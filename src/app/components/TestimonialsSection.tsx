@@ -2,12 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import svgPaths from "../../imports/TestimonialsSection/svg-2ss3ybjdpk";
 
-import imgSlide1 from "figma:asset/5926899d1cc62a8c472a80045c5531a797fcd790.png";
-import imgSlide2 from "figma:asset/34b7d9ec10567f97d104585dd751c88574bc2b07.png";
-import imgSlide3 from "figma:asset/c79497b95b362671f3826b57c07ff6b75876210f.png";
-import imgSlide4 from "figma:asset/f2114494586b803343871affe5e97729e32a572e.png";
-import imgSlide5 from "figma:asset/b29629f74036a61c4bc22a5962681cf47aeda57e.png";
-import imgSlide6 from "figma:asset/549400d7fbce2211b55697977061868abf20f370.png";
+import imgSlide1 from "../../assets/5926899d1cc62a8c472a80045c5531a797fcd790.png";
+import imgSlide2 from "../../assets/34b7d9ec10567f97d104585dd751c88574bc2b07.png";
+import imgSlide3 from "../../assets/c79497b95b362671f3826b57c07ff6b75876210f.png";
+import imgSlide4 from "../../assets/f2114494586b803343871affe5e97729e32a572e.png";
+import imgSlide5 from "../../assets/b29629f74036a61c4bc22a5962681cf47aeda57e.png";
+import imgSlide6 from "../../assets/549400d7fbce2211b55697977061868abf20f370.png";
 
 const slides = [
   {
@@ -81,7 +81,6 @@ export default function TestimonialsSection() {
   const cardsPerView = containerWidth > 720 ? 2 : 1;
   const GAP = 24;
 
-  /* ── Infinite navigation ──────────────────────────────────── */
   const goPrev = () => {
     setDirection(-1);
     setActiveIndex((i) => (i - 1 + slides.length) % slides.length);
@@ -97,31 +96,19 @@ export default function TestimonialsSection() {
     setActiveIndex(i);
   };
 
-  /* ── Visible slides for this page ────────────────────────── */
   const visibleSlides = Array.from({ length: cardsPerView }, (_, i) =>
     slides[(activeIndex + i) % slides.length]
   );
 
-  /* ── Card height based on container width ────────────────── */
   const cardWidth = containerWidth > 0
     ? (containerWidth - (cardsPerView - 1) * GAP) / cardsPerView
     : 600;
   const cardHeight = Math.round(cardWidth * (428 / 650));
 
-  /* ── Animation variants ──────────────────────────────────── */
   const cardGroupVariants = {
-    enter: (d: number) => ({
-      opacity: 0,
-      x: d > 0 ? 80 : -80,
-    }),
-    center: {
-      opacity: 1,
-      x: 0,
-    },
-    exit: (d: number) => ({
-      opacity: 0,
-      x: d > 0 ? -80 : 80,
-    }),
+    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 80 : -80 }),
+    center: { opacity: 1, x: 0 },
+    exit: (d: number) => ({ opacity: 0, x: d > 0 ? -80 : 80 }),
   };
 
   const descVariants = {
@@ -134,7 +121,7 @@ export default function TestimonialsSection() {
     <section className="w-full bg-white py-14 px-6 md:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
 
-        {/* ── Header ──────────────────────────────────────── */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -169,7 +156,7 @@ export default function TestimonialsSection() {
           </h2>
         </motion.div>
 
-        {/* ── Cards ───────────────────────────────────────── */}
+        {/* Cards */}
         <div ref={containerRef} className="relative" style={{ height: cardHeight, overflow: "hidden" }}>
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -201,8 +188,7 @@ export default function TestimonialsSection() {
                   <div
                     className="absolute inset-0"
                     style={{
-                      background:
-                        "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
+                      background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
                     }}
                   />
                   {/* Card title */}
@@ -225,7 +211,7 @@ export default function TestimonialsSection() {
           </AnimatePresence>
         </div>
 
-        {/* ── Description + navigation ─────────────────────── */}
+        {/* Description + navigation */}
         <div className="mt-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
 
           {/* Animated description */}
@@ -273,14 +259,13 @@ export default function TestimonialsSection() {
 
           {/* Navigation */}
           <div className="flex items-center gap-3 flex-shrink-0 self-center sm:self-end pb-1">
-
-            {/* Dot indicators — one per slide, always all visible */}
+            {/* Dot indicators */}
             <div className="flex items-center gap-1.5 mr-3">
               {slides.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => goTo(i)}
-                  className="rounded-full transition-all duration-300 cursor-pointer"
+                  className="rounded-full transition-all duration-300 cursor-pointer border-none"
                   style={{
                     width: i === activeIndex ? "20px" : "8px",
                     height: "8px",
@@ -291,10 +276,10 @@ export default function TestimonialsSection() {
               ))}
             </div>
 
-            {/* Left arrow — always enabled, wraps around */}
+            {/* Left arrow */}
             <motion.button
               onClick={goPrev}
-              className="flex items-center justify-center rounded-full cursor-pointer"
+              className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent"
               style={{ width: 45, height: 45 }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -312,10 +297,10 @@ export default function TestimonialsSection() {
               </svg>
             </motion.button>
 
-            {/* Right arrow — always enabled, wraps around */}
+            {/* Right arrow */}
             <motion.button
               onClick={goNext}
-              className="flex items-center justify-center rounded-full cursor-pointer"
+              className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent"
               style={{ width: 45, height: 45 }}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}

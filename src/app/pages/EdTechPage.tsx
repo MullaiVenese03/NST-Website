@@ -7,9 +7,11 @@ import {
   Globe, ChevronRight, Play, Zap, GraduationCap, FlaskConical,
   Lightbulb, Target, Building2, BarChart3
 } from "lucide-react";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
+import { ImageWithFallback } from "../components/ImageWithFallback";
 import FooterSection from "../components/FooterSection";
-import ScrollProgress from "../components/ScrollProgress";
+
+import TopNav from "../components/TopNav";
+import BottomNav from "../components/BottomNav";
 import svgPathsNST from "../../imports/HeroSection/svg-3kvcnifylj";
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -64,89 +66,10 @@ function NSTLogo() {
           <path d={svgPathsNST.p206f9980}  fill="#015AAA" />
         </g>
       </svg>
-      <span style={{ fontFamily: "'Inter',sans-serif", fontWeight: 800, fontSize: "20px", letterSpacing: "0.5px", color: C.heading }}>
+      <span style={{ fontFamily: "'Overcame Demo', sans-serif", fontWeight: 800, fontSize: "20px", letterSpacing: "0.5px", color: C.heading }}>
         NebulaSafe<span style={{ color: C.primary }}>Tech</span>
       </span>
     </div>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════════════════════════════════════ */
-const navLinks = [
-  { label: "Home",     href: "/",         isActive: false },
-  { label: "About",    href: "/about",    isActive: false },
-  { label: "Services", href: "/services", isActive: false },
-  { label: "Clients",  href: "/clients",  isActive: false },
-  { label: "EdTech",   href: "/edtech",   isActive: true  },
-  { label: "NEX",      href: "/#nex",     isActive: false },
-];
-
-function EdTechNavbar() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("/#")) { e.preventDefault(); window.location.href = href; }
-  };
-
-  return (
-    <motion.header
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="sticky top-0 z-50 transition-all duration-300"
-      style={{
-        background: "#FFFFFF",
-        borderBottom: scrolled ? `1px solid ${C.border}` : "1px solid transparent",
-        boxShadow: scrolled ? "0 4px 24px rgba(10,102,194,0.07)" : "none",
-      }}
-    >
-      <div className="max-w-[1320px] mx-auto px-8 flex items-center justify-between h-[72px]">
-        <a href="/" className="no-underline"><NSTLogo /></a>
-
-        {/* Nav links */}
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="no-underline px-4 py-2 rounded-[10px] transition-all duration-200 cursor-pointer"
-              style={{
-                fontFamily: "'Inter',sans-serif",
-                fontWeight: 600,
-                fontSize: "14px",
-                color: link.isActive ? C.primary : C.body,
-                background: link.isActive ? C.accentMid : "transparent",
-                textDecoration: "none",
-              }}
-              whileHover={{ backgroundColor: C.accent, color: C.primary }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {link.label}
-            </motion.a>
-          ))}
-        </nav>
-
-        {/* CTA */}
-        <motion.a
-          href="/#contact"
-          className="flex items-center gap-2 no-underline"
-          style={{ background: C.primary, borderRadius: "10px", padding: "10px 20px", fontFamily: "'Inter',sans-serif", fontWeight: 700, fontSize: "14px", color: "#fff" }}
-          whileHover={{ scale: 1.04, background: C.secondary }}
-          whileTap={{ scale: 0.96 }}
-        >
-          Contact Us <ArrowRight size={14} />
-        </motion.a>
-      </div>
-    </motion.header>
   );
 }
 
@@ -882,8 +805,8 @@ export default function EdTechPage() {
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden" style={{ background: C.bg }}>
-      <ScrollProgress />
-      <EdTechNavbar />
+      <TopNav />
+      <BottomNav />
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}

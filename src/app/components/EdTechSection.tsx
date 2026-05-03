@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import svgPaths from "../../imports/EdTechSection/svg-v7pn74uo9y";
-import imgEdTech from "figma:asset/44b3881b2d04e13afb2b4c2d0c2b8735dc8df522.png";
+import imgEdTech from "../../assets/EdTech-Image.png";
 
 const bulletPoints = [
   "Industry-relevant training programs",
@@ -34,10 +34,7 @@ const fadeUp = {
 
 export default function EdTechSection() {
   return (
-    <section
-      className="w-full overflow-hidden"
-      style={{ background: "#F8FAFE" }}
-    >
+    <section className="w-full overflow-hidden" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-h-[420px]">
         {/* Left – Content */}
         <div className="flex-shrink-0 w-full lg:w-[42%] flex flex-col justify-center px-12 lg:px-16 py-14 lg:py-16">
@@ -139,7 +136,7 @@ export default function EdTechSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            href="#"
+            href="/edtech"
             className="inline-flex items-center gap-2 group w-fit"
             style={{
               background: "#015AAA",

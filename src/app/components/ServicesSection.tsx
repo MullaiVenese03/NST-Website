@@ -1,14 +1,14 @@
 import { motion } from "motion/react";
 import svgPaths from "../../imports/ServiceSection/svg-81gwe7znow";
 
-import imgWebSecurity from "figma:asset/7346df11440f16b25549eb8cf287fb031b9683b2.png";
-import imgCloudSecurity from "figma:asset/24f1dca8645b9371a10c988ee3739ad434d28e63.png";
-import imgAppSecurity from "figma:asset/dafa5c9ee0601125e05fd5dbd560497dc7cc0e17.png";
-import imgNetworkSecurity from "figma:asset/1ac74c6d41c7bd2cd987c3d92a2ca4a3b6f2a331.png";
-import imgEncryption from "figma:asset/d75400a7458c5484886f6b0a8a673ade8d7be3cc.png";
-import imgFullStack from "figma:asset/b37727328c320781de18d9263a96d352748196e9.png";
-import imgWebDesign from "figma:asset/120bc0db098255f588d67ade37464ecb9aba739c.png";
-import imgAcademicTraining from "figma:asset/acaaf38ce691fda7d772bfee47672921c5112b35.png";
+import imgWebSecurity from "../../assets/Icons/Web Security.png";
+import imgCloudSecurity from "../../assets/Icons/Cloud Security.png";
+import imgAppSecurity from "../../assets/Icons/Application Security.png";
+import imgNetworkSecurity from "../../assets/Icons/Network Security.png";
+import imgEncryption from "../../assets/Icons/Encryption & Data Protection.png";
+import imgFullStack from "../../assets/Icons/Full-Stack Web Development.png";
+import imgWebDesign from "../../assets/Icons/Web Design & UIUX Developmen.png";
+import imgAcademicTraining from "../../assets/Icons/Academic Training.png";
 
 /* Arrow icon used on every card */
 function ArrowIcon({ strokePath }: { strokePath: string }) {
@@ -66,53 +66,64 @@ function ServiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.5, delay: (index % 4) * 0.1, ease: "easeOut" }}
-      className="relative rounded-[14px] bg-white flex flex-col justify-end gap-[14px] p-5 overflow-hidden"
+      className="relative rounded-[14px] bg-white flex flex-col group overflow-hidden cursor-pointer"
       style={{
         width: "100%",
         minHeight: "370px",
         boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.25)",
         ...borderStyles[border],
       }}
+      whileHover={{ y: -6, boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.4), 0 12px 32px rgba(1,90,170,0.15)" }}
     >
       {/* Card image */}
-      <div className="w-full flex-1 overflow-hidden rounded-t-[8px] flex items-center justify-center">
+      <div className="w-full h-[160px] flex items-center justify-center relative overflow-hidden p-6 rounded-t-[14px] flex-shrink-0">
         <img
           src={image}
           alt={title}
-          className={imgClassName || "w-full h-[180px] object-cover"}
+          className="relative z-10 w-auto h-full max-h-[100px] object-contain transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
-      {/* Title */}
-      <p
-        style={{
-          fontFamily: "'Geist', sans-serif",
-          fontWeight: 700,
-          fontSize: "18px",
-          lineHeight: "27px",
-          color: "#101828",
-          margin: 0,
-        }}
-      >
-        {title}
-      </p>
+      {/* Text Content */}
+      <div className="px-6 pb-6 flex flex-col gap-2 flex-1">
+        {/* Title */}
+        <h3
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 700,
+            fontSize: "22px",
+            lineHeight: "35px",
+            color: "#111827",
+            margin: 0,
+          }}
+        >
+          {title}
+        </h3>
 
-      {/* Description */}
-      <p
-        style={{
-          fontFamily: "'Geist', sans-serif",
-          fontWeight: 400,
-          fontSize: "14px",
-          lineHeight: "22.75px",
-          color: "#4a5565",
-          margin: 0,
-        }}
-      >
-        {description}
-      </p>
+        {/* Description */}
+        <p
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 400,
+            fontSize: "18px",
+            lineHeight: "26px",
+            color: "#6B7280",
+            margin: 0,
+          }}
+        >
+          {description}
+        </p>
 
-      {/* Arrow */}
-      <ArrowIcon strokePath={arrowPath} />
+        {/* Arrow at bottom right */}
+        <div className="mt-auto pt-4 flex justify-end">
+          <div className="transition-transform duration-300 group-hover:translate-x-1">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#015AAA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }
@@ -121,8 +132,7 @@ const services: Omit<ServiceCardProps, "index">[] = [
   {
     image: imgWebSecurity,
     title: "Web Security",
-    description:
-      "Secure your web apps with advanced vulnerability detection and real-time threat mitigation.",
+    description: "Secure your web apps with advanced vulnerability detection and real-time threat mitigation.",
     arrowPath: svgPaths.p123a1c40,
     border: "right",
     imgClassName: "w-full h-[180px] object-cover",
@@ -130,8 +140,7 @@ const services: Omit<ServiceCardProps, "index">[] = [
   {
     image: imgCloudSecurity,
     title: "Cloud Security",
-    description:
-      "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly.",
+    description: "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly.",
     arrowPath: svgPaths.p123a1c40,
     border: "right",
     imgClassName: "w-full h-[180px] object-cover",
@@ -139,8 +148,7 @@ const services: Omit<ServiceCardProps, "index">[] = [
   {
     image: imgAppSecurity,
     title: "Application Security",
-    description:
-      "Create innovative frameworks to build executable software with security, privacy, and trust.",
+    description: "Create innovative frameworks to build executable software with security, privacy, and trust.",
     arrowPath: svgPaths.p30ed7980,
     border: "left",
     imgClassName: "w-full h-[180px] object-cover",
@@ -148,8 +156,7 @@ const services: Omit<ServiceCardProps, "index">[] = [
   {
     image: imgNetworkSecurity,
     title: "Network Security",
-    description:
-      "Create innovative frameworks to build executable software with security, privacy, and trust.",
+    description: "Create innovative frameworks to build executable software with security, privacy, and trust.",
     arrowPath: svgPaths.p30ed7980,
     border: "left",
     imgClassName: "w-full h-[180px] object-cover",
@@ -157,8 +164,7 @@ const services: Omit<ServiceCardProps, "index">[] = [
   {
     image: imgEncryption,
     title: "Encryption & Data Protection",
-    description:
-      "Create innovative frameworks to build executable software with security, privacy, and trust.",
+    description: "Create innovative frameworks to build executable software with security, privacy, and trust.",
     arrowPath: svgPaths.p30ed7980,
     border: "bottom",
     imgClassName: "w-full h-[180px] object-cover",
@@ -166,8 +172,7 @@ const services: Omit<ServiceCardProps, "index">[] = [
   {
     image: imgFullStack,
     title: "Full-Stack Web Development",
-    description:
-      "Scalable, high-performance web applications built with modern technologies.",
+    description: "Scalable, high-performance web applications built with modern technologies.",
     arrowPath: svgPaths.p30ed7980,
     border: "top",
     imgClassName: "w-full h-[180px] object-cover",
@@ -175,8 +180,7 @@ const services: Omit<ServiceCardProps, "index">[] = [
   {
     image: imgWebDesign,
     title: "Web Design & UI/UX Development",
-    description:
-      "Pixel-perfect designs and intuitive experiences that engage users and drive results.",
+    description: "Pixel-perfect designs and intuitive experiences that engage users and drive results.",
     arrowPath: svgPaths.p30ed7980,
     border: "top",
     imgClassName: "w-full h-[180px] object-cover",
@@ -184,8 +188,7 @@ const services: Omit<ServiceCardProps, "index">[] = [
   {
     image: imgAcademicTraining,
     title: "Academic Training",
-    description:
-      "Practical training and real-world learning experiences that build skills and prepare you for industry.",
+    description: "Practical training and real-world learning experiences that build skills and prepare you for industry.",
     arrowPath: svgPaths.p123a1c40,
     border: "right",
     imgClassName: "w-[76%] mx-auto h-[160px] object-contain",
@@ -265,7 +268,7 @@ export default function ServicesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            href="#"
+            href="/services"
             className="inline-flex items-center gap-3 self-start sm:self-center mt-2 sm:mt-6 group whitespace-nowrap"
             style={{
               fontFamily: "'Inter', sans-serif",

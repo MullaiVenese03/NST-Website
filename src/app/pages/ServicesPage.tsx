@@ -2,19 +2,21 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Services/svg-ukc1gjjbsx";
 import FooterSection from "../components/FooterSection";
-import ScrollProgress from "../components/ScrollProgress";
+
+import TopNav from "../components/TopNav";
+import BottomNav from "../components/BottomNav";
 
 /* ── Image assets ─────────────────────────────────────────────────────── */
-import imgServices1     from "figma:asset/c82e37c3df4140ba6642a87d4a5d1e3074c6435a.png";
-import imgWhyChooseUs1  from "figma:asset/8db4e622e374bcde5dc4ea2ca954a2ff63661882.png";
-import imgWebSecurity   from "figma:asset/7346df11440f16b25549eb8cf287fb031b9683b2.png";
-import imgCloudSecurity from "figma:asset/24f1dca8645b9371a10c988ee3739ad434d28e63.png";
-import imgAppSecurity   from "figma:asset/dafa5c9ee0601125e05fd5dbd560497dc7cc0e17.png";
-import imgNetworkSec    from "figma:asset/1ac74c6d41c7bd2cd987c3d92a2ca4a3b6f2a331.png";
-import imgEncryption    from "figma:asset/d75400a7458c5484886f6b0a8a673ade8d7be3cc.png";
-import imgWebDev        from "figma:asset/b37727328c320781de18d9263a96d352748196e9.png";
-import imgUIUX          from "figma:asset/120bc0db098255f588d67ade37464ecb9aba739c.png";
-import imgAcademic      from "figma:asset/acaaf38ce691fda7d772bfee47672921c5112b35.png";
+import imgServices1     from "../../assets/Services.png";
+import imgWhyChooseUs1  from "../../assets/Why Choose Us.png";
+import imgWebSecurity   from "../../assets/Icons/Web Security.png";
+import imgCloudSecurity from "../../assets/Icons/Cloud Security.png";
+import imgAppSecurity   from "../../assets/Icons/Application Security.png";
+import imgNetworkSec    from "../../assets/Icons/Network Security.png";
+import imgEncryption    from "../../assets/Icons/Encryption & Data Protection.png";
+import imgWebDev        from "../../assets/Icons/Full-Stack Web Development.png";
+import imgUIUX          from "../../assets/Icons/Web Design & UIUX Developmen.png";
+import imgAcademic      from "../../assets/Icons/Academic Training.png";
 
 /* ── Parallax helper ───────────────────────────────────────────────────── */
 function useParallax(ref: React.RefObject<HTMLDivElement | null>, dist = 55) {
@@ -34,101 +36,7 @@ const fadeLeft  = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0,
 const fadeRight = { hidden: { opacity: 0, x:  36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
 /* ══════════════════════════════════════════════════════════════════════
-   SHARED — NST LOGO SVG
-══════════════════════════════════════════════════════════════════════ */
-function NSTLogo() {
-  return (
-    <svg className="w-10 h-10 flex-shrink-0" fill="none" viewBox="0 0 56 58.0458">
-      <g>
-        <path d={svgPaths.p33731b00} fill="#015AAA" />
-        <path d={svgPaths.p3959b800} fill="#015AAA" />
-        <path d={svgPaths.p3b6ed900} fill="#015AAA" />
-        <path d={svgPaths.p36cd8100} fill="#015AAA" />
-        <path d={svgPaths.p2e60b400} fill="#015AAA" />
-        <path d={svgPaths.p14a5c980} fill="#015AAA" />
-        <path d={svgPaths.p3ac0a900} fill="#015AAA" />
-        <path d={svgPaths.p12afe570} fill="#015AAA" />
-        <path d={svgPaths.p1c269b00} fill="#015AAA" />
-      </g>
-    </svg>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════════════════════════════════════ */
-function ServicesNavbar() {
-  const navLinks = [
-    { label: "Home",     href: "/",         isActive: false },
-    { label: "About",    href: "/about",    isActive: false },
-    { label: "Services", href: "/services", isActive: true  },
-    { label: "Clients",  href: "/clients",  isActive: false },
-    { label: "EdTech",   href: "/edtech",   isActive: false },
-    { label: "NEX",      href: "/#nex",     isActive: false },
-  ];
-
-  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("/#")) { e.preventDefault(); window.location.href = href; }
-  };
-
-  return (
-    <motion.nav
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="sticky top-0 z-50 bg-white border-b border-[#e8ecf0]"
-      style={{ boxShadow: "0 1px 12px rgba(1,90,170,0.08)" }}
-    >
-      <div className="max-w-[1440px] mx-auto px-8 md:px-14 flex items-center justify-between h-[72px]">
-        <a href="/" className="flex items-center gap-3 no-underline">
-          <NSTLogo />
-          <span style={{ fontFamily: "'Overcame Demo','Geist',sans-serif", fontWeight: 700, fontSize: "22px", letterSpacing: "1.4px", color: "#030108" }}>
-            NebulaSafeTech
-          </span>
-        </a>
-
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="px-5 py-2 rounded-full no-underline cursor-pointer transition-colors duration-200"
-              style={{
-                fontFamily: "'Satoshi',sans-serif",
-                fontWeight: 700,
-                fontSize: "16px",
-                letterSpacing: "0.32px",
-                color: link.isActive ? "#015AAA" : "#000",
-                background: link.isActive ? "#f0f6ff" : "transparent",
-                textDecoration: "none",
-              }}
-              whileHover={{ scale: 1.04, background: "#f0f6ff", color: "#015AAA" }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {link.label}
-            </motion.a>
-          ))}
-        </div>
-
-        <motion.a
-          href="/#contact"
-          className="flex items-center gap-2 no-underline"
-          style={{ background: "#015AAA", borderRadius: "8px", padding: "10px 18px" }}
-          whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-        >
-          <span style={{ fontFamily: "'Satoshi',sans-serif", fontWeight: 700, fontSize: "15px", color: "#fff", letterSpacing: "0.6px" }}>Contact</span>
-          <svg width="16" height="10" viewBox="0 0 19.5 11.5" fill="none">
-            <path d={svgPaths.p3c346e80} stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-          </svg>
-        </motion.a>
-      </div>
-    </motion.nav>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   HERO — "Smart Solutions. Secure Future."
+   HERO — "Built by defenders, for defenders"
 ══════════════════════════════════════════════════════════════════════ */
 function ServicesHero() {
   const imgRef = useRef<HTMLDivElement>(null);
@@ -225,23 +133,31 @@ function ServiceCardsSection() {
               transition={{ type: "spring", stiffness: 280, damping: 22 }}
             >
               {/* Image */}
-              <div className="flex-1 overflow-hidden" style={{ maxHeight: "200px" }}>
+              <div className="w-full h-[160px] flex items-center justify-center relative overflow-hidden p-6 rounded-t-[14px]">
                 <motion.img
                   src={card.img}
                   alt={card.title}
-                  className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
-                  style={{ background: "rgba(1,90,170,0.04)" }}
+                  className="relative z-10 w-auto h-full max-h-[100px] object-contain transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
 
               {/* Text */}
-              <div className="p-6 flex flex-col gap-3">
-                <h3 style={{ fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "18px", color: "#101828", letterSpacing: "0.36px", margin: 0, lineHeight: "27px" }}>
+              <div className="px-6 pb-6 flex flex-col gap-2 flex-1">
+                <h3 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "20px", color: "#111827", margin: 0, lineHeight: "35px" }}>
                   {card.title}
                 </h3>
-                <p style={{ fontFamily: "'Geist',sans-serif", fontWeight: 400, fontSize: "14px", color: "#4A5565", lineHeight: "22.75px", margin: 0 }}>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "14px", color: "#6B7280", lineHeight: "22px", margin: 0 }}>
                   {card.desc}
                 </p>
+                {/* Arrow at the bottom right */}
+                <div className="mt-auto pt-4 flex justify-end">
+                  <div className="transition-transform duration-300 group-hover:translate-x-1">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#015AAA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </div>
+                </div>
               </div>
 
               {/* Bottom blue accent */}
@@ -512,8 +428,8 @@ export default function ServicesPage() {
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
-      <ScrollProgress />
-      <ServicesNavbar />
+      <TopNav />
+      <BottomNav />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

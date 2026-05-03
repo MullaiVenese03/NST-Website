@@ -1,10 +1,10 @@
 import { motion } from "motion/react";
 import svgPaths from "../../imports/NexSection/svg-rp6a4ek3k8";
 
-import imgIcon1 from "figma:asset/1f066275dd53c74dff5c96b7457f880ff6bf449c.png";
-import imgIcon2 from "figma:asset/f91518b79010eaa93959378763af7859ec766c3c.png";
-import imgIcon3 from "figma:asset/29e5adbafd79ad164d68628f4fe05812f59035f8.png";
-import imgIcon4 from "figma:asset/49007bc1ca69d7ceb842185815952e563bda794a.png";
+import imgIcon1 from "../../assets/Icons/1.png";
+import imgIcon2 from "../../assets/Icons/2.png";
+import imgIcon3 from "../../assets/Icons/3.png";
+import imgIcon4 from "../../assets/Icons/4.png";
 
 const features = [
   { icon: imgIcon1, w: 52, h: 54, label1: "Powered", label2: "Threat Detection" },
@@ -177,11 +177,7 @@ export default function NexSection() {
         {/* Vertical divider */}
         <div
           className="hidden lg:block flex-shrink-0 mx-12"
-          style={{
-            width: "1px",
-            height: "350px",
-            background: "#C6C6C6",
-          }}
+          style={{ width: "1px", height: "350px", background: "#C6C6C6" }}
         />
 
         {/* Right – NEX Logo */}

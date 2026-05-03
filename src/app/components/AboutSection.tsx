@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import svgPaths from "../../imports/AboutSection/svg-s1i9qf01my";
-import imgAbout from "figma:asset/400481b24bdc692161b886edf58eada3268fa9ba.png";
+import imgAbout from "../../assets/About-Image.png";
 
 function UsersIcon() {
   return (
@@ -52,21 +52,9 @@ function Hours24Icon() {
 }
 
 const features = [
-  {
-    icon: <UsersIcon />,
-    label1: "Expert-Led",
-    label2: "Security",
-  },
-  {
-    icon: <ShieldCheckIcon />,
-    label1: "Proactive",
-    label2: "Protection",
-  },
-  {
-    icon: <Hours24Icon />,
-    label1: "24/7 Threat",
-    label2: "Monitoring",
-  },
+  { icon: <UsersIcon />, label1: "Expert-Led", label2: "Security" },
+  { icon: <ShieldCheckIcon />, label1: "Proactive", label2: "Protection" },
+  { icon: <Hours24Icon />, label1: "24/7 Threat", label2: "Monitoring" },
 ];
 
 const fadeUp = {
@@ -160,9 +148,9 @@ export default function AboutSection() {
               maxWidth: "480px",
             }}
           >
-            NebulaSafeTech was founded by cybersecurity experts with a mission to
+            <span style={{ fontFamily: "'Overcame Demo', sans-serif" }}>NebulaSafeTech</span> was founded by cybersecurity experts with a mission to
             deliver enterprise-grade protection through innovation, transparency,
-            and relentless dedication,
+            and relentless dedication.
           </motion.p>
 
           {/* Feature icons row */}
@@ -213,7 +201,7 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            href="#"
+            href="/about"
             className="inline-flex items-center gap-3 group"
             style={{
               fontFamily: "'Inter', sans-serif",

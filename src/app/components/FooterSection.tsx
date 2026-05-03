@@ -495,7 +495,7 @@ export default function FooterSection() {
               margin: 0,
             }}
           >
-            Copyright &copy; 2026 NebulaSafeTech. All Rights Reserved.
+            Copyright &copy; 2026 <span style={{ fontFamily: "'Overcame Demo', sans-serif" }}>NebulaSafeTech</span>. All Rights Reserved.
           </p>
 
           {/* Social icons */}
@@ -521,10 +521,10 @@ export default function FooterSection() {
       >
         <p
           style={{
-            fontFamily: "'Geist', 'Arial Black', sans-serif",
+            fontFamily: "'Overcame Demo', sans-serif",
             fontWeight: 900,
-            fontSize: "clamp(180px, 28vw, 480px)",
-            lineHeight: 0.85,
+            fontSize: "clamp(280px, 38vw, 480px)",
+            lineHeight: 0.5,
             background:
               "linear-gradient(to bottom, #015aaa 0%, #030108 45%, white 100%)",
             WebkitBackgroundClip: "text",

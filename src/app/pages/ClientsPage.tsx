@@ -2,15 +2,17 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Clients/svg-k9jt45kpig";
 import FooterSection from "../components/FooterSection";
-import ScrollProgress from "../components/ScrollProgress";
+
+import TopNav from "../components/TopNav";
+import BottomNav from "../components/BottomNav";
 
 /* ── Image assets ─────────────────────────────────────────────────────── */
-import imgImage1    from "figma:asset/5926899d1cc62a8c472a80045c5531a797fcd790.png";
-import imgCard1     from "figma:asset/34b7d9ec10567f97d104585dd751c88574bc2b07.png";
-import imgCard2     from "figma:asset/c79497b95b362671f3826b57c07ff6b75876210f.png";
-import img49        from "figma:asset/f2114494586b803343871affe5e97729e32a572e.png";
-import img51        from "figma:asset/b29629f74036a61c4bc22a5962681cf47aeda57e.png";
-import img64432110  from "figma:asset/549400d7fbce2211b55697977061868abf20f370.png";
+import imgImage1    from "../../assets/5926899d1cc62a8c472a80045c5531a797fcd790.png";
+import imgCard1     from "../../assets/34b7d9ec10567f97d104585dd751c88574bc2b07.png";
+import imgCard2     from "../../assets/c79497b95b362671f3826b57c07ff6b75876210f.png";
+import img49        from "../../assets/f2114494586b803343871affe5e97729e32a572e.png";
+import img51        from "../../assets/b29629f74036a61c4bc22a5962681cf47aeda57e.png";
+import img64432110  from "../../assets/549400d7fbce2211b55697977061868abf20f370.png";
 
 /* ── Client data ───────────────────────────────────────────────────────── */
 type Category = "All Clients" | "Academic" | "Enterprises";
@@ -82,104 +84,7 @@ const fadeUp = {
 };
 
 /* ══════════════════════════════════════════════════════════════════════
-   NST LOGO
-══════════════════════════════════════════════════════════════════════ */
-function NSTLogo() {
-  return (
-    <svg className="w-10 h-10 flex-shrink-0" fill="none" viewBox="0 0 56 58.0458">
-      <g>
-        <path d={svgPaths.p33731b00} fill="#015AAA" />
-        <path d={svgPaths.p3959b800} fill="#015AAA" />
-        <path d={svgPaths.p3b6ed900} fill="#015AAA" />
-        <path d={svgPaths.p36cd8100} fill="#015AAA" />
-        <path d={svgPaths.p2e60b400} fill="#015AAA" />
-        <path d={svgPaths.p14a5c980} fill="#015AAA" />
-        <path d={svgPaths.p3ac0a900} fill="#015AAA" />
-        <path d={svgPaths.p12afe570} fill="#015AAA" />
-        <path d={svgPaths.p1c269b00} fill="#015AAA" />
-      </g>
-    </svg>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════════════════════════════════════ */
-function ClientsNavbar() {
-  const navLinks = [
-    { label: "Home",     href: "/",         isActive: false },
-    { label: "About",    href: "/about",    isActive: false },
-    { label: "Services", href: "/services", isActive: false },
-    { label: "Clients",  href: "/clients",  isActive: true  },
-    { label: "EdTech",   href: "/edtech",   isActive: false },
-    { label: "NEX",      href: "/#nex",     isActive: false },
-  ];
-
-  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("/#")) { e.preventDefault(); window.location.href = href; }
-  };
-
-  return (
-    <motion.nav
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="sticky top-0 z-50 bg-white border-b border-[#e8ecf0]"
-      style={{ boxShadow: "0 1px 12px rgba(1,90,170,0.08)" }}
-    >
-      <div className="max-w-[1440px] mx-auto px-8 md:px-14 flex items-center justify-between h-[72px]">
-        {/* Logo */}
-        <a href="/" className="flex items-center gap-3 no-underline">
-          <NSTLogo />
-          <span style={{ fontFamily: "'Overcame Demo','Geist',sans-serif", fontWeight: 700, fontSize: "22px", letterSpacing: "1.4px", color: "#030108" }}>
-            NebulaSafeTech
-          </span>
-        </a>
-
-        {/* Nav links */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="px-5 py-2 rounded-full no-underline cursor-pointer transition-colors duration-200"
-              style={{
-                fontFamily: "'Satoshi',sans-serif",
-                fontWeight: 700,
-                fontSize: "16px",
-                letterSpacing: "0.32px",
-                color: link.isActive ? "#015AAA" : "#000",
-                background: link.isActive ? "#f0f6ff" : "transparent",
-                textDecoration: "none",
-              }}
-              whileHover={{ scale: 1.04, background: "#f0f6ff", color: "#015AAA" }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {link.label}
-            </motion.a>
-          ))}
-        </div>
-
-        {/* Contact button */}
-        <motion.a
-          href="/#contact"
-          className="flex items-center gap-2 no-underline"
-          style={{ background: "#015AAA", borderRadius: "8px", padding: "10px 18px" }}
-          whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}
-        >
-          <span style={{ fontFamily: "'Satoshi',sans-serif", fontWeight: 700, fontSize: "15px", color: "#fff", letterSpacing: "0.6px" }}>Contact</span>
-          <svg width="16" height="10" viewBox="0 0 19.5 11.5" fill="none">
-            <path d={svgPaths.p3c346e80} stroke="white" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-          </svg>
-        </motion.a>
-      </div>
-    </motion.nav>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════
-   HERO  —  Empowering People. Strengthening Security.
+   HERO — "Trusted by Leaders Worldwide"
 ══════════════════════════════════════════════════════════════════════ */
 function ClientsHero({ activeFilter, setActiveFilter }: {
   activeFilter: Category;
@@ -459,8 +364,8 @@ export default function ClientsPage() {
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
-      <ScrollProgress />
-      <ClientsNavbar />
+      <TopNav />
+      <BottomNav />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

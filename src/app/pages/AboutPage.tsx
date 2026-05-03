@@ -2,22 +2,24 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2AboutUs/svg-n77cdd2snf";
 import FooterSection from "../components/FooterSection";
-import ScrollProgress from "../components/ScrollProgress";
+
+import TopNav from "../components/TopNav";
+import BottomNav from "../components/BottomNav";
 
 /* ── Image assets ─────────────────────────────────────────────────────── */
-import imgDashboard from "figma:asset/400481b24bdc692161b886edf58eada3268fa9ba.png";
-import imgTeam from "figma:asset/b1169effe8d5ec2e34b3c9c91ae11e55589f5fc1.png";
-import imgCtaBg from "figma:asset/37ceb5ac938ce2fd6393d41f091635f2ffdd3e00.png";
-import imgLogoThirukkural from "figma:asset/cae0543e4d40907e740964425ebb330b97abe22f.png";
-import imgLogoStJoseph from "figma:asset/e355fe2f1a3f31bcdfe0cd0d99f6f28dda47e72a.png";
-import imgLogoSolamalai from "figma:asset/d5f607418c370acbaa1f40116cb7f71ec15f7cb5.png";
-import imgLogoDhanalakshmi from "figma:asset/05c41322d27468edf456953a87abfdd7ea362d4c.png";
-import imgLogoAkshaya from "figma:asset/b4f771cbee9a12e39c116157c446004997e7dcfd.png";
-import imgLogoNsr from "figma:asset/8d795a174b249a3418f58c1303298a2b79e129da.png";
-import imgLogoSgnl from "figma:asset/c352b1695ed894ec9f13b794b78bfd0a7a5ce52f.png";
-import imgLogoTwomile from "figma:asset/5ef75f1a4d3f2b1d66fafc1493ce45d1bbc807cb.png";
-import imgLogoRapido from "figma:asset/f8b4c2e6aa66f714e256226143405c3478a1db0e.png";
-import imgLogoP2Task from "figma:asset/1a60c549e67b214eaed0516c16e0c4ed107c690a.png";
+import imgDashboard from "../../assets/About-Image.png";
+import imgTeam from "../../assets/About-Us.png";
+import imgCtaBg from "../../assets/37ceb5ac938ce2fd6393d41f091635f2ffdd3e00.png";
+import imgLogoThirukkural from "../../assets/cae0543e4d40907e740964425ebb330b97abe22f.png";
+import imgLogoStJoseph from "../../assets/e355fe2f1a3f31bcdfe0cd0d99f6f28dda47e72a.png";
+import imgLogoSolamalai from "../../assets/d5f607418c370acbaa1f40116cb7f71ec15f7cb5.png";
+import imgLogoDhanalakshmi from "../../assets/05c41322d27468edf456953a87abfdd7ea362d4c.png";
+import imgLogoAkshaya from "../../assets/b4f771cbee9a12e39c116157c446004997e7dcfd.png";
+import imgLogoNsr from "../../assets/8d795a174b249a3418f58c1303298a2b79e129da.png";
+import imgLogoSgnl from "../../assets/c352b1695ed894ec9f13b794b78bfd0a7a5ce52f.png";
+import imgLogoTwomile from "../../assets/5ef75f1a4d3f2b1d66fafc1493ce45d1bbc807cb.png";
+import imgLogoRapido from "../../assets/f8b4c2e6aa66f714e256226143405c3478a1db0e.png";
+import imgLogoP2Task from "../../assets/1a60c549e67b214eaed0516c16e0c4ed107c690a.png";
 
 /* ── Parallax hook ─────────────────────────────────────────────────────── */
 function useParallax(ref: React.RefObject<HTMLDivElement | null>, distance = 60) {
@@ -55,132 +57,6 @@ const fadeRight = {
     transition: { duration: 0.65, ease: "easeOut" },
   },
 };
-
-/* ══════════════════════════════════════════════════════════════════════
-   NAVBAR
-══════════════════════════════════════════════════════════════════════ */
-function NSTLogo() {
-  return (
-    <svg className="w-10 h-10 flex-shrink-0" fill="none" viewBox="0 0 56 58.0458">
-      <g>
-        <path d={svgPaths.p33731b00} fill="#015AAA" />
-        <path d={svgPaths.p3959b800} fill="#015AAA" />
-        <path d={svgPaths.p3b6ed900} fill="#015AAA" />
-        <path d={svgPaths.p36cd8100} fill="#015AAA" />
-        <path d={svgPaths.p2e60b400} fill="#015AAA" />
-        <path d={svgPaths.p14a5c980} fill="#015AAA" />
-        <path d={svgPaths.p3ac0a900} fill="#015AAA" />
-        <path d={svgPaths.p12afe570} fill="#015AAA" />
-        <path d={svgPaths.p1c269b00} fill="#015AAA" />
-      </g>
-    </svg>
-  );
-}
-
-function AboutNavbar() {
-  const navLinks = [
-    { label: "Home",     href: "/",         isActive: false },
-    { label: "About",    href: "/about",    isActive: true  },
-    { label: "Services", href: "/services", isActive: false },
-    { label: "Clients",  href: "/clients",  isActive: false },
-    { label: "EdTech",   href: "/edtech",   isActive: false },
-    { label: "NEX",      href: "/#nex",     isActive: false },
-  ];
-
-  const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("/#")) {
-      e.preventDefault();
-      window.location.href = href;
-    }
-  };
-
-  return (
-    <motion.nav
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="sticky top-0 z-50 bg-white border-b border-[#e8ecf0]"
-      style={{ boxShadow: "0 1px 12px rgba(1,90,170,0.08)" }}
-    >
-      <div className="max-w-[1440px] mx-auto px-8 md:px-14 flex items-center justify-between h-[72px]">
-        {/* Logo + Brand */}
-        <a href="/" className="flex items-center gap-3 no-underline">
-          <NSTLogo />
-          <span
-            style={{
-              fontFamily: "'Overcame Demo', 'Geist', sans-serif",
-              fontWeight: 700,
-              fontSize: "22px",
-              letterSpacing: "1.4px",
-              color: "#030108",
-            }}
-          >
-            NebulaSafeTech
-          </span>
-        </a>
-
-        {/* Nav links */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <motion.a
-              key={link.label}
-              href={link.href}
-              onClick={(e) => handleNav(e, link.href)}
-              className="px-5 py-2 rounded-full no-underline cursor-pointer transition-colors duration-200"
-              style={{
-                fontFamily: "'Satoshi', sans-serif",
-                fontWeight: 700,
-                fontSize: "16px",
-                letterSpacing: "0.32px",
-                color: link.isActive ? "#015AAA" : "#000",
-                background: link.isActive ? "#f0f6ff" : "transparent",
-                textDecoration: "none",
-              }}
-              whileHover={{ scale: 1.04, background: "#f0f6ff", color: "#015AAA" }}
-              whileTap={{ scale: 0.97 }}
-            >
-              {link.label}
-            </motion.a>
-          ))}
-        </div>
-
-        {/* Contact button */}
-        <motion.a
-          href="/#contact"
-          className="flex items-center gap-2 no-underline"
-          style={{
-            background: "#015AAA",
-            borderRadius: "8px",
-            padding: "10px 18px",
-          }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.96 }}
-        >
-          <span
-            style={{
-              fontFamily: "'Satoshi', sans-serif",
-              fontWeight: 700,
-              fontSize: "15px",
-              color: "#fff",
-              letterSpacing: "0.6px",
-            }}
-          >
-            Contact
-          </span>
-          <svg width="16" height="10" viewBox="0 0 19.5 11.5" fill="none">
-            <path
-              d={svgPaths.p3c346e80}
-              stroke="white"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-        </motion.a>
-      </div>
-    </motion.nav>
-  );
-}
 
 /* ══════════════════════════════════════════════════════════════════════
    HERO — "Built by defenders, for defenders"
@@ -254,7 +130,7 @@ function HeroAboutSection() {
               maxWidth: "520px",
             }}
           >
-            NebulaSafeTech was founded by cybersecurity experts with a mission
+            <span style={{ fontFamily: "'Overcame Demo', sans-serif" }}>NebulaSafeTech</span> was founded by cybersecurity experts with a mission
             to deliver enterprise-grade protection through innovation,
             transparency, and relentless dedication.
           </motion.p>
@@ -943,8 +819,8 @@ export default function AboutPage() {
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
-      <ScrollProgress />
-      <AboutNavbar />
+      <TopNav />
+      <BottomNav />
 
       {/* Animated page entry */}
       <motion.div
