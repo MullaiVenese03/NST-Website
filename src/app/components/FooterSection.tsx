@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Linkedin, Instagram, Twitter, Phone, Mail, MapPin, Send, ArrowRight } from "lucide-react";
+import { Linkedin, Instagram, Twitter, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 
 /* ─── Nav link ─────────────────────────────────────────────────────────── */
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {

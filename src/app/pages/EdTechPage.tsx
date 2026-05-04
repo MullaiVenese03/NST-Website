@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, Variants } from "motion/react";
 import {
   Shield, Award, Code2, ShoppingBag, Users, TrendingUp,
@@ -312,7 +312,7 @@ const featuredProjects = [
   },
 ];
 
-function ProjectCard({ project, index }: { project: typeof featuredProjects[0]; index: number }) {
+export function ProjectCard({ project, index }: { project: typeof featuredProjects[0]; index: number }) {
   const diff = difficultyColor[project.difficulty];
   return (
     <motion.div
@@ -382,7 +382,7 @@ function ProjectCard({ project, index }: { project: typeof featuredProjects[0]; 
   );
 }
 
-function FeaturedProjectsSection() {
+export function FeaturedProjectsSection() {
   return (
     <section id="projects" className="w-full py-20 px-8" style={{ background: C.bg }}>
       <div className="max-w-[1320px] mx-auto">
