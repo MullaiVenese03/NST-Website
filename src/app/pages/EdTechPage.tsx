@@ -51,7 +51,7 @@ function useParallax(ref: React.RefObject<HTMLDivElement | null>, dist = 50) {
 /* ══════════════════════════════════════════════════════════════════════
    SHARED: NST LOGO (inline SVG — no import needed)
 ══════════════════════════════════════════════════════════════════════ */
-function NSTLogo() {
+export function NSTLogo() {
   return (
     <div className="flex items-center gap-3">
       <svg className="w-10 h-10 flex-shrink-0" fill="none" viewBox="0 0 56 58.0457">
