@@ -1,10 +1,11 @@
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Services/svg-ukc1gjjbsx";
 import FooterSection from "../components/FooterSection";
 
 import TopNav from "../components/TopNav";
-import BottomNav from "../components/BottomNav";
+import ScrollToTop from "../components/ScrollToTop";
+import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
 /* ── Image assets ─────────────────────────────────────────────────────── */
 import imgServices1     from "../../assets/Services.png";
@@ -25,15 +26,15 @@ function useParallax(ref: React.RefObject<HTMLDivElement | null>, dist = 55) {
 }
 
 /* ── Animation variants ─────────────────────────────────────────────── */
-const fadeUp = {
+const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
     opacity: 1, y: 0,
     transition: { duration: 0.52, delay: i * 0.1, ease: "easeOut" },
   }),
 };
-const fadeLeft  = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
-const fadeRight = { hidden: { opacity: 0, x:  36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
+const fadeLeft: Variants  = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
+const fadeRight: Variants = { hidden: { opacity: 0, x:  36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
 /* ══════════════════════════════════════════════════════════════════════
    HERO — "Built by defenders, for defenders"
@@ -43,7 +44,7 @@ function ServicesHero() {
   const y = useParallax(imgRef, 40);
 
   return (
-    <section className="relative w-full bg-white overflow-hidden py-20 px-8 md:px-14 lg:px-20">
+    <section className="relative w-full bg-white overflow-hidden pt-32 pb-20 px-8 md:px-14 lg:px-20">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-10">
 
         {/* Left */}
@@ -64,21 +65,61 @@ function ServicesHero() {
           </motion.p>
 
           {/* Feature icons */}
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={3} className="flex items-center">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={3}
+            className="flex items-center gap-0 border border-slate-100 rounded-2xl p-6 bg-slate-50/30 shadow-sm"
+          >
             {[
-              { icon: <svg width="56" height="52" viewBox="0 0 57 48" fill="none"><path d={svgPaths.p91c0280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/></svg>, label1: "Expert-Led", label2: "Security" },
-              { icon: <svg width="52" height="58" viewBox="0 0 51 56.5404" fill="none"><path d={svgPaths.p35f7eb80} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/></svg>, label1: "Proactive", label2: "Protection" },
-              { icon: <svg width="56" height="56" viewBox="0 0 48.6877 48.6465" fill="none"><path d={svgPaths.pe5e6700} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/><path d={svgPaths.p308e5280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/></svg>, label1: "24/7 Threat", label2: "Monitoring" },
+              { 
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 57 48">
+                    <path d={svgPaths.p91c0280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
+                  </svg>
+                ), 
+                label1: "Expert-Led", 
+                label2: "Security" 
+              },
+              { 
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 51 56.5404">
+                    <path d={svgPaths.p35f7eb80} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
+                  </svg>
+                ), 
+                label1: "Proactive", 
+                label2: "Protection" 
+              },
+              { 
+                icon: (
+                  <svg className="w-full h-full" fill="none" viewBox="0 0 48.6877 48.6465">
+                    <path d={svgPaths.pe5e6700} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
+                    <path d={svgPaths.p308e5280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
+                  </svg>
+                ), 
+                label1: "24/7 Threat", 
+                label2: "Monitoring" 
+              },
             ].map((item, i) => (
-              <div key={i} className="flex items-stretch">
-                <div className="flex flex-col items-center gap-3 flex-1 px-4">
-                  <div className="flex items-center justify-center w-16 h-16">{item.icon}</div>
+              <div key={i} className="flex flex-1 items-center">
+                <div className="flex flex-col items-center gap-3 flex-1 px-2">
+                  <div className="w-[64px] h-[64px] relative overflow-hidden flex items-center justify-center">
+                    {item.icon}
+                  </div>
                   <div className="text-center">
-                    <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>{item.label1}</p>
-                    <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>{item.label2}</p>
+                    <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                      {item.label1}
+                    </p>
+                    <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                      {item.label2}
+                    </p>
                   </div>
                 </div>
-                {i < 2 && <div className="w-[1.5px] self-stretch" style={{ background: "#C6C6C6", minHeight: "100px" }} />}
+                {i < 2 && (
+                  <div className="w-[1px] self-stretch mx-2" style={{ background: "#e2e8f0", minHeight: "80px" }} />
+                )}
               </div>
             ))}
           </motion.div>
@@ -118,7 +159,7 @@ function ServiceCardsSection() {
   return (
     <section className="w-full py-20 px-8 md:px-14 lg:px-20 overflow-hidden" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {serviceCards.map((card, i) => (
             <motion.div
               key={i}
@@ -127,42 +168,32 @@ function ServiceCardsSection() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
               custom={i % 4}
-              className="relative rounded-[14px] bg-white flex flex-col overflow-hidden cursor-pointer group"
-              style={{ boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.25)", minHeight: "360px" }}
-              whileHover={{ y: -6, boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.4), 0 12px 32px rgba(1,90,170,0.15)" }}
-              transition={{ type: "spring", stiffness: 280, damping: 22 }}
+              className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer h-full"
             >
-              {/* Image */}
-              <div className="w-full h-[160px] flex items-center justify-center relative overflow-hidden p-6 rounded-t-[14px]">
-                <motion.img
-                  src={card.img}
-                  alt={card.title}
-                  className="relative z-10 w-auto h-full max-h-[100px] object-contain transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-
-              {/* Text */}
-              <div className="px-6 pb-6 flex flex-col gap-2 flex-1">
-                <h3 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: "20px", color: "#111827", margin: 0, lineHeight: "35px" }}>
-                  {card.title}
-                </h3>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400, fontSize: "14px", color: "#6B7280", lineHeight: "22px", margin: 0 }}>
-                  {card.desc}
-                </p>
-                {/* Arrow at the bottom right */}
-                <div className="mt-auto pt-4 flex justify-end">
-                  <div className="transition-transform duration-300 group-hover:translate-x-1">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#015AAA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </div>
+              {/* Icon/Image Container */}
+              <div className="p-8 pb-4 flex items-center justify-center h-48">
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <div className="absolute inset-0 bg-blue-50/50 rounded-full blur-2xl scale-75 group-hover:scale-100 transition-transform duration-500" />
+                  <motion.img
+                    src={card.img}
+                    alt={card.title}
+                    className="relative z-10 w-auto h-full max-h-[120px] object-contain transition-transform duration-500 group-hover:scale-110"
+                  />
                 </div>
               </div>
 
-              {/* Bottom blue accent */}
-              <div className="absolute bottom-0 left-0 right-0 h-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-[14px]"
-                style={{ background: "linear-gradient(90deg, #015AAA, #176bf0)" }} />
+              {/* Text Content */}
+              <div className="px-8 pb-8 flex flex-col flex-1">
+                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#015AAA] transition-colors duration-300">
+                  {card.title}
+                </h3>
+                <p className="text-base text-slate-500 leading-relaxed flex-1">
+                  {card.desc}
+                </p>
+              </div>
+
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl origin-left" />
             </motion.div>
           ))}
         </div>
@@ -220,7 +251,7 @@ const processSteps = [
     ),
   },
   {
-    num: "06", title: "Deliver",
+    num: "05", title: "Deliver",
     desc: "We deploy and provide ongoing support.",
     icon: (
       <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
@@ -232,16 +263,6 @@ const processSteps = [
     ),
   },
 ];
-
-function ArrowIcon() {
-  return (
-    <div className="flex-shrink-0 hidden lg:flex items-center justify-center px-1 mt-[-60px]">
-      <svg width="20" height="12" viewBox="0 0 18.5 11.5" fill="none">
-        <path d={svgPaths.p20b5e500} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-      </svg>
-    </div>
-  );
-}
 
 function OurProcessSection() {
   return (
@@ -262,28 +283,37 @@ function OurProcessSection() {
         </motion.p>
 
         {/* Step cards row */}
-        <div className="flex flex-col lg:flex-row items-start gap-4 lg:gap-0">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
           {processSteps.map((step, i) => (
-            <div key={i} className="flex items-center w-full lg:w-auto lg:flex-1">
+            <div key={i} className="flex flex-1 flex-col lg:flex-row items-center w-full">
               <motion.div
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i}
-                className="relative rounded-[14px] bg-white flex flex-col items-center gap-4 p-8 w-full"
-                style={{ boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.25)", minHeight: "300px", justifyContent: "center" }}
-                whileHover={{ y: -6, boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.4), 0 12px 32px rgba(1,90,170,0.12)" }}
+                className="relative rounded-2xl bg-white border border-slate-100 shadow-sm flex flex-col items-center p-8 w-full group min-h-[320px] text-center"
+                whileHover={{ y: -6, boxShadow: "0 12px 32px rgba(1,90,170,0.1)" }}
                 transition={{ type: "spring", stiffness: 280, damping: 22 }}
               >
-                {step.icon}
-                <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 700, fontSize: "32px", letterSpacing: "0.64px", color: "#015AAA", margin: 0 }}>{step.num}</p>
-                <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 700, fontSize: "26px", letterSpacing: "0.52px", color: "#030108", margin: 0 }}>{step.title}</p>
-                <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 400, fontSize: "15px", color: "#000", textAlign: "center", letterSpacing: "0.3px", lineHeight: "26px", margin: 0 }}>{step.desc}</p>
+                <div className="w-16 h-16 rounded-xl bg-[#015AAA]/10 flex items-center justify-center text-[#015AAA] mb-6 group-hover:scale-110 transition-transform duration-500">
+                  {step.icon}
+                </div>
+                <div className="space-y-2 flex-1 flex flex-col items-center">
+                  <span className="text-4xl font-black text-[#015AAA]/20 tracking-tighter">{step.num}</span>
+                  <h4 className="text-xl font-bold text-slate-900">{step.title}</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
+                </div>
               </motion.div>
-
-              {/* Arrow connector (not after last step) */}
-              {i < processSteps.length - 1 && <ArrowIcon />}
+              
+              {/* Connector arrow (Desktop only) */}
+              {i < processSteps.length - 1 && (
+                <div className="hidden lg:flex items-center justify-center px-2 z-10">
+                  <svg width="20" height="12" viewBox="0 0 18.5 11.5" fill="none" className="rotate-0">
+                    <path d={svgPaths.p20b5e500} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+                  </svg>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -386,7 +416,7 @@ function WhyChooseUsSection() {
         </div>
 
         {/* Right: feature cards */}
-        <div className="flex-1 min-w-0 flex flex-col gap-4">
+        <div className="flex-1 min-w-0 flex flex-col gap-5">
           {whyFeatures.map((feat, i) => (
             <motion.div
               key={i}
@@ -395,19 +425,19 @@ function WhyChooseUsSection() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={i}
-              className="relative rounded-[14px] bg-white p-5 flex items-start gap-5 overflow-hidden group"
-              style={{ boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.25)" }}
-              whileHover={{ x: 6, boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.4), 0 6px 24px rgba(1,90,170,0.1)" }}
+              className="relative rounded-2xl bg-white border border-slate-100 p-6 flex items-center gap-6 overflow-hidden group shadow-sm"
+              whileHover={{ x: 6 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
             >
-              <div className="flex-shrink-0">{feat.icon}</div>
-              <div className="flex flex-col gap-1 pt-1">
-                <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 700, fontSize: "18px", letterSpacing: "0.36px", color: "#030108", margin: 0 }}>{feat.title}</p>
-                <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 400, fontSize: "14px", color: "#000", letterSpacing: "0.28px", lineHeight: "26px", margin: 0 }}>{feat.desc}</p>
+              <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[#015AAA]/10 flex items-center justify-center text-[#015AAA] group-hover:scale-110 transition-transform duration-500">
+                {feat.icon}
               </div>
-              {/* Hover accent */}
-              <div className="absolute left-0 top-0 bottom-0 w-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-l-[14px]"
-                style={{ background: "linear-gradient(180deg, #015AAA, #176bf0)" }} />
+              <div className="flex flex-col gap-1.5">
+                <h4 className="text-xl font-bold text-slate-900 group-hover:text-[#015AAA] transition-colors duration-300">{feat.title}</h4>
+                <p className="text-base text-slate-500 leading-relaxed">{feat.desc}</p>
+              </div>
+              {/* Bottom border accent */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
             </motion.div>
           ))}
         </div>
@@ -421,15 +451,14 @@ function WhyChooseUsSection() {
 ══════════════════════════════════════════════════════════════════════ */
 export default function ServicesPage() {
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
-    window.scrollTo(0, 0);
-    return () => { document.documentElement.style.scrollBehavior = ""; };
+    scrollToTopInstant();
+    enableSmoothScroll();
+    return () => { resetScrollBehavior(); };
   }, []);
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
       <TopNav />
-      <BottomNav />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -441,6 +470,7 @@ export default function ServicesPage() {
         <OurProcessSection />
         <WhyChooseUsSection />
         <FooterSection />
+        <ScrollToTop />
       </motion.div>
     </div>
   );

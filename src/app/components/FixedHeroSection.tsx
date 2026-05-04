@@ -3,7 +3,7 @@ import svgPaths from "../../imports/HeroSection/svg-3kvcnifylj";
 
 export default function FixedHeroSection() {
   return (
-    <div className="flex flex-col items-start justify-center w-full">
+    <div className="flex flex-col justify-center w-full">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -12,7 +12,7 @@ export default function FixedHeroSection() {
       >
         {/* Heading: 24px gap below */}
         <motion.h2
-          className="text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight text-gray-900 mb-[24px]"
+          className="text-6xl md:text-7xl lg:text-8xl font-black leading-[1.25] tracking-tight text-gray-900 mb-[24px]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
@@ -48,11 +48,12 @@ export default function FixedHeroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <svg className="w-4 h-4" viewBox="0 0 9 9.92341">
+          <svg className="w-4 h-6" viewBox="0 0 9.5 9.92341">
             <path
               d={svgPaths.p31b6e600}
               stroke="#015aaa"
-              strokeWidth="1.5"
+              fill="none"
+              strokeWidth="1"
               strokeLinecap="round"
               strokeLinejoin="round"
             />

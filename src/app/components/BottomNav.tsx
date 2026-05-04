@@ -1,35 +1,36 @@
 import { motion, AnimatePresence } from "motion/react";
 import { useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
+import { scrollToTopInstant } from "../utils/scroll";
 
 const navItems = [
-  { name: "Home",        href: "hero",         path: "/" },
-  { name: "About",       href: "about",        path: "/about" },
-  { name: "Services",    href: "services",     path: "/services" },
+  { name: "Home",         href: "hero",         path: "/" },
+  { name: "About",        href: "about",        path: "/about" },
+  { name: "Services",     href: "services",     path: "/services" },
   { name: "Testimonials", href: "testimonials", path: "/clients" },
-  { name: "EdTech",      href: "edtech",       path: "/edtech" },
-  { name: "NEX",         href: "nex",          path: "/#nex" },
-  { name: "Footer",      href: "contact",      path: "/#contact" },
+  { name: "EdTech",       href: "edtech",       path: "/edtech" },
+  { name: "NEX",          href: "nex",          path: "/#nex" },
+  { name: "Footer",       href: "contact",      path: "/#contact" },
 ];
 
 export default function BottomNav() {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeSection, setActiveSection] = useState("hero");
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     // Listen for section changes (dispatched by HomePage's IntersectionObserver)
     const handleSectionChange = (e: any) => {
       if (location.pathname === "/") {
-        setActiveSection(e.detail);
+        // Map clients section to testimonials for bottom nav
+        const sectionId = e.detail === "clients" ? "testimonials" : e.detail;
+        setActiveSection(sectionId);
       }
     };
     window.addEventListener("sectionChange", handleSectionChange);
     
     // Update active section based on current path for non-home pages
     if (location.pathname !== "/") {
-      // Find item that matches path
       const currentItem = navItems.find(item => item.path === location.pathname);
       if (currentItem) setActiveSection(currentItem.href);
     } else if (location.hash) {
@@ -42,25 +43,11 @@ export default function BottomNav() {
     return () => window.removeEventListener("sectionChange", handleSectionChange);
   }, [location.pathname, location.hash]);
 
-  // Hide bottom nav when scrolled, allowing it to "merge" into TopNav
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsVisible(window.scrollY <= 50);
-    };
-
-    // Check initial state
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleClick = (item: typeof navItems[0]) => {
-    // Case 1: Already on home page and item is a home section or hash link
     if (location.pathname === "/" && (item.path === "/" || item.path.startsWith("/#"))) {
       const sectionId = item.path === "/" ? item.href : item.path.split("#")[1];
       
       if (item.path === "/") {
-        // Home button — scroll to very top
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
         const el = document.getElementById(sectionId);
@@ -71,15 +58,12 @@ export default function BottomNav() {
       return;
     }
 
-    // Case 2: Already on the target page — scroll to top
     if (location.pathname === item.path) {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
-    // Case 3: Navigate to a new page — scroll to top FIRST then navigate
-    // This ensures the new page starts from the top
-    window.scrollTo(0, 0);
+    scrollToTopInstant();
     navigate(item.path);
   };
 
@@ -87,10 +71,7 @@ export default function BottomNav() {
     <motion.div
       className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-4xl"
       initial={{ y: 100, opacity: 0 }}
-      animate={{ 
-        y: isVisible ? 0 : 100, 
-        opacity: isVisible ? 1 : 0 
-      }}
+      animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
       <div className="relative bg-white/40 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-full p-1.5 flex items-center justify-between gap-1 overflow-hidden md:overflow-visible">

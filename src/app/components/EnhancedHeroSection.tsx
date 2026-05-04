@@ -1,9 +1,10 @@
 import FixedHeroSection from "./FixedHeroSection";
+// @ts-ignore
 import heroVideo from "../../assets/Hero-Background-Video.mp4";
 
 export default function EnhancedHeroSection() {
   return (
-    <div className="relative w-full min-h-screen overflow-hidden flex flex-col justify-center bg-white">
+    <div className="relative w-full overflow-hidden flex flex-col justify-center bg-white">
       {/* Background Video */}
       <video
         autoPlay
@@ -16,7 +17,7 @@ export default function EnhancedHeroSection() {
       </video>
 
       {/* Content Container */}
-      <div className="relative z-10 w-full min-h-screen max-w-[1440px] m-[50px] px-[20px] flex items-center">
+      <div className="relative z-10 w-full min-h-screen max-w-[1440px] mx-auto px-[20px] pt-20 flex items-center">
         <div className="w-full">
           <FixedHeroSection />
         </div>

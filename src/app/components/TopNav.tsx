@@ -2,6 +2,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import svgPaths from "../../imports/HeroSection/svg-3kvcnifylj";
+import { scrollToTopInstant } from "../utils/scroll";
 
 const navItems = [
   { name: "Home",        href: "hero",         path: "/" },
@@ -72,6 +73,7 @@ export default function TopNav() {
     if (location.pathname === "/") {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
+      scrollToTopInstant();
       navigate("/");
     }
   };
@@ -100,7 +102,7 @@ export default function TopNav() {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    window.scrollTo(0, 0);
+    scrollToTopInstant();
     navigate(item.path);
   };
 

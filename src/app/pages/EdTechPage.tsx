@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, Variants } from "motion/react";
 import {
   Shield, Award, Code2, ShoppingBag, Users, TrendingUp,
   BookOpen, Wrench, Rocket, CheckCircle, Laptop, DollarSign,
@@ -11,7 +11,8 @@ import { ImageWithFallback } from "../components/ImageWithFallback";
 import FooterSection from "../components/FooterSection";
 
 import TopNav from "../components/TopNav";
-import BottomNav from "../components/BottomNav";
+import ScrollToTop from "../components/ScrollToTop";
+import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 import svgPathsNST from "../../imports/HeroSection/svg-3kvcnifylj";
 
 /* ══════════════════════════════════════════════════════════════════════
@@ -31,15 +32,15 @@ const C = {
 };
 
 /* ── Shared animation presets ────────────────────────────────────────── */
-const fadeUp = {
+const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 28 },
   visible: (i: number = 0) => ({
     opacity: 1, y: 0,
     transition: { duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
   }),
 };
-const fadeLeft  = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
-const fadeRight = { hidden: { opacity: 0, x:  40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
+const fadeLeft: Variants  = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
+const fadeRight: Variants = { hidden: { opacity: 0, x:  40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
 
 /* ── Parallax hook ───────────────────────────────────────────────────── */
 function useParallax(ref: React.RefObject<HTMLDivElement | null>, dist = 50) {
@@ -87,7 +88,7 @@ function EdTechHero() {
   ];
 
   return (
-    <section className="relative w-full overflow-hidden" style={{ background: C.bg, paddingTop: "80px", paddingBottom: "80px" }}>
+    <section className="relative w-full overflow-hidden" style={{ background: C.bg, paddingTop: "120px", paddingBottom: "80px" }}>
       <div className="max-w-[1320px] mx-auto px-8 flex flex-col lg:flex-row items-center gap-16">
 
         {/* ── Left content ── */}
@@ -798,15 +799,14 @@ function CTASection() {
 ══════════════════════════════════════════════════════════════════════ */
 export default function EdTechPage() {
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
-    window.scrollTo(0, 0);
-    return () => { document.documentElement.style.scrollBehavior = ""; };
+    scrollToTopInstant();
+    enableSmoothScroll();
+    return () => { resetScrollBehavior(); };
   }, []);
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden" style={{ background: C.bg }}>
       <TopNav />
-      <BottomNav />
 
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -821,6 +821,7 @@ export default function EdTechPage() {
         <PlatformFeaturesSection />
         <CTASection />
         <FooterSection />
+        <ScrollToTop />
       </motion.div>
     </div>
   );

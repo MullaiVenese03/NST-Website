@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 import svgPaths from "../../imports/EdTechSection/svg-v7pn74uo9y";
 import imgEdTech from "../../assets/EdTech-Image.png";
 
@@ -23,7 +23,7 @@ function CheckIcon() {
   );
 }
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 22 },
   visible: (i: number) => ({
     opacity: 1,

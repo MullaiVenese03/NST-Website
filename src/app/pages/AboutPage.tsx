@@ -1,15 +1,15 @@
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2AboutUs/svg-n77cdd2snf";
 import FooterSection from "../components/FooterSection";
 
 import TopNav from "../components/TopNav";
-import BottomNav from "../components/BottomNav";
+import ScrollToTop from "../components/ScrollToTop";
+import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
 /* ── Image assets ─────────────────────────────────────────────────────── */
 import imgDashboard from "../../assets/About-Image.png";
 import imgTeam from "../../assets/About-Us.png";
-import imgCtaBg from "../../assets/37ceb5ac938ce2fd6393d41f091635f2ffdd3e00.png";
 import imgLogoThirukkural from "../../assets/cae0543e4d40907e740964425ebb330b97abe22f.png";
 import imgLogoStJoseph from "../../assets/e355fe2f1a3f31bcdfe0cd0d99f6f28dda47e72a.png";
 import imgLogoSolamalai from "../../assets/d5f607418c370acbaa1f40116cb7f71ec15f7cb5.png";
@@ -31,7 +31,7 @@ function useParallax(ref: React.RefObject<HTMLDivElement | null>, distance = 60)
 }
 
 /* ── Animation variants ─────────────────────────────────────────────── */
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
     opacity: 1,
@@ -40,7 +40,7 @@ const fadeUp = {
   }),
 };
 
-const fadeLeft = {
+const fadeLeft: Variants = {
   hidden: { opacity: 0, x: -40 },
   visible: {
     opacity: 1,
@@ -49,7 +49,7 @@ const fadeLeft = {
   },
 };
 
-const fadeRight = {
+const fadeRight: Variants = {
   hidden: { opacity: 0, x: 40 },
   visible: {
     opacity: 1,
@@ -66,7 +66,7 @@ function HeroAboutSection() {
   const y = useParallax(imgRef, 40);
 
   return (
-    <section className="w-full bg-white overflow-hidden py-20 px-8 md:px-14 lg:px-20">
+    <section className="w-full bg-white overflow-hidden pt-32 pb-20 px-8 md:px-14 lg:px-20">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
         {/* Left: content */}
         <div className="flex-1 min-w-0">
@@ -142,7 +142,7 @@ function HeroAboutSection() {
             whileInView="visible"
             viewport={{ once: true }}
             custom={3}
-            className="flex items-center gap-0"
+            className="flex items-center gap-0 border border-slate-100 rounded-2xl p-6 bg-slate-50/30 shadow-sm"
           >
             {/* Expert-Led Security */}
             <div className="flex flex-col items-center gap-3 flex-1 pr-6">
@@ -168,7 +168,7 @@ function HeroAboutSection() {
             </div>
 
             {/* Divider */}
-            <div className="w-[1.5px] self-stretch mx-2" style={{ background: "#C6C6C6", minHeight: "100px" }} />
+            <div className="w-[1px] self-stretch mx-2" style={{ background: "#e2e8f0", minHeight: "80px" }} />
 
             {/* Proactive Protection */}
             <div className="flex flex-col items-center gap-3 flex-1 px-6">
@@ -194,7 +194,7 @@ function HeroAboutSection() {
             </div>
 
             {/* Divider */}
-            <div className="w-[1.5px] self-stretch mx-2" style={{ background: "#C6C6C6", minHeight: "100px" }} />
+            <div className="w-[1px] self-stretch mx-2" style={{ background: "#e2e8f0", minHeight: "80px" }} />
 
             {/* 24/7 */}
             <div className="flex flex-col items-center gap-3 flex-1 pl-6">
@@ -297,7 +297,7 @@ function OurStorySection() {
           </motion.div>
 
           {[
-            "We started with a simple belief — security should be proactive, intelligent, and accessible to every organization.",
+            "We started with a simple belief - security should be proactive, intelligent, and accessible to every organization.",
             "From day one, we've focused on building solutions that not only defend against today's threats but anticipate tomorrow's challenges.",
             "Today, NebulaSafeTech empowers businesses across the globe to operate with confidence in an increasingly complex digital world.",
           ].map((para, i) => (
@@ -685,142 +685,20 @@ function PartnersSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   CTA BANNER
-══════════════════════════════════════════════════════════════════════ */
-function CTASection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-
-  return (
-    <section ref={sectionRef} className="w-full px-8 md:px-14 lg:px-20 py-12 bg-white overflow-hidden">
-      <div className="max-w-[1440px] mx-auto">
-        <motion.div
-          className="relative rounded-[12px] overflow-hidden"
-          style={{ minHeight: "240px" }}
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          {/* Background image with parallax */}
-          <motion.div
-            className="absolute inset-0"
-            style={{ y: bgY, scale: 1.15 }}
-          >
-            <img
-              src={imgCtaBg}
-              alt=""
-              className="w-full h-full object-cover"
-              style={{ objectPosition: "center" }}
-            />
-          </motion.div>
-
-          {/* Dark overlay */}
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(105deg, rgba(1,40,90,0.92) 0%, rgba(1,90,170,0.75) 60%, transparent 100%)" }}
-          />
-
-          {/* Content */}
-          <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8 px-10 md:px-14 py-14">
-            <div style={{ maxWidth: "660px" }}>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: 0.1 }}
-                style={{
-                  fontFamily: "'Geist', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "clamp(22px, 3vw, 32px)",
-                  letterSpacing: "2px",
-                  color: "#fff",
-                  margin: 0,
-                  marginBottom: "14px",
-                  lineHeight: 1.25,
-                }}
-              >
-                Let's Build a Safer Digital Future Together
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: 0.22 }}
-                style={{
-                  fontFamily: "'Geist', sans-serif",
-                  fontWeight: 400,
-                  fontSize: "15px",
-                  letterSpacing: "2px",
-                  color: "#C6C6C6",
-                  lineHeight: 1.625,
-                  margin: 0,
-                }}
-              >
-                Whether you're a start-up or an enterprise, NebulaSafeTech is here
-                to secure your journey.
-              </motion.p>
-            </div>
-
-            {/* Get in Touch button */}
-            <motion.a
-              href="/#contact"
-              className="flex-shrink-0 flex items-center gap-2 no-underline group"
-              style={{
-                background: "#fff",
-                borderRadius: "8px",
-                padding: "12px 18px",
-              }}
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: 0.3 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.96 }}
-            >
-              <span
-                style={{
-                  fontFamily: "'Satoshi', sans-serif",
-                  fontWeight: 700,
-                  fontSize: "13px",
-                  letterSpacing: "0.96px",
-                  color: "#015AAA",
-                  textTransform: "uppercase",
-                }}
-              >
-                Get in Touch
-              </span>
-              <svg width="13" height="10" viewBox="0 0 13.5 9.5" fill="none" className="transition-transform duration-200 group-hover:translate-x-0.5">
-                <path d={svgPaths.pbf23500} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-              </svg>
-            </motion.a>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════════
    MAIN PAGE
 ══════════════════════════════════════════════════════════════════════ */
 export default function AboutPage() {
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
-    window.scrollTo(0, 0);
+    scrollToTopInstant();
+    enableSmoothScroll();
     return () => {
-      document.documentElement.style.scrollBehavior = "";
+      resetScrollBehavior();
     };
   }, []);
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
       <TopNav />
-      <BottomNav />
 
       {/* Animated page entry */}
       <motion.div
@@ -833,8 +711,8 @@ export default function AboutPage() {
         <StatsSection />
         <MissionVisionSection />
         <PartnersSection />
-        <CTASection />
         <FooterSection />
+        <ScrollToTop />
       </motion.div>
     </div>
   );

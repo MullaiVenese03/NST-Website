@@ -2,8 +2,6 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useState, useRef } from "react";
 import EnhancedHeroSection from "../components/EnhancedHeroSection";
 
-import { FloatingDots, AnimatedGradient } from "../components/FloatingElements";
-import ParticleSystem from "../components/ParticleSystem";
 import LoadingScreen from "../components/LoadingScreen";
 import TrustedClientsSection from "../components/TrustedClientsSection";
 import AboutSection from "../components/AboutSection";
@@ -13,16 +11,15 @@ import EdTechSection from "../components/EdTechSection";
 import NexSection from "../components/NexSection";
 import FooterSection from "../components/FooterSection";
 import TopNav from "../components/TopNav";
+import ScrollToTop from "../components/ScrollToTop";
+import { enableSmoothScroll, scrollToTopInstant } from "../utils/scroll";
 
 // Module-level flag: only show loading animation once per session
 let hasShownLoadingAnimation = false;
 
 export default function HomePage() {
-  const [mounted, setMounted] = useState(false);
-  // Skip loading screen if already shown this session
   const [isLoading, setIsLoading] = useState(!hasShownLoadingAnimation);
   const [isRevealed, setIsRevealed] = useState(hasShownLoadingAnimation);
-  const [activeSection, setActiveSection] = useState("hero");
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Parallax for hero section
@@ -35,20 +32,18 @@ export default function HomePage() {
 
   useEffect(() => {
     if (!hasShownLoadingAnimation) {
-      // Initial scroll lock only for first visit
       document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      // Already revealed — ensure scroll is enabled
-      document.body.style.overflow = "auto";
-      document.documentElement.style.scrollBehavior = "smooth";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      scrollToTopInstant();
+      enableSmoothScroll();
     }
-    
-    const timer = setTimeout(() => {
-      setMounted(true);
-    }, 100);
 
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, []);
 
@@ -56,8 +51,7 @@ export default function HomePage() {
     if (!isRevealed) return;
 
     const sections = ["hero", "clients", "about", "services", "testimonials", "edtech", "nex", "contact"];
-    
-    // 1. Intersection Observer for sections
+
     const observers = sections.map(id => {
       const el = document.getElementById(id);
       if (!el) return null;
@@ -65,20 +59,17 @@ export default function HomePage() {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            setActiveSection(id);
             window.dispatchEvent(new CustomEvent("sectionChange", { detail: id }));
           }
         },
-        { threshold: 0.3, rootMargin: "-10% 0px -70% 0px" } // Better detection for active section
+        { threshold: 0.2, rootMargin: "-20% 0px -45% 0px" }
       );
       observer.observe(el);
       return observer;
     });
 
-    // 2. Scroll listener for top detection
     const handleScroll = () => {
       if (window.scrollY < 100) {
-        setActiveSection("hero");
         window.dispatchEvent(new CustomEvent("sectionChange", { detail: "hero" }));
       }
     };
@@ -94,13 +85,16 @@ export default function HomePage() {
     hasShownLoadingAnimation = true;
     setIsLoading(false);
     setIsRevealed(true);
-    document.body.style.overflow = "auto";
-    document.documentElement.style.scrollBehavior = "smooth";
+    document.body.style.overflow = "";
+    document.documentElement.style.overflow = "";
+    scrollToTopInstant();
+    enableSmoothScroll();
+    window.dispatchEvent(new CustomEvent("sectionChange", { detail: "hero" }));
   };
 
   return (
     <div className="bg-white min-h-screen">
-      {!hasShownLoadingAnimation || isLoading ? (
+      {isLoading ? (
         <LoadingScreen isLoading={isLoading} onReveal={handleReveal} />
       ) : null}
       
@@ -192,6 +186,7 @@ export default function HomePage() {
           >
             <FooterSection />
           </motion.div>
+          <ScrollToTop />
         </motion.div>
       </div>
     </div>

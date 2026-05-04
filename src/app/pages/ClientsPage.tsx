@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Clients/svg-k9jt45kpig";
 import FooterSection from "../components/FooterSection";
 
 import TopNav from "../components/TopNav";
-import BottomNav from "../components/BottomNav";
+import ScrollToTop from "../components/ScrollToTop";
+import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
 /* ── Image assets ─────────────────────────────────────────────────────── */
 import imgImage1    from "../../assets/5926899d1cc62a8c472a80045c5531a797fcd790.png";
@@ -75,7 +76,7 @@ const allClients = [
 ];
 
 /* ── Animation variants ─────────────────────────────────────────────── */
-const fadeUp = {
+const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 28 },
   visible: (i: number = 0) => ({
     opacity: 1, y: 0,
@@ -93,7 +94,7 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
   const filters: Category[] = ["All Clients", "Academic", "Enterprises"];
 
   return (
-    <section className="w-full bg-white py-16 px-8 md:px-14 overflow-hidden">
+    <section className="w-full bg-white pt-32 pb-16 px-8 md:px-14 overflow-hidden">
       <div className="max-w-[1440px] mx-auto text-center">
         {/* Label */}
         <motion.p
@@ -357,15 +358,14 @@ export default function ClientsPage() {
   const [activeFilter, setActiveFilter] = useState<Category>("All Clients");
 
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = "smooth";
-    window.scrollTo(0, 0);
-    return () => { document.documentElement.style.scrollBehavior = ""; };
+    scrollToTopInstant();
+    enableSmoothScroll();
+    return () => { resetScrollBehavior(); };
   }, []);
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
       <TopNav />
-      <BottomNav />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -376,6 +376,7 @@ export default function ClientsPage() {
         <ClientsGrid activeFilter={activeFilter} />
         <StatsBanner />
         <FooterSection />
+        <ScrollToTop />
       </motion.div>
     </div>
   );

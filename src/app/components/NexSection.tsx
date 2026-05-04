@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 import svgPaths from "../../imports/NexSection/svg-rp6a4ek3k8";
 
 import imgIcon1 from "../../assets/Icons/1.png";
@@ -38,7 +38,7 @@ function NexLogo() {
   );
 }
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
@@ -53,11 +53,11 @@ export default function NexSection() {
       <div
         className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-0"
         style={{
-          border: "1px solid #e5e7eb",
-          borderRadius: "12px",
-          padding: "40px 48px",
+          border: "1px solid #f1f5f9",
+          borderRadius: "24px",
+          padding: "48px",
           background: "#fff",
-          boxShadow: "0 2px 12px rgba(23,107,240,0.07)",
+          boxShadow: "0 10px 40px -10px rgba(1, 90, 170, 0.08)",
         }}
       >
         {/* Left – Content */}
@@ -79,7 +79,7 @@ export default function NexSection() {
               marginBottom: "20px",
             }}
           >
-            NXT– Next Generation Security Platform
+            NEX - Next Generation Security Platform
           </motion.p>
 
           {/* Heading */}

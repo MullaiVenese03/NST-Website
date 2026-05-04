@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 import svgPaths from "../../imports/AboutSection/svg-s1i9qf01my";
 import imgAbout from "../../assets/About-Image.png";
 
@@ -57,7 +57,7 @@ const features = [
   { icon: <Hours24Icon />, label1: "24/7 Threat", label2: "Monitoring" },
 ];
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
     opacity: 1,
@@ -149,7 +149,7 @@ export default function AboutSection() {
             }}
           >
             <span style={{ fontFamily: "'Overcame Demo', sans-serif" }}>NebulaSafeTech</span> was founded by cybersecurity experts with a mission to
-            deliver enterprise-grade protection through innovation, transparency,
+            deliver enterprise - grade protection through innovation, transparency,
             and relentless dedication.
           </motion.p>
 
@@ -160,36 +160,38 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex items-start gap-0 mb-10"
-            style={{ maxWidth: "480px" }}
+            className="flex items-center gap-0 border border-slate-100 rounded-2xl p-6 bg-slate-50/30 shadow-sm mb-10"
+            style={{ maxWidth: "520px" }}
           >
             {features.map((f, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center gap-3 relative">
+              <div key={i} className="flex-1 flex items-center">
+                <div className="flex-1 flex flex-col items-center gap-3">
+                  <div className="h-[60px] flex items-center justify-center">
+                    {f.icon}
+                  </div>
+                  <p
+                    style={{
+                      fontFamily: "'Manrope', sans-serif",
+                      fontWeight: 700,
+                      fontSize: "16px",
+                      letterSpacing: "0.36px",
+                      color: "#000",
+                      textAlign: "center",
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {f.label1}
+                    <br />
+                    {f.label2}
+                  </p>
+                </div>
                 {/* Vertical divider */}
-                {i > 0 && (
+                {i < features.length - 1 && (
                   <div
-                    className="absolute left-0 top-4 bottom-4"
-                    style={{ width: "1.5px", background: "#C6C6C6" }}
+                    className="w-[1.5px] self-stretch mx-2"
+                    style={{ background: "#e2e8f0", minHeight: "80px" }}
                   />
                 )}
-                <div className="h-[60px] flex items-center justify-center">
-                  {f.icon}
-                </div>
-                <p
-                  style={{
-                    fontFamily: "'Manrope', sans-serif",
-                    fontWeight: 700,
-                    fontSize: "16px",
-                    letterSpacing: "0.36px",
-                    color: "#000",
-                    textAlign: "center",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {f.label1}
-                  <br />
-                  {f.label2}
-                </p>
               </div>
             ))}
           </motion.div>
@@ -206,8 +208,8 @@ export default function AboutSection() {
             style={{
               fontFamily: "'Inter', sans-serif",
               fontWeight: 700,
-              fontSize: "20px",
-              letterSpacing: "0.4px",
+              fontSize: "16px",
+              letterSpacing: "1px",
               color: "#015AAA",
               textDecoration: "none",
             }}

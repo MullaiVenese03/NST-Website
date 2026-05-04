@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, Variants } from "motion/react";
 import svgPaths from "../../imports/TestimonialsSection/svg-2ss3ybjdpk";
 
 import imgSlide1 from "../../assets/5926899d1cc62a8c472a80045c5531a797fcd790.png";
@@ -111,7 +111,7 @@ export default function TestimonialsSection() {
     exit: (d: number) => ({ opacity: 0, x: d > 0 ? -80 : 80 }),
   };
 
-  const descVariants = {
+  const descVariants: Variants = {
     enter: (d: number) => ({ opacity: 0, y: d > 0 ? 14 : -14 }),
     center: { opacity: 1, y: 0 },
     exit: (d: number) => ({ opacity: 0, y: d > 0 ? -14 : 14 }),
