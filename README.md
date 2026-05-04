@@ -1,6 +1,6 @@
 # Nebula Safe Tech (NST) - Website V2
 
-[![Production Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/NebulaSafeTech/NST-Website-Version_2)
+[![Production Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/MullaiVenese03/NST-Website)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF.svg)](https://vitejs.dev/)
@@ -59,8 +59,8 @@ To ensure a smooth development and production experience, please verify that you
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/NebulaSafeTech/NST-Website-Version_2.git
-cd NST-Website-Version_2
+git clone https://github.com/MullaiVenese03/NST-Website.git
+cd NST-Website
 ```
 
 ### 2. Dependency Installation
@@ -130,7 +130,7 @@ src/
 ## 🧪 Testing & Quality Assurance
 
 ### Current Status
-- **Manual QA**: The project is currently verified for responsive consistency across standard viewports (Mobile, Tablet, Desktop).
+- **Manual QA**: The project is currently verified for responsive consistency across standard viewport (Mobile, Tablet, Desktop).
 - **Linter**: ESLint configuration (if present) ensures code quality.
 
 ### Future Roadmap
@@ -162,7 +162,7 @@ We welcome contributions! Please follow these standards:
 | **Vite Build Failures** | Ensure Node.js is v18+. Clear `node_modules` and `package-lock.json`, then re-install. |
 | **Missing Assets** | Verify that large media files (MP4/PNG) are correctly referenced in `src/assets`. |
 | **Tailwind 4 Errors** | Check that your PostCSS config is up to date and compatible with `@tailwindcss/vite`. |
-| **Animation Lag** | Reduce the number of active particle systems in `ParticleSystem.tsx` for low-end devices. |
+| **Animation Lag** | Reduce the number of active animations or background videos for low-end devices. |
 
 ---
 
@@ -173,4 +173,4 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 **Nebula Safe Tech**
 - **Website**: [nebulasafetech.com](https://nebulasafetech.com)
 - **Email**: [contact@nebulasafetech.com](mailto:contact@nebulasafetech.com)
-- **GitHub**: [@NebulaSafeTech](https://github.com/NebulaSafeTech)
+- **GitHub**: [@MullaiVenese03](https://github.com/MullaiVenese03)
