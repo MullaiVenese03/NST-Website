@@ -1,176 +1,277 @@
-# Nebula Safe Tech (NST) - Website V2
+# NebulaSafeTech — Official Website
 
-[![Production Build](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/MullaiVenese03/NST-Website)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![React](https://img.shields.io/badge/React-18.3.1-blue.svg)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF.svg)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC.svg)](https://tailwindcss.com/)
+<div align="center">
 
-## 🚀 Project Overview
+![React](https://img.shields.io/badge/React-18-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-6-purple?logo=vite)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38BDF8?logo=tailwindcss)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
-**Nebula Safe Tech (NST)** is a next-generation SaaS landing page and professional service portal. Version 2 of the NST platform is engineered for high performance, featuring a modern architectural stack that bridges the gap between Cyber Security excellence and EdTech innovation.
+Modern cybersecurity and EdTech company website built using React, Vite, Tailwind CSS, and Motion.
 
-### 🌟 Value Proposition
-- **Enterprise-Grade Security**: Showcasing specialized services in Cloud, Network, and Application security.
-- **Immersive UX/UI**: Utilizing Framer Motion and Tailwind CSS for a fluid, responsive, and accessible user experience.
-- **Educational Empowerment**: A dedicated EdTech module designed for institutional partnerships and skill development.
+</div>
 
 ---
 
-## ✨ Key Features
+# Overview
 
-- **Responsive Multi-Page Architecture**: Seamlessly navigate between Home, About, Services, Clients, and EdTech pages.
-- **Dynamic Hero Section**: Interactive background elements with particle systems and video integration.
-- **Service Portfolio**: Detailed service cards with custom icons for various security domains.
-- **Trusted Clients Showcase**: A dynamic section highlighting academic and enterprise partnerships.
-- **Modern Animations**: Complex parallax effects and scroll-triggered animations powered by `motion/react`.
-- **Custom UI Library**: Built on top of Radix UI primitives for maximum accessibility and customization.
+NebulaSafeTech (NST) is a modern company website developed to represent the brand identity, cybersecurity services, educational initiatives, and digital presence of the organization.
+
+The project focuses on:
+
+- Modern UI/UX
+- High performance
+- Responsive layouts
+- Smooth animations
+- Scalable frontend architecture
+- Professional business presentation
+
+This website is designed as a production-ready frontend application with reusable components and optimized performance for desktop and mobile devices.
 
 ---
 
-## 🛠 Tech Stack
+# Live Preview
+
+## Production Website
+https://nebulasafetech.com
+
+---
+
+# Features
+
+## Core Features
+
+- Fully responsive design
+- Modern landing page UI
+- Multi-page architecture
+- Smooth page transitions
+- Animated hero sections
+- Interactive service cards
+- Client showcase sections
+- EdTech platform presentation
+- Optimized navigation experience
+- Mobile-friendly layouts
+
+---
+
+## UI/UX Features
+
+- Clean modern interface
+- Motion-based animations
+- Scroll-triggered effects
+- Responsive typography
+- Gradient-based design system
+- Interactive hover states
+- Reusable component structure
+
+---
+
+# Tech Stack
 
 | Category | Technology |
-| :--- | :--- |
-| **Frontend Framework** | React 18.3.1 |
-| **Build Tool** | Vite 6.x |
-| **Styling** | Tailwind CSS 4.x, Emotion |
-| **Animations** | Framer Motion (Motion 12), TW Animate CSS |
-| **Routing** | React Router 7 |
-| **UI Components** | Radix UI, Lucide Icons, Material UI Icons |
-| **Charts** | Recharts |
-| **Package Manager** | npm / pnpm |
+|---|---|
+| Frontend | React 18 |
+| Build Tool | Vite 6 |
+| Styling | Tailwind CSS 4 |
+| Routing | React Router 7 |
+| Animations | Motion |
+| Icons | Lucide React |
+| Language | JavaScript / TypeScript |
 
 ---
 
-## 📋 System Requirements
+# Project Structure
 
-To ensure a smooth development and production experience, please verify that your environment meets the following specifications:
-
-- **Runtime**: Node.js `v18.0.0` or higher (LTS recommended).
-- **Package Manager**: npm `v9.0.0+` or pnpm `v8.0.0+`.
-- **Memory**: Minimum 4GB RAM (8GB recommended for build processes).
-- **Operating System**: Windows 10+, macOS 12+, or any modern Linux distribution.
-- **Browser**: Modern evergreen browsers (Chrome 90+, Firefox 88+, Safari 14+).
+```bash
+NST-Website/
+│
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── routes/
+│   ├── styles/
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── package.json
+├── vite.config.js
+└── README.md
+```
 
 ---
 
-## ⚙️ Installation & Setup
+# Installation
 
-### 1. Clone the Repository
+## Clone Repository
+
 ```bash
 git clone https://github.com/MullaiVenese03/NST-Website.git
+```
+
+## Navigate Into Project
+
+```bash
 cd NST-Website
 ```
 
-### 2. Dependency Installation
-The project uses `npm` by default, but is compatible with `pnpm`.
+## Install Dependencies
+
 ```bash
 npm install
-# OR
-pnpm install
 ```
 
-### 3. Environment Configuration
-Create a `.env` file in the root directory (if needed for future API integrations):
-```env
-VITE_APP_TITLE=Nebula Safe Tech
-# Add other variables here
-```
+## Start Development Server
 
-### 4. Local Development
-Start the development server with Hot Module Replacement (HMR):
 ```bash
 npm run dev
 ```
-Navigate to `http://localhost:5173` to view the application.
+
+The application will run on:
+
+```bash
+http://localhost:5173
+```
 
 ---
 
-## 🚀 Launch & Deployment
+# Build For Production
 
-### Production Build
-Generate an optimized production-ready bundle:
 ```bash
 npm run build
 ```
-The output will be located in the `dist/` directory, containing minified assets and clean HTML.
 
-### Deployment Procedures
-1. **Vercel/Netlify**: Connect your GitHub repository for automatic CI/CD.
-2. **Static Hosting**: Upload the contents of the `dist/` folder to any static host (AWS S3, Firebase Hosting, GitHub Pages).
-3. **Docker (Optional)**:
-   ```dockerfile
-   # Example: Use Nginx to serve static content
-   FROM nginx:alpine
-   COPY ./dist /usr/share/nginx/html
-   EXPOSE 80
-   ```
+Production files will be generated inside:
 
----
-
-## 📂 Project Architecture
-
-```text
-src/
-├── app/
-│   ├── components/    # Atomic UI components and layout sections
-│   │   ├── ui/        # Reusable Radix-based primitives
-│   │   └── ...        # Feature-specific sections (Hero, Footer, etc.)
-│   ├── pages/         # Page-level components (HomePage, AboutPage, etc.)
-│   ├── App.tsx        # Application root and provider setup
-│   └── routes.tsx     # React Router navigation map
-├── assets/            # Media assets (images, videos, fonts)
-├── imports/           # SVG path definitions and external asset imports
-└── styles/            # Global CSS, Tailwind configurations, and themes
+```bash
+dist/
 ```
 
 ---
 
-## 🧪 Testing & Quality Assurance
+# Performance Goals
 
-### Current Status
-- **Manual QA**: The project is currently verified for responsive consistency across standard viewport (Mobile, Tablet, Desktop).
-- **Linter**: ESLint configuration (if present) ensures code quality.
+This project is designed with focus on:
 
-### Future Roadmap
-- **Unit Testing**: Integration of Vitest for component logic testing.
-- **E2E Testing**: Implementation of Playwright or Cypress for user flow verification.
-- **Performance**: Continuous monitoring via Lighthouse and Web Vitals.
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please follow these standards:
-
-1. **Code Style**: Follow the existing functional component pattern using TypeScript.
-2. **Commit Messages**: Use [Conventional Commits](https://www.conventionalcommits.org/).
-3. **Workflow**:
-   - Fork the repository.
-   - Create a feature branch (`git checkout -b feature/amazing-feature`).
-   - Commit changes (`git commit -m 'feat: add amazing feature'`).
-   - Push to branch (`git push origin feature/amazing-feature`).
-   - Open a Pull Request.
+- Fast loading speed
+- Lightweight frontend architecture
+- Optimized asset rendering
+- Smooth animation performance
+- Mobile responsiveness
+- SEO-friendly structure
 
 ---
 
-## 🔍 Troubleshooting
+# Future Improvements
 
-| Issue | Solution |
-| :--- | :--- |
-| **Vite Build Failures** | Ensure Node.js is v18+. Clear `node_modules` and `package-lock.json`, then re-install. |
-| **Missing Assets** | Verify that large media files (MP4/PNG) are correctly referenced in `src/assets`. |
-| **Tailwind 4 Errors** | Check that your PostCSS config is up to date and compatible with `@tailwindcss/vite`. |
-| **Animation Lag** | Reduce the number of active animations or background videos for low-end devices. |
+Planned upgrades for future versions:
+
+- Backend integration
+- CMS support
+- Blog system
+- Authentication system
+- Admin dashboard
+- API integration
+- Dark mode
+- Internationalization
+- Analytics dashboard
+- Performance monitoring
 
 ---
 
-## 📄 License & Contact
+# Deployment
 
-Distributed under the **MIT License**. See `LICENSE` for more information.
+The project can be deployed easily on:
 
-**Nebula Safe Tech**
-- **Website**: [nebulasafetech.com](https://nebulasafetech.com)
-- **Email**: [contact@nebulasafetech.com](mailto:contact@nebulasafetech.com)
-- **GitHub**: [@MullaiVenese03](https://github.com/MullaiVenese03)
+- Vercel
+- Netlify
+- Firebase Hosting
+- GitHub Pages
+- AWS S3 + CloudFront
+
+---
+
+# Development Guidelines
+
+## Recommended Environment
+
+| Tool | Version |
+|---|---|
+| Node.js | 18+ |
+| npm | 9+ |
+
+---
+
+# Contributing
+
+Contributions are welcome.
+
+## Steps
+
+1. Fork the repository
+2. Create a new branch
+
+```bash
+git checkout -b feature/feature-name
+```
+
+3. Commit changes
+
+```bash
+git commit -m "feat: added new feature"
+```
+
+4. Push branch
+
+```bash
+git push origin feature/feature-name
+```
+
+5. Open Pull Request
+
+---
+
+# Screenshots
+
+## Home Page
+
+Add project screenshots here.
+
+```bash
+/assets/screenshots/home.png
+```
+
+---
+
+# License
+
+This project is licensed under the MIT License.
+
+---
+
+# Author
+
+## Mullai
+
+Frontend Developer | Cybersecurity Enthusiast | Founder of NebulaSafeTech
+
+- GitHub: https://github.com/MullaiVenese03
+- Website: https://nebulasafetech.com
+
+---
+
+# Support
+
+For business inquiries or collaborations:
+
+📧 contact@nebulasafetech.com
+
+---
+
+<div align="center">
+
+Built with React + Vite + TailwindCSS
+
+</div>
