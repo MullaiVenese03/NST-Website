@@ -1,16 +1,16 @@
 import { motion } from "motion/react";
 
 // Partner logos from local assets (hash filenames match figma exports already in src/assets)
-import imgThirukkuralTransportLogo from "../../assets/cae0543e4d40907e740964425ebb330b97abe22f.png";
-import imgStJosephCollegeLogo from "../../assets/e355fe2f1a3f31bcdfe0cd0d99f6f28dda47e72a.png";
-import imgSolamalaiCollegeLogo from "../../assets/d5f607418c370acbaa1f40116cb7f71ec15f7cb5.png";
-import imgDhanalakshmiSrinivasanCollegeLogo from "../../assets/05c41322d27468edf456953a87abfdd7ea362d4c.png";
-import imgAkshayaCollegeLogo from "../../assets/b4f771cbee9a12e39c116157c446004997e7dcfd.png";
-import imgNsrLogo from "../../assets/8d795a174b249a3418f58c1303298a2b79e129da.png";
-import imgSgnlLogo from "../../assets/c352b1695ed894ec9f13b794b78bfd0a7a5ce52f.png";
-import imgTwomileHeavyIndustriesLogo from "../../assets/5ef75f1a4d3f2b1d66fafc1493ce45d1bbc807cb.png";
-import imgRapidoLogo from "../../assets/f8b4c2e6aa66f714e256226143405c3478a1db0e.png";
-import imgP2TaskLogo from "../../assets/1a60c549e67b214eaed0516c16e0c4ed107c690a.png";
+import imgThirukkuralTransportLogo from "../../assets/logo-thirukkural-transport.png";
+import imgStJosephCollegeLogo from "../../assets/logo-st-joseph-college.png";
+import imgSolamalaiCollegeLogo from "../../assets/logo-solamalai-college.png";
+import imgDhanalakshmiSrinivasanCollegeLogo from "../../assets/logo-dhanalakshmi-srinivasan.png";
+import imgAkshayaCollegeLogo from "../../assets/logo-akshaya-college.png";
+import imgNsrLogo from "../../assets/logo-nsr.png";
+import imgSgnlLogo from "../../assets/logo-sgnl.png";
+import imgTwomileHeavyIndustriesLogo from "../../assets/logo-twomile-heavy-industries.png";
+import imgRapidoLogo from "../../assets/logo-rapido.png";
+import imgP2TaskLogo from "../../assets/logo-p2task.png";
 
 const logos = [
   { src: imgThirukkuralTransportLogo, alt: "Thirukkural Transport" },
@@ -50,7 +50,7 @@ export default function TrustedClientsSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
             className="text-2xl md:text-3xl font-black text-gray-900 leading-[1.1]"
-            style={{ fontFamily: "'Geist',sans-serif" }}>
+            style={{ fontFamily: 'var(--font-family)' }}>
             Trusted by
             <br />
             <span style={{ color: '#015AAA' }}>Industry & Academia</span>
@@ -96,3 +96,4 @@ export default function TrustedClientsSection() {
     </section>
   );
 }
+

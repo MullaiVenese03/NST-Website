@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { motion } from "motion/react";
-import { Linkedin, Instagram, Twitter, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowRight, type LucideIcon } from "lucide-react";
+import { brandMarkUrl } from "../../brandMark";
 
 /* ─── Nav link ─────────────────────────────────────────────────────────── */
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -31,19 +33,41 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
 }
 
 /* ─── Contact Row ──────────────────────────────────────────────────────── */
-function ContactRow({ icon: Icon, label, value, href }: { icon: any, label: string, value: string, href: string }) {
+function ContactRow({
+  icon: Icon,
+  label,
+  value,
+  href,
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  href: string;
+}) {
+  const isExternal = href.startsWith("http");
+
   return (
-    <div className="flex items-center gap-4">
-      <div className="w-10 h-10 rounded-lg bg-[#015AAA]/10 flex items-center justify-center text-[#015AAA] shrink-0">
+    <motion.a
+      href={href}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
+      className="group flex items-center gap-4 rounded-xl px-3 py-2.5 -mx-3 no-underline border border-transparent hover:border-[#015AAA]/15 hover:bg-[#015AAA]/5 transition-all duration-250"
+      whileHover={{ x: 2 }}
+      transition={{ type: "spring", stiffness: 420, damping: 26 }}
+      aria-label={`${label}: ${value}`}
+    >
+      <div className="w-10 h-10 rounded-lg bg-[#015AAA]/10 flex items-center justify-center text-[#015AAA] shrink-0 transition-colors duration-250 group-hover:bg-[#015AAA] group-hover:text-white">
         <Icon size={20} />
       </div>
       <div>
-        <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1">{label}</p>
-        <a href={href} className="text-[14px] font-semibold text-slate-800 hover:text-[#015AAA] transition-colors">
+        <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1 transition-colors duration-250 group-hover:text-[#015AAA]">
+          {label}
+        </p>
+        <span className="text-[14px] font-semibold text-slate-800 transition-colors duration-250 group-hover:text-[#015AAA]">
           {value}
-        </a>
+        </span>
       </div>
-    </div>
+    </motion.a>
   );
 }
 
@@ -63,7 +87,7 @@ function SocialBtn({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex items-center justify-center rounded-full bg-[#015AAA]/10 w-9 h-9 text-[#015AAA] hover:bg-[#015AAA]/20 transition-colors duration-200"
+      className="flex items-center justify-center rounded-full bg-[#015AAA]/10 w-11 h-11 min-w-[44px] min-h-[44px] text-[#015AAA] hover:bg-[#015AAA]/20 transition-colors duration-200"
       whileHover={{ scale: 1.1, y: -2 }}
       whileTap={{ scale: 0.95 }}
     >
@@ -96,10 +120,10 @@ export default function FooterSection() {
           {/* Left: Get In Touch */}
           <div className="lg:col-span-3 space-y-8">
             <div className="space-y-4">
-              <h4 className="text-[#015AAA] text-base font-bold uppercase tracking-wider">Get In Touch</h4>
-              <h3 className="text-3xl font-bold text-slate-900 leading-tight">
+              <p className="text-[#015AAA] text-base font-bold uppercase tracking-wider m-0">Get In Touch</p>
+              <h2 className="text-3xl font-bold text-slate-900 leading-tight m-0">
                 Let's secure your world.
-              </h3>
+              </h2>
             </div>
 
             <div className="space-y-6">
@@ -110,14 +134,14 @@ export default function FooterSection() {
           </div>
 
           {/* Vertical Divider (Desktop Only) */}
-          <div className="hidden lg:block lg:col-span-1 flex justify-center h-full min-h-[300px]">
+          <div className="hidden lg:col-span-1 lg:flex justify-center h-full min-h-[300px]">
             <div className="w-[1px] h-full bg-slate-200" />
           </div>
 
           {/* Middle: Links */}
-          <div className="lg:col-span-4 grid grid-cols-3 gap-4 lg:pt-10">
+          <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 lg:gap-4 lg:pt-10">
             <div className="space-y-6">
-              <h4 className="text-lg font-bold text-slate-900">Company</h4>
+              <p className="text-lg font-bold text-slate-900 m-0">Company</p>
               <nav className="flex flex-col gap-4">
                 <NavLink href="/">Home</NavLink>
                 <NavLink href="/about">About Us</NavLink>
@@ -128,7 +152,7 @@ export default function FooterSection() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-lg font-bold text-slate-900">Services</h4>
+              <p className="text-lg font-bold text-slate-900 m-0">Services</p>
               <nav className="flex flex-col gap-4">
                 <NavLink href="/services">Web Services</NavLink>
                 <NavLink href="/services">Security Services</NavLink>
@@ -138,10 +162,30 @@ export default function FooterSection() {
             </div>
 
             <div className="space-y-6">
-              <h4 className="text-lg font-bold text-slate-900">Support</h4>
+              <p className="text-lg font-bold text-slate-900 m-0">Support</p>
               <nav className="flex flex-col gap-4">
-                <NavLink href="#privacy">Privacy Policy</NavLink>
-                <NavLink href="#terms">Terms & Conditions</NavLink>
+                <motion.div
+                  whileHover={{ x: 2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Link
+                    to="/privacy-policy"
+                    className="block no-underline text-[15px] font-medium text-slate-700 hover:text-[#015AAA] transition-colors duration-200"
+                  >
+                    Privacy Policy
+                  </Link>
+                </motion.div>
+                <motion.div
+                  whileHover={{ x: 2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                >
+                  <Link
+                    to="/terms-and-conditions"
+                    className="block no-underline text-[15px] font-medium text-slate-700 hover:text-[#015AAA] transition-colors duration-200"
+                  >
+                    Terms & Conditions
+                  </Link>
+                </motion.div>
               </nav>
             </div>
           </div>
@@ -162,22 +206,22 @@ export default function FooterSection() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3">
                   <input
-                    name="name" type="text" placeholder="Name" required
+                    name="name" type="text" placeholder="Name" required autoComplete="name"
                     value={form.name} onChange={handleChange}
                     className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
                   />
                   <input
-                    name="email" type="email" placeholder="Email Address" required
+                    name="email" type="email" placeholder="Email Address" required autoComplete="email"
                     value={form.email} onChange={handleChange}
                     className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
                   />
                   <input
-                    name="phone" type="tel" placeholder="Phone Number"
+                    name="phone" type="tel" placeholder="Phone Number" autoComplete="tel"
                     value={form.phone} onChange={handleChange}
                     className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
                   />
                   <textarea
-                    name="message" placeholder="How can we help ?" required rows={4}
+                    name="message" placeholder="How can we help ?" required rows={4} autoComplete="off"
                     value={form.message} onChange={handleChange}
                     className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all resize-none placeholder:text-slate-400"
                   />
@@ -197,19 +241,32 @@ export default function FooterSection() {
 
         {/* Bottom Bar */}
         <div className="mt-16 py-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-slate-500 text-sm">
-            Copyright &copy; 2026 <span className="text-blue-500">NebulaSafeTech</span>. All Rights Reserved.
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-center sm:text-left">
+            <p className="text-slate-500 text-sm m-0">
+              Copyright &copy; 2026 <span className="text-blue-500" style={{ fontFamily: 'var(--font-company)' }}>NebulaSafeTech</span>. All Rights Reserved.
+            </p>
+            <div className="flex items-center justify-center gap-4 text-sm">
+              <Link to="/privacy-policy" className="text-slate-600 hover:text-[#015AAA] no-underline font-medium transition-colors">
+                Privacy Policy
+              </Link>
+              <span className="text-slate-300" aria-hidden>
+                |
+              </span>
+              <Link to="/terms-and-conditions" className="text-slate-600 hover:text-[#015AAA] no-underline font-medium transition-colors">
+                Terms & Conditions
+              </Link>
+            </div>
+          </div>
 
           <div className="flex items-center gap-4">
             <SocialBtn href="https://linkedin.com/company/nebulasafetech-nst/" label="LinkedIn">
-              <Linkedin size={18} />
+              <img src={brandMarkUrl} alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" decoding="async" />
             </SocialBtn>
             <SocialBtn href="https://instagram.com/nebulasafetech" label="Instagram">
-              <Instagram size={18} />
+              <img src={brandMarkUrl} alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" decoding="async" />
             </SocialBtn>
             <SocialBtn href="https://twitter.com/nebulasafetech" label="Twitter">
-              <Twitter size={18} />
+              <img src={brandMarkUrl} alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" decoding="async" />
             </SocialBtn>
           </div>
         </div>
@@ -217,21 +274,23 @@ export default function FooterSection() {
 
       {/* Giant NST Branding */}
       <div className="relative w-full overflow-hidden pointer-events-none select-none h-[250px] md:h-[450px]">
-        <h2 
-          className="font-black leading-none absolute bottom-0 left-0 w-full text-center"
-          style={{ 
-            fontSize: 'min(90vw, 800px)',
-            fontFamily: "'Overcame Demo', sans-serif",
-            background: 'linear-gradient(to top, #030108 0%, #015AAA 50%, #FFF 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            letterSpacing: '-0.02em',
-            transform: 'translateY(0%)'
+        <div
+          className="font-black leading-none absolute bottom-0 left-0 w-full text-center m-0"
+          style={{
+            fontSize: "min(90vw, 800px)",
+            fontFamily: "var(--font-company)",
+            background: "linear-gradient(to top, #030108 0%, #015AAA 50%, #FFF 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            letterSpacing: "-0.02em",
+            transform: "translateY(0%)",
           }}
+          role="img"
+          aria-label="NST"
         >
           NST
-        </h2>
+        </div>
       </div>
     </footer>
   );

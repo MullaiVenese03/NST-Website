@@ -1,21 +1,35 @@
 import { useState, useEffect, useRef } from "react";
+
 import { motion, AnimatePresence, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Clients/svg-k9jt45kpig";
 import FooterSection from "../components/FooterSection";
+import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
-/* ── Image assets ─────────────────────────────────────────────────────── */
-import imgImage1    from "../../assets/5926899d1cc62a8c472a80045c5531a797fcd790.png";
-import imgCard1     from "../../assets/34b7d9ec10567f97d104585dd751c88574bc2b07.png";
-import imgCard2     from "../../assets/c79497b95b362671f3826b57c07ff6b75876210f.png";
-import img49        from "../../assets/f2114494586b803343871affe5e97729e32a572e.png";
-import img51        from "../../assets/b29629f74036a61c4bc22a5962681cf47aeda57e.png";
-import img64432110  from "../../assets/549400d7fbce2211b55697977061868abf20f370.png";
+/* â”€â”€ Image assets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+import imgImage1    from "../../assets/testimonial-st-joseph-1.png";
+import imgCard1     from "../../assets/testimonial-cppm-college.png";
+import imgCard2     from "../../assets/testimonial-st-joseph-2.png";
+import img49        from "../../assets/testimonial-st-joseph-mou.png";
+import img51        from "../../assets/testimonial-tn-police.png";
+import img64432110  from "../../assets/testimonial-dhanalakshmi-mou.png";
 
-/* ── Client data ───────────────────────────────────────────────────────── */
+/* -- Partner Logos -- */
+import logoThirukkural from "../../assets/logo-thirukkural-transport.png";
+import logoStJoseph    from "../../assets/logo-st-joseph-college.png";
+import logoSolamalai   from "../../assets/logo-solamalai-college.png";
+import logoDhanalakshmi from "../../assets/logo-dhanalakshmi-srinivasan.png";
+import logoAkshaya     from "../../assets/logo-akshaya-college.png";
+import logoNsr         from "../../assets/logo-nsr.png";
+import logoSgnl        from "../../assets/logo-sgnl.png";
+import logoTwomile     from "../../assets/logo-twomile-heavy-industries.png";
+import logoRapido      from "../../assets/logo-rapido.png";
+import logoP2Task      from "../../assets/logo-p2task.png";
+
+/* â”€â”€ Client data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 type Category = "All Clients" | "Academic" | "Enterprises";
 
 const allClients = [
@@ -75,7 +89,7 @@ const allClients = [
   },
 ];
 
-/* ── Animation variants ─────────────────────────────────────────────── */
+/* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 28 },
   visible: (i: number = 0) => ({
@@ -84,9 +98,9 @@ const fadeUp: Variants = {
   }),
 };
 
-/* ══════════════════════════════════════════════════════════════════════
-   HERO — "Trusted by Leaders Worldwide"
-══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HERO â€” "Trusted by Leaders Worldwide"
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function ClientsHero({ activeFilter, setActiveFilter }: {
   activeFilter: Category;
   setActiveFilter: (f: Category) => void;
@@ -99,7 +113,7 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
         {/* Label */}
         <motion.p
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
-          style={{ fontFamily: "'Inter',sans-serif", fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "16px" }}
+          style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "16px" }}
         >
           Our Client Programs
         </motion.p>
@@ -107,7 +121,7 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
         {/* Heading */}
         <motion.h1
           variants={fadeUp} initial="hidden" animate="visible" custom={1}
-          style={{ fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "clamp(28px,4vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.1, marginBottom: "20px" }}
+          style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(28px,4vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.1, marginBottom: "20px" }}
         >
           Empowering People. Strengthening Security.
         </motion.h1>
@@ -115,7 +129,7 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
         {/* Sub-description */}
         <motion.p
           variants={fadeUp} initial="hidden" animate="visible" custom={2}
-          style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "36px", maxWidth: "700px", margin: "0 auto 36px" }}
+          style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "36px", maxWidth: "700px", margin: "0 auto 36px" }}
         >
           We conduct cybersecurity awareness programs and training sessions that educate, engage, and empower individuals to stay safe in the digital world.
         </motion.p>
@@ -123,23 +137,27 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
         {/* Filter buttons */}
         <motion.div
           variants={fadeUp} initial="hidden" animate="visible" custom={3}
-          className="flex items-center justify-center gap-4 flex-wrap"
+          className="inline-flex items-center justify-center gap-2 flex-wrap rounded-full p-1.5"
+          style={{ background: "#f1f5f9", border: "1px solid #dbe5f1" }}
         >
           {filters.map((f) => (
             <motion.button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className="px-5 py-2 rounded-[8px] cursor-pointer border-none outline-none transition-all duration-200"
+              className="px-5 py-2.5 rounded-full cursor-pointer border-none outline-none transition-all duration-250"
               style={{
-                fontFamily: "'Satoshi',sans-serif",
+                fontFamily: 'var(--font-family)',
                 fontWeight: 900,
                 fontSize: "12px",
-                letterSpacing: "0.96px",
-                background: activeFilter === f ? "#015AAA" : "#fff",
-                color: activeFilter === f ? "#fff" : "#015AAA",
-                boxShadow: activeFilter === f ? "none" : "inset 0px 2px 10px 0px rgba(23,107,240,0.25)",
+                letterSpacing: "0.84px",
+                background: activeFilter === f ? "#015AAA" : "transparent",
+                color: activeFilter === f ? "#fff" : "#25507f",
+                boxShadow:
+                  activeFilter === f
+                    ? "0 8px 20px rgba(1,90,170,0.28)"
+                    : "none",
               }}
-              whileHover={{ scale: 1.06 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
             >
               {f}
@@ -151,9 +169,9 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SINGLE CLIENT CARD
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function WavyCheckIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 15.4998 15.4997" fill="none" className="flex-shrink-0">
@@ -195,22 +213,12 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
-        {/* Category badge */}
-        <div
-          className="absolute top-4 right-4 rounded-[6px] flex items-center justify-center"
-          style={{ background: "#015AAA", height: "22px", padding: "0 10px" }}
-        >
-          <span style={{ fontFamily: "'Satoshi',sans-serif", fontWeight: 900, fontSize: "9px", letterSpacing: "0.54px", color: "#fff" }}>
-            {client.category}
-          </span>
-        </div>
-
         {/* Program label at bottom of image */}
         <div
           className="absolute bottom-0 left-0 right-0 flex items-end justify-center pb-3"
           style={{ background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%)", height: "80px" }}
         >
-          <span style={{ fontFamily: "'Satoshi',sans-serif", fontWeight: 900, fontSize: "13px", letterSpacing: "0.78px", color: "#fff", textAlign: "center" }}>
+          <span style={{ fontFamily: 'var(--font-family)', fontWeight: 900, fontSize: "13px", letterSpacing: "0.78px", color: "#fff", textAlign: "center" }}>
             {client.label}
           </span>
         </div>
@@ -220,14 +228,14 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
       <div className="flex flex-col gap-3 p-5 flex-1">
         {/* Institution + verified */}
         <div className="flex items-center gap-2">
-          <span style={{ fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "16px", letterSpacing: "0.32px", color: "#000", lineHeight: 1 }}>
+          <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", letterSpacing: "0.32px", color: "#000", lineHeight: 1 }}>
             {client.institution}
           </span>
           <WavyCheckIcon />
         </div>
 
         {/* Description */}
-        <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 500, fontSize: "13px", letterSpacing: "0.26px", color: "#6D6D6D", lineHeight: 1.65, margin: 0, flexGrow: 1 }}>
+        <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "13px", letterSpacing: "0.26px", color: "#6D6D6D", lineHeight: 1.65, margin: 0, flexGrow: 1 }}>
           {client.desc}
         </p>
 
@@ -238,8 +246,11 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
         >
           <UsersGroupIcon />
           <div className="flex flex-col gap-0.5">
-            <span style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 700, fontSize: "8px", letterSpacing: "0.16px", color: "#015AAA" }}>Participants</span>
-            <span style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 700, fontSize: "9px", letterSpacing: "0.36px", color: "#000" }}>{client.participants}</span>
+            <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "8px", letterSpacing: "0.16px", color: "#015AAA" }}>Participants</span>
+            <AnimatedNumber
+              value={client.participants}
+              style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "9px", letterSpacing: "0.36px", color: "#000" }}
+            />
           </div>
         </div>
       </div>
@@ -247,9 +258,9 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CLIENTS GRID
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function ClientsGrid({ activeFilter }: { activeFilter: Category }) {
   const filtered = activeFilter === "All Clients"
     ? allClients
@@ -290,10 +301,10 @@ function ClientsGrid({ activeFilter }: { activeFilter: Category }) {
                   <path d="M8 12h8M12 8v8" stroke="#015AAA" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
               </div>
-              <p style={{ fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "22px", color: "#000", margin: 0 }}>
+              <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "22px", color: "#000", margin: 0 }}>
                 Coming Soon
               </p>
-              <p style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 500, fontSize: "16px", color: "#6D6D6D", margin: 0, textAlign: "center", maxWidth: "400px" }}>
+              <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "16px", color: "#6D6D6D", margin: 0, textAlign: "center", maxWidth: "400px" }}>
                 Enterprise client programs are being curated. Check back soon!
               </p>
             </motion.div>
@@ -304,9 +315,79 @@ function ClientsGrid({ activeFilter }: { activeFilter: Category }) {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   PARTNERS SECTION â€” "Partnering with Leaders Worldwide"
+â•â•â•â•â••â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+function PartnersSection() {
+  const partners = [
+    { logo: logoThirukkural, alt: "Thirukkural Transport" },
+    { logo: logoStJoseph,    alt: "St. Joseph College" },
+    { logo: logoSolamalai,   alt: "Solamalai College" },
+    { logo: logoDhanalakshmi, alt: "Dhanalakshmi Srinivasan College" },
+    { logo: logoAkshaya,     alt: "Akshaya College" },
+    { logo: logoNsr,         alt: "NSR" },
+    { logo: logoSgnl,        alt: "SGNL" },
+    { logo: logoTwomile,     alt: "Twomile Heavy Industries" },
+    { logo: logoRapido,      alt: "Rapido" },
+    { logo: logoP2Task,      alt: "P2Task" },
+  ];
+
+  return (
+    <section className="w-full bg-white py-20 px-8 md:px-14 lg:px-20 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto">
+        {/* Label */}
+        <motion.p
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
+          className="text-[#015AAA] font-bold text-[14px] tracking-[0.05em] uppercase mb-4"
+          style={{ fontFamily: 'var(--font-family)' }}
+        >
+          Trusted by Industry & Academia
+        </motion.p>
+
+        {/* Heading */}
+        <motion.h2
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
+          className="text-gray-900 font-bold text-4xl md:text-5xl mb-6"
+          style={{ fontFamily: 'var(--font-family)', letterSpacing: "-0.02em" }}
+        >
+          Partnering with Leaders Worldwide
+        </motion.h2>
+
+        {/* Subtitle */}
+        <motion.p
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
+          className="text-gray-500 font-medium text-lg max-w-3xl mb-16 leading-relaxed"
+          style={{ fontFamily: 'var(--font-family)' }}
+        >
+          We are proud to work with innovative companies and academic institutions that trust us to secure their digital future.
+        </motion.p>
+
+        {/* Logo Grid */}
+        <div className="flex flex-wrap justify-center gap-6 md:gap-8">
+          {partners.map((partner, index) => (
+            <motion.div
+              key={index}
+              variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index % 6}
+              className="w-[180px] h-[120px] md:w-[200px] md:h-[140px] bg-white rounded-2xl flex items-center justify-center p-6 transition-all duration-300 border border-gray-100/50"
+              style={{ boxShadow: "0 10px 30px -10px rgba(0,0,0,0.08)" }}
+              whileHover={{ y: -5, boxShadow: "0 20px 40px -12px rgba(1,90,170,0.12)" }}
+            >
+              <img
+                src={partner.logo}
+                alt={partner.alt}
+                className="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
+              />
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FLOATING STATS BAR (parallax accent)
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function StatsBanner() {
   const stats = [
     { value: "6+",   label: "Partner Institutions" },
@@ -337,10 +418,11 @@ function StatsBanner() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <span style={{ fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "clamp(28px,3vw,42px)", color: "#fff", letterSpacing: "0.96px" }}>
-                {s.value}
-              </span>
-              <span style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 500, fontSize: "15px", color: "rgba(255,255,255,0.75)", letterSpacing: "0.3px" }}>
+              <AnimatedNumber
+                value={s.value}
+                style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(28px,3vw,42px)", color: "#fff", letterSpacing: "0.96px" }}
+              />
+              <span style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "15px", color: "rgba(255,255,255,0.75)", letterSpacing: "0.3px" }}>
                 {s.label}
               </span>
             </motion.div>
@@ -351,9 +433,9 @@ function StatsBanner() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    MAIN PAGE
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function ClientsPage() {
   const [activeFilter, setActiveFilter] = useState<Category>("All Clients");
 
@@ -374,6 +456,7 @@ export default function ClientsPage() {
       >
         <ClientsHero activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
         <ClientsGrid activeFilter={activeFilter} />
+        <PartnersSection />
         <StatsBanner />
         <FooterSection />
         <ScrollToTop />
@@ -381,3 +464,4 @@ export default function ClientsPage() {
     </div>
   );
 }
+

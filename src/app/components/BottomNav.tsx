@@ -1,16 +1,16 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { scrollToTopInstant } from "../utils/scroll";
 
 const navItems = [
-  { name: "Home",         href: "hero",         path: "/" },
-  { name: "About",        href: "about",        path: "/about" },
-  { name: "Services",     href: "services",     path: "/services" },
+  { name: "Home", href: "hero", path: "/" },
+  { name: "About", href: "about", path: "/about" },
+  { name: "Services", href: "services", path: "/services" },
   { name: "Testimonials", href: "testimonials", path: "/clients" },
-  { name: "EdTech",       href: "edtech",       path: "/edtech" },
-  { name: "NEX",          href: "nex",          path: "/#nex" },
-  { name: "Footer",       href: "contact",      path: "/#contact" },
+  { name: "EdTech", href: "edtech", path: "/edtech" },
+  { name: "NEX", href: "nex", path: "/#nex" },
+  { name: "Footer", href: "contact", path: "/#contact" },
 ];
 
 export default function BottomNav() {
@@ -19,19 +19,17 @@ export default function BottomNav() {
   const [activeSection, setActiveSection] = useState("hero");
 
   useEffect(() => {
-    // Listen for section changes (dispatched by HomePage's IntersectionObserver)
-    const handleSectionChange = (e: any) => {
+    const handleSectionChange = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
       if (location.pathname === "/") {
-        // Map clients section to testimonials for bottom nav
-        const sectionId = e.detail === "clients" ? "testimonials" : e.detail;
+        const sectionId = detail === "clients" ? "testimonials" : detail;
         setActiveSection(sectionId);
       }
     };
     window.addEventListener("sectionChange", handleSectionChange);
-    
-    // Update active section based on current path for non-home pages
+
     if (location.pathname !== "/") {
-      const currentItem = navItems.find(item => item.path === location.pathname);
+      const currentItem = navItems.find((item) => item.path === location.pathname);
       if (currentItem) setActiveSection(currentItem.href);
     } else if (location.hash) {
       const hash = location.hash.replace("#", "");
@@ -43,10 +41,10 @@ export default function BottomNav() {
     return () => window.removeEventListener("sectionChange", handleSectionChange);
   }, [location.pathname, location.hash]);
 
-  const handleClick = (item: typeof navItems[0]) => {
+  const handleClick = (item: (typeof navItems)[0]) => {
     if (location.pathname === "/" && (item.path === "/" || item.path.startsWith("/#"))) {
       const sectionId = item.path === "/" ? item.href : item.path.split("#")[1];
-      
+
       if (item.path === "/") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
@@ -69,37 +67,26 @@ export default function BottomNav() {
 
   return (
     <motion.div
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-4xl"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-4xl max-md:hidden"
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <div className="relative bg-white/40 backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-full p-1.5 flex items-center justify-between gap-1 overflow-hidden md:overflow-visible">
-        {navItems.map((item, index) => {
+      <div className="relative rounded-full border border-slate-200/90 bg-white/95 p-1 sm:p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex items-stretch gap-0.5 sm:gap-1 overflow-x-auto overflow-y-hidden max-w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:overflow-visible md:justify-between">
+        {navItems.map((item) => {
           const isActive = activeSection === item.href;
-          
+
           return (
             <motion.button
               key={item.name}
+              type="button"
               onClick={() => handleClick(item)}
-              className={`relative px-4 py-2.5 md:px-6 md:py-3 rounded-full font-bold text-xs md:text-sm transition-all cursor-pointer border-none whitespace-nowrap flex-1 flex items-center justify-center ${
-                isActive 
-                  ? "text-white" 
-                  : "text-gray-700 hover:text-[#015aaa] hover:bg-white/30"
+              className={`relative shrink-0 min-w-[44px] min-h-[44px] rounded-full border-none px-2.5 sm:px-4 md:px-6 py-2.5 md:py-3 font-bold text-[11px] sm:text-xs md:text-sm transition-colors duration-200 cursor-pointer whitespace-nowrap flex items-center justify-center md:flex-1 ${
+                isActive
+                  ? "bg-[#014080] text-white shadow-md shadow-blue-900/25"
+                  : "bg-transparent text-gray-800 hover:bg-slate-100 hover:text-[#015aaa]"
               }`}
             >
-              <AnimatePresence>
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 bg-[#015aaa] rounded-full shadow-lg shadow-blue-500/30 -z-10"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-              </AnimatePresence>
               {item.name}
             </motion.button>
           );

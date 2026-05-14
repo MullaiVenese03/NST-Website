@@ -14,8 +14,8 @@ import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
 import { enableSmoothScroll, scrollToTopInstant } from "../utils/scroll";
 
-// Module-level flag: only show loading animation once per session
-let hasShownLoadingAnimation = false;
+// Skip intro splash in production for faster LCP and better Lighthouse scores; dev keeps the animation once per session.
+let hasShownLoadingAnimation = import.meta.env.PROD;
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(!hasShownLoadingAnimation);
@@ -98,7 +98,7 @@ export default function HomePage() {
         <LoadingScreen isLoading={isLoading} onReveal={handleReveal} />
       ) : null}
       
-      <div className={isRevealed ? "block" : "hidden"}>
+      <div>
         <TopNav />
 
         <motion.div

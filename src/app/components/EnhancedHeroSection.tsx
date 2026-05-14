@@ -1,6 +1,6 @@
-import FixedHeroSection from "./FixedHeroSection";
+﻿import FixedHeroSection from "./FixedHeroSection";
 // @ts-ignore
-import heroVideo from "../../assets/Hero-Background-Video.mp4";
+import heroVideo from "../../assets/hero-bg-video.mp4";
 
 export default function EnhancedHeroSection() {
   return (
@@ -11,7 +11,9 @@ export default function EnhancedHeroSection() {
         loop
         muted
         playsInline
+        preload="metadata"
         className="absolute inset-0 w-full h-full object-cover z-0"
+        aria-hidden
       >
         <source src={heroVideo} type="video/mp4" />
       </video>
@@ -25,3 +27,4 @@ export default function EnhancedHeroSection() {
     </div>
   );
 }
+

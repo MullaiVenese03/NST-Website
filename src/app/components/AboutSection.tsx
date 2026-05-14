@@ -1,6 +1,6 @@
 import { motion, Variants } from "motion/react";
 import svgPaths from "../../imports/AboutSection/svg-s1i9qf01my";
-import imgAbout from "../../assets/About-Image.png";
+import imgAbout from "../../assets/about-hero.png";
 
 function UsersIcon() {
   return (
@@ -70,7 +70,7 @@ export default function AboutSection() {
   return (
     <section className="w-full bg-white overflow-hidden">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-h-[499px]">
-        {/* Left – Image */}
+        {/* Left â€“ Image */}
         <motion.div
           className="relative w-full lg:w-[53%] min-h-[340px] lg:min-h-[499px] overflow-hidden"
           initial={{ opacity: 0, x: -40 }}
@@ -86,7 +86,7 @@ export default function AboutSection() {
           />
         </motion.div>
 
-        {/* Right – Content */}
+        {/* Right â€“ Content */}
         <div className="flex-1 flex flex-col justify-center px-12 lg:px-16 py-14 lg:py-0">
           {/* Label */}
           <motion.p
@@ -96,7 +96,7 @@ export default function AboutSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "20px",
               letterSpacing: "1.2px",
@@ -116,7 +116,7 @@ export default function AboutSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(32px, 3.5vw, 48px)",
               letterSpacing: "0.96px",
@@ -138,7 +138,7 @@ export default function AboutSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 500,
               fontSize: "18px",
               letterSpacing: "0.4px",
@@ -148,7 +148,7 @@ export default function AboutSection() {
               maxWidth: "480px",
             }}
           >
-            <span style={{ fontFamily: "'Overcame Demo', sans-serif" }}>NebulaSafeTech</span> was founded by cybersecurity experts with a mission to
+            <span style={{ fontFamily: 'var(--font-family)' }}>NebulaSafeTech</span> was founded by cybersecurity experts with a mission to
             deliver enterprise - grade protection through innovation, transparency,
             and relentless dedication.
           </motion.p>
@@ -171,7 +171,7 @@ export default function AboutSection() {
                   </div>
                   <p
                     style={{
-                      fontFamily: "'Manrope', sans-serif",
+                      fontFamily: 'var(--font-family)',
                       fontWeight: 700,
                       fontSize: "16px",
                       letterSpacing: "0.36px",
@@ -206,7 +206,7 @@ export default function AboutSection() {
             href="/about"
             className="inline-flex items-center gap-3 group"
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "16px",
               letterSpacing: "1px",
@@ -236,3 +236,4 @@ export default function AboutSection() {
     </section>
   );
 }
+

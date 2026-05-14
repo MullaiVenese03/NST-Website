@@ -29,7 +29,7 @@ export default function LoadingScreen({
 
     const timer = setTimeout(() => {
       setAnimationFinished(true);
-    }, 2500); // Total duration for logo assembly
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, [isLoading]);
@@ -86,14 +86,13 @@ export default function LoadingScreen({
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
           className="fixed inset-0 bg-white z-[9999] flex flex-col items-center justify-center overflow-hidden"
+          role="status"
+          aria-live="polite"
+          aria-busy="true"
         >
           <div className="flex flex-col items-center gap-8">
             <motion.div className="relative w-32 h-32">
-              <svg
-                className="w-full h-full"
-                viewBox="0 0 56 58.0457"
-                fill="none"
-              >
+              <svg className="w-full h-full" viewBox="0 0 56 58.0457" fill="none" aria-hidden>
                 <g>
                   {logoPaths.map((path, index) => (
                     <motion.path
@@ -129,13 +128,13 @@ export default function LoadingScreen({
               transition={{ duration: 0.6, delay: 0.8 }}
               className="flex flex-col items-center gap-4"
             >
-              <h2
-                className="text-3xl font-bold tracking-widest text-[#015aaa] uppercase"
-                style={{ fontFamily: "'Overcame Demo', sans-serif" }}
+              <p
+                className="text-3xl font-bold tracking-widest text-[#015aaa] uppercase m-0"
+                style={{ fontFamily: "var(--font-company)" }}
               >
                 NebulaSafeTech
-              </h2>
-              <div className="flex gap-2">
+              </p>
+              <div className="flex gap-2" aria-hidden>
                 {[0, 1, 2].map((i) => (
                   <motion.div
                     key={i}

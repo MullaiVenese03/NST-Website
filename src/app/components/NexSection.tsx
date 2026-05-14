@@ -1,10 +1,10 @@
 import { motion, Variants } from "motion/react";
 import svgPaths from "../../imports/NexSection/svg-rp6a4ek3k8";
 
-import imgIcon1 from "../../assets/Icons/1.png";
-import imgIcon2 from "../../assets/Icons/2.png";
-import imgIcon3 from "../../assets/Icons/3.png";
-import imgIcon4 from "../../assets/Icons/4.png";
+import imgIcon1 from "../../assets/Icons/step-1.png";
+import imgIcon2 from "../../assets/Icons/step-2.png";
+import imgIcon3 from "../../assets/Icons/step-3.png";
+import imgIcon4 from "../../assets/Icons/step-4.png";
 
 const features = [
   { icon: imgIcon1, w: 52, h: 54, label1: "Powered", label2: "Threat Detection" },
@@ -29,7 +29,7 @@ function NexLogo() {
       <circle cx="359.27" cy="63.7352" r="6.73516" fill="#0B0F19" />
       {/* Keyhole body */}
       <path d={svgPaths.p3285e100} fill="#0B0F19" />
-      {/* X — blue parts */}
+      {/* X â€” blue parts */}
       <path d={svgPaths.p1b450300} fill="#2563EB" />
       <path d={svgPaths.p3e9d6e00} fill="#2563EB" />
       <path d={svgPaths.p2443e480} fill="#2563EB" />
@@ -60,7 +60,7 @@ export default function NexSection() {
           boxShadow: "0 10px 40px -10px rgba(1, 90, 170, 0.08)",
         }}
       >
-        {/* Left – Content */}
+        {/* Left â€“ Content */}
         <div className="flex-1 flex flex-col">
           {/* Label */}
           <motion.p
@@ -70,7 +70,7 @@ export default function NexSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "20px",
               letterSpacing: "1.2px",
@@ -90,7 +90,7 @@ export default function NexSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(26px, 3vw, 32px)",
               letterSpacing: "0.64px",
@@ -113,7 +113,7 @@ export default function NexSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 400,
               fontSize: "14px",
               letterSpacing: "2px",
@@ -155,7 +155,7 @@ export default function NexSection() {
                 </div>
                 <p
                   style={{
-                    fontFamily: "'Manrope', sans-serif",
+                    fontFamily: 'var(--font-family)',
                     fontWeight: 700,
                     fontSize: "13.5px",
                     letterSpacing: "0.27px",
@@ -180,7 +180,7 @@ export default function NexSection() {
           style={{ width: "1px", height: "350px", background: "#C6C6C6" }}
         />
 
-        {/* Right – NEX Logo */}
+        {/* Right â€“ NEX Logo */}
         <motion.div
           className="flex-shrink-0 flex flex-col items-center justify-center gap-6"
           initial={{ opacity: 0, scale: 0.92 }}
@@ -193,7 +193,7 @@ export default function NexSection() {
           {/* Tagline */}
           <p
             style={{
-              fontFamily: "'Nexa', 'Poppins', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 300,
               fontSize: "18px",
               letterSpacing: "0.36px",
@@ -211,3 +211,4 @@ export default function NexSection() {
     </section>
   );
 }
+

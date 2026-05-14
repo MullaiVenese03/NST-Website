@@ -2,26 +2,27 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2AboutUs/svg-n77cdd2snf";
 import FooterSection from "../components/FooterSection";
+import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
-/* ── Image assets ─────────────────────────────────────────────────────── */
-import imgDashboard from "../../assets/About-Image.png";
-import imgTeam from "../../assets/About-Us.png";
-import imgLogoThirukkural from "../../assets/cae0543e4d40907e740964425ebb330b97abe22f.png";
-import imgLogoStJoseph from "../../assets/e355fe2f1a3f31bcdfe0cd0d99f6f28dda47e72a.png";
-import imgLogoSolamalai from "../../assets/d5f607418c370acbaa1f40116cb7f71ec15f7cb5.png";
-import imgLogoDhanalakshmi from "../../assets/05c41322d27468edf456953a87abfdd7ea362d4c.png";
-import imgLogoAkshaya from "../../assets/b4f771cbee9a12e39c116157c446004997e7dcfd.png";
-import imgLogoNsr from "../../assets/8d795a174b249a3418f58c1303298a2b79e129da.png";
-import imgLogoSgnl from "../../assets/c352b1695ed894ec9f13b794b78bfd0a7a5ce52f.png";
-import imgLogoTwomile from "../../assets/5ef75f1a4d3f2b1d66fafc1493ce45d1bbc807cb.png";
-import imgLogoRapido from "../../assets/f8b4c2e6aa66f714e256226143405c3478a1db0e.png";
-import imgLogoP2Task from "../../assets/1a60c549e67b214eaed0516c16e0c4ed107c690a.png";
+/* â”€â”€ Image assets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+import imgDashboard from "../../assets/about-hero.png";
+import imgTeam from "../../assets/about-team.png";
+import imgLogoThirukkural from "../../assets/logo-thirukkural-transport.png";
+import imgLogoStJoseph from "../../assets/logo-st-joseph-college.png";
+import imgLogoSolamalai from "../../assets/logo-solamalai-college.png";
+import imgLogoDhanalakshmi from "../../assets/logo-dhanalakshmi-srinivasan.png";
+import imgLogoAkshaya from "../../assets/logo-akshaya-college.png";
+import imgLogoNsr from "../../assets/logo-nsr.png";
+import imgLogoSgnl from "../../assets/logo-sgnl.png";
+import imgLogoTwomile from "../../assets/logo-twomile-heavy-industries.png";
+import imgLogoRapido from "../../assets/logo-rapido.png";
+import imgLogoP2Task from "../../assets/logo-p2task.png";
 
-/* ── Parallax hook ─────────────────────────────────────────────────────── */
+/* â”€â”€ Parallax hook â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function useParallax(ref: React.RefObject<HTMLDivElement | null>, distance = 60) {
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -30,7 +31,7 @@ function useParallax(ref: React.RefObject<HTMLDivElement | null>, distance = 60)
   return useTransform(scrollYProgress, [0, 1], [-distance, distance]);
 }
 
-/* ── Animation variants ─────────────────────────────────────────────── */
+/* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
@@ -58,9 +59,9 @@ const fadeRight: Variants = {
   },
 };
 
-/* ══════════════════════════════════════════════════════════════════════
-   HERO — "Built by defenders, for defenders"
-══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HERO â€” "Built by defenders, for defenders"
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function HeroAboutSection() {
   const imgRef = useRef<HTMLDivElement>(null);
   const y = useParallax(imgRef, 40);
@@ -78,7 +79,7 @@ function HeroAboutSection() {
             viewport={{ once: true }}
             custom={0}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "18px",
               letterSpacing: "1.2px",
@@ -98,7 +99,7 @@ function HeroAboutSection() {
             viewport={{ once: true }}
             custom={1}
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(32px, 4vw, 52px)",
               letterSpacing: "0.96px",
@@ -120,7 +121,7 @@ function HeroAboutSection() {
             viewport={{ once: true }}
             custom={2}
             style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 500,
               fontSize: "18px",
               letterSpacing: "0.4px",
@@ -130,7 +131,7 @@ function HeroAboutSection() {
               maxWidth: "520px",
             }}
           >
-            <span style={{ fontFamily: "'Overcame Demo', sans-serif" }}>NebulaSafeTech</span> was founded by cybersecurity experts with a mission
+            <span style={{ fontFamily: 'var(--font-family)' }}>NebulaSafeTech</span> was founded by cybersecurity experts with a mission
             to deliver enterprise-grade protection through innovation,
             transparency, and relentless dedication.
           </motion.p>
@@ -158,10 +159,10 @@ function HeroAboutSection() {
                 </svg>
               </div>
               <div className="text-center">
-                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
                   Expert-Led
                 </p>
-                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
                   Security
                 </p>
               </div>
@@ -184,10 +185,10 @@ function HeroAboutSection() {
                 </svg>
               </div>
               <div className="text-center">
-                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
                   Proactive
                 </p>
-                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
                   Protection
                 </p>
               </div>
@@ -205,10 +206,10 @@ function HeroAboutSection() {
                 </svg>
               </div>
               <div className="text-center">
-                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
                   24/7 Threat
                 </p>
-                <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
                   Monitoring
                 </p>
               </div>
@@ -244,9 +245,9 @@ function HeroAboutSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   OUR STORY — "Securing Today, Protecting Tomorrow"
-══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   OUR STORY â€” "Securing Today, Protecting Tomorrow"
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function OurStorySection() {
   const imgRef = useRef<HTMLDivElement>(null);
   const y = useParallax(imgRef, 55);
@@ -263,7 +264,7 @@ function OurStorySection() {
             viewport={{ once: true }}
             custom={0}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "18px",
               letterSpacing: "1.2px",
@@ -282,7 +283,7 @@ function OurStorySection() {
             viewport={{ once: true }}
             custom={1}
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(28px, 3.5vw, 48px)",
               letterSpacing: "0.96px",
@@ -309,7 +310,7 @@ function OurStorySection() {
               viewport={{ once: true }}
               custom={i + 2}
               style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: 'var(--font-family)',
                 fontWeight: 500,
                 fontSize: "18px",
                 letterSpacing: "0.4px",
@@ -348,9 +349,9 @@ function OurStorySection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   STATS — 99.98%, 100+, 10+
-══════════════════════════════════════════════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   STATS â€” 99.98%, 100+, 10+
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const statsData = [
   {
     value: "99.98%",
@@ -409,21 +410,20 @@ function StatsSection() {
               {stat.icon}
             </div>
             <div>
-              <p
+              <AnimatedNumber
+                value={stat.value}
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: 'var(--font-family)',
                   fontWeight: 700,
                   fontSize: "clamp(22px, 2.5vw, 28px)",
                   letterSpacing: "0.48px",
                   color: "#015AAA",
                   margin: 0,
                 }}
-              >
-                {stat.value}
-              </p>
+              />
               <p
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: 'var(--font-family)',
                   fontWeight: 700,
                   fontSize: "16px",
                   letterSpacing: "0.32px",
@@ -441,9 +441,9 @@ function StatsSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    MISSION / VISION / VALUES
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function MissionVisionSection() {
   const cards = [
     {
@@ -455,7 +455,7 @@ function MissionVisionSection() {
       ),
       title: "Our Mission",
       content: (
-        <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: 1.7, margin: 0 }}>
+        <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: 1.7, margin: 0 }}>
           To provide advanced, reliable, and affordable cybersecurity solutions that help organizations safeguard their digital assets and build a secure future.
         </p>
       ),
@@ -470,7 +470,7 @@ function MissionVisionSection() {
       ),
       title: "Our Vision",
       content: (
-        <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: 1.7, margin: 0 }}>
+        <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: 1.7, margin: 0 }}>
           To be a global leader in cybersecurity, recognized for innovation, integrity, and our commitment to a safer digital world.
         </p>
       ),
@@ -485,7 +485,7 @@ function MissionVisionSection() {
       ),
       title: "Our Values",
       content: (
-        <ul style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: "30px", margin: 0, paddingLeft: "22px" }}>
+        <ul style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: "30px", margin: 0, paddingLeft: "22px" }}>
           <li>Integrity in all we do</li>
           <li>Innovation that drives impact</li>
           <li>Transparency builds trust</li>
@@ -506,7 +506,7 @@ function MissionVisionSection() {
           whileInView="visible"
           viewport={{ once: true }}
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: 'var(--font-family)',
             fontWeight: 700,
             fontSize: "18px",
             letterSpacing: "1.2px",
@@ -539,7 +539,7 @@ function MissionVisionSection() {
               {card.icon}
               <p
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: 'var(--font-family)',
                   fontWeight: 700,
                   fontSize: "clamp(24px, 2.5vw, 32px)",
                   letterSpacing: "0.64px",
@@ -558,9 +558,9 @@ function MissionVisionSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PARTNERS / CLIENTS
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const partnersRow1 = [
   { img: imgLogoThirukkural, alt: "Thirukkural Transport", size: 100 },
   { img: imgLogoStJoseph, alt: "St. Joseph College", size: 100 },
@@ -591,7 +591,7 @@ function PartnersSection() {
         >
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "18px",
               letterSpacing: "1.2px",
@@ -604,7 +604,7 @@ function PartnersSection() {
           </p>
           <h2
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(28px, 3.5vw, 48px)",
               letterSpacing: "0.96px",
@@ -617,7 +617,7 @@ function PartnersSection() {
           </h2>
           <p
             style={{
-              fontFamily: "'Manrope', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 500,
               fontSize: "18px",
               letterSpacing: "0.4px",
@@ -630,7 +630,7 @@ function PartnersSection() {
           </p>
         </motion.div>
 
-        {/* Row 1 — 6 logos */}
+        {/* Row 1 â€” 6 logos */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 mb-5">
           {partnersRow1.map((p, i) => (
             <motion.div
@@ -650,7 +650,7 @@ function PartnersSection() {
           ))}
         </div>
 
-        {/* Row 2 — mix of normal + wide */}
+        {/* Row 2 â€” mix of normal + wide */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
           {partnersRow2.map((p, i) => (
             <motion.div
@@ -684,9 +684,9 @@ function PartnersSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    MAIN PAGE
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function AboutPage() {
   useEffect(() => {
     scrollToTopInstant();
@@ -717,3 +717,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

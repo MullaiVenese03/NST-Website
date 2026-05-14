@@ -2,30 +2,31 @@ import { useRef, useEffect } from "react";
 import { motion, useScroll, useTransform, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Services/svg-ukc1gjjbsx";
 import FooterSection from "../components/FooterSection";
+import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
-/* ── Image assets ─────────────────────────────────────────────────────── */
-import imgServices1     from "../../assets/Services.png";
-import imgWhyChooseUs1  from "../../assets/Why Choose Us.png";
-import imgWebSecurity   from "../../assets/Icons/Web Security.png";
-import imgCloudSecurity from "../../assets/Icons/Cloud Security.png";
-import imgAppSecurity   from "../../assets/Icons/Application Security.png";
-import imgNetworkSec    from "../../assets/Icons/Network Security.png";
-import imgEncryption    from "../../assets/Icons/Encryption & Data Protection.png";
-import imgWebDev        from "../../assets/Icons/Full-Stack Web Development.png";
-import imgUIUX          from "../../assets/Icons/Web Design & UIUX Developmen.png";
-import imgAcademic      from "../../assets/Icons/Academic Training.png";
 
-/* ── Parallax helper ───────────────────────────────────────────────────── */
+import imgServices1     from "../../assets/services-hero.png";
+import imgWhyChooseUs1  from "../../assets/why-choose-us.png";
+import imgWebSecurity   from "../../assets/Icons/web-security.png";
+import imgCloudSecurity from "../../assets/Icons/cloud-security.png";
+import imgAppSecurity   from "../../assets/Icons/application-security.png";
+import imgNetworkSec    from "../../assets/Icons/network-security.png";
+import imgEncryption    from "../../assets/Icons/encryption-data-protection.png";
+import imgWebDev        from "../../assets/Icons/full-stack-web-dev.png";
+import imgUIUX          from "../../assets/Icons/web-design-uiux.png";
+import imgAcademic      from "../../assets/Icons/academic-training.png";
+
+/* â”€â”€ Parallax helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function useParallax(ref: React.RefObject<HTMLDivElement | null>, dist = 55) {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   return useTransform(scrollYProgress, [0, 1], [-dist, dist]);
 }
 
-/* ── Animation variants ─────────────────────────────────────────────── */
+/* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
@@ -36,9 +37,16 @@ const fadeUp: Variants = {
 const fadeLeft: Variants  = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 const fadeRight: Variants = { hidden: { opacity: 0, x:  36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
-/* ══════════════════════════════════════════════════════════════════════
-   HERO — "Built by defenders, for defenders"
-══════════════════════════════════════════════════════════════════════ */
+function IconBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="w-[70px] h-[70px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0">
+      <svg className="w-[70px] h-[70px] block" fill="none" viewBox="0 0 70 70">
+        {children}
+      </svg>
+    </div>
+  );
+}
+
 function ServicesHero() {
   const imgRef = useRef<HTMLDivElement>(null);
   const y = useParallax(imgRef, 40);
@@ -50,17 +58,17 @@ function ServicesHero() {
         {/* Left */}
         <div className="flex-1 min-w-0">
           <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
-            style={{ fontFamily: "'Inter',sans-serif", fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
+            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
             Our Services
           </motion.p>
 
           <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
-            style={{ fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.08, marginBottom: "20px" }}>
+            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.08, marginBottom: "20px" }}>
             Smart Solutions.<br />Secure Future.
           </motion.div>
 
           <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
-            style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "44px", maxWidth: "540px" }}>
+            style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "44px", maxWidth: "540px" }}>
             From innovative web experiences to enterprise-grade security, we build, protect, and scale what matters most.
           </motion.p>
 
@@ -109,10 +117,10 @@ function ServicesHero() {
                     {item.icon}
                   </div>
                   <div className="text-center">
-                    <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                    <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
                       {item.label1}
                     </p>
-                    <p style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                    <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
                       {item.label2}
                     </p>
                   </div>
@@ -129,7 +137,7 @@ function ServicesHero() {
         <motion.div ref={imgRef} className="flex-1 min-w-0 relative" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
           <motion.img
             src={imgServices1}
-            alt="Smart Solutions – Security illustration"
+            alt="Smart Solutions â€“ Security illustration"
             className="w-full h-auto"
             style={{ y, objectFit: "contain", maxHeight: "520px" }}
           />
@@ -141,14 +149,11 @@ function ServicesHero() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   SERVICE CARDS — 8 cards
-══════════════════════════════════════════════════════════════════════ */
 const serviceCards = [
   { img: imgWebSecurity,   title: "Web Security",                    desc: "Secure your web apps with advanced vulnerability detection and real-time threat mitigation." },
   { img: imgCloudSecurity, title: "Cloud Security",                  desc: "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly." },
   { img: imgAppSecurity,   title: "Application Security",            desc: "Create innovative frameworks to build executable software security with privacy and trust." },
-  { img: imgNetworkSec,    title: "Network Security",                desc: "Create innovative frameworks to executable software security — built for privacy and trust." },
+  { img: imgNetworkSec,    title: "Network Security",                desc: "Create innovative frameworks to executable software security â€” built for privacy and trust." },
   { img: imgEncryption,    title: "Encryption & Data Protection",    desc: "Create innovative frameworks to executable software security we built, privacy, and trust." },
   { img: imgWebDev,        title: "Full-Stack Web Development",      desc: "Scalable, high-performance web applications built with modern technologies." },
   { img: imgUIUX,          title: "Web Design & UI/UX Development",  desc: "Pixel-perfect designs and intuitive experiences that engage users and drive results." },
@@ -202,64 +207,56 @@ function ServiceCardsSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   OUR PROCESS — 5 steps with arrows
-═════════════════════════════════════════════════════════════════════ */
 const processSteps = [
   {
     num: "01", title: "Discover",
     desc: "We analyse your needs, challenges, and goals.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d={svgPaths.p1d14d600} fill="#015AAA" />
-      </svg>
+      </IconBadge>
     ),
   },
   {
     num: "02", title: "Plan",
     desc: "We design a tailored strategy and roadmap.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d={svgPaths.p25ae1080} fill="#015AAA" />
         <path d={svgPaths.p24172b00} fill="#015AAA" />
-      </svg>
+      </IconBadge>
     ),
   },
   {
     num: "03", title: "Build",
     desc: "We develop with best practices and cutting-edge technologies.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <g>
           <path d={svgPaths.pa064e00} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
           <path d={svgPaths.p39374772} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
         </g>
-      </svg>
+      </IconBadge>
     ),
   },
   {
     num: "04", title: "Secure",
     desc: "We test, validate, and ensure robust security.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d={svgPaths.p17885a00} fill="#015AAA" />
-      </svg>
+      </IconBadge>
     ),
   },
   {
     num: "05", title: "Deliver",
     desc: "We deploy and provide ongoing support.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d={svgPaths.p1a588000} fill="#015AAA" />
         <path d={svgPaths.p2cb01300} fill="#015AAA" />
         <path d={svgPaths.p2bc0e600} fill="#015AAA" />
-      </svg>
+      </IconBadge>
     ),
   },
 ];
@@ -270,15 +267,15 @@ function OurProcessSection() {
       <div className="max-w-[1440px] mx-auto">
         {/* Header */}
         <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          style={{ fontFamily: "'Inter',sans-serif", fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
+          style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
           Our Process
         </motion.p>
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
-          style={{ fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "clamp(28px,3.8vw,52px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.1, marginBottom: "14px" }}>
+          style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(28px,3.8vw,52px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.1, marginBottom: "14px" }}>
           How We Deliver Excellence
         </motion.div>
         <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
-          style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "48px", maxWidth: "580px" }}>
+          style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "48px", maxWidth: "580px" }}>
           We combine expertise, technology, and dedication to deliver solutions that drive growth and security.
         </motion.p>
 
@@ -296,11 +293,14 @@ function OurProcessSection() {
                 whileHover={{ y: -6, boxShadow: "0 12px 32px rgba(1,90,170,0.1)" }}
                 transition={{ type: "spring", stiffness: 280, damping: 22 }}
               >
-                <div className="w-16 h-16 rounded-xl bg-[#015AAA]/10 flex items-center justify-center text-[#015AAA] mb-6 group-hover:scale-110 transition-transform duration-500">
+                <div className="mb-6 shrink-0 group-hover:scale-110 transition-transform duration-500">
                   {step.icon}
                 </div>
                 <div className="space-y-2 flex-1 flex flex-col items-center">
-                  <span className="text-4xl font-black text-[#015AAA]/20 tracking-tighter">{step.num}</span>
+                  <AnimatedNumber
+                    value={step.num}
+                    className="text-4xl font-black text-[#015AAA]/20 tracking-tighter"
+                  />
                   <h4 className="text-xl font-bold text-slate-900">{step.title}</h4>
                   <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
                 </div>
@@ -322,61 +322,56 @@ function OurProcessSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    WHY CHOOSE US
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const whyFeatures = [
   {
     title: "Security First Approach",
     desc: "We prioritise security in every solution we build.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d={svgPaths.p24ca6630} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
-      </svg>
+      </IconBadge>
     ),
   },
   {
     title: "Tailored Solutions",
     desc: "Custom solutions designed to fit your unique business needs.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d={svgPaths.p25ae1080} fill="#015AAA" />
         <path d={svgPaths.p24172b00} fill="#015AAA" />
-      </svg>
+      </IconBadge>
     ),
   },
   {
     title: "Advanced Technology",
     desc: "Leveraging the latest tools and frameworks for impactful results.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d="M28 28H42V42H28V28Z" fill="#015AAA" />
         <path d={svgPaths.p11219e00} fill="#015AAA" />
-      </svg>
+      </IconBadge>
     ),
   },
   {
     title: "Reliable Support",
     desc: "24/7 support and continuous monitoring for your peace of mind.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d={svgPaths.p3ef4e500} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
         <path d={svgPaths.p2aa32d80} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
-      </svg>
+      </IconBadge>
     ),
   },
   {
     title: "Proven Track Record",
     desc: "Trusted by businesses and institutions worldwide.",
     icon: (
-      <svg width="70" height="70" fill="none" viewBox="0 0 70 70">
-        <rect fill="#015AAA" fillOpacity="0.15" height="70" rx="12" width="70" />
+      <IconBadge>
         <path d={svgPaths.p293f3a00} fill="#015AAA" />
-      </svg>
+      </IconBadge>
     ),
   },
 ];
@@ -392,15 +387,15 @@ function WhyChooseUsSection() {
         {/* Left */}
         <div className="flex-1 min-w-0">
           <motion.p variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            style={{ fontFamily: "'Inter',sans-serif", fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "4px" }}>
+            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "4px" }}>
             Why Choose Us
           </motion.p>
           <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            style={{ fontFamily: "'Geist',sans-serif", fontWeight: 700, fontSize: "clamp(26px,3.6vw,50px)", letterSpacing: "1px", color: "#000", lineHeight: 1.1 }}>
+            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(26px,3.6vw,50px)", letterSpacing: "1px", color: "#000", lineHeight: 1.1 }}>
             Your Trusted Partner<br />in Security &amp; Innovation
           </motion.div>
           <motion.p variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            style={{ fontFamily: "'Manrope',sans-serif", fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, maxWidth: "480px" }}>
+            style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, maxWidth: "480px" }}>
             We combine expertise, technology, and dedication to deliver solutions that drive growth and security.
           </motion.p>
 
@@ -429,7 +424,7 @@ function WhyChooseUsSection() {
               whileHover={{ x: 6 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
             >
-              <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[#015AAA]/10 flex items-center justify-center text-[#015AAA] group-hover:scale-110 transition-transform duration-500">
+              <div className="flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
                 {feat.icon}
               </div>
               <div className="flex flex-col gap-1.5">
@@ -446,9 +441,9 @@ function WhyChooseUsSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    MAIN PAGE
-══════════════════════════════════════════════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function ServicesPage() {
   useEffect(() => {
     scrollToTopInstant();
@@ -475,3 +470,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+

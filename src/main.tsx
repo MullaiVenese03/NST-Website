@@ -1,7 +1,9 @@
+import { createRoot } from "react-dom/client";
+import App from "./app/App.tsx";
+import "./styles/index.css";
+import { brandMarkUrl } from "./brandMark.ts";
 
-  import { createRoot } from "react-dom/client";
-  import App from "./app/App.tsx";
-  import "./styles/index.css";
+const fav = document.getElementById("nst-favicon") as HTMLLinkElement | null;
+if (fav) fav.href = brandMarkUrl;
 
-  createRoot(document.getElementById("root")!).render(<App />);
-  
+createRoot(document.getElementById("root")!).render(<App />);

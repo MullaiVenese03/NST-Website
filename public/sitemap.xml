@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.nebulasafetech.com/</loc><changefreq>weekly</changefreq><priority>1</priority></url>
+  <url><loc>https://www.nebulasafetech.com/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.nebulasafetech.com/services</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.nebulasafetech.com/clients</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://www.nebulasafetech.com/edtech</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://www.nebulasafetech.com/privacy-policy</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://www.nebulasafetech.com/terms-and-conditions</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+</urlset>

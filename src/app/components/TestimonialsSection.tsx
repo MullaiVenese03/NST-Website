@@ -2,12 +2,12 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, Variants } from "motion/react";
 import svgPaths from "../../imports/TestimonialsSection/svg-2ss3ybjdpk";
 
-import imgSlide1 from "../../assets/5926899d1cc62a8c472a80045c5531a797fcd790.png";
-import imgSlide2 from "../../assets/34b7d9ec10567f97d104585dd751c88574bc2b07.png";
-import imgSlide3 from "../../assets/c79497b95b362671f3826b57c07ff6b75876210f.png";
-import imgSlide4 from "../../assets/f2114494586b803343871affe5e97729e32a572e.png";
-import imgSlide5 from "../../assets/b29629f74036a61c4bc22a5962681cf47aeda57e.png";
-import imgSlide6 from "../../assets/549400d7fbce2211b55697977061868abf20f370.png";
+import imgSlide1 from "../../assets/testimonial-st-joseph-1.png";
+import imgSlide2 from "../../assets/testimonial-cppm-college.png";
+import imgSlide3 from "../../assets/testimonial-st-joseph-2.png";
+import imgSlide4 from "../../assets/testimonial-st-joseph-mou.png";
+import imgSlide5 from "../../assets/testimonial-tn-police.png";
+import imgSlide6 from "../../assets/testimonial-dhanalakshmi-mou.png";
 
 const slides = [
   {
@@ -131,7 +131,7 @@ export default function TestimonialsSection() {
         >
           <p
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "20px",
               letterSpacing: "1.2px",
@@ -144,7 +144,7 @@ export default function TestimonialsSection() {
           </p>
           <h2
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(26px, 3vw, 32px)",
               letterSpacing: "0.64px",
@@ -195,7 +195,7 @@ export default function TestimonialsSection() {
                   <p
                     className="absolute bottom-5 left-0 right-0 text-center text-white"
                     style={{
-                      fontFamily: "'Satoshi', sans-serif",
+                      fontFamily: 'var(--font-family)',
                       fontWeight: 700,
                       fontSize: "18px",
                       letterSpacing: "1.08px",
@@ -230,7 +230,7 @@ export default function TestimonialsSection() {
               <div className="flex items-center gap-2 flex-wrap">
                 <span
                   style={{
-                    fontFamily: "'Geist', sans-serif",
+                    fontFamily: 'var(--font-family)',
                     fontWeight: 700,
                     fontSize: "18px",
                     letterSpacing: "0.36px",
@@ -243,7 +243,7 @@ export default function TestimonialsSection() {
               </div>
               <p
                 style={{
-                  fontFamily: "'Manrope', sans-serif",
+                  fontFamily: 'var(--font-family)',
                   fontWeight: 500,
                   fontSize: "16px",
                   letterSpacing: "0.32px",

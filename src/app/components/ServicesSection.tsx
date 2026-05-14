@@ -1,13 +1,13 @@
 import { motion } from "motion/react";
 
-import imgWebSecurity from "../../assets/Icons/Web Security.png";
-import imgCloudSecurity from "../../assets/Icons/Cloud Security.png";
-import imgAppSecurity from "../../assets/Icons/Application Security.png";
-import imgNetworkSecurity from "../../assets/Icons/Network Security.png";
-import imgEncryption from "../../assets/Icons/Encryption & Data Protection.png";
-import imgFullStack from "../../assets/Icons/Full-Stack Web Development.png";
-import imgWebDesign from "../../assets/Icons/Web Design & UIUX Developmen.png";
-import imgAcademicTraining from "../../assets/Icons/Academic Training.png";
+import imgWebSecurity from "../../assets/Icons/web-security.png";
+import imgCloudSecurity from "../../assets/Icons/cloud-security.png";
+import imgAppSecurity from "../../assets/Icons/application-security.png";
+import imgNetworkSecurity from "../../assets/Icons/network-security.png";
+import imgEncryption from "../../assets/Icons/encryption-data-protection.png";
+import imgFullStack from "../../assets/Icons/full-stack-web-dev.png";
+import imgWebDesign from "../../assets/Icons/web-design-uiux.png";
+import imgAcademicTraining from "../../assets/Icons/academic-training.png";
 
 interface ServiceCardProps {
   image: string;
@@ -116,7 +116,7 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               style={{
-                fontFamily: "'Inter', sans-serif",
+                fontFamily: 'var(--font-family)',
                 fontWeight: 700,
                 fontSize: "20px",
                 letterSpacing: "1.2px",
@@ -135,7 +135,7 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.08 }}
               style={{
-                fontFamily: "'Geist', sans-serif",
+                fontFamily: 'var(--font-family)',
                 fontWeight: 700,
                 fontSize: "clamp(26px, 3vw, 32px)",
                 letterSpacing: "0.64px",
@@ -154,7 +154,7 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.14 }}
               style={{
-                fontFamily: "'Manrope', sans-serif",
+                fontFamily: 'var(--font-family)',
                 fontWeight: 500,
                 fontSize: "18px",
                 letterSpacing: "0.4px",
@@ -169,16 +169,16 @@ export default function ServicesSection() {
             </motion.p>
           </div>
 
-          {/* CTA – View all */}
+          {/* CTA â€“ View all */}
           <motion.a
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
             href="/services"
-            className="inline-flex items-center gap-3 self-start sm:self-center mt-2 sm:mt-6 group whitespace-nowrap"
+            className="inline-flex items-center gap-3 self-start sm:self-center mt-2 sm:mt-6 group flex-wrap"
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "16px",
               letterSpacing: "1px",
@@ -206,7 +206,7 @@ export default function ServicesSection() {
           </motion.a>
         </div>
 
-        {/* Cards grid – 4 columns on desktop, 2 on tablet, 1 on mobile */}
+        {/* Cards grid â€“ 4 columns on desktop, 2 on tablet, 1 on mobile */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((svc, i) => (
             <ServiceCard key={i} {...svc} index={i} />
@@ -216,3 +216,4 @@ export default function ServicesSection() {
     </section>
   );
 }
+

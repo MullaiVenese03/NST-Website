@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import svgPaths from "../../imports/HeroSection/svg-3kvcnifylj";
+import { brandMarkUrl } from "../../brandMark";
 
 export default function FixedHeroSection() {
   return (
@@ -11,8 +11,8 @@ export default function FixedHeroSection() {
         className="flex flex-col items-start"
       >
         {/* Heading: 24px gap below */}
-        <motion.h2
-          className="text-6xl md:text-7xl lg:text-8xl font-black leading-[1.25] tracking-tight text-gray-900 mb-[24px]"
+        <motion.h1
+          className="text-[clamp(2rem,9vw,3.75rem)] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[1.15] sm:leading-[1.2] tracking-tight text-gray-900 mb-[24px] max-w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
@@ -28,7 +28,7 @@ export default function FixedHeroSection() {
               <span className="text-[#015aaa]">One</span> Purpose.
             </span>
           </div>
-        </motion.h2>
+        </motion.h1>
 
         {/* Subtext: 16px gap below */}
         <motion.p
@@ -48,16 +48,14 @@ export default function FixedHeroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <svg className="w-4 h-6" viewBox="0 0 9.5 9.92341">
-            <path
-              d={svgPaths.p31b6e600}
-              stroke="#015aaa"
-              fill="none"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <img
+            src={brandMarkUrl}
+            alt=""
+            width={20}
+            height={20}
+            decoding="async"
+            className="w-5 h-5 object-contain shrink-0"
+          />
           <span>Trusted by enterprises Worldwide</span>
         </motion.div>
       </motion.div>

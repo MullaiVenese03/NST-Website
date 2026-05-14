@@ -1,6 +1,6 @@
 import { motion, Variants } from "motion/react";
 import svgPaths from "../../imports/EdTechSection/svg-v7pn74uo9y";
-import imgEdTech from "../../assets/EdTech-Image.png";
+import imgEdTech from "../../assets/edtech-hero.png";
 
 const bulletPoints = [
   "Industry-relevant training programs",
@@ -36,8 +36,8 @@ export default function EdTechSection() {
   return (
     <section className="w-full overflow-hidden" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-h-[420px]">
-        {/* Left – Content */}
-        <div className="flex-shrink-0 w-full lg:w-[42%] flex flex-col justify-center px-12 lg:px-16 py-14 lg:py-16">
+        {/* Left â€“ Content */}
+        <div className="flex-shrink-0 w-full lg:w-[42%] flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-16 py-14 lg:py-16 min-w-0">
           {/* Label */}
           <motion.p
             custom={0}
@@ -46,7 +46,7 @@ export default function EdTechSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Inter', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "20px",
               letterSpacing: "1.2px",
@@ -66,7 +66,7 @@ export default function EdTechSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(28px, 3vw, 36px)",
               letterSpacing: "0.64px",
@@ -87,7 +87,7 @@ export default function EdTechSection() {
             whileInView="visible"
             viewport={{ once: true }}
             style={{
-              fontFamily: "'Geist', sans-serif",
+              fontFamily: 'var(--font-family)',
               fontWeight: 400,
               fontSize: "14px",
               letterSpacing: "2px",
@@ -115,7 +115,7 @@ export default function EdTechSection() {
                 <CheckIcon />
                 <span
                   style={{
-                    fontFamily: "'Geist', sans-serif",
+                    fontFamily: 'var(--font-family)',
                     fontWeight: 600,
                     fontSize: "16px",
                     letterSpacing: "0.32px",
@@ -147,7 +147,7 @@ export default function EdTechSection() {
           >
             <span
               style={{
-                fontFamily: "'Satoshi', sans-serif",
+                fontFamily: 'var(--font-family)',
                 fontWeight: 700,
                 fontSize: "13px",
                 letterSpacing: "0.96px",
@@ -175,7 +175,7 @@ export default function EdTechSection() {
           </motion.a>
         </div>
 
-        {/* Right – Image */}
+        {/* Right â€“ Image */}
         <motion.div
           className="flex-1 flex items-center justify-center min-h-[360px] lg:min-h-0"
           style={{ background: "#F8FAFE" }}
