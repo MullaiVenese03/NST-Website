@@ -92,10 +92,13 @@ export default function TopNav() {
     setMobileOpen(false);
     if (location.pathname === "/") {
       const el = document.getElementById("contact");
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      navigate("/#contact");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+      }
     }
+    scrollToTopInstant();
+    navigate("/#contact");
   };
 
   const handleNavClick = (item: (typeof navItems)[0]) => {
@@ -198,7 +201,7 @@ export default function TopNav() {
             type="button"
             className="bg-[#015aaa] text-white px-4 py-2.5 md:px-6 md:py-2.5 rounded-[16px] font-bold text-xs md:text-sm shadow-lg shadow-blue-200/50 flex items-center gap-2 group border-none cursor-pointer transition-colors hover:bg-[#014a8e] min-h-[44px]"
             onClick={handleContactClick}
-            aria-label="Go to contact section"
+            aria-label="Scroll to contact section"
           >
             Contact
             <svg

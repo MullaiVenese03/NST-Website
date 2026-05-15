@@ -7,6 +7,8 @@ import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { SeoHead } from "../../seo/SeoHead";
+import { CLIENTS_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
 /* â”€â”€ Image assets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -143,6 +145,8 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
           {filters.map((f) => (
             <motion.button
               key={f}
+              type="button"
+              aria-pressed={activeFilter === f}
               onClick={() => setActiveFilter(f)}
               className="px-5 py-2.5 rounded-full cursor-pointer border-none outline-none transition-all duration-250"
               style={{
@@ -209,7 +213,7 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
       <div className="relative overflow-hidden rounded-t-[8px]" style={{ height: "220px" }}>
         <motion.img
           src={client.img}
-          alt={client.label}
+          alt={`${client.institution} - ${client.label}`}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
@@ -447,8 +451,10 @@ export default function ClientsPage() {
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
+      <SeoHead meta={CLIENTS_SEO} />
       <TopNav />
 
+      <main id="main-content">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -461,6 +467,7 @@ export default function ClientsPage() {
         <FooterSection />
         <ScrollToTop />
       </motion.div>
+      </main>
     </div>
   );
 }

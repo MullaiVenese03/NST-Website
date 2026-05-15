@@ -10,7 +10,6 @@ const navItems = [
   { name: "Testimonials", href: "testimonials", path: "/clients" },
   { name: "EdTech", href: "edtech", path: "/edtech" },
   { name: "NEX", href: "nex", path: "/#nex" },
-  { name: "Footer", href: "contact", path: "/#contact" },
 ];
 
 export default function BottomNav() {

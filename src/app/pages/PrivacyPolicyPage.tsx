@@ -1,12 +1,20 @@
 import LegalDocLayout from "../components/LegalDocLayout";
+import { SeoHead } from "../../seo/SeoHead";
+import { PRIVACY_SEO } from "../../seo/pageMeta";
 
 export default function PrivacyPolicyPage() {
   return (
-    <LegalDocLayout
-      documentTitle="NebulaSafeTech | Privacy Policy"
-      badge="Privacy Policy"
-      lastUpdated="04 January 2026"
-    >
+    <>
+      <SeoHead meta={PRIVACY_SEO} />
+      <LegalDocLayout
+        documentTitle="Privacy Policy | NebulaSafeTech"
+        badge="Privacy Policy"
+        lastUpdated="04 January 2026"
+        breadcrumbItems={[
+          { name: "Home", path: "/" },
+          { name: "Privacy Policy", path: "/privacy-policy" },
+        ]}
+      >
       <p>
         For the purposes of this Privacy Policy, <strong>&ldquo;NebulaSafeTech,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo;</strong> or{" "}
         <strong>&ldquo;company&rdquo;</strong> refers to NebulaSafeTech, the legal entity providing the services described herein, and{" "}
@@ -202,5 +210,6 @@ export default function PrivacyPolicyPage() {
       </address>
       <p>We will make our best effort to respond to and resolve any inquiries or complaints in a timely manner in accordance with applicable law.</p>
     </LegalDocLayout>
+    </>
   );
 }

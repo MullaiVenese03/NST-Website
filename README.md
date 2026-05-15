@@ -1,4 +1,4 @@
-# NebulaSafeTech — Official Website
+# NebulaSafeTech - Official Website
 
 <div align="center">
 

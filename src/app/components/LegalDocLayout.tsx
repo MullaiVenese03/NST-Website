@@ -2,16 +2,24 @@ import { useEffect, type ReactNode } from "react";
 import TopNav from "./TopNav";
 import FooterSection from "./FooterSection";
 import ScrollToTop from "./ScrollToTop";
+import { Breadcrumbs, type BreadcrumbItem } from "./Breadcrumbs";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
 type LegalDocLayoutProps = {
   documentTitle: string;
   badge: string;
   lastUpdated: string;
+  breadcrumbItems: BreadcrumbItem[];
   children: ReactNode;
 };
 
-export default function LegalDocLayout({ documentTitle, badge, lastUpdated, children }: LegalDocLayoutProps) {
+export default function LegalDocLayout({
+  documentTitle,
+  badge,
+  lastUpdated,
+  breadcrumbItems,
+  children,
+}: LegalDocLayoutProps) {
   useEffect(() => {
     scrollToTopInstant();
     document.title = documentTitle;
@@ -27,6 +35,7 @@ export default function LegalDocLayout({ documentTitle, badge, lastUpdated, chil
       <TopNav />
       <main className="pt-28 pb-12 px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
+          <Breadcrumbs className="mb-5" items={breadcrumbItems} />
           <header className="mb-10 border-b border-slate-100 pb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-slate-900 tracking-tight">{badge}</h1>
             <p className="mt-4 text-slate-600">

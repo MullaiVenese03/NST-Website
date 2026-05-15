@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, ArrowRight, type LucideIcon } from "lucide-react";
-import { brandMarkUrl } from "../../brandMark";
+import { Phone, Mail, MapPin, ArrowRight, Linkedin, Instagram, Twitter, type LucideIcon } from "lucide-react";
+import { BUSINESS_IDENTITY } from "../../seo/seoConfig";
 
-/* ─── Nav link ─────────────────────────────────────────────────────────── */
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (href.startsWith("#")) {
@@ -32,7 +31,6 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   );
 }
 
-/* ─── Contact Row ──────────────────────────────────────────────────────── */
 function ContactRow({
   icon: Icon,
   label,
@@ -71,7 +69,6 @@ function ContactRow({
   );
 }
 
-/* ─── Social button ────────────────────────────────────────────────────── */
 function SocialBtn({
   href,
   label,
@@ -87,7 +84,7 @@ function SocialBtn({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex items-center justify-center rounded-full bg-[#015AAA]/10 w-11 h-11 min-w-[44px] min-h-[44px] text-[#015AAA] hover:bg-[#015AAA]/20 transition-colors duration-200"
+      className="flex items-center justify-center rounded-full bg-[#015AAA]/10 w-11 h-11 min-w-[44px] min-h-[44px] text-[#015AAA] hover:bg-[#015AAA] hover:text-white transition-colors duration-200"
       whileHover={{ scale: 1.1, y: -2 }}
       whileTap={{ scale: 0.95 }}
     >
@@ -96,7 +93,6 @@ function SocialBtn({
   );
 }
 
-/* ─── Main component ───────────────────────────────────────────────────── */
 export default function FooterSection() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -115,15 +111,12 @@ export default function FooterSection() {
   return (
     <footer className="w-full bg-white pt-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-start">
-          
-          {/* Left: Get In Touch */}
-          <div className="lg:col-span-3 space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
+          <motion.div className="space-y-8">
             <div className="space-y-4">
               <p className="text-[#015AAA] text-base font-bold uppercase tracking-wider m-0">Get In Touch</p>
-              <h2 className="text-3xl font-bold text-slate-900 leading-tight m-0">
-                Let's secure your world.
-              </h2>
+              <h2 className="text-3xl font-bold text-slate-900 leading-tight m-0">Let&apos;s secure your world.</h2>
+              <p className="text-slate-600 text-sm leading-relaxed m-0 max-w-sm">{BUSINESS_IDENTITY}</p>
             </div>
 
             <div className="space-y-6">
@@ -131,16 +124,10 @@ export default function FooterSection() {
               <ContactRow icon={Mail} label="Email" value="info@nebulasafetech.com" href="mailto:info@nebulasafetech.com" />
               <ContactRow icon={MapPin} label="Address" value="Hosur, Tamil Nadu, India." href="https://maps.google.com/?q=Hosur,Tamil+Nadu,India" />
             </div>
-          </div>
+          </motion.div>
 
-          {/* Vertical Divider (Desktop Only) */}
-          <div className="hidden lg:col-span-1 lg:flex justify-center h-full min-h-[300px]">
-            <div className="w-[1px] h-full bg-slate-200" />
-          </div>
-
-          {/* Middle: Links */}
-          <div className="lg:col-span-4 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-6 lg:gap-4 lg:pt-10">
-            <div className="space-y-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 sm:gap-12">
+            <div className="space-y-8">
               <p className="text-lg font-bold text-slate-900 m-0">Company</p>
               <nav className="flex flex-col gap-4">
                 <NavLink href="/">Home</NavLink>
@@ -160,42 +147,14 @@ export default function FooterSection() {
                 <NavLink href="/edtech">EdTech</NavLink>
               </nav>
             </div>
-
-            <div className="space-y-6">
-              <p className="text-lg font-bold text-slate-900 m-0">Support</p>
-              <nav className="flex flex-col gap-4">
-                <motion.div
-                  whileHover={{ x: 2 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <Link
-                    to="/privacy-policy"
-                    className="block no-underline text-[15px] font-medium text-slate-700 hover:text-[#015AAA] transition-colors duration-200"
-                  >
-                    Privacy Policy
-                  </Link>
-                </motion.div>
-                <motion.div
-                  whileHover={{ x: 2 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                >
-                  <Link
-                    to="/terms-and-conditions"
-                    className="block no-underline text-[15px] font-medium text-slate-700 hover:text-[#015AAA] transition-colors duration-200"
-                  >
-                    Terms & Conditions
-                  </Link>
-                </motion.div>
-              </nav>
-            </div>
           </div>
 
-          {/* Right: Form */}
-          <div className="lg:col-span-4 lg:pl-8">
-            <div className="bg-white rounded-2xl border border-slate-100 p-2">
+          <div>
+            <motion.div className="bg-white rounded-2xl border border-slate-100 p-2">
               {submitted ? (
-                <motion.div 
-                  initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   className="flex flex-col items-center justify-center py-12 text-center"
                 >
                   <div className="w-12 h-12 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4">
@@ -206,27 +165,47 @@ export default function FooterSection() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3">
                   <input
-                    name="name" type="text" placeholder="Name" required autoComplete="name"
-                    value={form.name} onChange={handleChange}
+                    name="name"
+                    type="text"
+                    placeholder="Name"
+                    required
+                    autoComplete="name"
+                    value={form.name}
+                    onChange={handleChange}
                     className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
                   />
                   <input
-                    name="email" type="email" placeholder="Email Address" required autoComplete="email"
-                    value={form.email} onChange={handleChange}
+                    name="email"
+                    type="email"
+                    placeholder="Email Address"
+                    required
+                    autoComplete="email"
+                    value={form.email}
+                    onChange={handleChange}
                     className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
                   />
                   <input
-                    name="phone" type="tel" placeholder="Phone Number" autoComplete="tel"
-                    value={form.phone} onChange={handleChange}
+                    name="phone"
+                    type="tel"
+                    placeholder="Phone Number"
+                    autoComplete="tel"
+                    value={form.phone}
+                    onChange={handleChange}
                     className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
                   />
                   <textarea
-                    name="message" placeholder="How can we help ?" required rows={4} autoComplete="off"
-                    value={form.message} onChange={handleChange}
+                    name="message"
+                    placeholder="How can we help ?"
+                    required
+                    rows={4}
+                    autoComplete="off"
+                    value={form.message}
+                    onChange={handleChange}
                     className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all resize-none placeholder:text-slate-400"
                   />
                   <motion.button
-                    whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
                     type="submit"
                     className="w-full bg-[#015AAA] text-white font-semibold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-100/50"
                   >
@@ -235,15 +214,18 @@ export default function FooterSection() {
                   </motion.button>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
         <div className="mt-16 py-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-center sm:text-left">
             <p className="text-slate-500 text-sm m-0">
-              Copyright &copy; 2026 <span className="text-blue-500" style={{ fontFamily: 'var(--font-company)' }}>NebulaSafeTech</span>. All Rights Reserved.
+              Copyright &copy; 2026{" "}
+              <span className="text-blue-500" style={{ fontFamily: "var(--font-company)" }}>
+                NebulaSafeTech
+              </span>
+              . All Rights Reserved.
             </p>
             <div className="flex items-center justify-center gap-4 text-sm">
               <Link to="/privacy-policy" className="text-slate-600 hover:text-[#015AAA] no-underline font-medium transition-colors">
@@ -260,19 +242,18 @@ export default function FooterSection() {
 
           <div className="flex items-center gap-4">
             <SocialBtn href="https://linkedin.com/company/nebulasafetech-nst/" label="LinkedIn">
-              <img src={brandMarkUrl} alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" decoding="async" />
+              <Linkedin size={20} strokeWidth={2} aria-hidden />
             </SocialBtn>
             <SocialBtn href="https://instagram.com/nebulasafetech" label="Instagram">
-              <img src={brandMarkUrl} alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" decoding="async" />
+              <Instagram size={20} strokeWidth={2} aria-hidden />
             </SocialBtn>
             <SocialBtn href="https://twitter.com/nebulasafetech" label="Twitter">
-              <img src={brandMarkUrl} alt="" width={22} height={22} className="w-[22px] h-[22px] object-contain" decoding="async" />
+              <Twitter size={20} strokeWidth={2} aria-hidden />
             </SocialBtn>
           </div>
         </div>
       </div>
 
-      {/* Giant NST Branding */}
       <div className="relative w-full overflow-hidden pointer-events-none select-none h-[250px] md:h-[450px]">
         <div
           className="font-black leading-none absolute bottom-0 left-0 w-full text-center m-0"

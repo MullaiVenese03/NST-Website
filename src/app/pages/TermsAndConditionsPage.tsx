@@ -1,12 +1,20 @@
 import LegalDocLayout from "../components/LegalDocLayout";
+import { SeoHead } from "../../seo/SeoHead";
+import { TERMS_SEO } from "../../seo/pageMeta";
 
 export default function TermsAndConditionsPage() {
   return (
-    <LegalDocLayout
-      documentTitle="NebulaSafeTech | Terms and Conditions"
-      badge="Terms and Conditions"
-      lastUpdated="04 January 2026"
-    >
+    <>
+      <SeoHead meta={TERMS_SEO} />
+      <LegalDocLayout
+        documentTitle="Terms and Conditions | NebulaSafeTech"
+        badge="Terms and Conditions"
+        lastUpdated="04 January 2026"
+        breadcrumbItems={[
+          { name: "Home", path: "/" },
+          { name: "Terms & Conditions", path: "/terms-and-conditions" },
+        ]}
+      >
       <p>
         For the purposes of this Privacy Policy, <strong>&ldquo;NebulaSafeTech,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo;</strong> or{" "}
         <strong>&ldquo;company&rdquo;</strong> refers to NebulaSafeTech, the legal entity providing the services described herein, and{" "}
@@ -318,5 +326,6 @@ export default function TermsAndConditionsPage() {
         writing.
       </p>
     </LegalDocLayout>
+    </>
   );
 }

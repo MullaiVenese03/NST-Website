@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { Link } from "react-router";
 import { motion, useScroll, useTransform, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Services/svg-ukc1gjjbsx";
 import FooterSection from "../components/FooterSection";
@@ -6,6 +7,11 @@ import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { SeoHead } from "../../seo/SeoHead";
+import { SERVICES_SEO, SERVICES_FAQ_ITEMS } from "../../seo/pageMeta";
+import { SITE_ORIGIN } from "../../seo/seoConfig";
+import { faqPageSchema } from "../../seo/schemas/faqSchema";
+import { ServicesFaqSection } from "../components/ServicesFaqSection";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
 
@@ -150,14 +156,14 @@ function ServicesHero() {
 }
 
 const serviceCards = [
-  { img: imgWebSecurity,   title: "Web Security",                    desc: "Secure your web apps with advanced vulnerability detection and real-time threat mitigation." },
-  { img: imgCloudSecurity, title: "Cloud Security",                  desc: "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly." },
-  { img: imgAppSecurity,   title: "Application Security",            desc: "Create innovative frameworks to build executable software security with privacy and trust." },
-  { img: imgNetworkSec,    title: "Network Security",                desc: "Create innovative frameworks to executable software security â€” built for privacy and trust." },
-  { img: imgEncryption,    title: "Encryption & Data Protection",    desc: "Create innovative frameworks to executable software security we built, privacy, and trust." },
-  { img: imgWebDev,        title: "Full-Stack Web Development",      desc: "Scalable, high-performance web applications built with modern technologies." },
-  { img: imgUIUX,          title: "Web Design & UI/UX Development",  desc: "Pixel-perfect designs and intuitive experiences that engage users and drive results." },
-  { img: imgAcademic,      title: "Academic Training",               desc: "Practical training and real-world learning experiences that build skills and prepare you for industry." },
+  { slug: "/services/cybersecurity", img: imgWebSecurity,   title: "Web Security",                    desc: "Secure your web apps with advanced vulnerability detection and real-time threat mitigation." },
+  { slug: "/services/cybersecurity", img: imgCloudSecurity, title: "Cloud Security",                  desc: "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly." },
+  { slug: "/services/cybersecurity", img: imgAppSecurity,   title: "Application Security",            desc: "Create innovative frameworks to build executable software security with privacy and trust." },
+  { slug: "/services/cybersecurity", img: imgNetworkSec,    title: "Network Security",                desc: "Create innovative frameworks to executable software security - built for privacy and trust." },
+  { slug: "/services/cybersecurity", img: imgEncryption,    title: "Encryption & Data Protection",    desc: "Create innovative frameworks to executable software security we built, privacy, and trust." },
+  { slug: "/services/web-development", img: imgWebDev,        title: "Full-Stack Web Development",      desc: "Scalable, high-performance web applications built with modern technologies." },
+  { slug: "/services/ui-ux-design", img: imgUIUX,          title: "Web Design & UI/UX Development",  desc: "Pixel-perfect designs and intuitive experiences that engage users and drive results." },
+  { slug: "/services/edtech-training", img: imgAcademic,      title: "Academic Training",               desc: "Practical training and real-world learning experiences that build skills and prepare you for industry." },
 ];
 
 function ServiceCardsSection() {
@@ -166,8 +172,8 @@ function ServiceCardsSection() {
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {serviceCards.map((card, i) => (
+            <Link key={i} to={card.slug} className="no-underline text-inherit h-full block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/70 rounded-2xl">
             <motion.div
-              key={i}
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
@@ -200,6 +206,7 @@ function ServiceCardsSection() {
               {/* Bottom accent line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl origin-left" />
             </motion.div>
+            </Link>
           ))}
         </div>
       </div>
@@ -451,10 +458,25 @@ export default function ServicesPage() {
     return () => { resetScrollBehavior(); };
   }, []);
 
+  const faqJson = faqPageSchema([...SERVICES_FAQ_ITEMS]);
+  const serviceIndex = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "NebulaSafeTech service areas",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Cybersecurity", item: `${SITE_ORIGIN}/services/cybersecurity` },
+      { "@type": "ListItem", position: 2, name: "Web development", item: `${SITE_ORIGIN}/services/web-development` },
+      { "@type": "ListItem", position: 3, name: "UI/UX design", item: `${SITE_ORIGIN}/services/ui-ux-design` },
+      { "@type": "ListItem", position: 4, name: "EdTech & training", item: `${SITE_ORIGIN}/services/edtech-training` },
+    ],
+  };
+
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
+      <SeoHead meta={SERVICES_SEO} structuredData={[faqJson, serviceIndex]} />
       <TopNav />
 
+      <main id="main-content">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -464,9 +486,11 @@ export default function ServicesPage() {
         <ServiceCardsSection />
         <OurProcessSection />
         <WhyChooseUsSection />
+        <ServicesFaqSection items={[...SERVICES_FAQ_ITEMS]} />
         <FooterSection />
         <ScrollToTop />
       </motion.div>
+      </main>
     </div>
   );
 }

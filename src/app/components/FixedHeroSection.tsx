@@ -55,6 +55,7 @@ export default function FixedHeroSection() {
             height={20}
             decoding="async"
             className="w-5 h-5 object-contain shrink-0"
+            aria-hidden
           />
           <span>Trusted by enterprises Worldwide</span>
         </motion.div>

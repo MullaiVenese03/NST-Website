@@ -13,6 +13,8 @@ import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { SeoHead } from "../../seo/SeoHead";
+import { EDTECH_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 import { brandMarkUrl } from "../../brandMark";
 
@@ -57,7 +59,7 @@ export function NSTLogo() {
     <div className="flex items-center gap-3">
       <img
         src={brandMarkUrl}
-        alt=""
+        alt="NebulaSafeTech logo"
         width={40}
         height={40}
         decoding="async"
@@ -377,6 +379,8 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
         </div>
         {/* CTA */}
         <motion.button
+          type="button"
+          aria-label={`View project: ${project.title}`}
           className="flex items-center justify-center gap-2 rounded-[10px] py-2.5 mt-1 border-none cursor-pointer"
           style={{ background: project.highlight ? C.primary : "transparent", border: project.highlight ? "none" : `1px solid ${C.border}`, color: project.highlight ? "#fff" : C.primary, fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "13px" }}
           whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
@@ -815,8 +819,10 @@ export default function EdTechPage() {
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden" style={{ background: C.bg }}>
+      <SeoHead meta={EDTECH_SEO} />
       <TopNav />
 
+      <main id="main-content">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -832,6 +838,7 @@ export default function EdTechPage() {
         <FooterSection />
         <ScrollToTop />
       </motion.div>
+      </main>
     </div>
   );
 }

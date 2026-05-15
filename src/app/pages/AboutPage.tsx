@@ -6,6 +6,8 @@ import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { SeoHead } from "../../seo/SeoHead";
+import { ABOUT_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
 /* â”€â”€ Image assets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -698,6 +700,7 @@ export default function AboutPage() {
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
+      <SeoHead meta={ABOUT_SEO} />
       <TopNav />
 
       {/* Animated page entry */}
@@ -706,11 +709,13 @@ export default function AboutPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <HeroAboutSection />
-        <OurStorySection />
-        <StatsSection />
-        <MissionVisionSection />
-        <PartnersSection />
+        <main id="main-content">
+          <HeroAboutSection />
+          <OurStorySection />
+          <StatsSection />
+          <MissionVisionSection />
+          <PartnersSection />
+        </main>
         <FooterSection />
         <ScrollToTop />
       </motion.div>

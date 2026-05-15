@@ -12,6 +12,8 @@ import NexSection from "../components/NexSection";
 import FooterSection from "../components/FooterSection";
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { SeoHead } from "../../seo/SeoHead";
+import { HOME_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, scrollToTopInstant } from "../utils/scroll";
 
 // Skip intro splash in production for faster LCP and better Lighthouse scores; dev keeps the animation once per session.
@@ -94,6 +96,7 @@ export default function HomePage() {
 
   return (
     <div className="bg-white min-h-screen">
+      <SeoHead meta={HOME_SEO} />
       {isLoading ? (
         <LoadingScreen isLoading={isLoading} onReveal={handleReveal} />
       ) : null}
@@ -107,6 +110,7 @@ export default function HomePage() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="w-full relative z-10"
         >
+          <main id="main-content">
           {/* Hero section with parallax */}
           <motion.div
             ref={heroRef}
@@ -187,6 +191,7 @@ export default function HomePage() {
             <FooterSection />
           </motion.div>
           <ScrollToTop />
+          </main>
         </motion.div>
       </div>
     </div>

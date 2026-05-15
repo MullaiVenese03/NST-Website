@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/contact", "destination": "/#contact", "permanent": false },
+    { "source": "/blog", "destination": "/", "permanent": false },
+    { "source": "/careers", "destination": "/", "permanent": false }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
