@@ -11,6 +11,9 @@ dist/
 dist-ssr/
 build/
 
+# Original TTF sources for npm run optimize:fonts (WOFF2 in src/assets/fonts is canonical)
+scripts/font-sources/*.ttf
+
 # Misc
 .DS_Store
 *.pem

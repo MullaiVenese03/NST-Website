@@ -1,199 +1,147 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { useEffect, useState, useRef } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { useLocation } from "react-router";
 import EnhancedHeroSection from "../components/EnhancedHeroSection";
-
-import LoadingScreen from "../components/LoadingScreen";
-import TrustedClientsSection from "../components/TrustedClientsSection";
-import AboutSection from "../components/AboutSection";
-import ServicesSection from "../components/ServicesSection";
-import TestimonialsSection from "../components/TestimonialsSection";
-import EdTechSection from "../components/EdTechSection";
-import NexSection from "../components/NexSection";
-import FooterSection from "../components/FooterSection";
 import TopNav from "../components/TopNav";
-import ScrollToTop from "../components/ScrollToTop";
+import { HeroParallax } from "../components/HeroParallax";
+import { LazyWhenVisible } from "../components/LazyWhenVisible";
 import { SeoHead } from "../../seo/SeoHead";
 import { HOME_SEO } from "../../seo/pageMeta";
-import { enableSmoothScroll, scrollToTopInstant } from "../utils/scroll";
+import { enableSmoothScroll, scrollToSection, scrollToTopInstant } from "../utils/scroll";
+import { prefetchCommonRoutes } from "../utils/prefetchRoute";
+import { useMotionEnabled } from "../utils/performance";
 
-// Skip intro splash in production for faster LCP and better Lighthouse scores; dev keeps the animation once per session.
-let hasShownLoadingAnimation = import.meta.env.PROD;
+const ScrollToTop = lazy(() => import("../components/ScrollToTop"));
+
+const sectionFallback = <div className="w-full min-h-[120px] bg-white" aria-hidden />;
+
+const SECTION_IDS = ["hero", "clients", "about", "services", "testimonials", "edtech", "contact"] as const;
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(!hasShownLoadingAnimation);
-  const [isRevealed, setIsRevealed] = useState(hasShownLoadingAnimation);
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  // Parallax for hero section
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.3]);
+  const motionEnabled = useMotionEnabled();
+  const location = useLocation();
 
   useEffect(() => {
-    if (!hasShownLoadingAnimation) {
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      scrollToTopInstant();
-      enableSmoothScroll();
+    if (!location.hash) scrollToTopInstant();
+    enableSmoothScroll();
+    prefetchCommonRoutes();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    if (!location.hash) return;
+    const id = location.hash.replace("#", "");
+    scrollToSection(id);
+  }, [location.hash, location.pathname]);
+
+  useEffect(() => {
+    const visible = new Set<string>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let changed = false;
+        for (const entry of entries) {
+          const id = entry.target.id;
+          if (!id) continue;
+          if (entry.isIntersecting) {
+            if (!visible.has(id)) {
+              visible.add(id);
+              changed = true;
+              window.dispatchEvent(new CustomEvent("sectionChange", { detail: id }));
+            }
+          } else {
+            visible.delete(id);
+          }
+        }
+        if (!changed && window.scrollY < 100 && !visible.has("hero")) {
+          window.dispatchEvent(new CustomEvent("sectionChange", { detail: "hero" }));
+        }
+      },
+      { threshold: 0.2, rootMargin: "-20% 0px -45% 0px" },
+    );
+
+    for (const id of SECTION_IDS) {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
     }
 
-    return () => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-    };
+    return () => observer.disconnect();
   }, []);
 
-  useEffect(() => {
-    if (!isRevealed) return;
+  const mainContent = (
+    <main id="main-content">
+      <HeroParallax enabled={motionEnabled}>
+        <EnhancedHeroSection />
+      </HeroParallax>
 
-    const sections = ["hero", "clients", "about", "services", "testimonials", "edtech", "nex", "contact"];
+      <LazyWhenVisible
+        id="clients"
+        loader={() => import("../components/TrustedClientsSection")}
+        fallback={sectionFallback}
+        minHeight={150}
+        className="relative w-full"
+      />
 
-    const observers = sections.map(id => {
-      const el = document.getElementById(id);
-      if (!el) return null;
+      <LazyWhenVisible
+        id="about"
+        loader={() => import("../components/AboutSection")}
+        fallback={sectionFallback}
+        minHeight={340}
+        className="relative w-full"
+      />
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            window.dispatchEvent(new CustomEvent("sectionChange", { detail: id }));
-          }
-        },
-        { threshold: 0.2, rootMargin: "-20% 0px -45% 0px" }
-      );
-      observer.observe(el);
-      return observer;
-    });
+      <LazyWhenVisible
+        id="services"
+        loader={() => import("../components/ServicesSection")}
+        fallback={sectionFallback}
+        minHeight={400}
+        className="relative w-full"
+      />
 
-    const handleScroll = () => {
-      if (window.scrollY < 100) {
-        window.dispatchEvent(new CustomEvent("sectionChange", { detail: "hero" }));
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
+      <LazyWhenVisible
+        id="testimonials"
+        loader={() => import("../components/TestimonialsSection")}
+        fallback={sectionFallback}
+        minHeight={420}
+        className="relative w-full"
+      />
 
-    return () => {
-      observers.forEach(obs => obs?.disconnect());
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isRevealed]);
+      <LazyWhenVisible
+        id="edtech"
+        loader={() => import("../components/EdTechSection")}
+        fallback={sectionFallback}
+        minHeight={420}
+        className="relative w-full"
+      />
 
-  const handleReveal = () => {
-    hasShownLoadingAnimation = true;
-    setIsLoading(false);
-    setIsRevealed(true);
-    document.body.style.overflow = "";
-    document.documentElement.style.overflow = "";
-    scrollToTopInstant();
-    enableSmoothScroll();
-    window.dispatchEvent(new CustomEvent("sectionChange", { detail: "hero" }));
-  };
+      {/* TEMPORARILY DISABLED - NEX section will be re-enabled after project completion */}
+      {/*
+      <LazyWhenVisible
+        id="nex"
+        loader={() => import("../components/NexSection")}
+        fallback={sectionFallback}
+        minHeight={320}
+        className="relative w-full"
+      />
+      */}
+
+      <LazyWhenVisible
+        hashTarget="contact"
+        loader={() => import("../components/FooterSection")}
+        fallback={sectionFallback}
+        minHeight={280}
+        className="relative w-full"
+      />
+
+      <Suspense fallback={null}>
+        <ScrollToTop />
+      </Suspense>
+    </main>
+  );
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen overflow-x-clip w-full max-w-[100vw]">
       <SeoHead meta={HOME_SEO} />
-      {isLoading ? (
-        <LoadingScreen isLoading={isLoading} onReveal={handleReveal} />
-      ) : null}
-      
-      <div>
-        <TopNav />
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isRevealed ? 1 : 0 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          className="w-full relative z-10"
-        >
-          <main id="main-content">
-          {/* Hero section with parallax */}
-          <motion.div
-            ref={heroRef}
-            style={{ y: heroY, opacity: heroOpacity }}
-            className="relative w-full"
-            id="hero"
-          >
-            <EnhancedHeroSection />
-          </motion.div>
-
-          {/* Trusted Clients Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full"
-            id="clients"
-          >
-            <TrustedClientsSection />
-          </motion.div>
-
-          {/* About Us Section */}
-          <div className="relative w-full" id="about">
-            <AboutSection />
-          </div>
-
-          {/* Services Section */}
-          <div className="relative w-full" id="services">
-            <ServicesSection />
-          </div>
-
-          {/* Testimonials Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full"
-            id="testimonials"
-          >
-            <TestimonialsSection />
-          </motion.div>
-
-          {/* EdTech Ecosystem Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full"
-            id="edtech"
-          >
-            <EdTechSection />
-          </motion.div>
-
-          {/* NEX Product Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full"
-            id="nex"
-          >
-            <NexSection />
-          </motion.div>
-
-          {/* Footer / Contact Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative w-full"
-            id="contact"
-          >
-            <FooterSection />
-          </motion.div>
-          <ScrollToTop />
-          </main>
-        </motion.div>
-      </div>
+      <TopNav />
+      <div className="w-full relative z-10 min-w-0">{mainContent}</div>
     </div>
   );
 }

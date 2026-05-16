@@ -1,10 +1,12 @@
-import { motion, Variants } from "motion/react";
+import { motion } from "motion/react";
 import svgPaths from "../../imports/AboutSection/svg-s1i9qf01my";
-import imgAbout from "../../assets/about-hero.png";
+import { ResponsivePicture } from "./ResponsivePicture";
+import { fadeHorizontalVariants, fadeUpVariants, VIEWPORT_ONCE } from "../utils/motionPresets";
+import { useLightExperience } from "../utils/performance";
 
 function UsersIcon() {
   return (
-    <svg width="54" height="48" viewBox="0 0 57 48" fill="none">
+    <svg className="w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 57 48" fill="none" aria-hidden>
       <path
         d={svgPaths.p91c0280}
         stroke="#015AAA"
@@ -18,7 +20,7 @@ function UsersIcon() {
 
 function ShieldCheckIcon() {
   return (
-    <svg width="48" height="56" viewBox="0 0 51 56.5404" fill="none">
+    <svg className="w-11 h-12 sm:w-12 sm:h-14" viewBox="0 0 51 56.5404" fill="none" aria-hidden>
       <path
         d={svgPaths.p35f7eb80}
         stroke="#015AAA"
@@ -32,7 +34,7 @@ function ShieldCheckIcon() {
 
 function Hours24Icon() {
   return (
-    <svg width="48" height="48" viewBox="0 0 48.6877 48.6473" fill="none">
+    <svg className="w-11 h-11 sm:w-12 sm:h-12" viewBox="0 0 48.6877 48.6473" fill="none" aria-hidden>
       <path
         d={svgPaths.pe5e6700}
         stroke="#015AAA"
@@ -57,72 +59,55 @@ const features = [
   { icon: <Hours24Icon />, label1: "24/7 Threat", label2: "Monitoring" },
 ];
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, delay: i * 0.12, ease: "easeOut" },
-  }),
-};
-
 export default function AboutSection() {
+  const light = useLightExperience();
+  const fadeUp = fadeUpVariants(light, 0.08);
+  const fadeLeft = fadeHorizontalVariants(light, "left");
+
   return (
     <section className="w-full bg-white overflow-hidden">
-      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-h-[499px]">
-        {/* Left â€“ Image */}
+      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-w-0">
+        {/* Left — Image */}
         <motion.div
-          className="relative w-full lg:w-[53%] min-h-[340px] lg:min-h-[499px] overflow-hidden"
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative w-full lg:w-[42%] min-h-[220px] sm:min-h-[280px] lg:min-h-[360px] max-h-[min(48vh,360px)] lg:max-h-[420px] overflow-hidden"
+          variants={fadeLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
         >
-          <img
-            src={imgAbout}
+          <ResponsivePicture
+            slug="about-hero"
             alt="NST dashboard showing threats blocked and security posture"
-            className="w-full h-full object-cover object-left-top"
-            style={{ minHeight: "340px" }}
+            className="absolute inset-0 w-full h-full object-cover object-center lg:object-left-top"
+            sizes="(max-width: 1024px) 100vw, 42vw"
           />
         </motion.div>
 
-        {/* Right â€“ Content */}
-        <div className="flex-1 flex flex-col justify-center px-12 lg:px-16 py-14 lg:py-0">
-          {/* Label */}
+        {/* Right — Content */}
+        <div className="flex-1 flex flex-col justify-center px-6 sm:px-8 lg:px-16 py-10 sm:py-12 lg:py-14 min-w-0">
           <motion.p
             custom={0}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            style={{
-              fontFamily: 'var(--font-family)',
-              fontWeight: 700,
-              fontSize: "20px",
-              letterSpacing: "1.2px",
-              color: "#015AAA",
-              textTransform: "uppercase",
-              marginBottom: "18px",
-            }}
+            viewport={VIEWPORT_ONCE}
+            className="text-[#015AAA] font-bold text-sm sm:text-base uppercase tracking-wider mb-3 sm:mb-4"
+            style={{ fontFamily: "var(--font-family)" }}
           >
             About Us
           </motion.p>
 
-          {/* Heading */}
           <motion.h2
             custom={1}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
+            className="font-bold text-slate-900 leading-tight mb-4 sm:mb-5"
             style={{
-              fontFamily: 'var(--font-family)',
-              fontWeight: 700,
-              fontSize: "clamp(32px, 3.5vw, 48px)",
-              letterSpacing: "0.96px",
-              color: "#000",
-              lineHeight: 1.1,
-              marginBottom: "20px",
+              fontFamily: "var(--font-family)",
+              fontSize: "clamp(1.75rem, 5vw, 3rem)",
+              letterSpacing: "0.02em",
             }}
           >
             Built by defenders,
@@ -130,89 +115,58 @@ export default function AboutSection() {
             for defenders.
           </motion.h2>
 
-          {/* Description */}
           <motion.p
             custom={2}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            style={{
-              fontFamily: 'var(--font-family)',
-              fontWeight: 500,
-              fontSize: "18px",
-              letterSpacing: "0.4px",
-              color: "#6d6d6d",
-              lineHeight: 1.65,
-              marginBottom: "40px",
-              maxWidth: "480px",
-            }}
+            viewport={VIEWPORT_ONCE}
+            className="text-base sm:text-lg text-[#6d6d6d] leading-relaxed mb-8 sm:mb-10 max-w-xl"
+            style={{ fontFamily: "var(--font-family)" }}
           >
-            <span style={{ fontFamily: 'var(--font-family)' }}>NebulaSafeTech</span> was founded by cybersecurity experts with a mission to
-            deliver enterprise - grade protection through innovation, transparency,
-            and relentless dedication.
+            <span style={{ fontFamily: "var(--font-family)" }}>NebulaSafeTech</span> was founded by
+            cybersecurity experts with a mission to deliver enterprise-grade protection through
+            innovation, transparency, and relentless dedication.
           </motion.p>
 
-          {/* Feature icons row */}
+          {/* Feature cards — stack on mobile, row on sm+ */}
           <motion.div
             custom={3}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
-            className="flex items-center gap-0 border border-slate-100 rounded-2xl p-6 bg-slate-50/30 shadow-sm mb-10"
-            style={{ maxWidth: "520px" }}
+            viewport={VIEWPORT_ONCE}
+            className="grid grid-cols-1 sm:grid-cols-3 items-stretch gap-3 sm:gap-2 border border-slate-100 rounded-2xl p-4 sm:p-6 bg-slate-50/30 shadow-sm mb-8 sm:mb-10 w-full max-w-lg sm:max-w-xl"
           >
             {features.map((f, i) => (
-              <div key={i} className="flex-1 flex items-center">
-                <div className="flex-1 flex flex-col items-center gap-3">
-                  <div className="h-[60px] flex items-center justify-center">
-                    {f.icon}
-                  </div>
-                  <p
-                    style={{
-                      fontFamily: 'var(--font-family)',
-                      fontWeight: 700,
-                      fontSize: "16px",
-                      letterSpacing: "0.36px",
-                      color: "#000",
-                      textAlign: "center",
-                      lineHeight: 1.4,
-                    }}
-                  >
-                    {f.label1}
-                    <br />
-                    {f.label2}
-                  </p>
+              <div
+                key={i}
+                className="flex flex-1 flex-col items-center justify-center gap-2 sm:gap-3 text-center min-h-[100px] sm:min-h-[120px] px-2 py-3 sm:py-0"
+              >
+                <div className="h-12 sm:h-14 flex items-center justify-center shrink-0" aria-hidden>
+                  {f.icon}
                 </div>
-                {/* Vertical divider */}
-                {i < features.length - 1 && (
-                  <div
-                    className="w-[1.5px] self-stretch mx-2"
-                    style={{ background: "#e2e8f0", minHeight: "80px" }}
-                  />
-                )}
+                <p
+                  className="font-bold text-sm sm:text-base text-slate-900 leading-snug m-0"
+                  style={{ fontFamily: "var(--font-family)" }}
+                >
+                  {f.label1}
+                  <br />
+                  {f.label2}
+                </p>
               </div>
             ))}
           </motion.div>
 
-          {/* CTA */}
           <motion.a
             custom={4}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             href="/about"
-            className="inline-flex items-center gap-3 group"
-            style={{
-              fontFamily: 'var(--font-family)',
-              fontWeight: 700,
-              fontSize: "16px",
-              letterSpacing: "1px",
-              color: "#015AAA",
-              textDecoration: "none",
-            }}
+            className="inline-flex items-center gap-3 group min-h-[44px] text-[#015AAA] font-bold text-sm sm:text-base tracking-wide no-underline"
+            style={{ fontFamily: "var(--font-family)" }}
           >
             Learn more about us
             <svg
@@ -220,7 +174,8 @@ export default function AboutSection() {
               height="12"
               viewBox="0 0 20 12"
               fill="none"
-              className="transition-transform duration-200 group-hover:translate-x-1"
+              className="transition-transform duration-200 group-hover:translate-x-1 shrink-0"
+              aria-hidden
             >
               <path
                 d="M19 6L14 1M19 6L14 11M19 6H1"
@@ -236,4 +191,3 @@ export default function AboutSection() {
     </section>
   );
 }
-

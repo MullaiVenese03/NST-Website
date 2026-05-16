@@ -1,18 +1,10 @@
 import type { ServiceSlug } from "../../seo/pageMeta";
-import imgWebDev from "../../assets/Icons/full-stack-web-dev.png";
-import imgUIUX from "../../assets/Icons/web-design-uiux.png";
-import imgAcademic from "../../assets/Icons/academic-training.png";
-import imgWebSecurity from "../../assets/Icons/web-security.png";
-import imgCloudSecurity from "../../assets/Icons/cloud-security.png";
-import imgAppSecurity from "../../assets/Icons/application-security.png";
-import imgNetworkSec from "../../assets/Icons/network-security.png";
-import imgEncryption from "../../assets/Icons/encryption-data-protection.png";
-import imgServicesHero from "../../assets/services-hero.png";
+import type { MediaSlug } from "../utils/media";
 
 export type ServiceOffering = {
   title: string;
   description: string;
-  image: string;
+  mediaSlug: MediaSlug;
 };
 
 export type ServiceBenefit = {
@@ -31,7 +23,7 @@ export type ServiceDetailContent = {
   eyebrow: string;
   heroHeadline: string;
   heroHighlight: string;
-  heroImage: string;
+  heroMedia: MediaSlug;
   heroImageAlt: string;
   tagline: string;
   highlights: string[];
@@ -54,7 +46,7 @@ export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> =
     eyebrow: "Full-Stack Web Development",
     heroHeadline: "Modern web products",
     heroHighlight: "built to scale securely.",
-    heroImage: imgWebDev,
+    heroMedia: "Icons--full-stack-web-dev",
     heroImageAlt: "Full-stack web development illustration",
     tagline:
       "From MVPs to enterprise platforms-we design, build, and deploy production-ready web applications with security and performance baked in from day one.",
@@ -65,22 +57,22 @@ export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> =
       {
         title: "SaaS & product platforms",
         description: "Multi-tenant apps, dashboards, and subscription flows engineered for growth and maintainability.",
-        image: imgWebDev,
+        mediaSlug: "Icons--full-stack-web-dev",
       },
       {
         title: "Business & marketing sites",
         description: "Fast, accessible sites with CMS-friendly structure and conversion-focused UX.",
-        image: imgUIUX,
+        mediaSlug: "Icons--web-design-uiux",
       },
       {
         title: "APIs & integrations",
         description: "RESTful services, third-party integrations, and clean contracts your team can extend.",
-        image: imgWebSecurity,
+        mediaSlug: "Icons--web-security",
       },
       {
         title: "Legacy modernization",
         description: "Incremental rewrites and refactors that reduce risk while improving security and velocity.",
-        image: imgCloudSecurity,
+        mediaSlug: "Icons--cloud-security",
       },
     ],
     capabilitiesTitle: "Technologies & practices",
@@ -124,7 +116,7 @@ export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> =
     eyebrow: "Cybersecurity Services",
     heroHeadline: "Find vulnerabilities",
     heroHighlight: "before attackers do.",
-    heroImage: imgServicesHero,
+    heroMedia: "services-hero",
     heroImageAlt: "Cybersecurity services illustration",
     tagline:
       "Practical assessments and hardening across web, cloud, networks, and data-with clear reports your team can act on, not shelf-ware.",
@@ -135,27 +127,27 @@ export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> =
       {
         title: "Web & application security",
         description: "OWASP-aligned testing for web apps, APIs, and authentication flows.",
-        image: imgWebSecurity,
+        mediaSlug: "Icons--web-security",
       },
       {
         title: "Cloud security",
         description: "Configuration review, identity posture, and DevSecOps integration guidance.",
-        image: imgCloudSecurity,
+        mediaSlug: "Icons--cloud-security",
       },
       {
         title: "Application security programs",
         description: "Secure SDLC practices, threat modeling, and developer-ready remediation guidance.",
-        image: imgAppSecurity,
+        mediaSlug: "Icons--application-security",
       },
       {
         title: "Network security",
         description: "Perimeter hardening, segmentation review, and exposure reduction.",
-        image: imgNetworkSec,
+        mediaSlug: "Icons--network-security",
       },
       {
         title: "Encryption & data protection",
         description: "Data classification, encryption strategy, and privacy-conscious controls.",
-        image: imgEncryption,
+        mediaSlug: "Icons--encryption-data-protection",
       },
     ],
     capabilitiesTitle: "Assessment focus areas",
@@ -199,7 +191,7 @@ export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> =
     eyebrow: "UI/UX Design Services",
     heroHeadline: "Experiences that",
     heroHighlight: "convert and delight.",
-    heroImage: imgUIUX,
+    heroMedia: "Icons--web-design-uiux",
     heroImageAlt: "UI and UX design illustration",
     tagline:
       "Research-led product design from first wireframe to polished UI-built for accessibility, brand consistency, and smooth handoff to engineering.",
@@ -210,22 +202,22 @@ export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> =
       {
         title: "UX research & discovery",
         description: "User interviews, journey maps, and problem framing before pixels hit the canvas.",
-        image: imgUIUX,
+        mediaSlug: "Icons--web-design-uiux",
       },
       {
         title: "Wireframes & prototyping",
         description: "Clickable flows to validate ideas early and align stakeholders fast.",
-        image: imgWebDev,
+        mediaSlug: "Icons--full-stack-web-dev",
       },
       {
         title: "Visual UI design",
         description: "High-fidelity screens for web and product surfaces with consistent visual language.",
-        image: imgAppSecurity,
+        mediaSlug: "Icons--application-security",
       },
       {
         title: "Design systems",
         description: "Reusable components, tokens, and documentation that scale across teams.",
-        image: imgCloudSecurity,
+        mediaSlug: "Icons--cloud-security",
       },
     ],
     capabilitiesTitle: "Deliverables you receive",
@@ -269,7 +261,7 @@ export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> =
     eyebrow: "EdTech & Cybersecurity Training",
     heroHeadline: "Learn security",
     heroHighlight: "by building for real.",
-    heroImage: imgAcademic,
+    heroMedia: "Icons--academic-training",
     heroImageAlt: "EdTech and cybersecurity training illustration",
     tagline:
       "Instructor-led programs, hands-on labs, and capstone projects that turn learners into practitioners-with pathways for campuses and organizations.",
@@ -280,22 +272,22 @@ export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> =
       {
         title: "Cybersecurity foundations",
         description: "Core concepts, networking basics, and ethical hacking fundamentals with guided labs.",
-        image: imgWebSecurity,
+        mediaSlug: "Icons--web-security",
       },
       {
         title: "Advanced security tracks",
         description: "Web app security, cloud basics, and incident-response scenarios in sandbox environments.",
-        image: imgAppSecurity,
+        mediaSlug: "Icons--application-security",
       },
       {
         title: "Campus & institutional MoUs",
         description: "Curriculum alignment, faculty enablement, and semester-long delivery models.",
-        image: imgAcademic,
+        mediaSlug: "Icons--academic-training",
       },
       {
         title: "Corporate workshops",
         description: "Awareness sessions and role-based upskilling for engineering and IT teams.",
-        image: imgNetworkSec,
+        mediaSlug: "Icons--network-security",
       },
     ],
     capabilitiesTitle: "What learners gain",

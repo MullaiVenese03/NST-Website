@@ -1,3 +1,3 @@
-import brandMarkUrl from "./assets/NST_-_Favicon_[Dark_Transparent].png";
+import { BRAND_MARK_URL } from "./app/utils/media";
 
-export { brandMarkUrl };
+export const brandMarkUrl = BRAND_MARK_URL;

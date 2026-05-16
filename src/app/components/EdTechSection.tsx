@@ -1,6 +1,8 @@
-import { motion, Variants } from "motion/react";
+import { motion } from "motion/react";
 import svgPaths from "../../imports/EdTechSection/svg-v7pn74uo9y";
-import imgEdTech from "../../assets/edtech-hero.png";
+import { ResponsivePicture } from "./ResponsivePicture";
+import { fadeHorizontalVariants, fadeUpVariants, VIEWPORT_ONCE } from "../utils/motionPresets";
+import { useLightExperience } from "../utils/performance";
 
 const bulletPoints = [
   "Industry-relevant training programs",
@@ -23,16 +25,11 @@ function CheckIcon() {
   );
 }
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 22 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" },
-  }),
-};
-
 export default function EdTechSection() {
+  const light = useLightExperience();
+  const fadeUp = fadeUpVariants(light, 0.08);
+  const fadeRight = fadeHorizontalVariants(light, "right");
+
   return (
     <section className="w-full overflow-hidden" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-h-[420px]">
@@ -44,7 +41,7 @@ export default function EdTechSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             style={{
               fontFamily: 'var(--font-family)',
               fontWeight: 700,
@@ -64,7 +61,7 @@ export default function EdTechSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             style={{
               fontFamily: 'var(--font-family)',
               fontWeight: 700,
@@ -85,7 +82,7 @@ export default function EdTechSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             style={{
               fontFamily: 'var(--font-family)',
               fontWeight: 400,
@@ -107,7 +104,7 @@ export default function EdTechSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             className="flex flex-col gap-[18px] mb-10 list-none p-0 m-0"
           >
             {bulletPoints.map((point, i) => (
@@ -135,7 +132,7 @@ export default function EdTechSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             href="/edtech"
             className="inline-flex items-center gap-2 group w-fit"
             style={{
@@ -179,23 +176,22 @@ export default function EdTechSection() {
         <motion.div
           className="flex-1 flex items-center justify-center min-h-[360px] lg:min-h-0"
           style={{ background: "#F8FAFE" }}
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          variants={fadeRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT_ONCE}
         >
-          <img
-            src={imgEdTech}
+          <ResponsivePicture
+            slug="edtech-hero"
             alt="EdTech platform showing featured projects and categories"
+            className="w-full h-auto block"
             style={{
-              width: "100%",
-              height: "100%",
               objectFit: "contain",
               objectPosition: "center",
-              display: "block",
               maxHeight: "520px",
               padding: "16px 8px 16px 0",
             }}
+            sizes="(max-width: 1024px) 100vw, 42vw"
           />
         </motion.div>
       </div>

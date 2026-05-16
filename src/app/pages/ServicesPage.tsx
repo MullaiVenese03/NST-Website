@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { Link } from "react-router";
-import { motion, useScroll, useTransform, Variants } from "motion/react";
+import { motion, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Services/svg-ukc1gjjbsx";
 import FooterSection from "../components/FooterSection";
 import AnimatedNumber from "../components/AnimatedNumber";
@@ -13,24 +13,10 @@ import { SITE_ORIGIN } from "../../seo/seoConfig";
 import { faqPageSchema } from "../../seo/schemas/faqSchema";
 import { ServicesFaqSection } from "../components/ServicesFaqSection";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
+import { useParallaxY } from "../utils/motionPresets";
 
-
-import imgServices1     from "../../assets/services-hero.png";
-import imgWhyChooseUs1  from "../../assets/why-choose-us.png";
-import imgWebSecurity   from "../../assets/Icons/web-security.png";
-import imgCloudSecurity from "../../assets/Icons/cloud-security.png";
-import imgAppSecurity   from "../../assets/Icons/application-security.png";
-import imgNetworkSec    from "../../assets/Icons/network-security.png";
-import imgEncryption    from "../../assets/Icons/encryption-data-protection.png";
-import imgWebDev        from "../../assets/Icons/full-stack-web-dev.png";
-import imgUIUX          from "../../assets/Icons/web-design-uiux.png";
-import imgAcademic      from "../../assets/Icons/academic-training.png";
-
-/* â”€â”€ Parallax helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-function useParallax(ref: React.RefObject<HTMLDivElement | null>, dist = 55) {
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  return useTransform(scrollYProgress, [0, 1], [-dist, dist]);
-}
+import { ResponsivePicture } from "../components/ResponsivePicture";
+import type { MediaSlug } from "../utils/media";
 
 /* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
@@ -43,10 +29,24 @@ const fadeUp: Variants = {
 const fadeLeft: Variants  = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 const fadeRight: Variants = { hidden: { opacity: 0, x:  36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
-function IconBadge({ children }: { children: React.ReactNode }) {
+function IconBadge({
+  children,
+  viewBox = "0 0 70 70",
+}: {
+  children: React.ReactNode;
+  viewBox?: string;
+}) {
   return (
-    <div className="w-[70px] h-[70px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0">
-      <svg className="w-[70px] h-[70px] block" fill="none" viewBox="0 0 70 70">
+    <div
+      className="w-[70px] h-[70px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0"
+      aria-hidden
+    >
+      <svg
+        className="w-[44px] h-[44px] block"
+        fill="none"
+        viewBox={viewBox}
+        preserveAspectRatio="xMidYMid meet"
+      >
         {children}
       </svg>
     </div>
@@ -55,7 +55,7 @@ function IconBadge({ children }: { children: React.ReactNode }) {
 
 function ServicesHero() {
   const imgRef = useRef<HTMLDivElement>(null);
-  const y = useParallax(imgRef, 40);
+  const y = useParallaxY(imgRef, 40);
 
   return (
     <section className="relative w-full bg-white overflow-hidden pt-32 pb-20 px-8 md:px-14 lg:px-20">
@@ -85,7 +85,7 @@ function ServicesHero() {
             whileInView="visible"
             viewport={{ once: true }}
             custom={3}
-            className="flex items-center gap-0 border border-slate-100 rounded-2xl p-6 bg-slate-50/30 shadow-sm"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-0 border border-slate-100 rounded-2xl p-4 sm:p-6 bg-slate-50/30 shadow-sm w-full max-w-xl"
           >
             {[
               { 
@@ -117,9 +117,9 @@ function ServicesHero() {
                 label2: "Monitoring" 
               },
             ].map((item, i) => (
-              <div key={i} className="flex flex-1 items-center">
-                <div className="flex flex-col items-center gap-3 flex-1 px-2">
-                  <div className="w-[64px] h-[64px] relative overflow-hidden flex items-center justify-center">
+              <div key={i} className="flex flex-1 items-center min-w-0">
+                <div className="flex flex-col items-center gap-3 flex-1 px-3 sm:px-4 py-2 sm:py-0">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 relative flex items-center justify-center shrink-0">
                     {item.icon}
                   </div>
                   <div className="text-center">
@@ -132,7 +132,7 @@ function ServicesHero() {
                   </div>
                 </div>
                 {i < 2 && (
-                  <div className="w-[1px] self-stretch mx-2" style={{ background: "#e2e8f0", minHeight: "80px" }} />
+                  <div className="hidden sm:block w-px self-stretch mx-1 shrink-0" style={{ background: "#e2e8f0", minHeight: "72px" }} aria-hidden />
                 )}
               </div>
             ))}
@@ -141,13 +141,16 @@ function ServicesHero() {
 
         {/* Right: services illustration with parallax */}
         <motion.div ref={imgRef} className="flex-1 min-w-0 relative" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
-          <motion.img
-            src={imgServices1}
-            alt="Smart Solutions â€“ Security illustration"
-            className="w-full h-auto"
-            style={{ y, objectFit: "contain", maxHeight: "520px" }}
-          />
-          <div className="absolute -z-10 inset-0 blur-3xl opacity-15"
+          <motion.div style={{ y }} className="w-full">
+            <ResponsivePicture
+              slug="services-hero"
+              alt="Smart Solutions – Security illustration"
+              className="w-full h-auto object-contain"
+              style={{ maxHeight: "520px" }}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </motion.div>
+          <div className="absolute -z-10 inset-0 rounded-full bg-[#015AAA]/8 opacity-40" aria-hidden
             style={{ background: "radial-gradient(circle at 50% 40%, #015AAA 0%, transparent 70%)" }} />
         </motion.div>
       </div>
@@ -155,50 +158,51 @@ function ServicesHero() {
   );
 }
 
-const serviceCards = [
-  { slug: "/services/cybersecurity", img: imgWebSecurity,   title: "Web Security",                    desc: "Secure your web apps with advanced vulnerability detection and real-time threat mitigation." },
-  { slug: "/services/cybersecurity", img: imgCloudSecurity, title: "Cloud Security",                  desc: "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly." },
-  { slug: "/services/cybersecurity", img: imgAppSecurity,   title: "Application Security",            desc: "Create innovative frameworks to build executable software security with privacy and trust." },
-  { slug: "/services/cybersecurity", img: imgNetworkSec,    title: "Network Security",                desc: "Create innovative frameworks to executable software security - built for privacy and trust." },
-  { slug: "/services/cybersecurity", img: imgEncryption,    title: "Encryption & Data Protection",    desc: "Create innovative frameworks to executable software security we built, privacy, and trust." },
-  { slug: "/services/web-development", img: imgWebDev,        title: "Full-Stack Web Development",      desc: "Scalable, high-performance web applications built with modern technologies." },
-  { slug: "/services/ui-ux-design", img: imgUIUX,          title: "Web Design & UI/UX Development",  desc: "Pixel-perfect designs and intuitive experiences that engage users and drive results." },
-  { slug: "/services/edtech-training", img: imgAcademic,      title: "Academic Training",               desc: "Practical training and real-world learning experiences that build skills and prepare you for industry." },
+const serviceCards: { slug: string; mediaSlug: MediaSlug; title: string; desc: string }[] = [
+  { slug: "/services/cybersecurity", mediaSlug: "Icons--web-security", title: "Web Security", desc: "Secure your web apps with advanced vulnerability detection and real-time threat mitigation." },
+  { slug: "/services/cybersecurity", mediaSlug: "Icons--cloud-security", title: "Cloud Security", desc: "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly." },
+  { slug: "/services/cybersecurity", mediaSlug: "Icons--application-security", title: "Application Security", desc: "Create innovative frameworks to build executable software security with privacy and trust." },
+  { slug: "/services/cybersecurity", mediaSlug: "Icons--network-security", title: "Network Security", desc: "Create innovative frameworks to executable software security - built for privacy and trust." },
+  { slug: "/services/cybersecurity", mediaSlug: "Icons--encryption-data-protection", title: "Encryption & Data Protection", desc: "Create innovative frameworks to executable software security we built, privacy, and trust." },
+  { slug: "/services/web-development", mediaSlug: "Icons--full-stack-web-dev", title: "Full-Stack Web Development", desc: "Scalable, high-performance web applications built with modern technologies." },
+  { slug: "/services/ui-ux-design", mediaSlug: "Icons--web-design-uiux", title: "Web Design & UI/UX Development", desc: "Pixel-perfect designs and intuitive experiences that engage users and drive results." },
+  { slug: "/services/edtech-training", mediaSlug: "Icons--academic-training", title: "Academic Training", desc: "Practical training and real-world learning experiences that build skills and prepare you for industry." },
 ];
 
 function ServiceCardsSection() {
   return (
     <section className="w-full py-20 px-8 md:px-14 lg:px-20 overflow-hidden" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-stretch">
           {serviceCards.map((card, i) => (
-            <Link key={i} to={card.slug} className="no-underline text-inherit h-full block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/70 rounded-2xl">
+            <Link key={i} to={card.slug} className="no-underline text-inherit h-full block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/70 rounded-2xl min-w-0">
             <motion.div
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
               custom={i % 4}
-              className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer h-full"
+              className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer h-full min-h-[320px] sm:min-h-[360px]"
             >
               {/* Icon/Image Container */}
-              <div className="p-8 pb-4 flex items-center justify-center h-48">
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <div className="absolute inset-0 bg-blue-50/50 rounded-full blur-2xl scale-75 group-hover:scale-100 transition-transform duration-500" />
-                  <motion.img
-                    src={card.img}
+              <div className="p-6 sm:p-8 pb-4 flex items-center justify-center min-h-[160px] sm:min-h-[192px]">
+                <div className="relative w-full max-w-[140px] sm:max-w-[160px] aspect-square flex items-center justify-center mx-auto">
+                  <div className="absolute inset-0 bg-blue-50/50 rounded-full scale-90 group-hover:scale-100 transition-transform duration-500" aria-hidden />
+                  <ResponsivePicture
+                    slug={card.mediaSlug}
                     alt={card.title}
-                    className="relative z-10 w-auto h-full max-h-[120px] object-contain transition-transform duration-500 group-hover:scale-110"
+                    className="relative z-10 w-full h-full max-h-[100px] sm:max-h-[120px] object-contain object-center transition-transform duration-500 group-hover:scale-105"
+                    profile="icon"
                   />
                 </div>
               </div>
 
               {/* Text Content */}
-              <div className="px-8 pb-8 flex flex-col flex-1">
-                <h3 className="text-2xl font-bold text-slate-900 mb-4 group-hover:text-[#015AAA] transition-colors duration-300">
+              <div className="px-6 sm:px-8 pb-6 sm:pb-8 flex flex-col flex-1 min-w-0">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-[#015AAA] transition-colors duration-300 break-words">
                   {card.title}
                 </h3>
-                <p className="text-base text-slate-500 leading-relaxed flex-1">
+                <p className="text-sm sm:text-base text-slate-500 leading-relaxed flex-1 break-words">
                   {card.desc}
                 </p>
               </div>
@@ -238,7 +242,7 @@ const processSteps = [
     num: "03", title: "Build",
     desc: "We develop with best practices and cutting-edge technologies.",
     icon: (
-      <IconBadge>
+      <IconBadge viewBox="0 0 46 46">
         <g>
           <path d={svgPaths.pa064e00} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
           <path d={svgPaths.p39374772} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
@@ -300,9 +304,9 @@ function OurProcessSection() {
                 whileHover={{ y: -6, boxShadow: "0 12px 32px rgba(1,90,170,0.1)" }}
                 transition={{ type: "spring", stiffness: 280, damping: 22 }}
               >
-                <div className="mb-6 shrink-0 group-hover:scale-110 transition-transform duration-500">
+                <motion.div className="mb-6 shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                   {step.icon}
-                </div>
+                </motion.div>
                 <div className="space-y-2 flex-1 flex flex-col items-center">
                   <AnimatedNumber
                     value={step.num}
@@ -337,7 +341,7 @@ const whyFeatures = [
     title: "Security First Approach",
     desc: "We prioritise security in every solution we build.",
     icon: (
-      <IconBadge>
+      <IconBadge viewBox="0 0 42 46">
         <path d={svgPaths.p24ca6630} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
       </IconBadge>
     ),
@@ -366,7 +370,7 @@ const whyFeatures = [
     title: "Reliable Support",
     desc: "24/7 support and continuous monitoring for your peace of mind.",
     icon: (
-      <IconBadge>
+      <IconBadge viewBox="0 0 44 46">
         <path d={svgPaths.p3ef4e500} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
         <path d={svgPaths.p2aa32d80} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
       </IconBadge>
@@ -385,7 +389,7 @@ const whyFeatures = [
 
 function WhyChooseUsSection() {
   const imgRef = useRef<HTMLDivElement>(null);
-  const y = useParallax(imgRef, 50);
+  const y = useParallaxY(imgRef, 50);
 
   return (
     <section className="relative w-full bg-white overflow-hidden py-20 px-8 md:px-14 lg:px-20">
@@ -408,12 +412,15 @@ function WhyChooseUsSection() {
 
           {/* Illustration with parallax */}
           <div ref={imgRef} className="relative overflow-hidden rounded-[16px] mt-4">
-            <motion.img
-              src={imgWhyChooseUs1}
-              alt="Why Choose NebulaSafeTech"
-              className="w-full h-auto rounded-[16px]"
-              style={{ y, maxHeight: "420px", objectFit: "cover", objectPosition: "center top" }}
-            />
+            <motion.div style={{ y }}>
+              <ResponsivePicture
+                slug="why-choose-us"
+                alt="Why Choose NebulaSafeTech"
+                className="w-full h-auto rounded-[16px] object-cover"
+                style={{ maxHeight: "420px", objectPosition: "center top" }}
+                sizes="(max-width: 1024px) 100vw, 480px"
+              />
+            </motion.div>
           </div>
         </div>
 
@@ -431,9 +438,9 @@ function WhyChooseUsSection() {
               whileHover={{ x: 6 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
             >
-              <div className="flex-shrink-0 group-hover:scale-110 transition-transform duration-500">
+              <motion.div className="flex-shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
                 {feat.icon}
-              </div>
+              </motion.div>
               <div className="flex flex-col gap-1.5">
                 <h4 className="text-xl font-bold text-slate-900 group-hover:text-[#015AAA] transition-colors duration-300">{feat.title}</h4>
                 <p className="text-base text-slate-500 leading-relaxed">{feat.desc}</p>

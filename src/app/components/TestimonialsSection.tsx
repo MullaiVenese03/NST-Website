@@ -1,47 +1,50 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, Variants } from "motion/react";
+import { VIEWPORT_ONCE } from "../utils/motionPresets";
+import { useLightExperience } from "../utils/performance";
 import svgPaths from "../../imports/TestimonialsSection/svg-2ss3ybjdpk";
 
-import imgSlide1 from "../../assets/testimonial-st-joseph-1.png";
-import imgSlide2 from "../../assets/testimonial-cppm-college.png";
-import imgSlide3 from "../../assets/testimonial-st-joseph-2.png";
-import imgSlide4 from "../../assets/testimonial-st-joseph-mou.png";
-import imgSlide5 from "../../assets/testimonial-tn-police.png";
-import imgSlide6 from "../../assets/testimonial-dhanalakshmi-mou.png";
+import type { MediaSlug } from "../utils/media";
+import { ResponsivePicture } from "./ResponsivePicture";
 
-const slides = [
+const slides: {
+  mediaSlug: MediaSlug;
+  cardTitle: string;
+  org: string;
+  text: string;
+}[] = [
   {
-    img: imgSlide1,
+    mediaSlug: "testimonial-st-joseph-1",
     cardTitle: "Cybersecurity Awareness Program",
     org: "St. Joseph College for Women",
     text: "Happy to conduct a cybersecurity awareness session for students, where we discussed common cyber threats, online safety habits, and simple steps everyone can follow to stay secure in their daily digital life.",
   },
   {
-    img: imgSlide2,
+    mediaSlug: "testimonial-cppm-college",
     cardTitle: "Cybersecurity Awareness Program",
     org: "CPPM College, Hosur",
     text: "Delivered an awareness program focused on digital safety, cyber hygiene, and common mistakes people make online. The session helped students understand how small actions can prevent bigger cyber problems.",
   },
   {
-    img: imgSlide3,
+    mediaSlug: "testimonial-st-joseph-2",
     cardTitle: "Cybersecurity Seminar",
     org: "St. Joseph College for Women",
     text: "Presented a seminar covering the basics of cybersecurity, real-world cyber attack examples, and career paths in the field. The goal was to make cybersecurity easy to understand and relatable for students.",
   },
   {
-    img: imgSlide4,
+    mediaSlug: "testimonial-st-joseph-mou",
     cardTitle: "MoU Signing",
     org: "St. Joseph College for Women",
     text: "Proud to sign a Memorandum of Understanding to support cybersecurity training, hands-on learning, and collaboration between industry and students for future skill development.",
   },
   {
-    img: imgSlide5,
+    mediaSlug: "testimonial-tn-police",
     cardTitle: "Law Enforcement Training",
     org: "Tamil Nadu Police, Hosur",
     text: "Conducted a cybersecurity training session for law enforcement personnel, focusing on cybercrime awareness, basic digital investigation concepts, and understanding online threats more effectively.",
   },
   {
-    img: imgSlide6,
+    mediaSlug: "testimonial-dhanalakshmi-mou",
     cardTitle: "MoU Signing & Academic Collaboration",
     org: "Dhanalakshmi Srinivasan College",
     text: "Happy to sign an MoU with Dhanalakshmi Srinivasan College, Perambalur, to promote cybersecurity awareness, practical learning, and industry-focused skill development for students.",
@@ -63,20 +66,24 @@ function VerifiedIcon() {
 }
 
 export default function TestimonialsSection() {
+  const light = useLightExperience();
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
 
+  const updateWidth = useCallback(() => {
+    if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+  }, []);
+
   useEffect(() => {
-    const update = () => {
-      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
-    };
-    update();
-    const ro = new ResizeObserver(update);
+    updateWidth();
+    const ro = new ResizeObserver(() => {
+      requestAnimationFrame(updateWidth);
+    });
     if (containerRef.current) ro.observe(containerRef.current);
     return () => ro.disconnect();
-  }, []);
+  }, [updateWidth]);
 
   const cardsPerView = containerWidth > 720 ? 2 : 1;
   const GAP = 24;
@@ -103,29 +110,34 @@ export default function TestimonialsSection() {
   const cardWidth = containerWidth > 0
     ? (containerWidth - (cardsPerView - 1) * GAP) / cardsPerView
     : 600;
-  const cardHeight = Math.round(cardWidth * (428 / 650));
+  const cardHeight = Math.min(
+    Math.max(Math.round(cardWidth * (428 / 650)), 220),
+    containerWidth > 0 && containerWidth <= 480 ? 300 : 380
+  );
 
   const cardGroupVariants = {
-    enter: (d: number) => ({ opacity: 0, x: d > 0 ? 80 : -80 }),
+    enter: (d: number) =>
+      light ? { opacity: 0 } : { opacity: 0, x: d > 0 ? 48 : -48 },
     center: { opacity: 1, x: 0 },
-    exit: (d: number) => ({ opacity: 0, x: d > 0 ? -80 : 80 }),
+    exit: (d: number) =>
+      light ? { opacity: 0 } : { opacity: 0, x: d > 0 ? -48 : 48 },
   };
 
   const descVariants: Variants = {
-    enter: (d: number) => ({ opacity: 0, y: d > 0 ? 14 : -14 }),
-    center: { opacity: 1, y: 0 },
-    exit: (d: number) => ({ opacity: 0, y: d > 0 ? -14 : 14 }),
+    enter: () => ({ opacity: 0 }),
+    center: { opacity: 1 },
+    exit: () => ({ opacity: 0 }),
   };
 
   return (
-    <section className="w-full bg-white py-14 px-6 md:px-10 lg:px-16 overflow-hidden">
+    <section className="w-full bg-white py-12 sm:py-14 px-4 sm:px-6 md:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
 
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: light ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           transition={{ duration: 0.55 }}
           className="mb-10"
         >
@@ -179,10 +191,12 @@ export default function TestimonialsSection() {
                     border: "1px solid #c6c6c6",
                   }}
                 >
-                  <img
-                    src={slide.img}
+                  <ResponsivePicture
+                    slug={slide.mediaSlug}
                     alt={slide.cardTitle}
                     className="absolute inset-0 w-full h-full object-cover"
+                    profile="testimonial"
+                    sizes="(max-width: 720px) 92vw, 420px"
                   />
                   {/* Gradient overlay */}
                   <div
@@ -224,13 +238,13 @@ export default function TestimonialsSection() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.32, ease: "easeOut" }}
-              className="flex flex-col gap-2"
+              className="flex flex-col gap-3"
               style={{ maxWidth: "560px" }}
             >
-              <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-2 flex-wrap min-w-0">
                 <span
                   style={{
-                    fontFamily: 'var(--font-family)',
+                    fontFamily: "var(--font-family)",
                     fontWeight: 700,
                     fontSize: "18px",
                     letterSpacing: "0.36px",
@@ -260,30 +274,36 @@ export default function TestimonialsSection() {
           {/* Navigation */}
           <div className="flex items-center gap-3 flex-shrink-0 self-center sm:self-end pb-1">
             {/* Dot indicators */}
-            <div className="flex items-center gap-1.5 mr-3">
+            <motion.div className="flex items-center gap-2 mr-3" role="tablist" aria-label="Testimonial slides">
               {slides.map((_, i) => (
                 <button
                   key={i}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === activeIndex}
                   onClick={() => goTo(i)}
-                  className="rounded-full transition-all duration-300 cursor-pointer border-none"
-                  style={{
-                    width: i === activeIndex ? "20px" : "8px",
-                    height: "8px",
-                    background: i === activeIndex ? "#015AAA" : "#C6C6C6",
-                  }}
                   aria-label={`Go to slide ${i + 1}`}
-                />
+                  className="border-none bg-transparent p-3 cursor-pointer flex items-center justify-center min-h-[44px] min-w-[44px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/60"
+                >
+                  <span
+                    className="block rounded-full transition-[width,background-color] duration-300 ease-out"
+                    style={{
+                      width: i === activeIndex ? "22px" : "8px",
+                      height: "8px",
+                      background: i === activeIndex ? "#015AAA" : "#C6C6C6",
+                    }}
+                    aria-hidden
+                  />
+                </button>
               ))}
-            </div>
+            </motion.div>
 
             {/* Left arrow */}
-            <motion.button
+            <button
+              type="button"
               onClick={goPrev}
-              className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent"
+              className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent transition-transform duration-200 hover:scale-105 active:scale-95"
               style={{ width: 45, height: 45 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
               aria-label="Previous"
             >
               <svg width="45" height="45" viewBox="0 0 35.75 35.75" fill="none">
@@ -295,16 +315,13 @@ export default function TestimonialsSection() {
                   strokeWidth="2"
                 />
               </svg>
-            </motion.button>
+            </button>
 
-            {/* Right arrow */}
-            <motion.button
+            <button
+              type="button"
               onClick={goNext}
-              className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent"
+              className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent transition-transform duration-200 hover:scale-105 active:scale-95"
               style={{ width: 45, height: 45 }}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 400, damping: 20 }}
               aria-label="Next"
             >
               <svg width="45" height="45" viewBox="0 0 35.75 35.75" fill="none">
@@ -316,7 +333,7 @@ export default function TestimonialsSection() {
                   strokeWidth="2"
                 />
               </svg>
-            </motion.button>
+            </button>
           </div>
         </div>
 

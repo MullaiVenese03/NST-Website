@@ -1,30 +1,17 @@
-﻿import FixedHeroSection from "./FixedHeroSection";
-// @ts-ignore
-import heroVideo from "../../assets/hero-bg-video.mp4";
+import FixedHeroSection from "./FixedHeroSection";
+import HeroBackground from "./HeroBackground";
 
 export default function EnhancedHeroSection() {
   return (
-    <div className="relative w-full overflow-hidden flex flex-col justify-center bg-white">
-      {/* Background Video */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        aria-hidden
-      >
-        <source src={heroVideo} type="video/mp4" />
-      </video>
+    <section
+      className="relative flex min-h-dvh w-full flex-col overflow-hidden"
+      aria-label="Hero"
+    >
+      <HeroBackground />
 
-      {/* Content Container */}
-      <div className="relative z-10 w-full min-h-screen max-w-[1440px] mx-auto px-[20px] pt-20 flex items-center">
-        <div className="w-full">
-          <FixedHeroSection />
-        </div>
+      <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[1440px] flex-col items-center justify-evenly px-4 pb-10 pt-[calc(5rem+env(safe-area-inset-top,0px))] sm:px-5 md:items-start md:justify-center md:px-10 md:pb-16 md:pt-24 lg:px-[50px]">
+        <FixedHeroSection />
       </div>
-    </div>
+    </section>
   );
 }
-

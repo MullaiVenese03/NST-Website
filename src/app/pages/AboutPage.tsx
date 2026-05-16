@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, Variants } from "motion/react";
+import { motion, Variants } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2AboutUs/svg-n77cdd2snf";
 import FooterSection from "../components/FooterSection";
 import AnimatedNumber from "../components/AnimatedNumber";
@@ -9,29 +9,10 @@ import ScrollToTop from "../components/ScrollToTop";
 import { SeoHead } from "../../seo/SeoHead";
 import { ABOUT_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
+import { useParallaxY } from "../utils/motionPresets";
 
-/* â”€â”€ Image assets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-import imgDashboard from "../../assets/about-hero.png";
-import imgTeam from "../../assets/about-team.png";
-import imgLogoThirukkural from "../../assets/logo-thirukkural-transport.png";
-import imgLogoStJoseph from "../../assets/logo-st-joseph-college.png";
-import imgLogoSolamalai from "../../assets/logo-solamalai-college.png";
-import imgLogoDhanalakshmi from "../../assets/logo-dhanalakshmi-srinivasan.png";
-import imgLogoAkshaya from "../../assets/logo-akshaya-college.png";
-import imgLogoNsr from "../../assets/logo-nsr.png";
-import imgLogoSgnl from "../../assets/logo-sgnl.png";
-import imgLogoTwomile from "../../assets/logo-twomile-heavy-industries.png";
-import imgLogoRapido from "../../assets/logo-rapido.png";
-import imgLogoP2Task from "../../assets/logo-p2task.png";
-
-/* â”€â”€ Parallax hook â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-function useParallax(ref: React.RefObject<HTMLDivElement | null>, distance = 60) {
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  return useTransform(scrollYProgress, [0, 1], [-distance, distance]);
-}
+import { ResponsivePicture } from "../components/ResponsivePicture";
+import type { MediaSlug } from "../utils/media";
 
 /* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
@@ -66,10 +47,10 @@ const fadeRight: Variants = {
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function HeroAboutSection() {
   const imgRef = useRef<HTMLDivElement>(null);
-  const y = useParallax(imgRef, 40);
+  const y = useParallaxY(imgRef, 40);
 
   return (
-    <section className="w-full bg-white overflow-hidden pt-32 pb-20 px-8 md:px-14 lg:px-20">
+    <section className="w-full bg-white overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-8 md:px-14 lg:px-20">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
         {/* Left: content */}
         <div className="flex-1 min-w-0">
@@ -145,10 +126,10 @@ function HeroAboutSection() {
             whileInView="visible"
             viewport={{ once: true }}
             custom={3}
-            className="flex items-center gap-0 border border-slate-100 rounded-2xl p-6 bg-slate-50/30 shadow-sm"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-2 border border-slate-100 rounded-2xl p-4 sm:p-6 bg-slate-50/30 shadow-sm w-full max-w-xl"
           >
             {/* Expert-Led Security */}
-            <div className="flex flex-col items-center gap-3 flex-1 pr-6">
+            <div className="flex flex-col items-center gap-3 flex-1 px-2 py-3 sm:py-0 min-h-[100px] sm:min-h-[120px] justify-center">
               <div className="w-[64px] h-[64px] relative overflow-hidden">
                 <svg className="w-full h-full" fill="none" viewBox="0 0 57 48">
                   <path
@@ -170,11 +151,8 @@ function HeroAboutSection() {
               </div>
             </div>
 
-            {/* Divider */}
-            <div className="w-[1px] self-stretch mx-2" style={{ background: "#e2e8f0", minHeight: "80px" }} />
-
             {/* Proactive Protection */}
-            <div className="flex flex-col items-center gap-3 flex-1 px-6">
+            <div className="flex flex-col items-center gap-3 flex-1 px-2 py-3 sm:py-0 min-h-[100px] sm:min-h-[120px] justify-center">
               <div className="w-[64px] h-[64px] relative overflow-hidden">
                 <svg className="w-full h-full" fill="none" viewBox="0 0 51 56.5404">
                   <path
@@ -196,11 +174,8 @@ function HeroAboutSection() {
               </div>
             </div>
 
-            {/* Divider */}
-            <div className="w-[1px] self-stretch mx-2" style={{ background: "#e2e8f0", minHeight: "80px" }} />
-
             {/* 24/7 */}
-            <div className="flex flex-col items-center gap-3 flex-1 pl-6">
+            <div className="flex flex-col items-center gap-3 flex-1 px-2 py-3 sm:py-0 min-h-[100px] sm:min-h-[120px] justify-center">
               <div className="w-[64px] h-[64px] relative overflow-hidden flex items-center justify-center">
                 <svg className="w-full h-full" fill="none" viewBox="0 0 48.6877 48.6465">
                   <path d={svgPaths.pe5e6700} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
@@ -228,17 +203,19 @@ function HeroAboutSection() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.div style={{ y }} className="overflow-hidden rounded-[16px]">
-            <img
-              src={imgDashboard}
+          <motion.div style={{ y }} className="overflow-hidden rounded-[16px] w-full">
+            <ResponsivePicture
+              slug="about-hero"
               alt="Security metrics dashboard"
-              className="w-full h-auto rounded-[16px]"
+              className="w-full h-auto max-h-[min(52vh,420px)] sm:max-h-none object-cover object-center rounded-[16px]"
               style={{ boxShadow: "0 8px 40px rgba(1,90,170,0.15)" }}
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </motion.div>
           {/* Decorative glow */}
           <div
-            className="absolute -z-10 inset-0 blur-3xl opacity-20"
+            className="absolute -z-10 inset-0 rounded-full bg-[#015AAA]/10 opacity-30"
+            aria-hidden
             style={{ background: "radial-gradient(circle at 60% 40%, #015AAA 0%, transparent 70%)" }}
           />
         </motion.div>
@@ -252,10 +229,10 @@ function HeroAboutSection() {
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function OurStorySection() {
   const imgRef = useRef<HTMLDivElement>(null);
-  const y = useParallax(imgRef, 55);
+  const y = useParallaxY(imgRef, 55);
 
   return (
-    <section className="w-full overflow-hidden py-20 px-8 md:px-14 lg:px-20" style={{ background: "#F8FAFE" }}>
+    <section className="w-full overflow-hidden py-16 sm:py-20 px-4 sm:px-8 md:px-14 lg:px-20" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
         {/* Left: text */}
         <div className="flex-1 min-w-0">
@@ -327,22 +304,21 @@ function OurStorySection() {
         </div>
 
         {/* Right: team photo with parallax */}
-        <div ref={imgRef} className="flex-1 min-w-0 relative overflow-hidden rounded-[12px]">
+        <div ref={imgRef} className="flex-1 min-w-0 relative overflow-hidden rounded-[12px] min-h-[240px] sm:min-h-[320px] max-h-[min(52vh,420px)] lg:max-h-none">
           <motion.div
             variants={fadeRight}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
+            style={{ y }}
+            className="h-full w-full"
           >
-            <motion.img
-              src={imgTeam}
+            <ResponsivePicture
+              slug="about-team"
               alt="NebulaSafeTech security operations team"
-              className="w-full h-auto rounded-[12px]"
-              style={{
-                y,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
-                display: "block",
-              }}
+              className="w-full h-full min-h-[240px] object-cover object-center rounded-[12px]"
+              style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </motion.div>
         </div>
@@ -356,8 +332,8 @@ function OurStorySection() {
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const statsData = [
   {
-    value: "99.98%",
-    label: "Customer Trust",
+    value: "50+",
+    label: "Clients Served",
     icon: (
       <svg width="60" height="60" viewBox="0 0 44 48.617" fill="none">
         <path d={svgPaths.p9630160} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
@@ -365,8 +341,8 @@ const statsData = [
     ),
   },
   {
-    value: "100+",
-    label: "Clients Projects",
+    value: "120+",
+    label: "Projects Delivered",
     icon: (
       <svg width="60" height="60" viewBox="0 0 49 41.5" fill="none">
         <path d={svgPaths.p32f12880} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
@@ -374,7 +350,7 @@ const statsData = [
     ),
   },
   {
-    value: "10+",
+    value: "5+",
     label: "Years of Experience",
     icon: (
       <svg width="60" height="60" viewBox="0 0 50 42.5" fill="none">
@@ -387,7 +363,7 @@ const statsData = [
 function StatsSection() {
   return (
     <section className="w-full bg-white py-16 px-8 md:px-14 lg:px-20">
-      <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-0">
+      <div className="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-0 sm:gap-0">
         {statsData.map((stat, i) => (
           <motion.div
             key={i}
@@ -396,10 +372,7 @@ function StatsSection() {
             whileInView="visible"
             viewport={{ once: true }}
             custom={i}
-            className="flex items-center gap-5 flex-1 justify-center py-6 px-8"
-            style={{
-              borderRight: i < statsData.length - 1 ? "1px solid #E0E0E0" : "none",
-            }}
+            className="flex items-center gap-5 flex-1 justify-center py-6 px-4 sm:px-8 w-full sm:w-auto border-b sm:border-b-0 sm:border-r border-[#E0E0E0] last:border-b-0 last:sm:border-r-0"
           >
             <div
               className="flex items-center justify-center flex-shrink-0 rounded-[16px]"
@@ -457,9 +430,12 @@ function MissionVisionSection() {
       ),
       title: "Our Mission",
       content: (
-        <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: 1.7, margin: 0 }}>
-          To provide advanced, reliable, and affordable cybersecurity solutions that help organizations safeguard their digital assets and build a secure future.
-        </p>
+        <ul className="list-disc list-outside" style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: "30px", margin: 0, paddingLeft: "22px" }}>
+          <li>Deliver advanced, reliable cybersecurity solutions</li>
+          <li>Protect digital assets with proactive defense</li>
+          <li>Make enterprise-grade security accessible</li>
+          <li>Partner closely with every client we serve</li>
+        </ul>
       ),
     },
     {
@@ -472,9 +448,12 @@ function MissionVisionSection() {
       ),
       title: "Our Vision",
       content: (
-        <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: 1.7, margin: 0 }}>
-          To be a global leader in cybersecurity, recognized for innovation, integrity, and our commitment to a safer digital world.
-        </p>
+        <ul className="list-disc list-outside" style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: "30px", margin: 0, paddingLeft: "22px" }}>
+          <li>Lead globally in cybersecurity innovation</li>
+          <li>Build a safer, more resilient digital world</li>
+          <li>Champion integrity in every engagement</li>
+          <li>Empower organizations to grow with confidence</li>
+        </ul>
       ),
     },
     {
@@ -487,7 +466,7 @@ function MissionVisionSection() {
       ),
       title: "Our Values",
       content: (
-        <ul style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: "30px", margin: 0, paddingLeft: "22px" }}>
+        <ul className="list-disc list-outside" style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "#000", letterSpacing: "0.34px", lineHeight: "30px", margin: 0, paddingLeft: "22px" }}>
           <li>Integrity in all we do</li>
           <li>Innovation that drives impact</li>
           <li>Transparency builds trust</li>
@@ -563,20 +542,27 @@ function MissionVisionSection() {
 /* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    PARTNERS / CLIENTS
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
-const partnersRow1 = [
-  { img: imgLogoThirukkural, alt: "Thirukkural Transport", size: 100 },
-  { img: imgLogoStJoseph, alt: "St. Joseph College", size: 100 },
-  { img: imgLogoSolamalai, alt: "Solamalai College", size: 100 },
-  { img: imgLogoDhanalakshmi, alt: "Dhanalakshmi Srinivasan College", size: 100 },
-  { img: imgLogoAkshaya, alt: "Akshaya College", size: 100 },
-  { img: imgLogoNsr, alt: "NSR", size: 100 },
+const partnersRow1: { mediaSlug: MediaSlug; alt: string; size: number }[] = [
+  { mediaSlug: "logo-thirukkural-transport", alt: "Thirukkural Transport", size: 100 },
+  { mediaSlug: "logo-st-joseph-college", alt: "St. Joseph College", size: 100 },
+  { mediaSlug: "logo-solamalai-college", alt: "Solamalai College", size: 100 },
+  { mediaSlug: "logo-dhanalakshmi-srinivasan", alt: "Dhanalakshmi Srinivasan College", size: 100 },
+  { mediaSlug: "logo-akshaya-college", alt: "Akshaya College", size: 100 },
+  { mediaSlug: "logo-nsr", alt: "NSR", size: 100 },
 ];
 
-const partnersRow2 = [
-  { img: imgLogoSgnl, alt: "SGNL", size: 100, wide: false },
-  { img: imgLogoTwomile, alt: "Twomile Heavy Industries", size: 100, wide: false },
-  { img: imgLogoRapido, alt: "Rapido", w: 187, h: 100, wide: true },
-  { img: imgLogoP2Task, alt: "P2Task", w: 300, h: 83, wide: true },
+const partnersRow2: {
+  mediaSlug: MediaSlug;
+  alt: string;
+  size?: number;
+  w?: number;
+  h?: number;
+  wide: boolean;
+}[] = [
+  { mediaSlug: "logo-sgnl", alt: "SGNL", size: 100, wide: false },
+  { mediaSlug: "logo-twomile-heavy-industries", alt: "Twomile Heavy Industries", size: 100, wide: false },
+  { mediaSlug: "logo-rapido", alt: "Rapido", w: 187, h: 100, wide: true },
+  { mediaSlug: "logo-p2task", alt: "P2Task", w: 300, h: 83, wide: true },
 ];
 
 function PartnersSection() {
@@ -642,12 +628,18 @@ function PartnersSection() {
               whileInView="visible"
               viewport={{ once: true }}
               custom={i}
-              className="bg-white flex items-center justify-center p-7 rounded-[24px]"
+              className="bg-white flex items-center justify-center p-5 sm:p-7 rounded-[24px] min-h-[100px]"
               style={{ boxShadow: "3px 3px 12px 0px rgba(1,90,170,0.25)" }}
               whileHover={{ scale: 1.06, boxShadow: "3px 3px 20px 0px rgba(1,90,170,0.4)" }}
               transition={{ type: "spring", stiffness: 300, damping: 22 }}
             >
-              <img src={p.img} alt={p.alt} style={{ width: p.size, height: p.size, objectFit: "contain" }} />
+              <ResponsivePicture
+                slug={p.mediaSlug}
+                alt={p.alt}
+                className="object-contain"
+                style={{ width: p.size, height: p.size }}
+                profile="logo"
+              />
             </motion.div>
           ))}
         </div>
@@ -667,16 +659,17 @@ function PartnersSection() {
               whileHover={{ scale: 1.05, boxShadow: "3px 3px 20px 0px rgba(1,90,170,0.4)" }}
               transition={{ type: "spring", stiffness: 300, damping: 22 }}
             >
-              <img
-                src={p.img}
+              <ResponsivePicture
+                slug={p.mediaSlug}
                 alt={p.alt}
+                className="object-contain"
                 style={{
-                  width: "w" in p ? p.w : 100,
-                  height: "h" in p ? p.h : 100,
-                  objectFit: "contain",
+                  width: p.w ?? 100,
+                  height: p.h ?? 100,
                   maxWidth: "100%",
                   maxHeight: "100px",
                 }}
+                profile="logo"
               />
             </motion.div>
           ))}

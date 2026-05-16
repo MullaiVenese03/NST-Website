@@ -3,7 +3,9 @@ import { useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { brandMarkUrl } from "../../brandMark";
-import { scrollToTopInstant } from "../utils/scroll";
+import { navigateToContact, scrollToTopInstant } from "../utils/scroll";
+import { prefetchRoute } from "../utils/prefetchRoute";
+import { useLightExperience } from "../utils/performance";
 
 const navItems = [
   { name: "Home", href: "hero", path: "/" },
@@ -11,7 +13,8 @@ const navItems = [
   { name: "Services", href: "services", path: "/services" },
   { name: "Clients", href: "testimonials", path: "/clients" },
   { name: "EdTech", href: "edtech", path: "/edtech" },
-  { name: "NEX", href: "nex", path: "/#nex" },
+  // TEMPORARILY DISABLED - NEX nav link will be re-enabled after project completion
+  // { name: "NEX", href: "nex", path: "/#nex" },
 ];
 
 function NstLogo() {
@@ -30,20 +33,11 @@ function NstLogo() {
 }
 
 export default function TopNav() {
+  const light = useLightExperience();
   const navigate = useNavigate();
   const location = useLocation();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const handleSectionChange = (e: Event) => {
@@ -90,15 +84,7 @@ export default function TopNav() {
 
   const handleContactClick = () => {
     setMobileOpen(false);
-    if (location.pathname === "/") {
-      const el = document.getElementById("contact");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
-      }
-    }
-    scrollToTopInstant();
-    navigate("/#contact");
+    navigateToContact(navigate, location.pathname === "/");
   };
 
   const handleNavClick = (item: (typeof navItems)[0]) => {
@@ -126,9 +112,9 @@ export default function TopNav() {
       <motion.nav
         aria-label="Primary"
         className="fixed top-[18px] left-3 right-3 sm:left-4 sm:right-4 md:left-[50px] md:right-[50px] min-h-[52px] md:min-h-[60px] px-3 sm:px-4 md:px-6 flex items-center justify-between gap-2 z-[100] bg-white/10 backdrop-blur-md border border-white/20 rounded-[20px] shadow-lg overflow-visible"
-        initial={{ y: -20, opacity: 0 }}
+        initial={light ? { opacity: 1, y: 0 } : { y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: light ? 0.2 : 0.5, ease: "easeOut" }}
       >
         <button
           type="button"
@@ -145,47 +131,8 @@ export default function TopNav() {
           </span>
         </button>
 
-        <AnimatePresence>
-          {isScrolled && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="hidden md:flex items-center gap-1 flex-1 justify-center min-w-0 px-2"
-            >
-              {navItems.map((item) => {
-                const isActive = activeSection === item.href;
-                return (
-                  <button
-                    key={item.name}
-                    type="button"
-                    onClick={() => handleNavClick(item)}
-                    className={`relative px-3 xl:px-4 py-2 rounded-full font-bold text-xs transition-all cursor-pointer border-none whitespace-nowrap min-h-[40px] ${
-                      isActive ? "text-white" : "text-gray-700 hover:text-[#015aaa] hover:bg-white/30"
-                    }`}
-                  >
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.div
-                          layoutId="topNavActiveTab"
-                          className="absolute inset-0 bg-[#015aaa] rounded-full shadow-lg shadow-blue-500/30 -z-10"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        />
-                      )}
-                    </AnimatePresence>
-                    {item.name}
-                  </button>
-                );
-              })}
-            </motion.div>
-          )}
-        </AnimatePresence>
 
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-2 shrink-0 ml-auto">
           <motion.button
             type="button"
             className="md:hidden flex items-center justify-center rounded-xl border border-white/30 bg-white/20 text-gray-900 w-11 h-11 min-w-[44px] min-h-[44px] cursor-pointer"
@@ -254,6 +201,8 @@ export default function TopNav() {
                       key={item.name}
                       type="button"
                       onClick={() => handleNavClick(item)}
+                      onMouseEnter={() => item.path.startsWith("/") && !item.path.includes("#") && prefetchRoute(item.path)}
+                      onFocus={() => item.path.startsWith("/") && !item.path.includes("#") && prefetchRoute(item.path)}
                       className={`text-left py-3.5 px-4 rounded-xl font-bold text-base border-none cursor-pointer min-h-[48px] ${
                         isActive ? "bg-[#015aaa] text-white" : "bg-slate-50 text-gray-900 hover:bg-slate-100"
                       }`}

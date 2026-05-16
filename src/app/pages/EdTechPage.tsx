@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, Variants } from "motion/react";
+import { motion, Variants } from "motion/react";
 import {
   Shield, Award, Code2, ShoppingBag, Users, TrendingUp,
   BookOpen, Wrench, Rocket, CheckCircle, Laptop, DollarSign,
@@ -8,7 +8,9 @@ import {
   Lightbulb, Target, Building2, BarChart3
 } from "lucide-react";
 import { ImageWithFallback } from "../components/ImageWithFallback";
+import { ResponsivePicture } from "../components/ResponsivePicture";
 import FooterSection from "../components/FooterSection";
+import ContactForm from "../components/ContactForm";
 import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
@@ -17,6 +19,8 @@ import { SeoHead } from "../../seo/SeoHead";
 import { EDTECH_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 import { brandMarkUrl } from "../../brandMark";
+import { useParallaxY } from "../utils/motionPresets";
+import { useLightExperience } from "../utils/performance";
 
 /* ══════════════════════════════════════════════════════════════════════
    DESIGN TOKENS  (Premium SaaS - Light Mode)
@@ -45,12 +49,6 @@ const fadeUp: Variants = {
 const fadeLeft: Variants  = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
 const fadeRight: Variants = { hidden: { opacity: 0, x:  40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
 
-/* ── Parallax hook ───────────────────────────────────────────────────── */
-function useParallax(ref: React.RefObject<HTMLDivElement | null>, dist = 50) {
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  return useTransform(scrollYProgress, [0, 1], [-dist, dist]);
-}
-
 /* ══════════════════════════════════════════════════════════════════════
    SHARED: NST brand mark
 ══════════════════════════════════════════════════════════════════════ */
@@ -77,12 +75,13 @@ export function NSTLogo() {
 ══════════════════════════════════════════════════════════════════════ */
 function EdTechHero() {
   const imgRef = useRef<HTMLDivElement>(null);
-  const y = useParallax(imgRef, 35);
+  const light = useLightExperience();
+  const y = useParallaxY(imgRef, 35);
 
   const floatingStats = [
     { val: "1,000+", label: "Students Trained" },
     { val: "6+",     label: "Partner Institutions" },
-    { val: "20+",    label: "Live Projects" },
+    { val: "100+",   label: "Live Projects" },
   ];
 
   return (
@@ -124,12 +123,14 @@ function EdTechHero() {
               whileHover={{ scale: 1.04, background: C.secondary }} whileTap={{ scale: 0.96 }}>
               Explore Programs <ArrowRight size={16} />
             </motion.a>
+            {/* TEMPORARILY DISABLED - View Projects CTA will be re-enabled when marketplace launches
             <motion.a href="#ecommerce"
               className="flex items-center gap-2 no-underline"
               style={{ background: "#fff", color: C.primary, border: `2px solid ${C.border}`, borderRadius: "12px", padding: "14px 28px", fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "15px" }}
               whileHover={{ scale: 1.04, borderColor: C.primary, background: C.accent }} whileTap={{ scale: 0.96 }}>
               <Play size={15} fill={C.primary} /> View Projects
             </motion.a>
+            */}
           </motion.div>
 
           {/* Floating stat pills */}
@@ -153,11 +154,13 @@ function EdTechHero() {
         <div ref={imgRef} className="flex-1 min-w-0 relative">
           <motion.div variants={fadeRight} initial="hidden" animate="visible" className="relative">
             <motion.div style={{ y, boxShadow: "0 24px 64px rgba(10,102,194,0.15)", borderRadius: "20px" }} className="relative rounded-[20px] overflow-hidden">
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1695067231719-a700763a2541?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHVkZW50JTIwbGVhcm5pbmclMjBsYXB0b3AlMjBjeWJlcnNlY3VyaXR5JTIwZWR1Y2F0aW9ufGVufDF8fHx8MTc3Nzc0MjIwOHww&ixlib=rb-4.1.0&q=80&w=1080"
+              <ResponsivePicture
+                slug="edtech-hero"
                 alt="Students learning cybersecurity"
                 className="w-full h-auto object-cover"
                 style={{ maxHeight: "500px" }}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority={!light}
               />
               {/* Overlay gradient */}
               <div className="absolute inset-0"
@@ -176,10 +179,10 @@ function EdTechHero() {
               </div>
               <div>
                 <AnimatedNumber
-                  value="50+"
+                  value="1000+"
                   style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "18px", color: C.heading, margin: 0 }}
                 />
-                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "12px", color: C.muted, margin: 0 }}>Certifications Issued</p>
+                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "12px", color: C.muted, margin: 0 }}>Certificates Issued</p>
               </div>
             </motion.div>
 
@@ -259,11 +262,6 @@ function EdTechServicesSection() {
                   <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "14px", color: C.body, lineHeight: 1.65, margin: 0 }}>
                     {svc.desc}
                   </p>
-                </div>
-                {/* Learn more link */}
-                <div className="flex items-center gap-1 mt-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                  style={{ color: C.primary, fontFamily: 'var(--font-family)', fontWeight: 600, fontSize: "13px" }}>
-                  Learn more <ChevronRight size={14} />
                 </div>
               </motion.div>
             );
@@ -430,11 +428,13 @@ export function FeaturedProjectsSection() {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
-   4. E-COMMERCE SHOUTOUT  -  Gateway section
+   4. E-COMMERCE SHOUTOUT  -  Flagship Project card (marketplace gateway)
+   TEMPORARILY DISABLED - preserved for reuse; re-enable with <ECommerceShoutout />
 ══════════════════════════════════════════════════════════════════════ */
 function ECommerceShoutout() {
   const imgRef = useRef<HTMLDivElement>(null);
-  const y = useParallax(imgRef, 30);
+  const light = useLightExperience();
+  const y = useParallaxY(imgRef, 30);
 
   return (
     <section id="ecommerce" className="relative w-full py-4 px-4 sm:px-6 lg:px-8">
@@ -586,52 +586,34 @@ function LearningPathSection() {
         </motion.div>
 
         {/* Steps */}
-        <div className="flex flex-col lg:flex-row items-start gap-0 lg:gap-0 relative">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
           {journeySteps.map((step, i) => {
             const Icon = step.icon;
             return (
-              <div key={i} className="flex-1 flex flex-col lg:flex-row items-center">
-                {/* Step card */}
-                <motion.div
-                  variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i}
-                  className="group flex flex-col items-center text-center gap-4 p-8 rounded-[16px] w-full lg:w-auto flex-1 transition-all duration-300 cursor-default"
-                  style={{ background: C.card, border: `1px solid ${C.border}` }}
-                  whileHover={{ y: -6, boxShadow: `0 20px 48px rgba(10,102,194,0.1)`, borderColor: step.color }}>
-
-                  {/* Step number */}
-                  <span style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "12px", letterSpacing: "2px", color: step.color }}>
-                    STEP {step.step}
-                  </span>
-
-                  {/* Icon */}
-                  <div className="rounded-[16px] p-4 transition-transform duration-300 group-hover:scale-110"
-                    style={{ background: step.bg }}>
-                    <Icon size={30} color={step.color} strokeWidth={2} />
-                  </div>
-
-                  {/* Text */}
-                  <h3 style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "22px", color: C.heading, margin: 0 }}>
-                    {step.title}
-                  </h3>
-                  <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "14px", color: C.body, lineHeight: 1.65, margin: 0, maxWidth: "220px" }}>
-                    {step.desc}
-                  </p>
-                </motion.div>
-
-                {/* Connector arrow (not after last) */}
-                {i < journeySteps.length - 1 && (
-                  <div className="hidden lg:flex items-center justify-center px-3 flex-shrink-0">
-                    <motion.div
-                      initial={{ opacity: 0, scaleX: 0 }}
-                      whileInView={{ opacity: 1, scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.15 + 0.3 }}
-                      style={{ transformOrigin: "left" }}>
-                      <ChevronRight size={24} color={C.muted} />
-                    </motion.div>
-                  </div>
-                )}
-              </div>
+              <motion.div
+                key={i}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                custom={i}
+                className="group flex h-full flex-col items-center text-center gap-4 p-6 sm:p-8 rounded-[16px] transition-all duration-300 cursor-default min-h-[240px] sm:min-h-[260px]"
+                style={{ background: C.card, border: `1px solid ${C.border}` }}
+                whileHover={{ y: -6, boxShadow: `0 20px 48px rgba(10,102,194,0.1)`, borderColor: step.color }}
+              >
+                <span style={{ fontFamily: "var(--font-family)", fontWeight: 800, fontSize: "12px", letterSpacing: "2px", color: step.color }}>
+                  STEP {step.step}
+                </span>
+                <div className="rounded-[16px] p-4 transition-transform duration-300 group-hover:scale-110 shrink-0" style={{ background: step.bg }}>
+                  <Icon size={30} color={step.color} strokeWidth={2} />
+                </div>
+                <h3 className="m-0 text-lg sm:text-xl" style={{ fontFamily: "var(--font-family)", fontWeight: 800, color: C.heading }}>
+                  {step.title}
+                </h3>
+                <p className="m-0 mt-auto text-sm leading-relaxed max-w-[240px]" style={{ fontFamily: "var(--font-family)", fontWeight: 400, color: C.body }}>
+                  {step.desc}
+                </p>
+              </motion.div>
             );
           })}
         </div>
@@ -710,7 +692,7 @@ function StatsStrip() {
   const stats = [
     { val: "1,000+", label: "Students Trained",        icon: Users },
     { val: "6+",     label: "Partner Institutions",     icon: Building2 },
-    { val: "20+",    label: "Projects Deployed",         icon: Rocket },
+    { val: "100+",   label: "Projects Deployed",         icon: Rocket },
     { val: "4.9★",  label: "Average Rating",            icon: Star },
   ];
   return (
@@ -756,7 +738,8 @@ function CTASection() {
           style={{ background: `linear-gradient(135deg, ${C.bg} 0%, ${C.accentMid} 100%)`, border: `2px solid ${C.border}` }}>
 
           {/* Glow blob */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] blur-3xl pointer-events-none"
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-[#0A66C2]/10 pointer-events-none"
+            aria-hidden
             style={{ background: `radial-gradient(ellipse, rgba(10,102,194,0.15) 0%, transparent 70%)` }} />
 
           {/* Icon */}
@@ -778,11 +761,15 @@ function CTASection() {
           </div>
 
           <div className="flex flex-wrap gap-4 items-center justify-center relative z-10">
-            <motion.a href="/edtech#programs"
+            <motion.a href="#contact-form"
               className="flex items-center gap-2 no-underline rounded-[14px] px-8 py-4"
               style={{ background: C.primary, color: "#fff", fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "16px", boxShadow: `0 8px 32px rgba(10,102,194,0.35)` }}
-              whileHover={{ scale: 1.05, background: C.secondary }} whileTap={{ scale: 0.96 }}>
-              Join EdTech Platform <ArrowRight size={16} />
+              whileHover={{ scale: 1.05, background: C.secondary }} whileTap={{ scale: 0.96 }}
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}>
+              Contact Form <ArrowRight size={16} />
             </motion.a>
             <motion.a href="/clients"
               className="flex items-center gap-2 no-underline rounded-[14px] px-8 py-4"
@@ -831,10 +818,30 @@ export default function EdTechPage() {
         <EdTechHero />
         <StatsStrip />
         <EdTechServicesSection />
-        <ECommerceShoutout />
+        {/* TEMPORARILY DISABLED - Marketplace Flagship Project card; reuse ECommerceShoutout when ready */}
+        {/* <ECommerceShoutout /> */}
         <LearningPathSection />
         <PlatformFeaturesSection />
+        {/* TEMPORARILY DISABLED - EdTech Marketplace projects section will be re-enabled after project completion */}
+        {/* <FeaturedProjectsSection /> */}
         <CTASection />
+        <section className="w-full py-16 md:py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#FFFFFF" }}>
+          <div className="max-w-[1320px] mx-auto">
+            <ContactForm
+              id="contact-form"
+              variant="edtech"
+              title="Get in touch about EdTech"
+              subtitle="Interested in training programs, institutional partnerships, or campus certifications? Send us a message."
+              serviceOptions={[
+                "Cybersecurity Training",
+                "Hands-on Labs",
+                "Certifications",
+                "Institutional Partnership",
+                "Other",
+              ]}
+            />
+          </div>
+        </section>
         <FooterSection />
         <ScrollToTop />
       </motion.div>

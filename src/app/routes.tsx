@@ -1,7 +1,11 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { createBrowserRouter, Outlet, useLocation } from "react-router";
-import BottomNav from "./components/BottomNav";
 import { GlobalStructuredData } from "../seo/GlobalStructuredData";
+import { SkipToContent } from "./components/SkipToContent";
+import { DeferredCompanyFont } from "./components/DeferredCompanyFont";
+import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
+
+const BottomNav = lazy(() => import("./components/BottomNav"));
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
@@ -24,14 +28,31 @@ function RootLayout() {
   const { pathname } = useLocation();
   const hideBottomNav = pathname === "/privacy-policy" || pathname === "/terms-and-conditions";
 
+  useEffect(() => {
+    const onPageShow = (event: PageTransitionEvent) => {
+      if (!event.persisted) return;
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+    window.addEventListener("pageshow", onPageShow);
+    return () => window.removeEventListener("pageshow", onPageShow);
+  }, []);
+
   return (
-    <>
+    <div className="overflow-x-clip w-full max-w-[100vw] min-h-screen">
+      <ScrollToTopOnNavigate />
+      <SkipToContent />
+      <DeferredCompanyFont />
       <GlobalStructuredData />
       <Suspense fallback={<PageFallback />}>
         <Outlet />
       </Suspense>
-      {!hideBottomNav ? <BottomNav /> : null}
-    </>
+      {!hideBottomNav ? (
+        <Suspense fallback={null}>
+          <BottomNav />
+        </Suspense>
+      ) : null}
+    </div>
   );
 }
 

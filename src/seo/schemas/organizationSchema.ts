@@ -6,7 +6,7 @@ export function organizationSchema() {
     "@type": "Organization",
     name: ORG_NAME,
     url: SITE_ORIGIN,
-    logo: `${SITE_ORIGIN}/og-image.png`,
+    logo: `${SITE_ORIGIN}/og-image.webp`,
     image: defaultOgImageUrl(),
     sameAs: [...SOCIAL_PROFILES],
     description: BUSINESS_DESCRIPTION,

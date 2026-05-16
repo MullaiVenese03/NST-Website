@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import { scrollToTopInstant } from "../utils/scroll";
+import { navigateToContact, scrollToSection, scrollToTopInstant } from "../utils/scroll";
 
 const navItems = [
   { name: "Home", href: "hero", path: "/" },
@@ -9,7 +9,8 @@ const navItems = [
   { name: "Services", href: "services", path: "/services" },
   { name: "Testimonials", href: "testimonials", path: "/clients" },
   { name: "EdTech", href: "edtech", path: "/edtech" },
-  { name: "NEX", href: "nex", path: "/#nex" },
+  // TEMPORARILY DISABLED - NEX nav link will be re-enabled after project completion
+  // { name: "NEX", href: "nex", path: "/#nex" },
 ];
 
 export default function BottomNav() {
@@ -41,16 +42,18 @@ export default function BottomNav() {
   }, [location.pathname, location.hash]);
 
   const handleClick = (item: (typeof navItems)[0]) => {
+    if (item.href === "contact") {
+      navigateToContact(navigate, location.pathname === "/");
+      return;
+    }
+
     if (location.pathname === "/" && (item.path === "/" || item.path.startsWith("/#"))) {
       const sectionId = item.path === "/" ? item.href : item.path.split("#")[1];
 
       if (item.path === "/") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        scrollToSection(sectionId);
       }
       return;
     }

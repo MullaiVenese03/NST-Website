@@ -18,6 +18,7 @@ import {
   ServiceBenefitsSection,
   ServiceProcessSection,
   ServiceCtaSection,
+  ServiceContactFormSection,
 } from "../components/ServiceDetailSections";
 
 const VALID: ServiceSlug[] = ["web-development", "cybersecurity", "ui-ux-design", "edtech-training"];
@@ -93,6 +94,7 @@ export default function ServiceDetailPage() {
         <ServiceBenefitsSection content={content} />
         <ServiceProcessSection content={content} />
         <ServiceCtaSection content={content} />
+        <ServiceContactFormSection key={slug} serviceName={meta.serviceType} />
         <ServicesFaqSection
           title={`${meta.serviceType} - FAQ`}
           subtitle="Common questions about this service area and how we work with clients."

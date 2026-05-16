@@ -1,9 +1,12 @@
 import { useRef } from "react";
 import { Link } from "react-router";
-import { motion, useScroll, useTransform, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
+import { useParallaxY } from "../utils/motionPresets";
 import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
 import { Breadcrumbs } from "./Breadcrumbs";
 import type { ServiceDetailContent } from "../data/serviceDetailContent";
+import { ResponsivePicture } from "./ResponsivePicture";
+import ContactForm from "./ContactForm";
 import type { PageSeo } from "../../seo/pageMeta";
 import AnimatedNumber from "./AnimatedNumber";
 
@@ -21,11 +24,6 @@ const fadeRight: Variants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-function useParallax(ref: React.RefObject<HTMLDivElement | null>, dist = 45) {
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  return useTransform(scrollYProgress, [0, 1], [-dist, dist]);
-}
-
 type ServiceHeroProps = {
   meta: PageSeo & { serviceType: string; summary: string };
   content: ServiceDetailContent;
@@ -33,7 +31,7 @@ type ServiceHeroProps = {
 
 export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
   const imgRef = useRef<HTMLDivElement>(null);
-  const y = useParallax(imgRef, 35);
+  const y = useParallaxY(imgRef, 35);
 
   return (
     <section className="relative w-full bg-white overflow-hidden pt-28 pb-16 md:pb-20 px-8 md:px-14 lg:px-20">
@@ -137,25 +135,29 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
 
           <motion.div
             ref={imgRef}
-            className="flex-1 min-w-0 w-full max-w-lg lg:max-w-none relative flex items-center justify-center"
+            className="flex-1 min-w-0 w-full lg:max-w-[520px] relative flex items-center justify-center"
             variants={fadeRight}
             initial="hidden"
             animate="visible"
           >
             <motion.div
-              className="relative w-full rounded-3xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white p-8 md:p-10 shadow-xl shadow-slate-200/50"
+              className="relative w-full rounded-3xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 md:p-10 shadow-xl shadow-slate-200/50 overflow-hidden"
               style={{ y }}
             >
-              <div
+              <motion.div
                 className="absolute inset-0 rounded-3xl opacity-30 pointer-events-none"
                 style={{ background: "radial-gradient(circle at 30% 20%, #015AAA 0%, transparent 55%)" }}
                 aria-hidden
               />
-              <motion.img
-                src={content.heroImage}
-                alt={content.heroImageAlt}
-                className="relative z-10 w-full h-auto max-h-[340px] object-contain mx-auto"
-              />
+              <div className="relative z-10 flex items-center justify-center min-h-[220px] sm:min-h-[280px] max-h-[360px] w-full overflow-hidden">
+                <ResponsivePicture
+                  slug={content.heroMedia}
+                  alt={content.heroImageAlt}
+                  className="w-full h-auto max-w-full max-h-[280px] sm:max-h-[320px] object-contain object-center mx-auto"
+                  sizes="(max-width: 1024px) 90vw, 480px"
+                  profile="icon"
+                />
+              </div>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -216,10 +218,11 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
               className="group relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden h-full"
             >
               <motion.div className="p-6 pb-2 flex items-center justify-center h-36 bg-gradient-to-b from-[#015AAA]/5 to-transparent">
-                <img
-                  src={item.image}
+                <ResponsivePicture
+                  slug={item.mediaSlug}
                   alt=""
                   className="max-h-[100px] w-auto object-contain transition-transform duration-500 group-hover:scale-110"
+                  profile="icon"
                 />
               </motion.div>
               <div className="px-6 pb-6 flex flex-col flex-1">
@@ -388,6 +391,25 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
   );
 }
 
+export function ServiceContactFormSection({
+  serviceName,
+}: {
+  serviceName: string;
+}) {
+  return (
+    <section className="w-full py-16 md:py-20 px-8 md:px-14 lg:px-20 bg-white border-t border-slate-100">
+      <div className="max-w-[1440px] mx-auto">
+        <ContactForm
+          id="service-contact-form"
+          title="Request a consultation"
+          subtitle="Share your requirements and our team will follow up with a tailored proposal."
+          defaultService={serviceName}
+        />
+      </div>
+    </section>
+  );
+}
+
 export function ServiceCtaSection({ content }: { content: ServiceDetailContent }) {
   return (
     <section className="w-full py-16 md:py-20 px-8 md:px-14 lg:px-20">
@@ -407,7 +429,8 @@ export function ServiceCtaSection({ content }: { content: ServiceDetailContent }
         />
         <div className="absolute inset-0 opacity-20 pointer-events-none" aria-hidden>
           <motion.div
-            className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/30 blur-3xl"
+            className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-white/25"
+            aria-hidden
             animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.35, 0.2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -426,13 +449,13 @@ export function ServiceCtaSection({ content }: { content: ServiceDetailContent }
               <Mail className="w-5 h-5" aria-hidden />
               Email us
             </a>
-            <Link
-              to="/#contact"
+            <a
+              href="#service-contact-form"
               className="inline-flex items-center gap-2 rounded-xl border-2 border-white/40 text-white font-semibold px-7 py-3.5 no-underline hover:bg-white/10 transition-colors"
             >
               Contact form
               <ArrowRight className="w-4 h-4" aria-hidden />
-            </Link>
+            </a>
           </div>
         </div>
       </motion.div>

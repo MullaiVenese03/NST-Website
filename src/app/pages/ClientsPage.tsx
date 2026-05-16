@@ -12,24 +12,8 @@ import { CLIENTS_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 
 /* â”€â”€ Image assets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-import imgImage1    from "../../assets/testimonial-st-joseph-1.png";
-import imgCard1     from "../../assets/testimonial-cppm-college.png";
-import imgCard2     from "../../assets/testimonial-st-joseph-2.png";
-import img49        from "../../assets/testimonial-st-joseph-mou.png";
-import img51        from "../../assets/testimonial-tn-police.png";
-import img64432110  from "../../assets/testimonial-dhanalakshmi-mou.png";
-
-/* -- Partner Logos -- */
-import logoThirukkural from "../../assets/logo-thirukkural-transport.png";
-import logoStJoseph    from "../../assets/logo-st-joseph-college.png";
-import logoSolamalai   from "../../assets/logo-solamalai-college.png";
-import logoDhanalakshmi from "../../assets/logo-dhanalakshmi-srinivasan.png";
-import logoAkshaya     from "../../assets/logo-akshaya-college.png";
-import logoNsr         from "../../assets/logo-nsr.png";
-import logoSgnl        from "../../assets/logo-sgnl.png";
-import logoTwomile     from "../../assets/logo-twomile-heavy-industries.png";
-import logoRapido      from "../../assets/logo-rapido.png";
-import logoP2Task      from "../../assets/logo-p2task.png";
+import { ResponsivePicture } from "../components/ResponsivePicture";
+import type { MediaSlug } from "../utils/media";
 
 /* â”€â”€ Client data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 type Category = "All Clients" | "Academic" | "Enterprises";
@@ -37,57 +21,57 @@ type Category = "All Clients" | "Academic" | "Enterprises";
 const allClients = [
   {
     id: 1,
-    img: imgImage1,
+    mediaSlug: "testimonial-st-joseph-1" as MediaSlug,
     institution: "St. Joseph College for Women",
     category: "Academic" as Category,
     label: "Cybersecurity Awareness Program",
     desc: "Happy to conduct a cybersecurity awareness session for students, where we discussed common cyber threats, online safety habits, and simple steps everyone can follow to stay secure in their daily digital life.",
-    participants: "250+ Students",
+    participants: "180 Students",
   },
   {
     id: 2,
-    img: imgCard1,
+    mediaSlug: "testimonial-cppm-college" as MediaSlug,
     institution: "CPPM College, Hosur",
     category: "Academic" as Category,
     label: "Cybersecurity Awareness Program",
     desc: "Delivered an awareness program focused on digital safety, cyber hygiene, and common mistakes people make online. The session helped students understand how small actions can prevent bigger cyber problems.",
-    participants: "250+ Students",
+    participants: "120 Students",
   },
   {
     id: 3,
-    img: imgCard2,
+    mediaSlug: "testimonial-st-joseph-2" as MediaSlug,
     institution: "St. Joseph College for Women",
     category: "Academic" as Category,
-    label: "Cybersecurity Awareness Program",
+    label: "Cybersecurity Seminar",
     desc: "Presented a seminar covering the basics of cybersecurity, real-world cyber attack examples, and career paths in the field. The goal was to make cybersecurity easy to understand and relatable for students.",
-    participants: "250+ Students",
+    participants: "200 Students",
   },
   {
     id: 4,
-    img: img49,
+    mediaSlug: "testimonial-st-joseph-mou" as MediaSlug,
     institution: "St. Joseph College for Women",
     category: "Academic" as Category,
-    label: "Cybersecurity Awareness Program",
+    label: "MoU Signing",
     desc: "Proud to sign a Memorandum of Understanding to support cybersecurity training, hands-on learning, and collaboration between industry and students for future skill development.",
-    participants: "250+ Students",
+    participants: "MoU Partnership",
   },
   {
     id: 5,
-    img: img51,
+    mediaSlug: "testimonial-tn-police" as MediaSlug,
     institution: "Tamil Nadu Police, Hosur",
     category: "Enterprises" as Category,
-    label: "Cybersecurity Awareness Program",
+    label: "Law Enforcement Training",
     desc: "Conducted a cybersecurity training session for law enforcement personnel, focusing on cybercrime awareness, basic digital investigation concepts, and understanding online threats more effectively.",
-    participants: "250+ Students",
+    participants: "45 Officers",
   },
   {
     id: 6,
-    img: img64432110,
+    mediaSlug: "testimonial-dhanalakshmi-mou" as MediaSlug,
     institution: "Dhanalakshmi Srinivasan College",
     category: "Academic" as Category,
-    label: "Cybersecurity Awareness Program",
+    label: "MoU & Academic Collaboration",
     desc: "Happy to sign an MoU with Dhanalakshmi Srinivasan College, Perambalur, to promote cybersecurity awareness, practical learning, and industry-focused skill development for students.",
-    participants: "250+ Students",
+    participants: "MoU Partnership",
   },
 ];
 
@@ -210,11 +194,13 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
     >
       {/* Image area */}
-      <div className="relative overflow-hidden rounded-t-[8px]" style={{ height: "220px" }}>
-        <motion.img
-          src={client.img}
+      <div className="relative overflow-hidden rounded-t-[8px] bg-slate-100 aspect-[16/10] max-h-[260px]">
+        <ResponsivePicture
+          slug={client.mediaSlug}
           alt={`${client.institution} - ${client.label}`}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover object-[center_25%]"
+          profile="testimonial"
+          sizes="(max-width: 768px) 100vw, 400px"
         />
 
         {/* Program label at bottom of image */}
@@ -229,10 +215,10 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
       </div>
 
       {/* Card body */}
-      <div className="flex flex-col gap-3 p-5 flex-1">
+      <div className="flex flex-col gap-3 p-5 sm:p-6 flex-1">
         {/* Institution + verified */}
-        <div className="flex items-center gap-2">
-          <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", letterSpacing: "0.32px", color: "#000", lineHeight: 1 }}>
+        <div className="flex items-center gap-2 flex-wrap min-w-0">
+          <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", letterSpacing: "0.32px", color: "#000", lineHeight: 1.2 }}>
             {client.institution}
           </span>
           <WavyCheckIcon />
@@ -323,17 +309,17 @@ function ClientsGrid({ activeFilter }: { activeFilter: Category }) {
    PARTNERS SECTION â€” "Partnering with Leaders Worldwide"
 â•â•â•â•â••â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function PartnersSection() {
-  const partners = [
-    { logo: logoThirukkural, alt: "Thirukkural Transport" },
-    { logo: logoStJoseph,    alt: "St. Joseph College" },
-    { logo: logoSolamalai,   alt: "Solamalai College" },
-    { logo: logoDhanalakshmi, alt: "Dhanalakshmi Srinivasan College" },
-    { logo: logoAkshaya,     alt: "Akshaya College" },
-    { logo: logoNsr,         alt: "NSR" },
-    { logo: logoSgnl,        alt: "SGNL" },
-    { logo: logoTwomile,     alt: "Twomile Heavy Industries" },
-    { logo: logoRapido,      alt: "Rapido" },
-    { logo: logoP2Task,      alt: "P2Task" },
+  const partners: { mediaSlug: MediaSlug; alt: string }[] = [
+    { mediaSlug: "logo-thirukkural-transport", alt: "Thirukkural Transport" },
+    { mediaSlug: "logo-st-joseph-college", alt: "St. Joseph College" },
+    { mediaSlug: "logo-solamalai-college", alt: "Solamalai College" },
+    { mediaSlug: "logo-dhanalakshmi-srinivasan", alt: "Dhanalakshmi Srinivasan College" },
+    { mediaSlug: "logo-akshaya-college", alt: "Akshaya College" },
+    { mediaSlug: "logo-nsr", alt: "NSR" },
+    { mediaSlug: "logo-sgnl", alt: "SGNL" },
+    { mediaSlug: "logo-twomile-heavy-industries", alt: "Twomile Heavy Industries" },
+    { mediaSlug: "logo-rapido", alt: "Rapido" },
+    { mediaSlug: "logo-p2task", alt: "P2Task" },
   ];
 
   return (
@@ -376,10 +362,11 @@ function PartnersSection() {
               style={{ boxShadow: "0 10px 30px -10px rgba(0,0,0,0.08)" }}
               whileHover={{ y: -5, boxShadow: "0 20px 40px -12px rgba(1,90,170,0.12)" }}
             >
-              <img
-                src={partner.logo}
+              <ResponsivePicture
+                slug={partner.mediaSlug}
                 alt={partner.alt}
                 className="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all duration-500 opacity-80 hover:opacity-100"
+                profile="logo"
               />
             </motion.div>
           ))}
@@ -394,10 +381,10 @@ function PartnersSection() {
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function StatsBanner() {
   const stats = [
-    { value: "6+",   label: "Partner Institutions" },
-    { value: "1000+", label: "Students Trained" },
-    { value: "10+",  label: "Programs Delivered" },
-    { value: "3",    label: "Sectors Served" },
+    { value: "10+", label: "Partner Institutions" },
+    { value: "1,000+", label: "Learners Reached" },
+    { value: "50+", label: "Programs Delivered" },
+    { value: "3", label: "Sectors Served" },
   ];
 
   return (

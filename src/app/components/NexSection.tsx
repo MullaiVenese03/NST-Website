@@ -1,16 +1,16 @@
-import { motion, Variants } from "motion/react";
+import { motion } from "motion/react";
+import { fadeUpVariants, VIEWPORT_ONCE } from "../utils/motionPresets";
+import { useLightExperience } from "../utils/performance";
 import svgPaths from "../../imports/NexSection/svg-rp6a4ek3k8";
 
-import imgIcon1 from "../../assets/Icons/step-1.png";
-import imgIcon2 from "../../assets/Icons/step-2.png";
-import imgIcon3 from "../../assets/Icons/step-3.png";
-import imgIcon4 from "../../assets/Icons/step-4.png";
+import { ResponsivePicture } from "./ResponsivePicture";
+import type { MediaSlug } from "../utils/media";
 
-const features = [
-  { icon: imgIcon1, w: 52, h: 54, label1: "Powered", label2: "Threat Detection" },
-  { icon: imgIcon2, w: 53, h: 54, label1: "Autonomous", label2: "Response" },
-  { icon: imgIcon3, w: 54, h: 54, label1: "Unified Security", label2: "Dashboard" },
-  { icon: imgIcon4, w: 63, h: 54, label1: "Built for the", label2: "Enterprise" },
+const features: { mediaSlug: MediaSlug; w: number; h: number; label1: string; label2: string }[] = [
+  { mediaSlug: "Icons--step-1", w: 52, h: 54, label1: "Powered", label2: "Threat Detection" },
+  { mediaSlug: "Icons--step-2", w: 53, h: 54, label1: "Autonomous", label2: "Response" },
+  { mediaSlug: "Icons--step-3", w: 54, h: 54, label1: "Unified Security", label2: "Dashboard" },
+  { mediaSlug: "Icons--step-4", w: 63, h: 54, label1: "Built for the", label2: "Enterprise" },
 ];
 
 function NexLogo() {
@@ -38,16 +38,10 @@ function NexLogo() {
   );
 }
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.1, ease: "easeOut" },
-  }),
-};
-
 export default function NexSection() {
+  const light = useLightExperience();
+  const fadeUp = fadeUpVariants(light, 0.08);
+
   return (
     <section className="w-full bg-white py-12 px-6 md:px-10 lg:px-16 overflow-hidden">
       <div
@@ -68,7 +62,7 @@ export default function NexSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             style={{
               fontFamily: 'var(--font-family)',
               fontWeight: 700,
@@ -88,7 +82,7 @@ export default function NexSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             style={{
               fontFamily: 'var(--font-family)',
               fontWeight: 700,
@@ -111,7 +105,7 @@ export default function NexSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             style={{
               fontFamily: 'var(--font-family)',
               fontWeight: 400,
@@ -134,7 +128,7 @@ export default function NexSection() {
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={VIEWPORT_ONCE}
             className="flex items-start"
           >
             {features.map((f, i) => (
@@ -147,10 +141,13 @@ export default function NexSection() {
                   />
                 )}
                 <div className="h-[54px] flex items-center justify-center">
-                  <img
-                    src={f.icon}
+                  <ResponsivePicture
+                    slug={f.mediaSlug}
                     alt={f.label1}
-                    style={{ width: f.w, height: f.h, objectFit: "contain" }}
+                    className="object-contain"
+                    style={{ width: f.w, height: f.h }}
+                    profile="icon"
+                    sizes="80px"
                   />
                 </div>
                 <p
@@ -183,10 +180,10 @@ export default function NexSection() {
         {/* Right â€“ NEX Logo */}
         <motion.div
           className="flex-shrink-0 flex flex-col items-center justify-center gap-6"
-          initial={{ opacity: 0, scale: 0.92 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.65, ease: "easeOut" }}
+          initial={{ opacity: 0, y: light ? 0 : 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           style={{ minWidth: "min(380px, 90vw)" }}
         >
           <NexLogo />

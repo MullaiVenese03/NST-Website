@@ -1,0 +1,33 @@
+/* Brand display face - subset WOFF2, idle-loaded on desktop (see DeferredCompanyFont). */
+:root {
+  --font-company: "Overcame Demo", "Overcame Demo Fallback", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+/* Metrics tuned to reduce CLS vs system-ui while Overcame loads. */
+@font-face {
+  font-family: "Overcame Demo Fallback";
+  src: local("Segoe UI"), local("system-ui");
+  size-adjust: 98%;
+  ascent-override: 92%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Overcame Demo";
+  src: url("../assets/fonts/OvercameDemoRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007F;
+}
+
+@font-face {
+  font-family: "Overcame Demo";
+  src: url("../assets/fonts/OvercameDemoBold.woff2") format("woff2");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020-007F;
+}
