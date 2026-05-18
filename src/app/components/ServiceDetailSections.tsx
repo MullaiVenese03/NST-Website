@@ -67,7 +67,7 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
               animate="visible"
               custom={1}
               className="text-[clamp(2rem,4.5vw,3.5rem)] font-bold text-slate-900 leading-[1.08] m-0 mb-4"
-              style={{ fontFamily: "var(--font-family)" }}
+              style={{ }}
             >
               {content.heroHeadline}
               <br />
@@ -191,7 +191,7 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
           viewport={{ once: true }}
           custom={1}
           className="text-2xl md:text-4xl font-bold text-slate-900 m-0 mb-3 leading-tight"
-          style={{ fontFamily: "var(--font-family)" }}
+          style={{ }}
         >
           {content.offeringsTitle}
         </motion.h2>
@@ -252,7 +252,7 @@ export function ServiceCapabilitiesSection({ content }: { content: ServiceDetail
           viewport={{ once: true }}
         >
           <p className="text-[#015AAA] text-sm md:text-base font-bold uppercase tracking-wider m-0 mb-2">Capabilities</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 m-0 mb-4 leading-tight" style={{ fontFamily: "var(--font-family)" }}>
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 m-0 mb-4 leading-tight" style={{ }}>
             {content.capabilitiesTitle}
           </h2>
           <p className="text-slate-600 text-base leading-relaxed m-0">{content.tagline}</p>
@@ -303,7 +303,7 @@ export function ServiceBenefitsSection({ content }: { content: ServiceDetailCont
           viewport={{ once: true }}
           custom={1}
           className="text-2xl md:text-3xl font-bold text-slate-900 m-0 mb-10 text-center"
-          style={{ fontFamily: "var(--font-family)" }}
+          style={{ }}
         >
           Built for outcomes, not checkboxes
         </motion.h2>
@@ -354,7 +354,7 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
           viewport={{ once: true }}
           custom={1}
           className="text-2xl md:text-4xl font-bold text-slate-900 m-0 mb-3"
-          style={{ fontFamily: "var(--font-family)" }}
+          style={{ }}
         >
           {content.processTitle}
         </motion.h2>

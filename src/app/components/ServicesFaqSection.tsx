@@ -35,7 +35,7 @@ export function ServicesFaqSection({
         <h2
           id={headingId}
           className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 m-0 mb-2 leading-tight"
-          style={{ fontFamily: "var(--font-family)" }}
+          style={{ }}
         >
           {title}
         </h2>

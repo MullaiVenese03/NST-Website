@@ -43,7 +43,6 @@ export default function EdTechSection() {
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
             style={{
-              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "20px",
               letterSpacing: "1.2px",
@@ -63,7 +62,6 @@ export default function EdTechSection() {
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
             style={{
-              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(28px, 3vw, 36px)",
               letterSpacing: "0.64px",
@@ -84,7 +82,6 @@ export default function EdTechSection() {
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
             style={{
-              fontFamily: 'var(--font-family)',
               fontWeight: 400,
               fontSize: "14px",
               letterSpacing: "2px",
@@ -112,7 +109,6 @@ export default function EdTechSection() {
                 <CheckIcon />
                 <span
                   style={{
-                    fontFamily: 'var(--font-family)',
                     fontWeight: 600,
                     fontSize: "16px",
                     letterSpacing: "0.32px",
@@ -144,7 +140,6 @@ export default function EdTechSection() {
           >
             <span
               style={{
-                fontFamily: 'var(--font-family)',
                 fontWeight: 700,
                 fontSize: "13px",
                 letterSpacing: "0.96px",

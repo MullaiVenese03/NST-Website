@@ -64,7 +64,6 @@ export default function NexSection() {
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
             style={{
-              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "20px",
               letterSpacing: "1.2px",
@@ -84,7 +83,6 @@ export default function NexSection() {
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
             style={{
-              fontFamily: 'var(--font-family)',
               fontWeight: 700,
               fontSize: "clamp(26px, 3vw, 32px)",
               letterSpacing: "0.64px",
@@ -107,7 +105,6 @@ export default function NexSection() {
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
             style={{
-              fontFamily: 'var(--font-family)',
               fontWeight: 400,
               fontSize: "14px",
               letterSpacing: "2px",
@@ -152,7 +149,6 @@ export default function NexSection() {
                 </div>
                 <p
                   style={{
-                    fontFamily: 'var(--font-family)',
                     fontWeight: 700,
                     fontSize: "13.5px",
                     letterSpacing: "0.27px",
@@ -190,7 +186,6 @@ export default function NexSection() {
           {/* Tagline */}
           <p
             style={{
-              fontFamily: 'var(--font-family)',
               fontWeight: 300,
               fontSize: "18px",
               letterSpacing: "0.36px",

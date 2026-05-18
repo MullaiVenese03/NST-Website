@@ -108,14 +108,14 @@ export default function ContactForm({
         <div className="mb-8 text-center md:text-left">
           <p
             className="text-sm font-bold uppercase tracking-wider m-0 mb-2"
-            style={{ color: accent, fontFamily: "var(--font-family)" }}
+            style={{ color: accent }}
           >
             Contact
           </p>
           <h2
             id={`${id}-heading`}
             className="text-2xl md:text-3xl font-bold text-slate-900 m-0 mb-2"
-            style={{ fontFamily: "var(--font-family)" }}
+            style={{ }}
           >
             {title}
           </h2>

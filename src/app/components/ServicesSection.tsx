@@ -118,7 +118,6 @@ export default function ServicesSection() {
             viewport={VIEWPORT_ONCE}
               transition={{ duration: 0.5 }}
               style={{
-                fontFamily: "var(--font-family)",
                 fontWeight: 700,
                 fontSize: "20px",
                 letterSpacing: "1.2px",
@@ -136,7 +135,6 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.08 }}
               style={{
-                fontFamily: "var(--font-family)",
                 fontWeight: 700,
                 fontSize: "clamp(26px, 3vw, 32px)",
                 letterSpacing: "0.64px",
@@ -154,7 +152,6 @@ export default function ServicesSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.55, delay: 0.14 }}
               style={{
-                fontFamily: "var(--font-family)",
                 fontWeight: 500,
                 fontSize: "18px",
                 letterSpacing: "0.4px",
@@ -177,7 +174,6 @@ export default function ServicesSection() {
             href="/services"
             className="inline-flex items-center gap-3 self-start sm:self-center mt-2 sm:mt-6 group flex-wrap"
             style={{
-              fontFamily: "var(--font-family)",
               fontWeight: 700,
               fontSize: "16px",
               letterSpacing: "1px",
