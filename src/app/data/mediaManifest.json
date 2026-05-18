@@ -717,6 +717,66 @@
       }
     }
   },
+  "testimonial-solamalai-bos": {
+    "slug": "testimonial-solamalai-bos",
+    "profile": "testimonial",
+    "width": 420,
+    "height": 315,
+    "intrinsicWidth": 420,
+    "intrinsicHeight": 315,
+    "defaultSrc": "/media/testimonial-solamalai-bos/testimonial-solamalai-bos-420.webp",
+    "defaultAvif": "/media/testimonial-solamalai-bos/testimonial-solamalai-bos-420.avif",
+    "sources": {
+      "webp": {
+        "400": "/media/testimonial-solamalai-bos/testimonial-solamalai-bos-400.webp",
+        "420": "/media/testimonial-solamalai-bos/testimonial-solamalai-bos-420.webp"
+      },
+      "avif": {
+        "400": "/media/testimonial-solamalai-bos/testimonial-solamalai-bos-400.avif",
+        "420": "/media/testimonial-solamalai-bos/testimonial-solamalai-bos-420.avif"
+      }
+    }
+  },
+  "testimonial-akshaya-bos": {
+    "slug": "testimonial-akshaya-bos",
+    "profile": "testimonial",
+    "width": 420,
+    "height": 230,
+    "intrinsicWidth": 420,
+    "intrinsicHeight": 230,
+    "defaultSrc": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-420.webp",
+    "defaultAvif": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-420.avif",
+    "sources": {
+      "webp": {
+        "400": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-400.webp",
+        "420": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-420.webp"
+      },
+      "avif": {
+        "400": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-400.avif",
+        "420": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-420.avif"
+      }
+    }
+  },
+  "testimonial-akshaya-workshop": {
+    "slug": "testimonial-akshaya-workshop",
+    "profile": "testimonial",
+    "width": 420,
+    "height": 205,
+    "intrinsicWidth": 420,
+    "intrinsicHeight": 205,
+    "defaultSrc": "/media/testimonial-akshaya-workshop/testimonial-akshaya-workshop-420.webp",
+    "defaultAvif": "/media/testimonial-akshaya-workshop/testimonial-akshaya-workshop-420.avif",
+    "sources": {
+      "webp": {
+        "400": "/media/testimonial-akshaya-workshop/testimonial-akshaya-workshop-400.webp",
+        "420": "/media/testimonial-akshaya-workshop/testimonial-akshaya-workshop-420.webp"
+      },
+      "avif": {
+        "400": "/media/testimonial-akshaya-workshop/testimonial-akshaya-workshop-400.avif",
+        "420": "/media/testimonial-akshaya-workshop/testimonial-akshaya-workshop-420.avif"
+      }
+    }
+  },
   "why-choose-us": {
     "slug": "why-choose-us",
     "profile": "hero",
