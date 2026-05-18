@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { brandMarkUrl } from "../../brandMark";
+import { Shield } from "lucide-react";
 import { GPU_LAYER } from "../utils/motionPresets";
 
 export default function FixedHeroSection() {
@@ -31,13 +31,9 @@ export default function FixedHeroSection() {
       </p>
 
       <div className="flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-gray-500 md:justify-start">
-        <img
-          src={brandMarkUrl}
-          alt=""
-          width={20}
-          height={20}
-          decoding="async"
-          className="h-5 w-5 shrink-0 object-contain"
+        <Shield
+          className="h-5 w-5 shrink-0 text-[#015aaa]"
+          strokeWidth={2}
           aria-hidden
         />
         <span>Trusted by enterprises Worldwide</span>
