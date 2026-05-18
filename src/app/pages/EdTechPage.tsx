@@ -15,12 +15,23 @@ import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { SeoHead } from "../../seo/SeoHead";
+import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
 import { EDTECH_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 import { brandMarkUrl } from "../../brandMark";
 import { useParallaxY } from "../utils/motionPresets";
 import { useLightExperience } from "../utils/performance";
+import {
+  CLIENT_PROGRAMS,
+  EDTECH_IMPACT_STATS,
+  LEARNERS_REACHED_LABEL,
+} from "../data/clientsData";
+
+const PARTNER_INSTITUTION_NAMES = [
+  ...new Set(CLIENT_PROGRAMS.map((p) => p.institution)),
+];
 
 /* ══════════════════════════════════════════════════════════════════════
    DESIGN TOKENS  (Premium SaaS - Light Mode)
@@ -78,11 +89,10 @@ function EdTechHero() {
   const light = useLightExperience();
   const y = useParallaxY(imgRef, 35);
 
-  const floatingStats = [
-    { val: "1,000+", label: "Students Trained" },
-    { val: "6+",     label: "Partner Institutions" },
-    { val: "100+",   label: "Live Projects" },
-  ];
+  const floatingStats = EDTECH_IMPACT_STATS.map((s) => ({
+    val: s.val,
+    label: s.label,
+  }));
 
   return (
     <section className="relative w-full overflow-hidden" style={{ background: C.bg, paddingTop: "120px", paddingBottom: "80px" }}>
@@ -90,6 +100,7 @@ function EdTechHero() {
 
         {/* ── Left content ── */}
         <div className="flex-1 min-w-0">
+          <Breadcrumbs className="mb-5" items={[...PAGE_BREADCRUMBS.edtech]} />
           {/* Badge */}
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}
             className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
@@ -179,7 +190,7 @@ function EdTechHero() {
               </div>
               <div>
                 <AnimatedNumber
-                  value="1000+"
+                  value={LEARNERS_REACHED_LABEL.replace(/,/g, "")}
                   style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "18px", color: C.heading, margin: 0 }}
                 />
                 <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "12px", color: C.muted, margin: 0 }}>Certificates Issued</p>
@@ -690,10 +701,10 @@ function PlatformFeaturesSection() {
 ══════════════════════════════════════════════════════════════════════ */
 function StatsStrip() {
   const stats = [
-    { val: "1,000+", label: "Students Trained",        icon: Users },
-    { val: "6+",     label: "Partner Institutions",     icon: Building2 },
-    { val: "100+",   label: "Projects Deployed",         icon: Rocket },
-    { val: "4.9★",  label: "Average Rating",            icon: Star },
+    { val: EDTECH_IMPACT_STATS[0].val, label: EDTECH_IMPACT_STATS[0].label, icon: Users },
+    { val: EDTECH_IMPACT_STATS[1].val, label: EDTECH_IMPACT_STATS[1].label, icon: Building2 },
+    { val: "100+", label: "Projects Deployed", icon: Rocket },
+    { val: "4.9★", label: "Average Rating", icon: Star },
   ];
   return (
     <motion.section
@@ -781,7 +792,7 @@ function CTASection() {
 
           {/* Trust logos / chips */}
           <div className="flex flex-wrap items-center justify-center gap-3 relative z-10 pt-2">
-            {["St. Joseph College", "CPPM College, Hosur", "Tamil Nadu Police", "Dhanalakshmi Srinivasan College"].map((name) => (
+            {PARTNER_INSTITUTION_NAMES.map((name) => (
               <span key={name} className="rounded-full px-4 py-2"
                 style={{ background: "#fff", border: `1px solid ${C.border}`, fontFamily: 'var(--font-family)', fontWeight: 600, fontSize: "11px", color: C.body }}>
                 ✓ {name}
@@ -806,7 +817,7 @@ export default function EdTechPage() {
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden" style={{ background: C.bg }}>
-      <SeoHead meta={EDTECH_SEO} />
+      <SeoHead meta={EDTECH_SEO} structuredData={pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.edtech)} />
       <TopNav />
 
       <main id="main-content">

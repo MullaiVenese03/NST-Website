@@ -7,73 +7,23 @@ import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { SeoHead } from "../../seo/SeoHead";
 import { CLIENTS_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
+import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
 
-/* â”€â”€ Image assets â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 import { ResponsivePicture } from "../components/ResponsivePicture";
 import type { MediaSlug } from "../utils/media";
+import {
+  CLIENT_IMPACT_STATS,
+  CLIENT_PROGRAMS,
+  type ClientCategory,
+} from "../data/clientsData";
 
-/* â”€â”€ Client data â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-type Category = "All Clients" | "Academic" | "Enterprises";
+type Category = ClientCategory;
 
-const allClients = [
-  {
-    id: 1,
-    mediaSlug: "testimonial-st-joseph-1" as MediaSlug,
-    institution: "St. Joseph College for Women",
-    category: "Academic" as Category,
-    label: "Cybersecurity Awareness Program",
-    desc: "Happy to conduct a cybersecurity awareness session for students, where we discussed common cyber threats, online safety habits, and simple steps everyone can follow to stay secure in their daily digital life.",
-    participants: "180 Students",
-  },
-  {
-    id: 2,
-    mediaSlug: "testimonial-cppm-college" as MediaSlug,
-    institution: "CPPM College, Hosur",
-    category: "Academic" as Category,
-    label: "Cybersecurity Awareness Program",
-    desc: "Delivered an awareness program focused on digital safety, cyber hygiene, and common mistakes people make online. The session helped students understand how small actions can prevent bigger cyber problems.",
-    participants: "120 Students",
-  },
-  {
-    id: 3,
-    mediaSlug: "testimonial-st-joseph-2" as MediaSlug,
-    institution: "St. Joseph College for Women",
-    category: "Academic" as Category,
-    label: "Cybersecurity Seminar",
-    desc: "Presented a seminar covering the basics of cybersecurity, real-world cyber attack examples, and career paths in the field. The goal was to make cybersecurity easy to understand and relatable for students.",
-    participants: "200 Students",
-  },
-  {
-    id: 4,
-    mediaSlug: "testimonial-st-joseph-mou" as MediaSlug,
-    institution: "St. Joseph College for Women",
-    category: "Academic" as Category,
-    label: "MoU Signing",
-    desc: "Proud to sign a Memorandum of Understanding to support cybersecurity training, hands-on learning, and collaboration between industry and students for future skill development.",
-    participants: "MoU Partnership",
-  },
-  {
-    id: 5,
-    mediaSlug: "testimonial-tn-police" as MediaSlug,
-    institution: "Tamil Nadu Police, Hosur",
-    category: "Enterprises" as Category,
-    label: "Law Enforcement Training",
-    desc: "Conducted a cybersecurity training session for law enforcement personnel, focusing on cybercrime awareness, basic digital investigation concepts, and understanding online threats more effectively.",
-    participants: "45 Officers",
-  },
-  {
-    id: 6,
-    mediaSlug: "testimonial-dhanalakshmi-mou" as MediaSlug,
-    institution: "Dhanalakshmi Srinivasan College",
-    category: "Academic" as Category,
-    label: "MoU & Academic Collaboration",
-    desc: "Happy to sign an MoU with Dhanalakshmi Srinivasan College, Perambalur, to promote cybersecurity awareness, practical learning, and industry-focused skill development for students.",
-    participants: "MoU Partnership",
-  },
-];
+const allClients = CLIENT_PROGRAMS;
 
 /* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
@@ -95,7 +45,8 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
 
   return (
     <section className="w-full bg-white pt-32 pb-16 px-8 md:px-14 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto text-center">
+      <motion.div className="max-w-[1440px] mx-auto text-center">
+        <Breadcrumbs className="mb-6 text-left" items={[...PAGE_BREADCRUMBS.testimonials]} />
         {/* Label */}
         <motion.p
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
@@ -152,7 +103,7 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
             </motion.button>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -380,12 +331,10 @@ function PartnersSection() {
    FLOATING STATS BAR (parallax accent)
 â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function StatsBanner() {
-  const stats = [
-    { value: "10+", label: "Partner Institutions" },
-    { value: "1,000+", label: "Learners Reached" },
-    { value: "50+", label: "Programs Delivered" },
-    { value: "3", label: "Sectors Served" },
-  ];
+  const stats = CLIENT_IMPACT_STATS.map((s) => ({
+    value: s.value,
+    label: s.label,
+  }));
 
   return (
     <motion.section
@@ -438,7 +387,7 @@ export default function ClientsPage() {
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
-      <SeoHead meta={CLIENTS_SEO} />
+      <SeoHead meta={CLIENTS_SEO} structuredData={pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.testimonials)} />
       <TopNav />
 
       <main id="main-content">

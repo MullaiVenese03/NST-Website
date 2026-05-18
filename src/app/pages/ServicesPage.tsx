@@ -7,10 +7,12 @@ import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { SeoHead } from "../../seo/SeoHead";
 import { SERVICES_SEO, SERVICES_FAQ_ITEMS } from "../../seo/pageMeta";
 import { SITE_ORIGIN } from "../../seo/seoConfig";
 import { faqPageSchema } from "../../seo/schemas/faqSchema";
+import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
 import { ServicesFaqSection } from "../components/ServicesFaqSection";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 import { useParallaxY } from "../utils/motionPresets";
@@ -59,7 +61,9 @@ function ServicesHero() {
 
   return (
     <section className="relative w-full bg-white overflow-hidden pt-32 pb-20 px-8 md:px-14 lg:px-20">
-      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-10">
+      <div className="max-w-[1440px] mx-auto">
+        <Breadcrumbs className="mb-8" items={[...PAGE_BREADCRUMBS.services]} />
+        <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-10">
 
         {/* Left */}
         <div className="flex-1 min-w-0">
@@ -153,6 +157,7 @@ function ServicesHero() {
           <div className="absolute -z-10 inset-0 rounded-full bg-[#015AAA]/8 opacity-40" aria-hidden
             style={{ background: "radial-gradient(circle at 50% 40%, #015AAA 0%, transparent 70%)" }} />
         </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -480,7 +485,10 @@ export default function ServicesPage() {
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
-      <SeoHead meta={SERVICES_SEO} structuredData={[faqJson, serviceIndex]} />
+      <SeoHead
+        meta={SERVICES_SEO}
+        structuredData={[faqJson, serviceIndex, pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.services)]}
+      />
       <TopNav />
 
       <main id="main-content">

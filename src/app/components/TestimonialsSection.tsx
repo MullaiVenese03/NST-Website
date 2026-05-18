@@ -4,52 +4,16 @@ import { VIEWPORT_ONCE } from "../utils/motionPresets";
 import { useLightExperience } from "../utils/performance";
 import svgPaths from "../../imports/TestimonialsSection/svg-2ss3ybjdpk";
 
-import type { MediaSlug } from "../utils/media";
+import { CLIENT_PROGRAMS } from "../data/clientsData";
 import { ResponsivePicture } from "./ResponsivePicture";
 
-const slides: {
-  mediaSlug: MediaSlug;
-  cardTitle: string;
-  org: string;
-  text: string;
-}[] = [
-  {
-    mediaSlug: "testimonial-st-joseph-1",
-    cardTitle: "Cybersecurity Awareness Program",
-    org: "St. Joseph College for Women",
-    text: "Happy to conduct a cybersecurity awareness session for students, where we discussed common cyber threats, online safety habits, and simple steps everyone can follow to stay secure in their daily digital life.",
-  },
-  {
-    mediaSlug: "testimonial-cppm-college",
-    cardTitle: "Cybersecurity Awareness Program",
-    org: "CPPM College, Hosur",
-    text: "Delivered an awareness program focused on digital safety, cyber hygiene, and common mistakes people make online. The session helped students understand how small actions can prevent bigger cyber problems.",
-  },
-  {
-    mediaSlug: "testimonial-st-joseph-2",
-    cardTitle: "Cybersecurity Seminar",
-    org: "St. Joseph College for Women",
-    text: "Presented a seminar covering the basics of cybersecurity, real-world cyber attack examples, and career paths in the field. The goal was to make cybersecurity easy to understand and relatable for students.",
-  },
-  {
-    mediaSlug: "testimonial-st-joseph-mou",
-    cardTitle: "MoU Signing",
-    org: "St. Joseph College for Women",
-    text: "Proud to sign a Memorandum of Understanding to support cybersecurity training, hands-on learning, and collaboration between industry and students for future skill development.",
-  },
-  {
-    mediaSlug: "testimonial-tn-police",
-    cardTitle: "Law Enforcement Training",
-    org: "Tamil Nadu Police, Hosur",
-    text: "Conducted a cybersecurity training session for law enforcement personnel, focusing on cybercrime awareness, basic digital investigation concepts, and understanding online threats more effectively.",
-  },
-  {
-    mediaSlug: "testimonial-dhanalakshmi-mou",
-    cardTitle: "MoU Signing & Academic Collaboration",
-    org: "Dhanalakshmi Srinivasan College",
-    text: "Happy to sign an MoU with Dhanalakshmi Srinivasan College, Perambalur, to promote cybersecurity awareness, practical learning, and industry-focused skill development for students.",
-  },
-];
+const slides = CLIENT_PROGRAMS.map((program) => ({
+  mediaSlug: program.mediaSlug,
+  cardTitle: program.label,
+  org: program.institution,
+  text: program.desc,
+  participants: program.participants,
+}));
 
 function VerifiedIcon() {
   return (
@@ -267,6 +231,18 @@ export default function TestimonialsSection() {
                 }}
               >
                 {slides[activeIndex].text}
+              </p>
+              <p
+                style={{
+                  fontFamily: 'var(--font-family)',
+                  fontWeight: 700,
+                  fontSize: "14px",
+                  letterSpacing: "0.28px",
+                  color: "#015AAA",
+                  margin: 0,
+                }}
+              >
+                {slides[activeIndex].participants}
               </p>
             </motion.div>
           </AnimatePresence>

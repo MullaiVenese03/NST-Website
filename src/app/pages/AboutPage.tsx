@@ -6,9 +6,11 @@ import AnimatedNumber from "../components/AnimatedNumber";
 
 import TopNav from "../components/TopNav";
 import ScrollToTop from "../components/ScrollToTop";
+import { Breadcrumbs } from "../components/Breadcrumbs";
 import { SeoHead } from "../../seo/SeoHead";
 import { ABOUT_SEO } from "../../seo/pageMeta";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
+import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
 import { useParallaxY } from "../utils/motionPresets";
 
 import { ResponsivePicture } from "../components/ResponsivePicture";
@@ -51,7 +53,9 @@ function HeroAboutSection() {
 
   return (
     <section className="w-full bg-white overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20 px-4 sm:px-8 md:px-14 lg:px-20">
-      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
+      <div className="max-w-[1440px] mx-auto">
+        <Breadcrumbs className="mb-6 sm:mb-8" items={[...PAGE_BREADCRUMBS.about]} />
+        <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
         {/* Left: content */}
         <div className="flex-1 min-w-0">
           {/* Label */}
@@ -219,6 +223,7 @@ function HeroAboutSection() {
             style={{ background: "radial-gradient(circle at 60% 40%, #015AAA 0%, transparent 70%)" }}
           />
         </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -693,7 +698,7 @@ export default function AboutPage() {
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
-      <SeoHead meta={ABOUT_SEO} />
+      <SeoHead meta={ABOUT_SEO} structuredData={pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.about)} />
       <TopNav />
 
       {/* Animated page entry */}

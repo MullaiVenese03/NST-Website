@@ -39,7 +39,7 @@ export default function TrustedClientsSection() {
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.4, delay: 0.08 }}
             className="text-xl sm:text-2xl md:text-3xl font-black text-gray-900 leading-[1.1]"
-            style={{ fontFamily: "var(--font-family)" }}
+            style={{ }}
           >
             Trusted by
             <br />
