@@ -1,9 +1,9 @@
-/** Single source of truth for public site origin (www matches existing index + robots). */
+
 export const SITE_ORIGIN = "https://www.nebulasafetech.com";
 
 export const ORG_NAME = "NebulaSafeTech";
 
-/** Consistent entity statement for metadata, schema, and on-page copy. */
+
 export const BUSINESS_IDENTITY =
   "NebulaSafeTech is a cybersecurity and digital solutions company based in India.";
 

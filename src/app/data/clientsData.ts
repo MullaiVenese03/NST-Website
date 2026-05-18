@@ -96,12 +96,10 @@ export const CLIENT_PROGRAMS: ClientProgram[] = [
   },
 ];
 
-/** Unique partner institution names across all programs. */
 export const PARTNER_INSTITUTION_COUNT = new Set(
   CLIENT_PROGRAMS.map((p) => p.institution)
 ).size;
 
-/** Sum of student-facing program headcounts (500+300+500+500). */
 export const LEARNERS_REACHED_LABEL = "1,800+";
 
 export const CLIENT_IMPACT_STATS = [

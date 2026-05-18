@@ -180,8 +180,7 @@ export default function FooterSection() {
                 <FooterNavLink to="/services">Services</FooterNavLink>
                 <FooterNavLink to="/clients">Clients</FooterNavLink>
                 <FooterNavLink to="/edtech">EdTech</FooterNavLink>
-                {/* TEMPORARILY DISABLED - NEX footer link will be re-enabled after project completion */}
-                {/* <FooterNavLink to="/#nex">NEX</FooterNavLink> */}
+
               </nav>
             </motion.div>
 
@@ -283,10 +282,9 @@ export default function FooterSection() {
           </motion.div>
         </div>
 
-        {/* NST brand watermark — Overcame Demo via --font-company, scales with viewport */}
         <div
           className="relative min-h-50 max-h-100 w-full overflow-hidden pointer-events-none select-none flex items-end justify-center"
-          aria-hidden  
+          aria-hidden
         >
           <p
             className="font-black text-center m-0 w-full max-w-[100vw] px-1"
@@ -343,7 +341,6 @@ export default function FooterSection() {
           </div>
         </div>
       </div>
-
 
     </footer>
   );

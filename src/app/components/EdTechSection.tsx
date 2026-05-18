@@ -33,9 +33,9 @@ export default function EdTechSection() {
   return (
     <section className="w-full overflow-hidden" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-h-[420px]">
-        {/* Left â€“ Content */}
+
         <div className="flex-shrink-0 w-full lg:w-[42%] flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-16 py-14 lg:py-16 min-w-0">
-          {/* Label */}
+
           <motion.p
             custom={0}
             variants={fadeUp}
@@ -54,7 +54,6 @@ export default function EdTechSection() {
             EdTech Ecosystem
           </motion.p>
 
-          {/* Heading */}
           <motion.h2
             custom={1}
             variants={fadeUp}
@@ -74,7 +73,6 @@ export default function EdTechSection() {
             Learn. Build. Grow
           </motion.h2>
 
-          {/* Sub-description */}
           <motion.p
             custom={2}
             variants={fadeUp}
@@ -95,7 +93,6 @@ export default function EdTechSection() {
             professionals and entrepreneurs.
           </motion.p>
 
-          {/* Bullet points */}
           <motion.ul
             custom={3}
             variants={fadeUp}
@@ -122,7 +119,6 @@ export default function EdTechSection() {
             ))}
           </motion.ul>
 
-          {/* CTA Button */}
           <motion.a
             custom={4}
             variants={fadeUp}
@@ -167,7 +163,6 @@ export default function EdTechSection() {
           </motion.a>
         </div>
 
-        {/* Right â€“ Image */}
         <motion.div
           className="flex-1 flex items-center justify-center min-h-[360px] lg:min-h-0"
           style={{ background: "#F8FAFE" }}

@@ -10,7 +10,7 @@ const routeLoaders: Record<string, () => Promise<unknown>> = {
   "/terms-and-conditions": () => import("../pages/TermsAndConditionsPage"),
 };
 
-/** Warm route chunks on hover/focus without navigating. */
+
 export function prefetchRoute(path: string): void {
   const normalized = path.split("#")[0] || "/";
   if (prefetched.has(normalized)) return;
@@ -20,7 +20,7 @@ export function prefetchRoute(path: string): void {
   void loader();
 }
 
-/** Prefetch one likely next route after home is idle - avoids pulling ~1MB+ of JS early. */
+
 export function prefetchCommonRoutes(): void {
   if (typeof window === "undefined") return;
   const run = () => prefetchRoute("/services");

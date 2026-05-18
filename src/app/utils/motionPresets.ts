@@ -3,12 +3,12 @@ import { useScroll, useTransform } from "motion/react";
 import type { Transition, Variants } from "motion/react";
 import { useLightExperience } from "./performance";
 
-/** Single intersection trigger for scroll reveals. */
+
 export const VIEWPORT_ONCE = { once: true, margin: "0px 0px -10% 0px" } as const;
 
 const EASE_OUT: Transition["ease"] = "easeOut";
 
-/** Opacity + translate fades; minimal motion on light experience. */
+
 export function fadeUpVariants(light: boolean, stagger = 0.1): Variants {
   if (light) {
     return {
@@ -46,7 +46,7 @@ export function fadeHorizontalVariants(
   };
 }
 
-/** Apply on elements passed to `useParallaxY` (Motion requires non-static positioning). */
+
 export const PARALLAX_REF_CLASS = "relative";
 
 function ensureParallaxPosition(ref: RefObject<HTMLElement | null>) {
@@ -58,7 +58,7 @@ function ensureParallaxPosition(ref: RefObject<HTMLElement | null>) {
   return true;
 }
 
-/** Scroll-linked Y parallax - disabled on mobile / save-data / reduced-motion. */
+
 export function useParallaxY(
   ref: RefObject<HTMLElement | null>,
   distance = 50,
@@ -78,7 +78,7 @@ export function useParallaxY(
   return useTransform(scrollYProgress, [0, 1], light ? [0, 0] : [-distance, distance]);
 }
 
-/** Compositor hint for animated layers (transform/opacity only). */
+
 export const GPU_LAYER = {
   willChange: "transform, opacity",
   transform: "translateZ(0)",

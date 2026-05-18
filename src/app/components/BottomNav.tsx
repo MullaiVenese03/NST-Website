@@ -9,8 +9,7 @@ const navItems = [
   { name: "Services", href: "services", path: "/services" },
   { name: "Testimonials", href: "testimonials", path: "/clients" },
   { name: "EdTech", href: "edtech", path: "/edtech" },
-  // TEMPORARILY DISABLED - NEX nav link will be re-enabled after project completion
-  // { name: "NEX", href: "nex", path: "/#nex" },
+
 ];
 
 export default function BottomNav() {

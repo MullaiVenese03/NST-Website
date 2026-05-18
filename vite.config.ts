@@ -4,7 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { compression } from "vite-plugin-compression2";
 
-/** Charset must be the first child of <head> (within first 1024 bytes) for Lighthouse and HTML5. */
 function charsetFirstInHead(): Plugin {
   const charsetTag = '<meta charset="UTF-8" />';
   return {

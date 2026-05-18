@@ -112,17 +112,6 @@ export default function HomePage() {
         className="relative w-full"
       />
 
-      {/* TEMPORARILY DISABLED - NEX section will be re-enabled after project completion */}
-      {/*
-      <LazyWhenVisible
-        id="nex"
-        loader={() => import("../components/NexSection")}
-        fallback={sectionFallback}
-        minHeight={320}
-        className="relative w-full"
-      />
-      */}
-
       <LazyWhenVisible
         hashTarget="contact"
         loader={() => import("../components/FooterSection")}

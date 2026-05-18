@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLightExperience } from "../utils/performance";
 
-/** Defers ~21KB brand WOFF2 until idle on desktop; mobile keeps system fallback. */
+
 export function DeferredCompanyFont() {
   const light = useLightExperience();
 

@@ -18,7 +18,7 @@ export function scrollToTopInstant() {
   });
 }
 
-/** Scroll to a section by id; retries until the element exists (lazy sections). */
+
 export function scrollToSection(
   id: string,
   options?: { behavior?: ScrollBehavior; block?: ScrollLogicalPosition; maxAttempts?: number },

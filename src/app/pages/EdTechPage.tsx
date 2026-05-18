@@ -33,9 +33,6 @@ const PARTNER_INSTITUTION_NAMES = [
   ...new Set(CLIENT_PROGRAMS.map((p) => p.institution)),
 ];
 
-/* ══════════════════════════════════════════════════════════════════════
-   DESIGN TOKENS  (Premium SaaS - Light Mode)
-══════════════════════════════════════════════════════════════════════ */
 const C = {
   primary:   "#0A66C2",
   secondary: "#083A75",
@@ -49,7 +46,6 @@ const C = {
   accentMid: "#DBEAFE",
 };
 
-/* ── Shared animation presets ────────────────────────────────────────── */
 const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 28 },
   visible: (i: number = 0) => ({
@@ -60,9 +56,6 @@ const fadeUp: Variants = {
 const fadeLeft: Variants  = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
 const fadeRight: Variants = { hidden: { opacity: 0, x:  40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
 
-/* ══════════════════════════════════════════════════════════════════════
-   SHARED: NST brand mark
-══════════════════════════════════════════════════════════════════════ */
 export function NSTLogo() {
   return (
     <div className="flex items-center gap-3">
@@ -81,9 +74,6 @@ export function NSTLogo() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   1. HERO  -  "Learn. Build. Launch."
-══════════════════════════════════════════════════════════════════════ */
 function EdTechHero() {
   const imgRef = useRef<HTMLDivElement>(null);
   const light = useLightExperience();
@@ -98,10 +88,9 @@ function EdTechHero() {
     <section className="relative w-full overflow-hidden" style={{ background: C.bg, paddingTop: "120px", paddingBottom: "80px" }}>
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-16">
 
-        {/* ── Left content ── */}
         <div className="flex-1 min-w-0">
           <Breadcrumbs className="mb-5" items={[...PAGE_BREADCRUMBS.edtech]} />
-          {/* Badge */}
+
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={0}
             className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
             style={{ background: C.accentMid, border: `1px solid ${C.border}` }}>
@@ -111,7 +100,6 @@ function EdTechHero() {
             </span>
           </motion.div>
 
-          {/* Heading */}
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1}
             style={{ fontFamily: 'var(--font-family)', fontWeight: 900, fontSize: "clamp(40px,5.5vw,72px)", color: C.heading, lineHeight: 1.06, letterSpacing: "-1.5px", marginBottom: "24px", margin: "0 0 24px 0" }}>
             Learn.<br />
@@ -119,13 +107,11 @@ function EdTechHero() {
             Launch.
           </motion.h1>
 
-          {/* Subtext */}
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2}
             style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "18px", color: C.body, lineHeight: 1.75, maxWidth: "480px", marginBottom: "40px", margin: "0 0 40px 0" }}>
             Industry-grade training programs, real-world projects, and a software marketplace - all in one cybersecurity EdTech ecosystem built to launch your tech career.
           </motion.p>
 
-          {/* CTA buttons */}
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={3}
             className="flex flex-wrap gap-4 mb-12">
             <motion.a href="#programs"
@@ -134,17 +120,9 @@ function EdTechHero() {
               whileHover={{ scale: 1.04, background: C.secondary }} whileTap={{ scale: 0.96 }}>
               Explore Programs <ArrowRight size={16} />
             </motion.a>
-            {/* TEMPORARILY DISABLED - View Projects CTA will be re-enabled when marketplace launches
-            <motion.a href="#ecommerce"
-              className="flex items-center gap-2 no-underline"
-              style={{ background: "#fff", color: C.primary, border: `2px solid ${C.border}`, borderRadius: "12px", padding: "14px 28px", fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "15px" }}
-              whileHover={{ scale: 1.04, borderColor: C.primary, background: C.accent }} whileTap={{ scale: 0.96 }}>
-              <Play size={15} fill={C.primary} /> View Projects
-            </motion.a>
-            */}
+
           </motion.div>
 
-          {/* Floating stat pills */}
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={4}
             className="flex flex-wrap gap-3">
             {floatingStats.map((s, i) => (
@@ -161,7 +139,6 @@ function EdTechHero() {
           </motion.div>
         </div>
 
-        {/* ── Right illustration ── */}
         <div ref={imgRef} className="flex-1 min-w-0 relative">
           <motion.div variants={fadeRight} initial="hidden" animate="visible" className="relative">
             <motion.div style={{ y, boxShadow: "0 24px 64px rgba(10,102,194,0.15)", borderRadius: "20px" }} className="relative rounded-[20px] overflow-hidden">
@@ -173,12 +150,11 @@ function EdTechHero() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority={!light}
               />
-              {/* Overlay gradient */}
+
               <div className="absolute inset-0"
                 style={{ background: "linear-gradient(to top, rgba(8,58,117,0.35) 0%, transparent 50%)" }} />
             </motion.div>
 
-            {/* Floating UI card */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -197,7 +173,6 @@ function EdTechHero() {
               </div>
             </motion.div>
 
-            {/* Rating card */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -217,9 +192,6 @@ function EdTechHero() {
   );
 }
 
-/* ═════════════════════════════════════════════════════════════════════
-   2. EDTECH SERVICES  -  6 cards
-══════════════════════════════════════════════════════════════════════ */
 const edtechServices = [
   { icon: Shield,      color: "#0A66C2", bg: "#EFF6FF", title: "Cybersecurity Training",    desc: "Structured programs covering ethical hacking, network defense, and real-world cyber ops." },
   { icon: FlaskConical,color: "#7C3AED", bg: "#F5F3FF", title: "Hands-on Labs",             desc: "Virtual labs and sandbox environments to practice skills without any real-world risk." },
@@ -233,7 +205,7 @@ function EdTechServicesSection() {
   return (
     <section id="programs" className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#FFFFFF" }}>
       <div className="max-w-[1320px] mx-auto">
-        {/* Header */}
+
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="flex flex-col items-center text-center gap-4 mb-14">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2"
@@ -251,7 +223,6 @@ function EdTechServicesSection() {
           </p>
         </motion.div>
 
-        {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {edtechServices.map((svc, i) => {
             const Icon = svc.icon;
@@ -260,12 +231,12 @@ function EdTechServicesSection() {
                 className="group rounded-[16px] p-6 flex flex-col gap-4 cursor-pointer transition-all duration-300"
                 style={{ background: C.card, border: `1px solid ${C.border}` }}
                 whileHover={{ y: -6, boxShadow: `0 20px 48px rgba(10,102,194,0.12)`, borderColor: C.primary }}>
-                {/* Icon */}
+
                 <div className="rounded-[12px] p-3 w-fit transition-transform duration-300 group-hover:scale-110"
                   style={{ background: svc.bg }}>
                   <Icon size={24} color={svc.color} strokeWidth={2} />
                 </div>
-                {/* Text */}
+
                 <div>
                   <h3 style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "17px", color: C.heading, margin: "0 0 8px 0" }}>
                     {svc.title}
@@ -283,9 +254,6 @@ function EdTechServicesSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   3. FEATURED PROJECTS  -  4 cards
-══════════════════════════════════════════════════════════════════════ */
 type Difficulty = "Beginner" | "Intermediate" | "Advanced";
 const difficultyColor: Record<Difficulty, { bg: string; text: string }> = {
   Beginner:     { bg: "#ECFDF5", text: "#059669" },
@@ -338,14 +306,14 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
       whileHover={{ y: -7, boxShadow: "0 24px 48px rgba(10,102,194,0.14)" }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
     >
-      {/* Image */}
+
       <div className="relative overflow-hidden" style={{ height: "200px" }}>
         <ImageWithFallback
           src={project.img}
           alt={project.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        {/* Highlight badge */}
+
         {project.highlight && (
           <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full px-3 py-1"
             style={{ background: C.primary, boxShadow: "0 4px 12px rgba(10,102,194,0.4)" }}>
@@ -353,14 +321,14 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
             <span style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "10px", letterSpacing: "0.5px", color: "#fff" }}>FEATURED</span>
           </div>
         )}
-        {/* Difficulty */}
+
         <div className="absolute top-3 right-3 rounded-full px-3 py-1"
           style={{ background: diff.bg }}>
           <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "10px", letterSpacing: "0.5px", color: diff.text }}>
             {project.difficulty}
           </span>
         </div>
-        {/* Hover overlay */}
+
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ background: "rgba(10,102,194,0.8)" }}>
           <span className="flex items-center gap-2" style={{ color: "#fff", fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "15px" }}>
@@ -369,7 +337,6 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
         </div>
       </div>
 
-      {/* Body */}
       <div className="p-5 flex flex-col gap-3 flex-1">
         <h3 style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "17px", color: C.heading, margin: 0, lineHeight: 1.3 }}>
           {project.title}
@@ -377,7 +344,7 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
         <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "13px", color: C.body, lineHeight: 1.6, margin: 0, flexGrow: 1 }}>
           {project.desc}
         </p>
-        {/* Tags */}
+
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span key={tag} className="rounded-full px-3 py-1"
@@ -386,7 +353,7 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
             </span>
           ))}
         </div>
-        {/* CTA */}
+
         <motion.button
           type="button"
           aria-label={`View project: ${project.title}`}
@@ -404,7 +371,7 @@ export function FeaturedProjectsSection() {
   return (
     <section id="projects" className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: C.bg }}>
       <div className="max-w-[1320px] mx-auto">
-        {/* Header */}
+
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12">
           <div className="flex flex-col gap-3">
@@ -438,10 +405,6 @@ export function FeaturedProjectsSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   4. E-COMMERCE SHOUTOUT  -  Flagship Project card (marketplace gateway)
-   TEMPORARILY DISABLED - preserved for reuse; re-enable with <ECommerceShoutout />
-══════════════════════════════════════════════════════════════════════ */
 function ECommerceShoutout() {
   const imgRef = useRef<HTMLDivElement>(null);
   const light = useLightExperience();
@@ -455,15 +418,14 @@ function ECommerceShoutout() {
           className="relative rounded-[24px] overflow-hidden flex flex-col lg:flex-row items-stretch"
           style={{ background: `linear-gradient(135deg, ${C.secondary} 0%, ${C.primary} 60%, #1D78D0 100%)`, minHeight: "480px" }}
         >
-          {/* Decorative circles */}
+
           <div className="absolute top-[-60px] right-[-60px] w-[300px] h-[300px] rounded-full opacity-10"
             style={{ background: "radial-gradient(circle, white 0%, transparent 70%)" }} />
           <div className="absolute bottom-[-40px] left-[30%] w-[200px] h-[200px] rounded-full opacity-5"
             style={{ background: "radial-gradient(circle, white 0%, transparent 70%)" }} />
 
-          {/* Left content */}
           <div className="flex-1 flex flex-col justify-center px-10 py-14 lg:px-14 relative z-10">
-            {/* Badge */}
+
             <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6 w-fit"
               style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.25)" }}>
@@ -483,7 +445,6 @@ function ECommerceShoutout() {
               Dive into a production-grade e-commerce build - from user auth and product catalogs to Stripe payments and an admin panel. This is what real-world development looks like.
             </motion.p>
 
-            {/* Bullet points */}
             <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
               className="flex flex-col gap-3 mb-8">
               {[
@@ -503,7 +464,6 @@ function ECommerceShoutout() {
               ))}
             </motion.div>
 
-            {/* CTA Button */}
             <motion.a
               href="https://ecommerce.nebulasafetech.com"
               target="_blank"
@@ -518,13 +478,11 @@ function ECommerceShoutout() {
               <ExternalLink size={16} color={C.primary} />
             </motion.a>
 
-            {/* Small note */}
             <p className="mt-4" style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "12px", color: "rgba(255,255,255,0.5)" }}>
               Opens in a new tab → Hosted on NST EdTech platform
             </p>
           </div>
 
-          {/* Right: Dashboard mockup */}
           <div ref={imgRef} className="flex-1 relative flex items-center justify-end p-6 lg:p-10">
             <motion.div style={{ y }} className="relative w-full max-w-[500px]">
               <div className="rounded-[16px] overflow-hidden relative"
@@ -537,7 +495,6 @@ function ECommerceShoutout() {
                 />
               </div>
 
-              {/* Floating metric */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -564,9 +521,6 @@ function ECommerceShoutout() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   5. LEARNING PATH  -  4-step horizontal journey
-══════════════════════════════════════════════════════════════════════ */
 const journeySteps = [
   { step: "01", icon: BookOpen,  color: "#0A66C2", bg: "#EFF6FF", title: "Learn",    desc: "Access structured courses designed by cybersecurity & tech industry experts." },
   { step: "02", icon: FlaskConical,color:"#7C3AED",bg:"#F5F3FF", title: "Practice", desc: "Work through hands-on labs, CTF challenges, and sandbox environments." },
@@ -578,7 +532,7 @@ function LearningPathSection() {
   return (
     <section className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#FFFFFF" }}>
       <div className="max-w-[1320px] mx-auto">
-        {/* Header */}
+
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="flex flex-col items-center text-center gap-4 mb-14">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2"
@@ -596,7 +550,6 @@ function LearningPathSection() {
           </p>
         </motion.div>
 
-        {/* Steps */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
           {journeySteps.map((step, i) => {
             const Icon = step.icon;
@@ -633,9 +586,6 @@ function LearningPathSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   6. PLATFORM FEATURES  -  icon + text grid
-══════════════════════════════════════════════════════════════════════ */
 const platformFeatures = [
   { icon: GraduationCap, title: "Industry-Relevant Curriculum",   desc: "Curated by working professionals and updated quarterly to match market demands." },
   { icon: Laptop,         title: "Real-World Projects",           desc: "Every course ends with a deployable project that belongs in your portfolio." },
@@ -651,7 +601,7 @@ function PlatformFeaturesSection() {
   return (
     <section className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: C.bg }}>
       <div className="max-w-[1320px] mx-auto">
-        {/* Header */}
+
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="flex flex-col items-center text-center gap-4 mb-14">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2"
@@ -696,9 +646,6 @@ function PlatformFeaturesSection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   7. STATS STRIP
-══════════════════════════════════════════════════════════════════════ */
 function StatsStrip() {
   const stats = [
     { val: EDTECH_IMPACT_STATS[0].val, label: EDTECH_IMPACT_STATS[0].label, icon: Users },
@@ -736,9 +683,6 @@ function StatsStrip() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   8. CTA  -  "Start Your Learning Journey Today"
-═════════════════════════════════════════════════════════════════════ */
 function CTASection() {
   return (
     <section className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: C.bg }}>
@@ -748,12 +692,10 @@ function CTASection() {
           className="relative rounded-[24px] overflow-hidden flex flex-col items-center text-center px-5 sm:px-10 py-12 sm:py-16 gap-8"
           style={{ background: `linear-gradient(135deg, ${C.bg} 0%, ${C.accentMid} 100%)`, border: `2px solid ${C.border}` }}>
 
-          {/* Glow blob */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-[#0A66C2]/10 pointer-events-none"
             aria-hidden
             style={{ background: `radial-gradient(ellipse, rgba(10,102,194,0.15) 0%, transparent 70%)` }} />
 
-          {/* Icon */}
           <motion.div
             animate={{ y: [0, -8, 0] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
@@ -790,7 +732,6 @@ function CTASection() {
             </motion.a>
           </div>
 
-          {/* Trust logos / chips */}
           <div className="flex flex-wrap items-center justify-center gap-3 relative z-10 pt-2">
             {PARTNER_INSTITUTION_NAMES.map((name) => (
               <span key={name} className="rounded-full px-4 py-2"
@@ -805,9 +746,6 @@ function CTASection() {
   );
 }
 
-/* ══════════════════════════════════════════════════════════════════════
-   PAGE ROOT
-══════════════════════════════════════════════════════════════════════ */
 export default function EdTechPage() {
   useEffect(() => {
     scrollToTopInstant();
@@ -829,12 +767,10 @@ export default function EdTechPage() {
         <EdTechHero />
         <StatsStrip />
         <EdTechServicesSection />
-        {/* TEMPORARILY DISABLED - Marketplace Flagship Project card; reuse ECommerceShoutout when ready */}
-        {/* <ECommerceShoutout /> */}
+
         <LearningPathSection />
         <PlatformFeaturesSection />
-        {/* TEMPORARILY DISABLED - EdTech Marketplace projects section will be re-enabled after project completion */}
-        {/* <FeaturedProjectsSection /> */}
+
         <CTASection />
         <section className="w-full py-16 md:py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#FFFFFF" }}>
           <div className="max-w-[1320px] mx-auto">

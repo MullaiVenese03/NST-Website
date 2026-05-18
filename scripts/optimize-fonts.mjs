@@ -1,7 +1,4 @@
-/**
- * Subset Overcame Demo TTF → WOFF2 for brand glyphs only.
- * Run: node scripts/optimize-fonts.mjs
- */
+
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const fontsDir = join(__dirname, "../src/assets/fonts");
 const sourcesDir = join(__dirname, "font-sources");
 
-/** Glyphs used with --font-company (logo, loader, footer, EdTech header). */
+
 const BRAND_TEXT =
   "NebulaSafeTech NST ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .-";
 

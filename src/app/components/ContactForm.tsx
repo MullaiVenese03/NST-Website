@@ -6,7 +6,7 @@ export type ContactFormProps = {
   id?: string;
   title?: string;
   subtitle?: string;
-  /** Pre-filled / locked service name shown in the Service field */
+  
   defaultService?: string;
   serviceOptions?: string[];
   className?: string;

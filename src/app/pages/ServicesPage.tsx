@@ -20,7 +20,6 @@ import { useParallaxY } from "../utils/motionPresets";
 import { ResponsivePicture } from "../components/ResponsivePicture";
 import type { MediaSlug } from "../utils/media";
 
-/* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
@@ -65,7 +64,6 @@ function ServicesHero() {
         <Breadcrumbs className="mb-8" items={[...PAGE_BREADCRUMBS.services]} />
         <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-10">
 
-        {/* Left */}
         <div className="flex-1 min-w-0">
           <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
             style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
@@ -82,7 +80,6 @@ function ServicesHero() {
             From innovative web experiences to enterprise-grade security, we build, protect, and scale what matters most.
           </motion.p>
 
-          {/* Feature icons */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -92,33 +89,33 @@ function ServicesHero() {
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-0 border border-slate-100 rounded-2xl p-4 sm:p-6 bg-slate-50/30 shadow-sm w-full max-w-xl"
           >
             {[
-              { 
+              {
                 icon: (
                   <svg className="w-full h-full" fill="none" viewBox="0 0 57 48">
                     <path d={svgPaths.p91c0280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
                   </svg>
-                ), 
-                label1: "Expert-Led", 
-                label2: "Security" 
+                ),
+                label1: "Expert-Led",
+                label2: "Security"
               },
-              { 
+              {
                 icon: (
                   <svg className="w-full h-full" fill="none" viewBox="0 0 51 56.5404">
                     <path d={svgPaths.p35f7eb80} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
                   </svg>
-                ), 
-                label1: "Proactive", 
-                label2: "Protection" 
+                ),
+                label1: "Proactive",
+                label2: "Protection"
               },
-              { 
+              {
                 icon: (
                   <svg className="w-full h-full" fill="none" viewBox="0 0 48.6877 48.6465">
                     <path d={svgPaths.pe5e6700} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
                     <path d={svgPaths.p308e5280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
                   </svg>
-                ), 
-                label1: "24/7 Threat", 
-                label2: "Monitoring" 
+                ),
+                label1: "24/7 Threat",
+                label2: "Monitoring"
               },
             ].map((item, i) => (
               <div key={i} className="flex flex-1 items-center min-w-0">
@@ -143,7 +140,6 @@ function ServicesHero() {
           </motion.div>
         </div>
 
-        {/* Right: services illustration with parallax */}
         <motion.div ref={imgRef} className="flex-1 min-w-0 relative" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
           <motion.div style={{ y }} className="w-full">
             <ResponsivePicture
@@ -189,7 +185,7 @@ function ServiceCardsSection() {
               custom={i % 4}
               className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer h-full min-h-[320px] sm:min-h-[360px]"
             >
-              {/* Icon/Image Container */}
+
               <div className="p-6 sm:p-8 pb-4 flex items-center justify-center min-h-[160px] sm:min-h-[192px]">
                 <div className="relative w-full max-w-[140px] sm:max-w-[160px] aspect-square flex items-center justify-center mx-auto">
                   <div className="absolute inset-0 bg-blue-50/50 rounded-full scale-90 group-hover:scale-100 transition-transform duration-500" aria-hidden />
@@ -202,7 +198,6 @@ function ServiceCardsSection() {
                 </div>
               </div>
 
-              {/* Text Content */}
               <div className="px-6 sm:px-8 pb-6 sm:pb-8 flex flex-col flex-1 min-w-0">
                 <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-[#015AAA] transition-colors duration-300 break-words">
                   {card.title}
@@ -212,7 +207,6 @@ function ServiceCardsSection() {
                 </p>
               </div>
 
-              {/* Bottom accent line */}
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl origin-left" />
             </motion.div>
             </Link>
@@ -281,7 +275,7 @@ function OurProcessSection() {
   return (
     <section className="w-full bg-white py-20 px-8 md:px-14 lg:px-20 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
-        {/* Header */}
+
         <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
           Our Process
@@ -295,7 +289,6 @@ function OurProcessSection() {
           We combine expertise, technology, and dedication to deliver solutions that drive growth and security.
         </motion.p>
 
-        {/* Step cards row */}
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-4">
           {processSteps.map((step, i) => (
             <div key={i} className="flex flex-1 flex-col lg:flex-row items-center w-full">
@@ -321,8 +314,7 @@ function OurProcessSection() {
                   <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
                 </div>
               </motion.div>
-              
-              {/* Connector arrow (Desktop only) */}
+
               {i < processSteps.length - 1 && (
                 <div className="hidden lg:flex items-center justify-center px-2 z-10">
                   <svg width="20" height="12" viewBox="0 0 18.5 11.5" fill="none" className="rotate-0">
@@ -338,9 +330,6 @@ function OurProcessSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   WHY CHOOSE US
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const whyFeatures = [
   {
     title: "Security First Approach",
@@ -400,7 +389,6 @@ function WhyChooseUsSection() {
     <section className="relative w-full bg-white overflow-hidden py-20 px-8 md:px-14 lg:px-20">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-10">
 
-        {/* Left */}
         <div className="flex-1 min-w-0">
           <motion.p variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
             style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "4px" }}>
@@ -415,7 +403,6 @@ function WhyChooseUsSection() {
             We combine expertise, technology, and dedication to deliver solutions that drive growth and security.
           </motion.p>
 
-          {/* Illustration with parallax */}
           <div ref={imgRef} className="relative overflow-hidden rounded-[16px] mt-4">
             <motion.div style={{ y }}>
               <ResponsivePicture
@@ -429,7 +416,6 @@ function WhyChooseUsSection() {
           </div>
         </div>
 
-        {/* Right: feature cards */}
         <div className="flex-1 min-w-0 flex flex-col gap-5">
           {whyFeatures.map((feat, i) => (
             <motion.div
@@ -450,7 +436,7 @@ function WhyChooseUsSection() {
                 <h4 className="text-xl font-bold text-slate-900 group-hover:text-[#015AAA] transition-colors duration-300">{feat.title}</h4>
                 <p className="text-base text-slate-500 leading-relaxed">{feat.desc}</p>
               </div>
-              {/* Bottom border accent */}
+
               <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
             </motion.div>
           ))}
@@ -460,9 +446,6 @@ function WhyChooseUsSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MAIN PAGE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function ServicesPage() {
   useEffect(() => {
     scrollToTopInstant();
@@ -509,4 +492,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-

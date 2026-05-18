@@ -8,7 +8,7 @@ type LazyWhenVisibleProps = {
   minHeight?: number | string;
   className?: string;
   id?: string;
-  /** Eager-load when location hash matches (e.g. footer before it scrolls into view). */
+  
   hashTarget?: string;
 };
 

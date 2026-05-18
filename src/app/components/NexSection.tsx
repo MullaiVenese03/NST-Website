@@ -21,15 +21,15 @@ function NexLogo() {
       fill="none"
       style={{ maxWidth: "380px", display: "block" }}
     >
-      {/* E */}
+
       <path d={svgPaths.p2ddc4500} fill="#0B0F19" />
-      {/* N */}
+
       <path d={svgPaths.p588f500} fill="#0B0F19" />
-      {/* Keyhole circle */}
+
       <circle cx="359.27" cy="63.7352" r="6.73516" fill="#0B0F19" />
-      {/* Keyhole body */}
+
       <path d={svgPaths.p3285e100} fill="#0B0F19" />
-      {/* X â€” blue parts */}
+
       <path d={svgPaths.p1b450300} fill="#2563EB" />
       <path d={svgPaths.p3e9d6e00} fill="#2563EB" />
       <path d={svgPaths.p2443e480} fill="#2563EB" />
@@ -54,9 +54,9 @@ export default function NexSection() {
           boxShadow: "0 10px 40px -10px rgba(1, 90, 170, 0.08)",
         }}
       >
-        {/* Left â€“ Content */}
+
         <div className="flex-1 flex flex-col">
-          {/* Label */}
+
           <motion.p
             custom={0}
             variants={fadeUp}
@@ -75,7 +75,6 @@ export default function NexSection() {
             NEX - Next Generation Security Platform
           </motion.p>
 
-          {/* Heading */}
           <motion.h2
             custom={1}
             variants={fadeUp}
@@ -97,7 +96,6 @@ export default function NexSection() {
             security is coming.
           </motion.h2>
 
-          {/* Description */}
           <motion.p
             custom={2}
             variants={fadeUp}
@@ -119,7 +117,6 @@ export default function NexSection() {
             to predict, prevent, and neutralize threats in real-time.
           </motion.p>
 
-          {/* Feature icons row */}
           <motion.div
             custom={3}
             variants={fadeUp}
@@ -130,7 +127,7 @@ export default function NexSection() {
           >
             {features.map((f, i) => (
               <div key={i} className="relative flex-1 flex flex-col items-center gap-4">
-                {/* Vertical divider */}
+
                 {i > 0 && (
                   <div
                     className="absolute left-0 top-3 bottom-3"
@@ -167,13 +164,11 @@ export default function NexSection() {
           </motion.div>
         </div>
 
-        {/* Vertical divider */}
         <div
           className="hidden lg:block flex-shrink-0 mx-12"
           style={{ width: "1px", height: "350px", background: "#C6C6C6" }}
         />
 
-        {/* Right â€“ NEX Logo */}
         <motion.div
           className="flex-shrink-0 flex flex-col items-center justify-center gap-6"
           initial={{ opacity: 0, y: light ? 0 : 16 }}
@@ -183,7 +178,7 @@ export default function NexSection() {
           style={{ minWidth: "min(380px, 90vw)" }}
         >
           <NexLogo />
-          {/* Tagline */}
+
           <p
             style={{
               fontWeight: 300,
@@ -203,4 +198,3 @@ export default function NexSection() {
     </section>
   );
 }
-

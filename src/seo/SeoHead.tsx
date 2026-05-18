@@ -6,10 +6,10 @@ import { toJsonLdScript } from "./structuredData";
 
 export type SeoHeadProps = {
   meta: PageSeo;
-  /** Absolute or root-relative OG image; defaults to /og-image.png on this origin. */
+  
   ogImage?: string;
   noindex?: boolean;
-  /** Extra JSON-LD objects (FAQ, Service, BreadcrumbList, etc.) */
+  
   structuredData?: object | object[];
 };
 

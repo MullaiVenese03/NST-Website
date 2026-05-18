@@ -50,5 +50,5 @@ export const BRAND_MARK_URL =
 
 export const HERO_POSTER_MOBILE = "/media/hero-poster/hero-poster-640.webp";
 export const HERO_VIDEO_URL = "/media/hero-bg-video.mp4";
-/** Hero logo / wolf assemble animation (same asset as hero video). */
+
 export const LOGO_ASSEMBLE_ANIMATION_URL = HERO_VIDEO_URL;

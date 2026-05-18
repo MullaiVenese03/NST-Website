@@ -7,7 +7,7 @@ type HeroParallaxProps = {
   children: ReactNode;
 };
 
-/** Single wrapper at all widths - avoids remount flicker at the 768px motion breakpoint. */
+
 export function HeroParallax({ enabled, children }: HeroParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({

@@ -155,7 +155,7 @@ export function getServiceDetailSeo(slug: ServiceSlug) {
   return SERVICE_DETAIL[slug];
 }
 
-/** Default services page FAQ - aligned with on-site offerings (no fabricated pricing). */
+
 export const SERVICES_FAQ_ITEMS = [
   {
     question: "What cybersecurity services does NebulaSafeTech provide?",
@@ -216,7 +216,7 @@ export function serviceFaqForSlug(slug: ServiceSlug) {
   return [...common, ...specific];
 }
 
-/** Static routes for sitemap.xml maintenance (add blog posts here when published). */
+
 export const SITEMAP_STATIC_PATHS: { path: string; changefreq: string; priority: string }[] = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
   { path: "/about", changefreq: "monthly", priority: "0.9" },

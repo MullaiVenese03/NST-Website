@@ -25,7 +25,6 @@ type Category = ClientCategory;
 
 const allClients = CLIENT_PROGRAMS;
 
-/* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 28 },
   visible: (i: number = 0) => ({
@@ -34,9 +33,6 @@ const fadeUp: Variants = {
   }),
 };
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   HERO â€” "Trusted by Leaders Worldwide"
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function ClientsHero({ activeFilter, setActiveFilter }: {
   activeFilter: Category;
   setActiveFilter: (f: Category) => void;
@@ -47,7 +43,7 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
     <section className="w-full bg-white pt-32 pb-16 px-8 md:px-14 overflow-hidden">
       <motion.div className="max-w-[1440px] mx-auto text-center">
         <Breadcrumbs className="mb-6 text-left" items={[...PAGE_BREADCRUMBS.testimonials]} />
-        {/* Label */}
+
         <motion.p
           variants={fadeUp} initial="hidden" animate="visible" custom={0}
           style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "16px" }}
@@ -55,7 +51,6 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
           Our Client Programs
         </motion.p>
 
-        {/* Heading */}
         <motion.h1
           variants={fadeUp} initial="hidden" animate="visible" custom={1}
           style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(28px,4vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.1, marginBottom: "20px" }}
@@ -63,7 +58,6 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
           Empowering People. Strengthening Security.
         </motion.h1>
 
-        {/* Sub-description */}
         <motion.p
           variants={fadeUp} initial="hidden" animate="visible" custom={2}
           style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "36px", maxWidth: "700px", margin: "0 auto 36px" }}
@@ -71,7 +65,6 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
           We conduct cybersecurity awareness programs and training sessions that educate, engage, and empower individuals to stay safe in the digital world.
         </motion.p>
 
-        {/* Filter buttons */}
         <motion.div
           variants={fadeUp} initial="hidden" animate="visible" custom={3}
           className="inline-flex items-center justify-center gap-2 flex-wrap rounded-full p-1.5"
@@ -108,9 +101,6 @@ function ClientsHero({ activeFilter, setActiveFilter }: {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   SINGLE CLIENT CARD
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function WavyCheckIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 15.4998 15.4997" fill="none" className="flex-shrink-0">
@@ -144,7 +134,7 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
       whileHover={{ y: -6, boxShadow: "inset 0px 2px 10px 0px rgba(23,107,240,0.4), 0 12px 32px rgba(1,90,170,0.13)" }}
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
     >
-      {/* Image area */}
+
       <div className="relative overflow-hidden rounded-t-[8px] bg-slate-100 aspect-[16/10] max-h-[260px]">
         <ResponsivePicture
           slug={client.mediaSlug}
@@ -154,7 +144,6 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
           sizes="(max-width: 768px) 100vw, 400px"
         />
 
-        {/* Program label at bottom of image */}
         <div
           className="absolute bottom-0 left-0 right-0 flex items-end justify-center pb-3"
           style={{ background: "linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%)", height: "80px" }}
@@ -165,9 +154,8 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
         </div>
       </div>
 
-      {/* Card body */}
       <div className="flex flex-col gap-3 p-5 sm:p-6 flex-1">
-        {/* Institution + verified */}
+
         <div className="flex items-center gap-2 flex-wrap min-w-0">
           <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", letterSpacing: "0.32px", color: "#000", lineHeight: 1.2 }}>
             {client.institution}
@@ -175,12 +163,10 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
           <WavyCheckIcon />
         </div>
 
-        {/* Description */}
         <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "13px", letterSpacing: "0.26px", color: "#6D6D6D", lineHeight: 1.65, margin: 0, flexGrow: 1 }}>
           {client.desc}
         </p>
 
-        {/* Participants badge */}
         <div
           className="self-start flex items-center gap-2 rounded-[8px] px-3 py-2"
           style={{ background: "#fff", boxShadow: "1px 1px 4px 0px rgba(1,90,170,0.25)" }}
@@ -199,9 +185,6 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   CLIENTS GRID
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function ClientsGrid({ activeFilter }: { activeFilter: Category }) {
   const filtered = activeFilter === "All Clients"
     ? allClients
@@ -256,9 +239,6 @@ function ClientsGrid({ activeFilter }: { activeFilter: Category }) {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   PARTNERS SECTION â€” "Partnering with Leaders Worldwide"
-â•â•â•â•â••â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function PartnersSection() {
   const partners: { mediaSlug: MediaSlug; alt: string }[] = [
     { mediaSlug: "logo-thirukkural-transport", alt: "Thirukkural Transport" },
@@ -276,7 +256,7 @@ function PartnersSection() {
   return (
     <section className="w-full bg-white py-20 px-8 md:px-14 lg:px-20 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
-        {/* Label */}
+
         <motion.p
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
           className="text-[#015AAA] font-bold text-[14px] tracking-[0.05em] uppercase mb-4"
@@ -285,7 +265,6 @@ function PartnersSection() {
           Trusted by Industry & Academia
         </motion.p>
 
-        {/* Heading */}
         <motion.h2
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
           className="text-gray-900 font-bold text-4xl md:text-5xl mb-6"
@@ -294,7 +273,6 @@ function PartnersSection() {
           Partnering with Leaders Worldwide
         </motion.h2>
 
-        {/* Subtitle */}
         <motion.p
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
           className="text-gray-500 font-medium text-lg max-w-3xl mb-16 leading-relaxed"
@@ -303,7 +281,6 @@ function PartnersSection() {
           We are proud to work with innovative companies and academic institutions that trust us to secure their digital future.
         </motion.p>
 
-        {/* Logo Grid */}
         <div className="flex flex-wrap justify-center gap-6 md:gap-8">
           {partners.map((partner, index) => (
             <motion.div
@@ -327,9 +304,6 @@ function PartnersSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   FLOATING STATS BAR (parallax accent)
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function StatsBanner() {
   const stats = CLIENT_IMPACT_STATS.map((s) => ({
     value: s.value,
@@ -373,9 +347,6 @@ function StatsBanner() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MAIN PAGE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function ClientsPage() {
   const [activeFilter, setActiveFilter] = useState<Category>("All Clients");
 
@@ -407,4 +378,3 @@ export default function ClientsPage() {
     </div>
   );
 }
-

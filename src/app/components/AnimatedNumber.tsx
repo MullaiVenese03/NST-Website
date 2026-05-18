@@ -8,7 +8,7 @@ type AnimatedNumberProps = {
 };
 
 function parseNumberToken(value: string) {
-  // Keep 24/7 static per design request.
+
   if (value.includes("24/7")) return null;
 
   const match = value.match(/^([^\d+-]*)([+-]?\d[\d,]*(?:\.\d+)?)(.*)$/);

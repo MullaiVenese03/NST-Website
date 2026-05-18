@@ -67,7 +67,7 @@ export default function AboutSection() {
   return (
     <section className="w-full bg-white overflow-hidden">
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-w-0">
-        {/* Left — Image */}
+
         <motion.div
           className="relative w-full lg:w-[42%] min-h-[220px] sm:min-h-[280px] lg:min-h-[360px] max-h-[min(48vh,360px)] lg:max-h-[420px] overflow-hidden"
           variants={fadeLeft}
@@ -83,7 +83,6 @@ export default function AboutSection() {
           />
         </motion.div>
 
-        {/* Right — Content */}
         <div className="flex-1 flex flex-col justify-center px-6 sm:px-8 lg:px-16 py-10 sm:py-12 lg:py-14 min-w-0">
           <motion.p
             custom={0}
@@ -129,7 +128,6 @@ export default function AboutSection() {
             innovation, transparency, and relentless dedication.
           </motion.p>
 
-          {/* Feature cards — stack on mobile, row on sm+ */}
           <motion.div
             custom={3}
             variants={fadeUp}

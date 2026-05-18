@@ -13,8 +13,7 @@ const navItems = [
   { name: "Services", href: "services", path: "/services" },
   { name: "Clients", href: "testimonials", path: "/clients" },
   { name: "EdTech", href: "edtech", path: "/edtech" },
-  // TEMPORARILY DISABLED - NEX nav link will be re-enabled after project completion
-  // { name: "NEX", href: "nex", path: "/#nex" },
+
 ];
 
 function NstLogo() {
@@ -130,7 +129,6 @@ export default function TopNav() {
             NebulaSafeTech
           </span>
         </button>
-
 
         <div className="flex items-center gap-2 shrink-0 ml-auto">
           <motion.button

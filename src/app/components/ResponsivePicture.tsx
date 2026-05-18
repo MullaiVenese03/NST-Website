@@ -14,7 +14,7 @@ export type ResponsivePictureProps = {
   className?: string;
   style?: CSSProperties;
   sizes?: string;
-  /** LCP / above-the-fold: eager load + high fetch priority */
+
   priority?: boolean;
   profile?: MediaProfile;
 };

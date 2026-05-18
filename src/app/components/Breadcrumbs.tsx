@@ -5,7 +5,7 @@ export type BreadcrumbItem = { name: string; path: string };
 
 type BreadcrumbsProps = {
   items: BreadcrumbItem[];
-  /** Visually compact variant for inner pages */
+  
   className?: string;
 };
 

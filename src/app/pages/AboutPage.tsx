@@ -16,7 +16,6 @@ import { useParallaxY } from "../utils/motionPresets";
 import { ResponsivePicture } from "../components/ResponsivePicture";
 import type { MediaSlug } from "../utils/media";
 
-/* â”€â”€ Animation variants â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
@@ -44,9 +43,6 @@ const fadeRight: Variants = {
   },
 };
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   HERO â€” "Built by defenders, for defenders"
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function HeroAboutSection() {
   const imgRef = useRef<HTMLDivElement>(null);
   const y = useParallaxY(imgRef, 40);
@@ -56,9 +52,9 @@ function HeroAboutSection() {
       <div className="max-w-[1440px] mx-auto">
         <Breadcrumbs className="mb-6 sm:mb-8" items={[...PAGE_BREADCRUMBS.about]} />
         <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
-        {/* Left: content */}
+
         <div className="flex-1 min-w-0">
-          {/* Label */}
+
           <motion.p
             variants={fadeUp}
             initial="hidden"
@@ -78,7 +74,6 @@ function HeroAboutSection() {
             About Us
           </motion.p>
 
-          {/* Heading */}
           <motion.h1
             variants={fadeUp}
             initial="hidden"
@@ -100,7 +95,6 @@ function HeroAboutSection() {
             for defenders.
           </motion.h1>
 
-          {/* Description */}
           <motion.p
             variants={fadeUp}
             initial="hidden"
@@ -123,7 +117,6 @@ function HeroAboutSection() {
             transparency, and relentless dedication.
           </motion.p>
 
-          {/* Feature icons row */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -132,7 +125,7 @@ function HeroAboutSection() {
             custom={3}
             className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-2 border border-slate-100 rounded-2xl p-4 sm:p-6 bg-slate-50/30 shadow-sm w-full max-w-xl"
           >
-            {/* Expert-Led Security */}
+
             <div className="flex flex-col items-center gap-3 flex-1 px-2 py-3 sm:py-0 min-h-[100px] sm:min-h-[120px] justify-center">
               <div className="w-[64px] h-[64px] relative overflow-hidden">
                 <svg className="w-full h-full" fill="none" viewBox="0 0 57 48">
@@ -155,7 +148,6 @@ function HeroAboutSection() {
               </div>
             </div>
 
-            {/* Proactive Protection */}
             <div className="flex flex-col items-center gap-3 flex-1 px-2 py-3 sm:py-0 min-h-[100px] sm:min-h-[120px] justify-center">
               <div className="w-[64px] h-[64px] relative overflow-hidden">
                 <svg className="w-full h-full" fill="none" viewBox="0 0 51 56.5404">
@@ -178,7 +170,6 @@ function HeroAboutSection() {
               </div>
             </div>
 
-            {/* 24/7 */}
             <div className="flex flex-col items-center gap-3 flex-1 px-2 py-3 sm:py-0 min-h-[100px] sm:min-h-[120px] justify-center">
               <div className="w-[64px] h-[64px] relative overflow-hidden flex items-center justify-center">
                 <svg className="w-full h-full" fill="none" viewBox="0 0 48.6877 48.6465">
@@ -198,7 +189,6 @@ function HeroAboutSection() {
           </motion.div>
         </div>
 
-        {/* Right: dashboard image with parallax */}
         <motion.div
           ref={imgRef}
           className="flex-1 min-w-0 relative"
@@ -216,7 +206,7 @@ function HeroAboutSection() {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </motion.div>
-          {/* Decorative glow */}
+
           <div
             className="absolute -z-10 inset-0 rounded-full bg-[#015AAA]/10 opacity-30"
             aria-hidden
@@ -229,9 +219,6 @@ function HeroAboutSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   OUR STORY â€” "Securing Today, Protecting Tomorrow"
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function OurStorySection() {
   const imgRef = useRef<HTMLDivElement>(null);
   const y = useParallaxY(imgRef, 55);
@@ -239,7 +226,7 @@ function OurStorySection() {
   return (
     <section className="w-full overflow-hidden py-16 sm:py-20 px-4 sm:px-8 md:px-14 lg:px-20" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
-        {/* Left: text */}
+
         <div className="flex-1 min-w-0">
           <motion.p
             variants={fadeUp}
@@ -308,7 +295,6 @@ function OurStorySection() {
           ))}
         </div>
 
-        {/* Right: team photo with parallax */}
         <div ref={imgRef} className="flex-1 min-w-0 relative overflow-hidden rounded-[12px] min-h-[240px] sm:min-h-[320px] max-h-[min(52vh,420px)] lg:max-h-none">
           <motion.div
             variants={fadeRight}
@@ -332,9 +318,6 @@ function OurStorySection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   STATS â€” 99.98%, 100+, 10+
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const statsData = [
   {
     value: "50+",
@@ -421,9 +404,6 @@ function StatsSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MISSION / VISION / VALUES
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 function MissionVisionSection() {
   const cards = [
     {
@@ -485,7 +465,7 @@ function MissionVisionSection() {
   return (
     <section className="w-full py-20 px-8 md:px-14 lg:px-20 overflow-hidden" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto">
-        {/* Label */}
+
         <motion.p
           variants={fadeUp}
           initial="hidden"
@@ -504,7 +484,6 @@ function MissionVisionSection() {
           Our Mission, Vision &amp; Values
         </motion.p>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {cards.map((card, i) => (
             <motion.div
@@ -544,9 +523,6 @@ function MissionVisionSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   PARTNERS / CLIENTS
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 const partnersRow1: { mediaSlug: MediaSlug; alt: string; size: number }[] = [
   { mediaSlug: "logo-thirukkural-transport", alt: "Thirukkural Transport", size: 100 },
   { mediaSlug: "logo-st-joseph-college", alt: "St. Joseph College", size: 100 },
@@ -574,7 +550,7 @@ function PartnersSection() {
   return (
     <section className="w-full bg-white py-20 px-8 md:px-14 lg:px-20 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
-        {/* Header */}
+
         <motion.div
           variants={fadeLeft}
           initial="hidden"
@@ -623,7 +599,6 @@ function PartnersSection() {
           </p>
         </motion.div>
 
-        {/* Row 1 â€” 6 logos */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-5 mb-5">
           {partnersRow1.map((p, i) => (
             <motion.div
@@ -649,7 +624,6 @@ function PartnersSection() {
           ))}
         </div>
 
-        {/* Row 2 â€” mix of normal + wide */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
           {partnersRow2.map((p, i) => (
             <motion.div
@@ -684,9 +658,6 @@ function PartnersSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MAIN PAGE
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 export default function AboutPage() {
   useEffect(() => {
     scrollToTopInstant();
@@ -701,7 +672,6 @@ export default function AboutPage() {
       <SeoHead meta={ABOUT_SEO} structuredData={pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.about)} />
       <TopNav />
 
-      {/* Animated page entry */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -720,4 +690,3 @@ export default function AboutPage() {
     </div>
   );
 }
-

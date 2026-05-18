@@ -97,7 +97,6 @@ export default function TestimonialsSection() {
     <section className="w-full bg-white py-12 sm:py-14 px-4 sm:px-6 md:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-[1440px] mx-auto">
 
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: light ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -132,7 +131,6 @@ export default function TestimonialsSection() {
           </h2>
         </motion.div>
 
-        {/* Cards */}
         <div ref={containerRef} className="relative" style={{ height: cardHeight, overflow: "hidden" }}>
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
@@ -162,14 +160,14 @@ export default function TestimonialsSection() {
                     profile="testimonial"
                     sizes="(max-width: 720px) 92vw, 420px"
                   />
-                  {/* Gradient overlay */}
+
                   <div
                     className="absolute inset-0"
                     style={{
                       background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
                     }}
                   />
-                  {/* Card title */}
+
                   <p
                     className="absolute bottom-5 left-0 right-0 text-center text-white"
                     style={{
@@ -189,10 +187,8 @@ export default function TestimonialsSection() {
           </AnimatePresence>
         </div>
 
-        {/* Description + navigation */}
         <div className="mt-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
 
-          {/* Animated description */}
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={activeIndex}
@@ -247,9 +243,8 @@ export default function TestimonialsSection() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation */}
           <div className="flex items-center gap-3 flex-shrink-0 self-center sm:self-end pb-1">
-            {/* Dot indicators */}
+
             <motion.div className="flex items-center gap-2 mr-3" role="tablist" aria-label="Testimonial slides">
               {slides.map((_, i) => (
                 <button
@@ -274,7 +269,6 @@ export default function TestimonialsSection() {
               ))}
             </motion.div>
 
-            {/* Left arrow */}
             <button
               type="button"
               onClick={goPrev}

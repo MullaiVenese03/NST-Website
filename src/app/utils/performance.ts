@@ -17,7 +17,7 @@ function prefersLightExperience(): boolean {
   return narrow || reducedMotion || saveData || slowNetwork || lowMemory;
 }
 
-/** Mobile / save-data / reduced-motion / low-memory: skip heavy video and motion. */
+
 export function useLightExperience(): boolean {
   const [light, setLight] = useState(prefersLightExperience);
 
@@ -39,7 +39,7 @@ export function useLightExperience(): boolean {
   return light;
 }
 
-/** True when full motion (parallax, marquees, stagger) is allowed. */
+
 export function useMotionEnabled(): boolean {
   return !useLightExperience();
 }
