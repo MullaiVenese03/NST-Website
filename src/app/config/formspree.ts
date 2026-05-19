@@ -1,5 +1,5 @@
-/** Official Formspree form hash — https://formspree.io/forms/xkooggpv */
-export const FORMSPREE_FORM_ID = "xkooggpv";
+/** Official Formspree form hash — https://formspree.io/forms/xgoqvrkb */
+export const FORMSPREE_FORM_ID = "xgoqvrkb";
 
 const FORMSPREE_ID_PATTERN = /^[a-z0-9]{6,12}$/i;
 
