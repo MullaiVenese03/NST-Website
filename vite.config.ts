@@ -20,6 +20,21 @@ function charsetFirstInHead(): Plugin {
   };
 }
 
+/** Mirrors vercel.json CSP on preview so Formspree/CSP issues reproduce locally. */
+function vercelCspOnPreview(): Plugin {
+  const csp =
+    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://formspree.io; media-src 'self'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests";
+  return {
+    name: "vercel-csp-on-preview",
+    configurePreviewServer(server) {
+      server.middlewares.use((_req, res, next) => {
+        res.setHeader("Content-Security-Policy", csp);
+        next();
+      });
+    },
+  };
+}
+
 function htmlCharsetResponseHeader(): Plugin {
   return {
     name: "html-charset-response-header",
@@ -83,6 +98,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
     htmlCharsetResponseHeader(),
+    vercelCspOnPreview(),
     compression({
       algorithms: ["gzip", "brotliCompress"],
       exclude: [/\.(br|gz)$/, /\.(png|jpe?g|webp|avif|gif|svg|ico|mp4|webm)$/],
