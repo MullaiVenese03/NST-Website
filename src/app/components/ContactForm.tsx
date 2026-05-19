@@ -1,10 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Loader2 } from "lucide-react";
-import { ValidationError } from "@formspree/react";
-import type { ContactFormFieldErrors, ContactFormValues } from "../utils/contactFormValidation";
+import { useForm, ValidationError } from "@formspree/react";
+import { ACTIVE_FORMSPREE_FORM_ID } from "../config/formspree";
+import {
+  readContactFormValues,
+  validateContactForm,
+  type ContactFormFieldErrors,
+} from "../utils/contactFormValidation";
 import { getFormspreeErrorMessage } from "../utils/contactFormspree";
-import { useContactFormspree, useResetFormspreeOnSuccess } from "../hooks/useContactFormspree";
 
 export type ContactFormProps = {
   id?: string;
@@ -19,13 +23,7 @@ export type ContactFormProps = {
 const inputClass =
   "w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] focus:ring-2 focus:ring-[#015AAA]/15 transition-all placeholder:text-slate-400 text-slate-900";
 
-const emptyValues = (service = ""): ContactFormValues => ({
-  name: "",
-  email: "",
-  phone: "",
-  service,
-  message: "",
-});
+const SUPPORT_EMAIL = "info@nebulasafetech.com";
 
 export default function ContactForm({
   id = "contact-form",
@@ -36,45 +34,32 @@ export default function ContactForm({
   className = "",
   variant = "default",
 }: ContactFormProps) {
-  const [form, setForm] = useState<ContactFormValues>(() => emptyValues(defaultService));
+  const [state, handleSubmit, reset] = useForm(ACTIVE_FORMSPREE_FORM_ID);
   const [errors, setErrors] = useState<ContactFormFieldErrors>({});
-  const { state, submitContact, resetFormspree } = useContactFormspree();
+  const [formKey, setFormKey] = useState(0);
 
   const accent = variant === "edtech" ? "#0A66C2" : "#015AAA";
   const formspreeErrorMessage = getFormspreeErrorMessage(state.errors);
+  const showServiceSelect = Boolean(serviceOptions?.length) && !defaultService;
 
   useEffect(() => {
-    setForm((prev) => ({ ...prev, service: defaultService }));
-  }, [defaultService]);
-
-  const resetFields = useCallback(() => {
-    setForm(emptyValues(defaultService));
+    if (!state.succeeded) return;
     setErrors({});
-  }, [defaultService]);
+    setFormKey((k) => k + 1);
+    const timer = window.setTimeout(() => reset(), 4500);
+    return () => window.clearTimeout(timer);
+  }, [state.succeeded, reset]);
 
-  useResetFormspreeOnSuccess(state.succeeded, resetFormspree, resetFields);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  ) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-    if (errors[name as keyof ContactFormValues]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const clientErrors = await submitContact(form);
-    if (clientErrors) {
+    const clientErrors = validateContactForm(readContactFormValues(e.currentTarget));
+    if (Object.keys(clientErrors).length > 0) {
       setErrors(clientErrors);
-    } else {
-      setErrors({});
+      return;
     }
+    setErrors({});
+    void handleSubmit(e);
   };
-
-  const showServiceSelect = Boolean(serviceOptions?.length) && !defaultService;
 
   return (
     <section id={id} className={`scroll-mt-28 ${className}`} aria-labelledby={`${id}-heading`}>
@@ -120,7 +105,8 @@ export default function ContactForm({
           </motion.div>
         ) : (
           <form
-            onSubmit={handleSubmit}
+            key={formKey}
+            onSubmit={onSubmit}
             className="space-y-4"
             noValidate
             aria-busy={state.submitting}
@@ -128,8 +114,8 @@ export default function ContactForm({
             {formspreeErrorMessage ? (
               <p className="text-red-600 text-sm m-0 p-3 rounded-xl bg-red-50 border border-red-100" role="alert">
                 {formspreeErrorMessage}{" "}
-                <a href="mailto:info@nebulasafetech.com" className="font-semibold underline">
-                  info@nebulasafetech.com
+                <a href={`mailto:${SUPPORT_EMAIL}`} className="font-semibold underline">
+                  {SUPPORT_EMAIL}
                 </a>
                 .
               </p>
@@ -147,8 +133,6 @@ export default function ContactForm({
                   placeholder="Name *"
                   required
                   autoComplete="name"
-                  value={form.name}
-                  onChange={handleChange}
                   disabled={state.submitting}
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? `${id}-name-error` : undefined}
@@ -178,8 +162,6 @@ export default function ContactForm({
                   placeholder="Email *"
                   required
                   autoComplete="email"
-                  value={form.email}
-                  onChange={handleChange}
                   disabled={state.submitting}
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? `${id}-email-error` : undefined}
@@ -211,8 +193,6 @@ export default function ContactForm({
                   type="tel"
                   placeholder="Phone"
                   autoComplete="tel"
-                  value={form.phone}
-                  onChange={handleChange}
                   disabled={state.submitting}
                   aria-invalid={!!errors.phone}
                   aria-describedby={errors.phone ? `${id}-phone-error` : undefined}
@@ -239,8 +219,7 @@ export default function ContactForm({
                   <select
                     id={`${id}-service`}
                     name="service"
-                    value={form.service}
-                    onChange={handleChange}
+                    defaultValue=""
                     disabled={state.submitting}
                     className={`${inputClass} appearance-none`}
                   >
@@ -257,8 +236,7 @@ export default function ContactForm({
                     name="service"
                     type="text"
                     placeholder="Service type"
-                    value={form.service}
-                    onChange={handleChange}
+                    defaultValue={defaultService}
                     readOnly={!!defaultService}
                     disabled={state.submitting}
                     className={`${inputClass}${defaultService ? " bg-slate-50 text-slate-600" : ""}`}
@@ -283,8 +261,6 @@ export default function ContactForm({
                 placeholder="How can we help? *"
                 required
                 rows={5}
-                value={form.message}
-                onChange={handleChange}
                 disabled={state.submitting}
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? `${id}-message-error` : undefined}

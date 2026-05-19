@@ -2,7 +2,6 @@
 
 interface ImportMetaEnv {
   readonly VITE_FORMSPREE_FORM_ID?: string;
-  readonly VITE_FORMSPREE_PROJECT_ID?: string;
 }
 
 interface ImportMeta {
