@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, ArrowRight, Linkedin, Instagram, Twitter, type LucideIcon } from "lucide-react";
+import { Phone, Mail, MapPin, Linkedin, Instagram, Twitter, type LucideIcon } from "lucide-react";
 import { BUSINESS_IDENTITY } from "../../seo/seoConfig";
 
 const FOOTER_SERVICES = [
@@ -11,14 +10,6 @@ const FOOTER_SERVICES = [
   { label: "UI/UX Design Services", path: "/services/ui-ux-design" },
   { label: "EdTech & Cybersecurity Training", path: "/services/edtech-training" },
 ] as const;
-
-const FOOTER_SERVICE_SELECT_OPTIONS = FOOTER_SERVICES.filter((s) => s.path !== "/services");
-
-function footerServiceForPath(pathname: string): string {
-  const match = FOOTER_SERVICES.find((s) => s.path === pathname);
-  if (!match || match.path === "/services") return "";
-  return match.label;
-}
 
 function FooterNavLink({ to, children }: { to: string; children: React.ReactNode }) {
   const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -122,41 +113,10 @@ function SocialBtn({
 }
 
 export default function FooterSection() {
-  const { pathname } = useLocation();
-  const serviceFromRoute = useMemo(() => footerServiceForPath(pathname), [pathname]);
-
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    if (serviceFromRoute) {
-      setForm((prev) => ({ ...prev, service: serviceFromRoute }));
-    }
-  }, [serviceFromRoute]);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4000);
-    setForm({ name: "", email: "", phone: "", service: serviceFromRoute, message: "" });
-  };
-
   return (
     <footer id="contact" className="w-full bg-white pt-12 sm:pt-16 lg:pt-20 overflow-x-clip scroll-mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-16 items-start">
+      <motion.div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
           <motion.div className="space-y-4 sm:space-y-5">
             <div className="space-y-3 sm:space-y-4">
               <p className="text-[#015AAA] text-sm sm:text-base font-bold uppercase tracking-wider m-0">Get In Touch</p>
@@ -171,7 +131,7 @@ export default function FooterSection() {
             </motion.div>
           </motion.div>
 
-          <div className="grid grid-cols-2 py-2 pb-10 sm:pb-12 lg:pb-14 min-w-0">
+          <div className="grid grid-cols-2 gap-8 sm:gap-10 py-2 pb-10 sm:pb-12 lg:pb-14 min-w-0 lg:justify-items-end lg:max-w-md lg:ml-auto w-full">
             <motion.div className="flex flex-col gap-5 sm:gap-6 min-w-0">
               <p className="text-base sm:text-lg font-bold text-slate-900 m-0">Company</p>
               <nav className="flex flex-col gap-3.5 sm:gap-4" aria-label="Company">
@@ -180,7 +140,6 @@ export default function FooterSection() {
                 <FooterNavLink to="/services">Services</FooterNavLink>
                 <FooterNavLink to="/clients">Clients</FooterNavLink>
                 <FooterNavLink to="/edtech">EdTech</FooterNavLink>
-
               </nav>
             </motion.div>
 
@@ -195,92 +154,7 @@ export default function FooterSection() {
               </nav>
             </div>
           </div>
-
-          <motion.div className="min-w-0">
-            <div className="bg-white rounded-2xl border border-slate-100 p-2 sm:p-3">
-              {submitted ? (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="flex flex-col items-center justify-center py-12 text-center"
-                >
-                  <div className="w-12 h-12 bg-green-50 text-green-500 rounded-full flex items-center justify-center mb-4">
-                    <ArrowRight size={20} />
-                  </div>
-                  <p className="text-slate-900 font-bold">Message Sent!</p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-3">
-                  <input
-                    name="name"
-                    type="text"
-                    placeholder="Name"
-                    required
-                    autoComplete="name"
-                    value={form.name}
-                    onChange={handleChange}
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
-                  />
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="Email Address"
-                    required
-                    autoComplete="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
-                  />
-                  <input
-                    name="phone"
-                    type="tel"
-                    placeholder="Phone Number"
-                    autoComplete="tel"
-                    value={form.phone}
-                    onChange={handleChange}
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all placeholder:text-slate-400"
-                  />
-                  <label htmlFor="footer-service" className="sr-only">
-                    Service
-                  </label>
-                  <select
-                    id="footer-service"
-                    name="service"
-                    value={form.service}
-                    onChange={handleChange}
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all text-slate-900 appearance-none"
-                  >
-                    <option value="">Select a service</option>
-                    {FOOTER_SERVICE_SELECT_OPTIONS.map((option) => (
-                      <option key={option.path} value={option.label}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  <textarea
-                    name="message"
-                    placeholder="How can we help ?"
-                    required
-                    rows={4}
-                    autoComplete="off"
-                    value={form.message}
-                    onChange={handleChange}
-                    className="w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] transition-all resize-none placeholder:text-slate-400"
-                  />
-                  <motion.button
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    className="w-full bg-[#015AAA] text-white font-semibold py-3.5 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-100/50 min-h-[44px]"
-                  >
-                    Send Message
-                    <ArrowRight size={16} />
-                  </motion.button>
-                </form>
-              )}
-            </div>
-          </motion.div>
-        </div>
+        </motion.div>
 
         <div
           className="relative min-h-50 max-h-100 w-full overflow-hidden pointer-events-none select-none flex items-end justify-center"
@@ -307,7 +181,7 @@ export default function FooterSection() {
         </div>
 
         <div className="pt-3 sm:pt-4 pb-8 md:pb-32 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 border-b-2 border-b-blue-500">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-center sm:text-left">
+          <motion.div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-center sm:text-left">
             <p className="text-slate-500 text-sm m-0">
               Copyright &copy; 2026{" "}
               <span className="text-blue-500" style={{ fontFamily: "var(--font-company)" }}>
@@ -326,7 +200,7 @@ export default function FooterSection() {
                 Terms & Conditions
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           <div className="flex items-center justify-center gap-4">
             <SocialBtn href="https://linkedin.com/company/nebulasafetech-nst/" label="LinkedIn">
@@ -340,8 +214,7 @@ export default function FooterSection() {
             </SocialBtn>
           </div>
         </div>
-      </div>
-
+      </motion.div>
     </footer>
   );
 }

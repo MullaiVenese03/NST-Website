@@ -1,52 +1,31 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { ValidationError } from "@formspree/react";
+import type { ContactFormFieldErrors, ContactFormValues } from "../utils/contactFormValidation";
+import { getFormspreeErrorMessage } from "../utils/contactFormspree";
+import { useContactFormspree, useResetFormspreeOnSuccess } from "../hooks/useContactFormspree";
 
 export type ContactFormProps = {
   id?: string;
   title?: string;
   subtitle?: string;
-  
   defaultService?: string;
   serviceOptions?: string[];
   className?: string;
   variant?: "default" | "edtech";
 };
 
-type FormState = {
-  name: string;
-  email: string;
-  phone: string;
-  service: string;
-  message: string;
-};
-
-type FormErrors = Partial<Record<keyof FormState, string>>;
-
-function validateForm(values: FormState): FormErrors {
-  const errors: FormErrors = {};
-  if (!values.name.trim()) errors.name = "Name is required";
-  else if (values.name.trim().length < 2) errors.name = "Please enter your full name";
-
-  if (!values.email.trim()) errors.email = "Email is required";
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
-    errors.email = "Enter a valid email address";
-  }
-
-  if (values.phone.trim() && !/^[\d\s+\-()]{7,20}$/.test(values.phone.trim())) {
-    errors.phone = "Enter a valid phone number";
-  }
-
-  if (!values.message.trim()) errors.message = "Message is required";
-  else if (values.message.trim().length < 10) {
-    errors.message = "Please provide a bit more detail (at least 10 characters)";
-  }
-
-  return errors;
-}
-
 const inputClass =
   "w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] focus:ring-2 focus:ring-[#015AAA]/15 transition-all placeholder:text-slate-400 text-slate-900";
+
+const emptyValues = (service = ""): ContactFormValues => ({
+  name: "",
+  email: "",
+  phone: "",
+  service,
+  message: "",
+});
 
 export default function ContactForm({
   id = "contact-form",
@@ -57,44 +36,45 @@ export default function ContactForm({
   className = "",
   variant = "default",
 }: ContactFormProps) {
-  const [form, setForm] = useState<FormState>({
-    name: "",
-    email: "",
-    phone: "",
-    service: defaultService,
-    message: "",
-  });
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState<ContactFormValues>(() => emptyValues(defaultService));
+  const [errors, setErrors] = useState<ContactFormFieldErrors>({});
+  const { state, submitContact, resetFormspree } = useContactFormspree();
+
+  const accent = variant === "edtech" ? "#0A66C2" : "#015AAA";
+  const formspreeErrorMessage = getFormspreeErrorMessage(state.errors);
 
   useEffect(() => {
     setForm((prev) => ({ ...prev, service: defaultService }));
   }, [defaultService]);
 
-  const accent = variant === "edtech" ? "#0A66C2" : "#015AAA";
+  const resetFields = useCallback(() => {
+    setForm(emptyValues(defaultService));
+    setErrors({});
+  }, [defaultService]);
+
+  useResetFormspreeOnSuccess(state.succeeded, resetFormspree, resetFields);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    if (errors[name as keyof FormState]) {
+    if (errors[name as keyof ContactFormValues]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const nextErrors = validateForm(form);
-    if (Object.keys(nextErrors).length > 0) {
-      setErrors(nextErrors);
-      return;
+    const clientErrors = await submitContact(form);
+    if (clientErrors) {
+      setErrors(clientErrors);
+    } else {
+      setErrors({});
     }
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 4500);
-    setForm({ name: "", email: "", phone: "", service: defaultService, message: "" });
-    setErrors({});
   };
+
+  const showServiceSelect = Boolean(serviceOptions?.length) && !defaultService;
 
   return (
     <section id={id} className={`scroll-mt-28 ${className}`} aria-labelledby={`${id}-heading`}>
@@ -115,19 +95,19 @@ export default function ContactForm({
           <h2
             id={`${id}-heading`}
             className="text-2xl md:text-3xl font-bold text-slate-900 m-0 mb-2"
-            style={{ }}
           >
             {title}
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed m-0 max-w-xl">{subtitle}</p>
         </div>
 
-        {submitted ? (
+        {state.succeeded ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center justify-center py-12 text-center"
             role="status"
+            aria-live="polite"
           >
             <motion.div
               className="w-14 h-14 rounded-full flex items-center justify-center mb-4"
@@ -135,11 +115,26 @@ export default function ContactForm({
             >
               <ArrowRight size={22} aria-hidden />
             </motion.div>
-            <p className="text-slate-900 font-bold text-lg m-0">Thank you - we&apos;ll be in touch soon.</p>
+            <p className="text-slate-900 font-bold text-lg m-0">Thank you — we&apos;ll be in touch soon.</p>
             <p className="text-slate-500 text-sm mt-2 m-0">Your message has been received.</p>
           </motion.div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4"
+            noValidate
+            aria-busy={state.submitting}
+          >
+            {formspreeErrorMessage ? (
+              <p className="text-red-600 text-sm m-0 p-3 rounded-xl bg-red-50 border border-red-100" role="alert">
+                {formspreeErrorMessage}{" "}
+                <a href="mailto:info@nebulasafetech.com" className="font-semibold underline">
+                  info@nebulasafetech.com
+                </a>
+                .
+              </p>
+            ) : null}
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor={`${id}-name`} className="sr-only">
@@ -154,6 +149,7 @@ export default function ContactForm({
                   autoComplete="name"
                   value={form.name}
                   onChange={handleChange}
+                  disabled={state.submitting}
                   aria-invalid={!!errors.name}
                   aria-describedby={errors.name ? `${id}-name-error` : undefined}
                   className={inputClass}
@@ -162,7 +158,14 @@ export default function ContactForm({
                   <p id={`${id}-name-error`} className="text-red-600 text-xs mt-1.5 m-0" role="alert">
                     {errors.name}
                   </p>
-                ) : null}
+                ) : (
+                  <ValidationError
+                    prefix="Name"
+                    field="name"
+                    errors={state.errors}
+                    className="text-red-600 text-xs mt-1.5 m-0"
+                  />
+                )}
               </div>
               <div>
                 <label htmlFor={`${id}-email`} className="sr-only">
@@ -177,6 +180,7 @@ export default function ContactForm({
                   autoComplete="email"
                   value={form.email}
                   onChange={handleChange}
+                  disabled={state.submitting}
                   aria-invalid={!!errors.email}
                   aria-describedby={errors.email ? `${id}-email-error` : undefined}
                   className={inputClass}
@@ -185,7 +189,14 @@ export default function ContactForm({
                   <p id={`${id}-email-error`} className="text-red-600 text-xs mt-1.5 m-0" role="alert">
                     {errors.email}
                   </p>
-                ) : null}
+                ) : (
+                  <ValidationError
+                    prefix="Email"
+                    field="email"
+                    errors={state.errors}
+                    className="text-red-600 text-xs mt-1.5 m-0"
+                  />
+                )}
               </div>
             </div>
 
@@ -202,6 +213,7 @@ export default function ContactForm({
                   autoComplete="tel"
                   value={form.phone}
                   onChange={handleChange}
+                  disabled={state.submitting}
                   aria-invalid={!!errors.phone}
                   aria-describedby={errors.phone ? `${id}-phone-error` : undefined}
                   className={inputClass}
@@ -210,22 +222,30 @@ export default function ContactForm({
                   <p id={`${id}-phone-error`} className="text-red-600 text-xs mt-1.5 m-0" role="alert">
                     {errors.phone}
                   </p>
-                ) : null}
+                ) : (
+                  <ValidationError
+                    prefix="Phone"
+                    field="phone"
+                    errors={state.errors}
+                    className="text-red-600 text-xs mt-1.5 m-0"
+                  />
+                )}
               </div>
               <div>
                 <label htmlFor={`${id}-service`} className="sr-only">
-                  Service
+                  Service type
                 </label>
-                {serviceOptions && serviceOptions.length > 0 && !defaultService ? (
+                {showServiceSelect ? (
                   <select
                     id={`${id}-service`}
                     name="service"
                     value={form.service}
                     onChange={handleChange}
+                    disabled={state.submitting}
                     className={`${inputClass} appearance-none`}
                   >
                     <option value="">Select a service</option>
-                    {serviceOptions.map((opt) => (
+                    {serviceOptions!.map((opt) => (
                       <option key={opt} value={opt}>
                         {opt}
                       </option>
@@ -236,13 +256,20 @@ export default function ContactForm({
                     id={`${id}-service`}
                     name="service"
                     type="text"
-                    placeholder="Service"
+                    placeholder="Service type"
                     value={form.service}
                     onChange={handleChange}
                     readOnly={!!defaultService}
+                    disabled={state.submitting}
                     className={`${inputClass}${defaultService ? " bg-slate-50 text-slate-600" : ""}`}
                   />
                 )}
+                <ValidationError
+                  prefix="Service"
+                  field="service"
+                  errors={state.errors}
+                  className="text-red-600 text-xs mt-1.5 m-0"
+                />
               </div>
             </div>
 
@@ -258,6 +285,7 @@ export default function ContactForm({
                 rows={5}
                 value={form.message}
                 onChange={handleChange}
+                disabled={state.submitting}
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? `${id}-message-error` : undefined}
                 className={`${inputClass} resize-none min-h-[120px]`}
@@ -266,18 +294,36 @@ export default function ContactForm({
                 <p id={`${id}-message-error`} className="text-red-600 text-xs mt-1.5 m-0" role="alert">
                   {errors.message}
                 </p>
-              ) : null}
+              ) : (
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={state.errors}
+                  className="text-red-600 text-xs mt-1.5 m-0"
+                />
+              )}
             </div>
 
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full sm:w-auto min-w-[200px] text-white font-semibold py-3.5 px-8 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg border-none cursor-pointer transition-colors"
+              disabled={state.submitting}
+              whileHover={state.submitting ? undefined : { scale: 1.01 }}
+              whileTap={state.submitting ? undefined : { scale: 0.98 }}
+              className="w-full sm:w-auto min-w-[200px] text-white font-semibold py-3.5 px-8 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg border-none cursor-pointer transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
               style={{ background: accent, boxShadow: `0 8px 24px ${accent}33` }}
+              aria-disabled={state.submitting}
             >
-              Send message
-              <ArrowRight size={16} aria-hidden />
+              {state.submitting ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" aria-hidden />
+                  Sending…
+                </>
+              ) : (
+                <>
+                  Send message
+                  <ArrowRight size={16} aria-hidden />
+                </>
+              )}
             </motion.button>
           </form>
         )}
