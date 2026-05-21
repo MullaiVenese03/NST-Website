@@ -70,10 +70,10 @@ function ServicesHero() {
             Our Services
           </motion.p>
 
-          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.08, marginBottom: "20px" }}>
+          <motion.h1 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
+            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.08, marginBottom: "20px", marginTop: 0 }}>
             Smart Solutions.<br />Secure Future.
-          </motion.div>
+          </motion.h1>
 
           <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
             style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "44px", maxWidth: "540px" }}>
@@ -280,10 +280,10 @@ function OurProcessSection() {
           style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
           Our Process
         </motion.p>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
-          style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(28px,3.8vw,52px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.1, marginBottom: "14px" }}>
+        <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
+          style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(28px,3.8vw,52px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.1, marginBottom: "14px", marginTop: 0 }}>
           How We Deliver Excellence
-        </motion.div>
+        </motion.h2>
         <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
           style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "48px", maxWidth: "580px" }}>
           We combine expertise, technology, and dedication to deliver solutions that drive growth and security.
@@ -394,10 +394,10 @@ function WhyChooseUsSection() {
             style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "4px" }}>
             Why Choose Us
           </motion.p>
-          <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(26px,3.6vw,50px)", letterSpacing: "1px", color: "#000", lineHeight: 1.1 }}>
+          <motion.h2 variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
+            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(26px,3.6vw,50px)", letterSpacing: "1px", color: "#000", lineHeight: 1.1, marginTop: 0 }}>
             Your Trusted Partner<br />in Security &amp; Innovation
-          </motion.div>
+          </motion.h2>
           <motion.p variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
             style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, maxWidth: "480px" }}>
             We combine expertise, technology, and dedication to deliver solutions that drive growth and security.

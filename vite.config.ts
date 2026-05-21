@@ -1,8 +1,78 @@
-import { defineConfig, type Plugin } from "vite";
+import { defineConfig, loadEnv, type Plugin } from "vite";
 import path from "path";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import { compression } from "vite-plugin-compression2";
+
+function analyticsEnabled(env: Record<string, string>, mode: string): boolean {
+  const flag = env.VITE_ENABLE_ANALYTICS;
+  if (flag === "false") return false;
+  if (flag === "true") return true;
+  return mode === "production";
+}
+
+function injectAnalyticsHtml(env: Record<string, string>, mode: string): Plugin {
+  const enabled = analyticsEnabled(env, mode);
+  const gtmId = env.VITE_GTM_ID || "GTM-WTQS44T7";
+  const clarityId = env.VITE_CLARITY_PROJECT_ID || "wum1ijwahj";
+  const gsc = env.VITE_GSC_VERIFICATION?.trim() ?? "";
+
+  const gtmHead = enabled
+    ? `<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${gtmId}');</script>
+<!-- End Google Tag Manager -->`
+    : "";
+
+  const gtmBody = enabled
+    ? `<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->`
+    : "";
+
+  const clarityHead = enabled && clarityId
+    ? `<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "${clarityId}");
+</script>`
+    : "";
+
+  const preconnect = enabled
+    ? `<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.clarity.ms" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.clarity.ms" />`
+    : "";
+
+  const gscMeta = gsc ? `<meta name="google-site-verification" content="${gsc}" />` : "";
+
+  return {
+    name: "inject-analytics-html",
+    transformIndexHtml: {
+      order: "pre",
+      handler(html) {
+        let out = html;
+        if (out.includes("<!-- NST_ANALYTICS_HEAD -->")) {
+          out = out.replace(
+            "<!-- NST_ANALYTICS_HEAD -->",
+            `${gtmHead}\n    ${clarityHead}\n    ${preconnect}\n    ${gscMeta}`.trim() || "",
+          );
+        }
+        if (out.includes("<!-- NST_ANALYTICS_BODY -->")) {
+          out = out.replace("<!-- NST_ANALYTICS_BODY -->", gtmBody || "");
+        }
+        return out;
+      },
+    },
+  };
+}
 
 function charsetFirstInHead(): Plugin {
   const charsetTag = '<meta charset="UTF-8" />';
@@ -23,7 +93,7 @@ function charsetFirstInHead(): Plugin {
 /** Mirrors vercel.json CSP on preview so Formspree/CSP issues reproduce locally. */
 function vercelCspOnPreview(): Plugin {
   const csp =
-    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://formspree.io; media-src 'self'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests";
+    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://www.google-analytics.com; font-src 'self' data:; connect-src 'self' https://formspree.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://*.clarity.ms https://cloudflareinsights.com https://vitals.vercel-insights.com https://va.vercel-scripts.com; frame-src https://www.googletagmanager.com; media-src 'self'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests";
   return {
     name: "vercel-csp-on-preview",
     configurePreviewServer(server) {
@@ -93,8 +163,11 @@ function moveEntryScriptToBody(): Plugin {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
+  return {
   plugins: [
+    injectAnalyticsHtml(env, mode),
     react(),
     tailwindcss(),
     htmlCharsetResponseHeader(),
@@ -153,4 +226,5 @@ export default defineConfig({
     "**/*.woff2",
     "**/*.mp4",
   ],
+};
 });

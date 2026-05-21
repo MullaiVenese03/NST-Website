@@ -1,6 +1,10 @@
 import { Helmet } from "react-helmet-async";
 import type { PageSeo } from "./pageMeta";
+import { GSC_VERIFICATION } from "../analytics/analyticsConfig";
 import { absoluteUrl, defaultOgImageUrl, ORG_NAME } from "./seoConfig";
+
+const OG_IMAGE_WIDTH = 1200;
+const OG_IMAGE_HEIGHT = 630;
 import { canonicalUrlFromPathname } from "./canonicalUrls";
 import { toJsonLdScript } from "./structuredData";
 
@@ -26,11 +30,12 @@ export function SeoHead({ meta, ogImage, noindex, structuredData }: SeoHeadProps
 
   return (
     <Helmet prioritizeSeoTags>
-      <html lang="en" />
+      <html lang="en-IN" />
       <title>{meta.title}</title>
       <meta name="description" content={meta.description} />
       {kw ? <meta name="keywords" content={kw} /> : null}
       <meta name="robots" content={robots} />
+      {GSC_VERIFICATION ? <meta name="google-site-verification" content={GSC_VERIFICATION} /> : null}
       <link rel="canonical" href={canonical} />
 
       <meta property="og:locale" content="en_IN" />
@@ -40,6 +45,8 @@ export function SeoHead({ meta, ogImage, noindex, structuredData }: SeoHeadProps
       <meta property="og:description" content={meta.description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
+      <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
       <meta property="og:image:alt" content={`${ORG_NAME} - preview image`} />
 
       <meta name="twitter:card" content="summary_large_image" />

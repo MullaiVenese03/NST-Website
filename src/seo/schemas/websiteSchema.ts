@@ -4,10 +4,13 @@ export function websiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE_ORIGIN}/#website`,
     name: ORG_NAME,
     url: SITE_ORIGIN,
+    inLanguage: "en-IN",
     publisher: {
       "@type": "Organization",
+      "@id": `${SITE_ORIGIN}/#organization`,
       name: ORG_NAME,
     },
   };

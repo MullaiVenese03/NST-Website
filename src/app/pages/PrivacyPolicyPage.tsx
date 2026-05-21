@@ -205,7 +205,7 @@ export default function PrivacyPolicyPage() {
           <a href="mailto:info@nebulasafetech.com">info@nebulasafetech.com</a>
         </p>
         <p>
-          <strong>Address:</strong> India
+          <strong>Address:</strong> Hosur, Tamil Nadu, India
         </p>
       </address>
       <p>We will make our best effort to respond to and resolve any inquiries or complaints in a timely manner in accordance with applicable law.</p>

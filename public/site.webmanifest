@@ -1,0 +1,17 @@
+{
+  "name": "NebulaSafeTech",
+  "short_name": "NST",
+  "description": "Cybersecurity and digital solutions in India",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#015aaa",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/media/NST_-_Favicon_[Dark_Transparent]/NST_-_Favicon_[Dark_Transparent]-480.webp",
+      "sizes": "480x480",
+      "type": "image/webp"
+    }
+  ]
+}

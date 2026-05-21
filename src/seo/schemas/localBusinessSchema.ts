@@ -8,30 +8,32 @@ import {
   napPostalAddress,
 } from "../seoConfig";
 
-export function organizationSchema() {
+export function localBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${SITE_ORIGIN}/#organization`,
-    name: ORG_NAME,
+    "@type": "ProfessionalService",
+    "@id": `${SITE_ORIGIN}/#localbusiness`,
+    name: BUSINESS_NAP.name,
     url: SITE_ORIGIN,
-    logo: `${SITE_ORIGIN}/og-image.webp`,
     image: defaultOgImageUrl(),
-    sameAs: [...SOCIAL_PROFILES],
+    logo: `${SITE_ORIGIN}/og-image.webp`,
     description: BUSINESS_DESCRIPTION,
     telephone: BUSINESS_NAP.telephone,
     email: BUSINESS_NAP.email,
+    address: napPostalAddress(),
+    areaServed: {
+      "@type": "Country",
+      name: "India",
+    },
+    priceRange: "$$",
+    sameAs: [...SOCIAL_PROFILES],
     contactPoint: {
       "@type": "ContactPoint",
       telephone: BUSINESS_NAP.telephone,
       email: BUSINESS_NAP.email,
       contactType: "customer service",
       areaServed: "IN",
+      availableLanguage: ["English", "Tamil"],
     },
-    founder: {
-      "@type": "Person",
-      name: "Mullai",
-    },
-    address: napPostalAddress(),
   };
 }

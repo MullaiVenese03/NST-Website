@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { Phone, Mail, MapPin, Linkedin, Instagram, Twitter, type LucideIcon } from "lucide-react";
-import { BUSINESS_IDENTITY } from "../../seo/seoConfig";
+import { BUSINESS_IDENTITY, BUSINESS_NAP } from "../../seo/seoConfig";
 
 const FOOTER_SERVICES = [
   { label: "All Services", path: "/services" },
@@ -133,9 +133,19 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
             </div>
 
             <motion.div className="space-y-3 sm:space-y-4">
-              <ContactRow icon={Phone} label="Phone" value="+91 63810 13086" href="tel:+916381013086" />
-              <ContactRow icon={Mail} label="Email" value="info@nebulasafetech.com" href="mailto:info@nebulasafetech.com" />
-              <ContactRow icon={MapPin} label="Address" value="Hosur, Tamil Nadu, India." href="https://maps.google.com/?q=Hosur,Tamil+Nadu,India" />
+              <ContactRow
+                icon={Phone}
+                label="Phone"
+                value={BUSINESS_NAP.telephone}
+                href={`tel:${BUSINESS_NAP.telephoneE164}`}
+              />
+              <ContactRow icon={Mail} label="Email" value={BUSINESS_NAP.email} href={`mailto:${BUSINESS_NAP.email}`} />
+              <ContactRow
+                icon={MapPin}
+                label="Address"
+                value={BUSINESS_NAP.formattedAddress}
+                href={`https://maps.google.com/?q=${BUSINESS_NAP.mapsQuery}`}
+              />
             </motion.div>
           </motion.div>
 

@@ -1,5 +1,7 @@
 import { ORG_NAME, SITE_ORIGIN } from "../seoConfig";
 
+const LOCAL_BUSINESS_ID = `${SITE_ORIGIN}/#localbusiness`;
+
 export type ServiceSchemaInput = {
   serviceType: string;
   name?: string;
@@ -16,7 +18,8 @@ export function serviceSchema(input: ServiceSchemaInput) {
     description: input.description,
     url: input.url,
     provider: {
-      "@type": "Organization",
+      "@type": "ProfessionalService",
+      "@id": LOCAL_BUSINESS_ID,
       name: ORG_NAME,
       url: SITE_ORIGIN,
     },

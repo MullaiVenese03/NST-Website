@@ -65,26 +65,7 @@ export const EDTECH_SEO: PageSeo = {
   canonicalPath: "/edtech",
 };
 
-export const CONTACT_SEO: PageSeo = {
-  title: `Contact ${ORG_NAME} | Hosur, Tamil Nadu`,
-  description: `Reach ${ORG_NAME} for cybersecurity assessments, secure development, and EdTech partnerships. Phone +91 63810 13086 · info@nebulasafetech.com · Hosur, India.`,
-  keywords: [...baseKeywords, "contact NebulaSafeTech", "cybersecurity consultation India"],
-  canonicalPath: "/contact",
-};
-
-export const BLOG_SEO: PageSeo = {
-  title: `Insights & Updates | ${ORG_NAME}`,
-  description: `${BUSINESS_IDENTITY} Official insights hub for security engineering, product delivery, and EdTech announcements. New articles are published here when available.`,
-  keywords: [...baseKeywords, "NebulaSafeTech blog", "cybersecurity insights"],
-  canonicalPath: "/blog",
-};
-
-export const CAREERS_SEO: PageSeo = {
-  title: `Careers | ${ORG_NAME}`,
-  description: `${BUSINESS_IDENTITY} Explore opportunities to build secure products, deliver assessments, and grow the EdTech ecosystem with our team in India.`,
-  keywords: [...baseKeywords, "NebulaSafeTech careers", "cybersecurity jobs India", "developer jobs Hosur"],
-  canonicalPath: "/careers",
-};
+/** /contact, /blog, /careers redirect via vercel.json — not indexed; contact is /#contact on home. */
 
 export const PRIVACY_SEO: PageSeo = {
   title: `Privacy Policy | ${ORG_NAME}`,
@@ -108,7 +89,7 @@ const SERVICE_DETAIL: Record<
 > = {
   "web-development": {
     title: `Full-Stack Web Development | ${ORG_NAME}`,
-    description: `${ORG_NAME} builds scalable, high-performance web applications with modern stacks, secure SDLC practices, and production-ready delivery for startups and enterprises.`,
+    description: `${ORG_NAME} builds scalable, secure web applications from Hosur, India with modern stacks, secure SDLC practices, and production-ready delivery for startups and enterprises.`,
     keywords: [...baseKeywords, "full-stack web development", "React development", "Node.js", "secure web apps"],
     canonicalPath: "/services/web-development",
     serviceType: "Full-Stack Web Development",
@@ -117,7 +98,7 @@ const SERVICE_DETAIL: Record<
   },
   cybersecurity: {
     title: `Cybersecurity Services & Assessments | ${ORG_NAME}`,
-    description: `${ORG_NAME} delivers practical cybersecurity services including web and application testing, cloud security guidance, network hardening, and awareness programs for teams in India and abroad.`,
+    description: `${ORG_NAME} in Hosur, Tamil Nadu delivers practical cybersecurity services including VAPT, application and cloud security, network hardening, and awareness programs for teams across India and abroad.`,
     keywords: [...baseKeywords, "VAPT", "penetration testing", "cloud security", "application security"],
     canonicalPath: "/services/cybersecurity",
     serviceType: "Cybersecurity Services",

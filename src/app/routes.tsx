@@ -4,6 +4,8 @@ import { GlobalStructuredData } from "../seo/GlobalStructuredData";
 import { SkipToContent } from "./components/SkipToContent";
 import { DeferredCompanyFont } from "./components/DeferredCompanyFont";
 import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
+import { AnalyticsScripts } from "../analytics/AnalyticsScripts";
+import { RouteAnalytics } from "../analytics/RouteAnalytics";
 
 const BottomNav = lazy(() => import("./components/BottomNav"));
 
@@ -41,6 +43,8 @@ function RootLayout() {
   return (
     <div className="overflow-x-clip w-full max-w-[100vw] min-h-screen">
       <ScrollToTopOnNavigate />
+      <RouteAnalytics />
+      <AnalyticsScripts />
       <SkipToContent />
       <DeferredCompanyFont />
       <GlobalStructuredData />
