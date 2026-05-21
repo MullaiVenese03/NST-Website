@@ -1,4 +1,5 @@
 import manifest from "../data/mediaManifest.json";
+import { COMPANY_ICON } from "../../seo/brandAssets";
 
 export type MediaSlug = keyof typeof manifest;
 
@@ -45,8 +46,7 @@ export function sizesForProfile(profile: MediaProfile, override?: string): strin
   return override ?? DEFAULT_SIZES[profile];
 }
 
-export const BRAND_MARK_URL =
-  "/media/NST_-_Favicon_[Dark_Transparent]/NST_-_Favicon_[Dark_Transparent]-480.webp";
+export const BRAND_MARK_URL = COMPANY_ICON.nav;
 
 export const HERO_POSTER_MOBILE = "/media/hero-poster/hero-poster-640.webp";
 export const HERO_VIDEO_URL = "/media/hero-bg-video.mp4";

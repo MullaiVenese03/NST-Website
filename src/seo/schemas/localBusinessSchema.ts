@@ -1,10 +1,10 @@
+import { COMPANY_ICON } from "../brandAssets";
 import {
   BUSINESS_DESCRIPTION,
   BUSINESS_NAP,
   ORG_NAME,
   SITE_ORIGIN,
   SOCIAL_PROFILES,
-  defaultOgImageUrl,
   napPostalAddress,
 } from "../seoConfig";
 
@@ -15,8 +15,8 @@ export function localBusinessSchema() {
     "@id": `${SITE_ORIGIN}/#localbusiness`,
     name: BUSINESS_NAP.name,
     url: SITE_ORIGIN,
-    image: defaultOgImageUrl(),
-    logo: `${SITE_ORIGIN}/og-image.webp`,
+    image: COMPANY_ICON.webUrl,
+    logo: COMPANY_ICON.webUrl,
     description: BUSINESS_DESCRIPTION,
     telephone: BUSINESS_NAP.telephone,
     email: BUSINESS_NAP.email,

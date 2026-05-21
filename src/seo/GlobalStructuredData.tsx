@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { CompanyIconLinks } from "./CompanyIconLinks";
 import { localBusinessSchema } from "./schemas/localBusinessSchema";
 import { organizationSchema } from "./schemas/organizationSchema";
 import { websiteSchema } from "./schemas/websiteSchema";
@@ -11,9 +12,12 @@ export function GlobalStructuredData() {
     "@graph": [organizationSchema(), localBusinessSchema(), websiteSchema()],
   };
   return (
-    <Helmet>
-      <script type="application/ld+json">{toJsonLdScript(graph)}</script>
-      <link rel="alternate" hrefLang="en-IN" href={SITE_ORIGIN} />
-    </Helmet>
+    <>
+      <CompanyIconLinks />
+      <Helmet>
+        <script type="application/ld+json">{toJsonLdScript(graph)}</script>
+        <link rel="alternate" hrefLang="en-IN" href={SITE_ORIGIN} />
+      </Helmet>
+    </>
   );
 }

@@ -21,7 +21,7 @@ function NstLogo() {
     <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 flex items-center justify-center">
       <img
         src={brandMarkUrl}
-        alt=""
+        alt="NebulaSafeTech logo"
         width={40}
         height={40}
         decoding="async"
