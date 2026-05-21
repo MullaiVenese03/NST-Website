@@ -5,7 +5,8 @@ import { trackPageView } from "./gtm";
 
 /**
  * Pushes SPA page_view events to GTM dataLayer on client-side navigations.
- * Initial load is typically handled by GTM "All Pages"; skip the first fire to avoid duplicates.
+ * Initial load is handled by GTM "All Pages"; skip the first fire to avoid duplicates.
+ * Clarity page identity is handled in AnalyticsScripts via @microsoft/clarity.
  */
 export function useRouteAnalytics(): void {
   const { pathname, search } = useLocation();

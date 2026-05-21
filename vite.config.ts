@@ -14,7 +14,6 @@ function analyticsEnabled(env: Record<string, string>, mode: string): boolean {
 function injectAnalyticsHtml(env: Record<string, string>, mode: string): Plugin {
   const enabled = analyticsEnabled(env, mode);
   const gtmId = env.VITE_GTM_ID || "GTM-WTQS44T7";
-  const clarityId = env.VITE_CLARITY_PROJECT_ID || "wum1ijwahj";
   const gsc = env.VITE_GSC_VERIFICATION?.trim() ?? "";
 
   const gtmHead = enabled
@@ -34,21 +33,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->`
     : "";
 
-  const clarityHead = enabled && clarityId
-    ? `<script type="text/javascript">
-(function(c,l,a,r,i,t,y){
-c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "${clarityId}");
-</script>`
-    : "";
-
   const preconnect = enabled
     ? `<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    <link rel="preconnect" href="https://www.clarity.ms" crossorigin />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    <link rel="dns-prefetch" href="https://www.clarity.ms" />`
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />`
     : "";
 
   const gscMeta = gsc ? `<meta name="google-site-verification" content="${gsc}" />` : "";
@@ -62,7 +49,7 @@ y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         if (out.includes("<!-- NST_ANALYTICS_HEAD -->")) {
           out = out.replace(
             "<!-- NST_ANALYTICS_HEAD -->",
-            `${gtmHead}\n    ${clarityHead}\n    ${preconnect}\n    ${gscMeta}`.trim() || "",
+            `${gtmHead}\n    ${preconnect}\n    ${gscMeta}`.trim() || "",
           );
         }
         if (out.includes("<!-- NST_ANALYTICS_BODY -->")) {
