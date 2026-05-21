@@ -112,9 +112,17 @@ function SocialBtn({
   );
 }
 
-export default function FooterSection() {
+type FooterSectionProps = {
+  /** Omit on home page — the lazy-load wrapper already provides `#contact`. */
+  anchorId?: string | null;
+};
+
+export default function FooterSection({ anchorId = "contact" }: FooterSectionProps) {
   return (
-    <footer id="contact" className="w-full bg-white pt-12 sm:pt-16 lg:pt-20 overflow-x-clip scroll-mt-24">
+    <footer
+      id={anchorId ?? undefined}
+      className="w-full bg-white pt-12 sm:pt-16 lg:pt-20 overflow-x-clip scroll-mt-24"
+    >
       <motion.div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
           <motion.div className="space-y-4 sm:space-y-5">
@@ -131,10 +139,10 @@ export default function FooterSection() {
             </motion.div>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-8 sm:gap-10 py-2 pb-10 sm:pb-12 lg:pb-14 min-w-0 lg:justify-items-end lg:max-w-md lg:ml-auto w-full">
-            <motion.div className="flex flex-col gap-5 sm:gap-6 min-w-0">
+          <div className="grid grid-cols-2 gap-x-10 sm:gap-x-16 lg:gap-x-20 gap-y-8 py-2 pb-10 sm:pb-12 lg:pb-14 min-w-0 w-full max-w-xl mx-auto lg:mx-0 lg:ml-auto justify-items-start text-start">
+            <motion.div className="flex flex-col gap-5 sm:gap-6 min-w-0 items-start">
               <p className="text-base sm:text-lg font-bold text-slate-900 m-0">Company</p>
-              <nav className="flex flex-col gap-3.5 sm:gap-4" aria-label="Company">
+              <nav className="flex flex-col gap-3.5 sm:gap-4 items-start" aria-label="Company">
                 <FooterNavLink to="/">Home</FooterNavLink>
                 <FooterNavLink to="/about">About Us</FooterNavLink>
                 <FooterNavLink to="/services">Services</FooterNavLink>
@@ -143,9 +151,9 @@ export default function FooterSection() {
               </nav>
             </motion.div>
 
-            <div className="flex flex-col gap-5 sm:gap-6 min-w-0">
+            <div className="flex flex-col gap-5 sm:gap-6 min-w-0 items-start">
               <p className="text-base sm:text-lg font-bold text-slate-900 m-0">Services</p>
-              <nav className="flex flex-col gap-3.5 sm:gap-4" aria-label="Services">
+              <nav className="flex flex-col gap-3.5 sm:gap-4 items-start" aria-label="Services">
                 {FOOTER_SERVICES.map((service) => (
                   <FooterNavLink key={service.path} to={service.path}>
                     {service.label}
@@ -156,31 +164,7 @@ export default function FooterSection() {
           </div>
         </motion.div>
 
-        <div
-          className="relative min-h-50 max-h-100 w-full overflow-hidden pointer-events-none select-none flex items-end justify-center"
-          aria-hidden
-        >
-          <p
-            className="font-black text-center m-0 w-full max-w-[100vw] px-1"
-            style={{
-              fontSize: "clamp(10rem, 36vw, 32rem)",
-              fontFamily: "var(--font-company)",
-              fontWeight: 900,
-              fontSynthesis: "none",
-              background: "linear-gradient(to top, #030108 0%, #015AAA 50%, #FFF 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              letterSpacing: "0.33em",
-            }}
-            role="img"
-            aria-label="NST"
-          >
-            NST
-          </p>
-        </div>
-
-        <div className="pt-3 sm:pt-4 pb-8 md:pb-32 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 border-b-2 border-b-blue-500">
+        <div className="pt-6 sm:pt-8 pb-8 md:pb-32 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 border-b-2 border-b-blue-500">
           <motion.div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-center sm:text-left">
             <p className="text-slate-500 text-sm m-0">
               Copyright &copy; 2026{" "}

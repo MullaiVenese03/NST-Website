@@ -113,11 +113,18 @@ export default function HomePage() {
       />
 
       <LazyWhenVisible
+        id="contact"
         hashTarget="contact"
-        loader={() => import("../components/FooterSection")}
+        loader={() =>
+          import("../components/FooterSection").then((mod) => ({
+            default: function HomeFooter() {
+              return <mod.default anchorId={null} />;
+            },
+          }))
+        }
         fallback={sectionFallback}
         minHeight={280}
-        className="relative w-full"
+        className="relative w-full scroll-mt-24"
       />
 
       <Suspense fallback={null}>

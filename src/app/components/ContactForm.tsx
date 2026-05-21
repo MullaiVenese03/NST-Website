@@ -2,7 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
-import { ACTIVE_FORMSPREE_FORM_ID, FORMSPREE_ENDPOINT } from "../config/formspree";
+import { ACTIVE_FORMSPREE_FORM_ID } from "../config/formspree";
 import {
   readContactFormValues,
   validateContactForm,
@@ -49,101 +49,6 @@ export default function ContactForm({
     const timer = window.setTimeout(() => reset(), 4500);
     return () => window.clearTimeout(timer);
   }, [state.succeeded, reset]);
-
-  // #region agent log
-  useEffect(() => {
-    const log = (message: string, data: Record<string, unknown>, hypothesisId: string) => {
-      fetch("http://127.0.0.1:7577/ingest/badbf0e2-6444-400c-bc61-f2ebaa81e012", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "391aed" },
-        body: JSON.stringify({
-          sessionId: "391aed",
-          runId: "pre-fix",
-          hypothesisId,
-          location: "ContactForm.tsx",
-          message,
-          data,
-          timestamp: Date.now(),
-        }),
-      }).catch(() => {});
-    };
-
-    log(
-      "ContactForm mounted",
-      {
-        formId: ACTIVE_FORMSPREE_FORM_ID,
-        endpoint: FORMSPREE_ENDPOINT,
-        envFormId: import.meta.env.VITE_FORMSPREE_FORM_ID ?? null,
-      },
-      "B",
-    );
-
-    const onCspViolation = (e: SecurityPolicyViolationEvent) => {
-      log(
-        "CSP violation",
-        {
-          violatedDirective: e.violatedDirective,
-          blockedURI: e.blockedURI,
-          effectiveDirective: e.effectiveDirective,
-        },
-        "A",
-      );
-    };
-    document.addEventListener("securitypolicyviolation", onCspViolation);
-
-    void fetch(FORMSPREE_ENDPOINT, {
-      method: "POST",
-      mode: "cors",
-      headers: { Accept: "application/json", "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: "csp-probe",
-        email: "probe@example.com",
-        message: "connectivity probe (ignore)",
-      }),
-    })
-      .then(async (res) => {
-        log(
-          "Formspree probe response",
-          { ok: res.ok, status: res.status, statusText: res.statusText },
-          "A",
-        );
-      })
-      .catch((err: unknown) => {
-        const msg = err instanceof Error ? err.message : String(err);
-        log("Formspree probe failed", { error: msg }, "A");
-      });
-
-    return () => document.removeEventListener("securitypolicyviolation", onCspViolation);
-  }, []);
-
-  useEffect(() => {
-    if (!state.errors) return;
-    const formErrors = state.errors.getFormErrors();
-    const fieldErrors = state.errors.getAllFieldErrors().flatMap((entry) => {
-      const errs = entry[1];
-      return errs.map((e) => e.message);
-    });
-    // #region agent log
-    fetch("http://127.0.0.1:7577/ingest/badbf0e2-6444-400c-bc61-f2ebaa81e012", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "391aed" },
-      body: JSON.stringify({
-        sessionId: "391aed",
-        runId: "pre-fix",
-        hypothesisId: "C",
-        location: "ContactForm.tsx:submit-error",
-        message: "Formspree submission error",
-        data: {
-          formErrors,
-          fieldErrors,
-          uiMessage: getFormspreeErrorMessage(state.errors),
-        },
-        timestamp: Date.now(),
-      }),
-    }).catch(() => {});
-    // #endregion
-  }, [state.errors]);
-  // #endregion
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

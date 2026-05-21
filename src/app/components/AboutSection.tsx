@@ -69,7 +69,7 @@ export default function AboutSection() {
       <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-stretch min-w-0">
 
         <motion.div
-          className="relative w-full lg:w-[42%] min-h-[220px] sm:min-h-[280px] lg:min-h-[360px] max-h-[min(48vh,360px)] lg:max-h-[420px] overflow-hidden"
+          className="relative w-full lg:w-[52%] shrink-0 flex items-center justify-center bg-slate-50 overflow-hidden min-h-[220px] sm:min-h-[280px] lg:min-h-[400px]"
           variants={fadeLeft}
           initial="hidden"
           whileInView="visible"
@@ -78,7 +78,7 @@ export default function AboutSection() {
           <ResponsivePicture
             slug="about-hero"
             alt="NST dashboard showing threats blocked and security posture"
-            className="absolute inset-0 w-full h-full object-cover object-center lg:object-left-top"
+            className="w-full h-auto max-h-[min(70vh,480px)] lg:absolute lg:inset-0 lg:h-full lg:max-h-none object-contain object-center"
             sizes="(max-width: 1024px) 100vw, 42vw"
           />
         </motion.div>

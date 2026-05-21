@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { Link } from "react-router";
 import { motion } from "motion/react";
 import { ResponsivePicture } from "./ResponsivePicture";
 import type { MediaSlug } from "../utils/media";
@@ -6,6 +7,7 @@ import { VIEWPORT_ONCE } from "../utils/motionPresets";
 import { useLightExperience } from "../utils/performance";
 
 interface ServiceCardProps {
+  to: string;
   mediaSlug: MediaSlug;
   title: string;
   description: string;
@@ -13,6 +15,7 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = memo(function ServiceCard({
+  to,
   mediaSlug,
   title,
   description,
@@ -25,8 +28,12 @@ const ServiceCard = memo(function ServiceCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={VIEWPORT_ONCE}
       transition={{ duration: 0.45, delay: light ? 0 : (index % 4) * 0.06, ease: "easeOut" }}
-      className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col group cursor-pointer h-full"
+      className="h-full"
     >
+      <Link
+        to={to}
+        className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-transform duration-300 flex flex-col group cursor-pointer h-full no-underline text-inherit focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/70"
+      >
       <div className="p-6 sm:p-8 pb-4 flex items-center justify-center min-h-[160px] sm:min-h-[192px]">
         <div className="relative w-full max-w-[140px] sm:max-w-[160px] aspect-square flex items-center justify-center mx-auto">
           <div
@@ -52,51 +59,60 @@ const ServiceCard = memo(function ServiceCard({
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl origin-left" />
+      </Link>
     </motion.div>
   );
 });
 
 const services: Omit<ServiceCardProps, "index">[] = [
   {
+    to: "/services/cybersecurity",
     mediaSlug: "Icons--web-security",
     title: "Web Security",
     description:
       "Secure your web apps with advanced vulnerability detection and real-time threat mitigation.",
   },
   {
+    to: "/services/cybersecurity",
     mediaSlug: "Icons--cloud-security",
     title: "Cloud Security",
     description: "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly.",
   },
   {
+    to: "/services/cybersecurity",
     mediaSlug: "Icons--application-security",
     title: "Application Security",
     description:
       "Create innovative frameworks to build executable software with security, privacy, and trust.",
   },
   {
+    to: "/services/cybersecurity",
     mediaSlug: "Icons--network-security",
     title: "Network Security",
     description:
       "Create innovative frameworks to build executable software with security, privacy, and trust.",
   },
   {
+    to: "/services/cybersecurity",
     mediaSlug: "Icons--encryption-data-protection",
     title: "Encryption & Data Protection",
     description:
       "Create innovative frameworks to build executable software with security, privacy, and trust.",
   },
   {
+    to: "/services/web-development",
     mediaSlug: "Icons--full-stack-web-dev",
     title: "Full-Stack Web Development",
     description: "Scalable, high-performance web applications built with modern technologies.",
   },
   {
+    to: "/services/ui-ux-design",
     mediaSlug: "Icons--web-design-uiux",
     title: "Web Design & UI/UX Development",
     description: "Pixel-perfect designs and intuitive experiences that engage users and drive results.",
   },
   {
+    to: "/services/edtech-training",
     mediaSlug: "Icons--academic-training",
     title: "Academic Training",
     description:
@@ -203,7 +219,7 @@ export default function ServicesSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {services.map((svc, i) => (
-            <ServiceCard key={svc.title} {...svc} index={i} light={light} />
+            <ServiceCard key={`${svc.to}-${svc.title}`} {...svc} index={i} light={light} />
           ))}
         </div>
       </div>

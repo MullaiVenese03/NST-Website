@@ -46,19 +46,20 @@ export function navigateToContact(
   navigate: (to: { pathname: string; hash?: string }) => void,
   isHome: boolean,
 ) {
+  const scrollToFooter = () =>
+    scrollToSection("contact", { behavior: "smooth", block: "start", maxAttempts: 96 });
+
   if (isHome) {
-    const onHomeWithContactHash =
-      window.location.pathname === "/" && window.location.hash.replace("#", "") === "contact";
-    if (!onHomeWithContactHash) {
-      navigate({ pathname: "/", hash: "contact" });
-    }
-    scrollToSection("contact");
+    navigate({ pathname: "/", hash: "contact" });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(scrollToFooter);
+    });
     return;
   }
 
   if (document.getElementById("contact")) {
-    scrollToSection("contact");
     window.history.replaceState(null, "", `${window.location.pathname}#contact`);
+    scrollToFooter();
     return;
   }
 

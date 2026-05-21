@@ -15,6 +15,9 @@ const slides = CLIENT_PROGRAMS.map((program) => ({
   participants: program.participants,
 }));
 
+const TWO_CARD_MIN_WIDTH = 768;
+const CARD_GAP = 24;
+
 function VerifiedIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 15.5 15.5" fill="none" className="flex-shrink-0">
@@ -49,8 +52,11 @@ export default function TestimonialsSection() {
     return () => ro.disconnect();
   }, [updateWidth]);
 
-  const cardsPerView = containerWidth > 720 ? 2 : 1;
-  const GAP = 24;
+  const cardsPerView = containerWidth >= TWO_CARD_MIN_WIDTH ? 2 : 1;
+
+  useEffect(() => {
+    setActiveIndex((i) => i % slides.length);
+  }, [cardsPerView]);
 
   const goPrev = () => {
     setDirection(-1);
@@ -68,15 +74,7 @@ export default function TestimonialsSection() {
   };
 
   const visibleSlides = Array.from({ length: cardsPerView }, (_, i) =>
-    slides[(activeIndex + i) % slides.length]
-  );
-
-  const cardWidth = containerWidth > 0
-    ? (containerWidth - (cardsPerView - 1) * GAP) / cardsPerView
-    : 600;
-  const cardHeight = Math.min(
-    Math.max(Math.round(cardWidth * (428 / 650)), 220),
-    containerWidth > 0 && containerWidth <= 480 ? 300 : 380
+    slides[(activeIndex + i) % slides.length],
   );
 
   const cardGroupVariants = {
@@ -94,90 +92,85 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="w-full bg-white py-12 sm:py-14 px-4 sm:px-6 md:px-10 lg:px-16 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto">
-
+    <section className="w-full bg-white py-12 sm:py-14 px-4 sm:px-6 md:px-10 lg:px-16">
+      <div className="max-w-[1440px] mx-auto min-w-0">
         <motion.div
           initial={{ opacity: 0, y: light ? 0 : 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_ONCE}
           transition={{ duration: 0.55 }}
-          className="mb-10"
+          className="mb-8 sm:mb-10"
         >
           <p
-            style={{
-              fontFamily: 'var(--font-family)',
-              fontWeight: 700,
-              fontSize: "20px",
-              letterSpacing: "1.2px",
-              color: "#015AAA",
-              textTransform: "uppercase",
-              marginBottom: "10px",
-            }}
+            className="text-[#015AAA] font-bold text-base sm:text-lg uppercase tracking-wider mb-2 sm:mb-2.5"
+            style={{ fontFamily: "var(--font-family)" }}
           >
             Clients Love Us
           </p>
           <h2
+            className="font-bold text-slate-900 m-0"
             style={{
-              fontFamily: 'var(--font-family)',
-              fontWeight: 700,
-              fontSize: "clamp(26px, 3vw, 32px)",
-              letterSpacing: "0.64px",
-              color: "#000",
-              margin: 0,
+              fontFamily: "var(--font-family)",
+              fontSize: "clamp(1.5rem, 4vw, 2rem)",
+              letterSpacing: "0.04em",
             }}
           >
             Trusted by Leaders
           </h2>
         </motion.div>
 
-        <div ref={containerRef} className="relative" style={{ height: cardHeight, overflow: "hidden" }}>
+        <div
+          ref={containerRef}
+          className="relative w-full min-w-0 overflow-hidden rounded-lg"
+          style={{
+            aspectRatio: "650 / 428",
+            maxHeight: "min(72vw, 420px)",
+            minHeight: "200px",
+          }}
+        >
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
-              key={activeIndex}
+              key={`${activeIndex}-${cardsPerView}`}
               custom={direction}
               variants={cardGroupVariants}
               initial="enter"
               animate="center"
               exit="exit"
               transition={{ duration: 0.38, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="absolute inset-0 flex"
-              style={{ gap: GAP }}
+              className="absolute inset-0 grid min-w-0"
+              style={{
+                gap: CARD_GAP,
+                gridTemplateColumns: `repeat(${cardsPerView}, minmax(0, 1fr))`,
+              }}
             >
               {visibleSlides.map((slide, i) => (
                 <div
-                  key={i}
-                  className="relative rounded-[8px] overflow-hidden flex-1"
-                  style={{
-                    boxShadow: "2px 2px 4px 0px rgba(0,0,0,0.25)",
-                    border: "1px solid #c6c6c6",
-                  }}
+                  key={`${slide.mediaSlug}-${i}`}
+                  className="relative min-w-0 h-full rounded-lg overflow-hidden border border-[#c6c6c6] shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)]"
                 >
                   <ResponsivePicture
                     slug={slide.mediaSlug}
                     alt={slide.cardTitle}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
                     profile="testimonial"
-                    sizes="(max-width: 720px) 92vw, 420px"
+                    sizes={
+                      cardsPerView === 2
+                        ? "(max-width: 768px) 92vw, 420px"
+                        : "(max-width: 768px) 92vw, 640px"
+                    }
                   />
 
                   <div
-                    className="absolute inset-0"
+                    className="absolute inset-0 pointer-events-none"
                     style={{
-                      background: "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
+                      background:
+                        "linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%)",
                     }}
                   />
 
                   <p
-                    className="absolute bottom-5 left-0 right-0 text-center text-white"
-                    style={{
-                      fontFamily: 'var(--font-family)',
-                      fontWeight: 700,
-                      fontSize: "18px",
-                      letterSpacing: "1.08px",
-                      margin: 0,
-                      padding: "0 16px",
-                    }}
+                    className="absolute bottom-4 sm:bottom-5 left-0 right-0 text-center text-white font-bold text-sm sm:text-lg px-3 sm:px-4 m-0 leading-snug"
+                    style={{ fontFamily: "var(--font-family)", letterSpacing: "0.06em" }}
                   >
                     {slide.cardTitle}
                   </p>
@@ -187,8 +180,7 @@ export default function TestimonialsSection() {
           </AnimatePresence>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
-
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-6 lg:gap-10 items-start min-w-0">
           <AnimatePresence mode="wait" custom={direction}>
             <motion.div
               key={activeIndex}
@@ -198,54 +190,38 @@ export default function TestimonialsSection() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.32, ease: "easeOut" }}
-              className="flex flex-col gap-3"
-              style={{ maxWidth: "560px" }}
+              className="flex flex-col gap-2 sm:gap-3 min-w-0 max-w-xl"
             >
               <div className="flex items-center gap-2 flex-wrap min-w-0">
                 <span
-                  style={{
-                    fontFamily: "var(--font-family)",
-                    fontWeight: 700,
-                    fontSize: "18px",
-                    letterSpacing: "0.36px",
-                    color: "#000",
-                  }}
+                  className="font-bold text-base sm:text-lg text-slate-900"
+                  style={{ fontFamily: "var(--font-family)", letterSpacing: "0.02em" }}
                 >
                   {slides[activeIndex].org}
                 </span>
                 <VerifiedIcon />
               </div>
               <p
-                style={{
-                  fontFamily: 'var(--font-family)',
-                  fontWeight: 500,
-                  fontSize: "16px",
-                  letterSpacing: "0.32px",
-                  color: "#6d6d6d",
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
+                className="text-sm sm:text-base text-[#6d6d6d] leading-relaxed m-0"
+                style={{ fontFamily: "var(--font-family)" }}
               >
                 {slides[activeIndex].text}
               </p>
               <p
-                style={{
-                  fontFamily: 'var(--font-family)',
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  letterSpacing: "0.28px",
-                  color: "#015AAA",
-                  margin: 0,
-                }}
+                className="font-bold text-sm text-[#015AAA] m-0"
+                style={{ fontFamily: "var(--font-family)" }}
               >
                 {slides[activeIndex].participants}
               </p>
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex items-center gap-3 flex-shrink-0 self-center sm:self-end pb-1">
-
-            <motion.div className="flex items-center gap-2 mr-3" role="tablist" aria-label="Testimonial slides">
+          <div className="flex flex-col items-center gap-3 sm:gap-4 w-full min-w-0 lg:items-end lg:justify-center lg:pt-1">
+            <div
+              className="flex items-center justify-center gap-1.5 sm:gap-2 w-full max-w-full overflow-x-auto overscroll-x-contain px-2 py-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+              role="tablist"
+              aria-label="Testimonial slides"
+            >
               {slides.map((_, i) => (
                 <button
                   key={i}
@@ -254,59 +230,57 @@ export default function TestimonialsSection() {
                   aria-selected={i === activeIndex}
                   onClick={() => goTo(i)}
                   aria-label={`Go to slide ${i + 1}`}
-                  className="border-none bg-transparent p-3 cursor-pointer flex items-center justify-center min-h-[44px] min-w-[44px] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/60"
+                  className="border-none bg-transparent p-1.5 sm:p-2 cursor-pointer flex items-center justify-center min-h-[36px] min-w-[32px] sm:min-h-[40px] sm:min-w-[36px] shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/60"
                 >
                   <span
-                    className="block rounded-full transition-[width,background-color] duration-300 ease-out"
-                    style={{
-                      width: i === activeIndex ? "22px" : "8px",
-                      height: "8px",
-                      background: i === activeIndex ? "#015AAA" : "#C6C6C6",
-                    }}
+                    className={`block h-1.5 sm:h-2 rounded-full transition-[width,background-color] duration-300 ease-out ${
+                      i === activeIndex
+                        ? "w-[16px] sm:w-[22px] bg-[#015AAA]"
+                        : "w-1.5 sm:w-2 bg-[#C6C6C6]"
+                    }`}
                     aria-hidden
                   />
                 </button>
               ))}
-            </motion.div>
+            </div>
 
-            <button
-              type="button"
-              onClick={goPrev}
-              className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent transition-transform duration-200 hover:scale-105 active:scale-95"
-              style={{ width: 45, height: 45 }}
-              aria-label="Previous"
-            >
-              <svg width="45" height="45" viewBox="0 0 35.75 35.75" fill="none">
-                <path
-                  d={svgPaths.p2ebc4680}
-                  stroke="#015AAA"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                />
-              </svg>
-            </button>
+            <div className="flex items-center justify-center gap-3 sm:gap-4">
+              <button
+                type="button"
+                onClick={goPrev}
+                className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent transition-transform duration-200 hover:scale-105 active:scale-95 shrink-0 min-h-[44px] min-w-[44px]"
+                aria-label="Previous testimonial"
+              >
+                <svg className="w-10 h-10 sm:w-11 sm:h-11" viewBox="0 0 35.75 35.75" fill="none" aria-hidden>
+                  <path
+                    d={svgPaths.p2ebc4680}
+                    stroke="#015AAA"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </button>
 
-            <button
-              type="button"
-              onClick={goNext}
-              className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent transition-transform duration-200 hover:scale-105 active:scale-95"
-              style={{ width: 45, height: 45 }}
-              aria-label="Next"
-            >
-              <svg width="45" height="45" viewBox="0 0 35.75 35.75" fill="none">
-                <path
-                  d={svgPaths.p67ae800}
-                  stroke="#015AAA"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                />
-              </svg>
-            </button>
+              <button
+                type="button"
+                onClick={goNext}
+                className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent transition-transform duration-200 hover:scale-105 active:scale-95 shrink-0 min-h-[44px] min-w-[44px]"
+                aria-label="Next testimonial"
+              >
+                <svg className="w-10 h-10 sm:w-11 sm:h-11" viewBox="0 0 35.75 35.75" fill="none" aria-hidden>
+                  <path
+                    d={svgPaths.p67ae800}
+                    stroke="#015AAA"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   );
