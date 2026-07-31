@@ -78,11 +78,11 @@ export const CLIENT_PROGRAMS: ClientProgram[] = [
   },
   {
     id: 8,
-    mediaSlug: "testimonial-akshaya-bos",
-    institution: "Akshaya College of Engineering",
+    mediaSlug: "testimonial-st-joseph-bos",
+    institution: "St. Joseph College for Women",
     category: "Academic",
-    label: "Cybersecurity Workshop & Board of Studies",
-    desc: "Cybersecurity workshop at Akshaya College of Engineering with faculty and academic leaders. Proud to serve as a member of the Board of Studies (BoS), contributing to curriculum alignment and industry-relevant security education.",
+    label: "Board of Studies (BoS)",
+    desc: "Serving on the Board of Studies at St. Joseph College for Women, where we help shape curriculum, introduce new cybersecurity topics, and ensure students get the best, most updated security knowledge for their future careers.",
     participants: "Board of Studies (BoS)",
   },
   {

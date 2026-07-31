@@ -737,23 +737,23 @@
       }
     }
   },
-  "testimonial-akshaya-bos": {
-    "slug": "testimonial-akshaya-bos",
+  "testimonial-st-joseph-bos": {
+    "slug": "testimonial-st-joseph-bos",
     "profile": "testimonial",
     "width": 420,
     "height": 230,
     "intrinsicWidth": 420,
     "intrinsicHeight": 230,
-    "defaultSrc": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-420.webp",
-    "defaultAvif": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-420.avif",
+    "defaultSrc": "/media/testimonial-st-joseph-bos/testimonial-st-joseph-bos-420.webp",
+    "defaultAvif": "/media/testimonial-st-joseph-bos/testimonial-st-joseph-bos-420.avif",
     "sources": {
       "webp": {
-        "400": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-400.webp",
-        "420": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-420.webp"
+        "400": "/media/testimonial-st-joseph-bos/testimonial-st-joseph-bos-400.webp",
+        "420": "/media/testimonial-st-joseph-bos/testimonial-st-joseph-bos-420.webp"
       },
       "avif": {
-        "400": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-400.avif",
-        "420": "/media/testimonial-akshaya-bos/testimonial-akshaya-bos-420.avif"
+        "400": "/media/testimonial-st-joseph-bos/testimonial-st-joseph-bos-400.avif",
+        "420": "/media/testimonial-st-joseph-bos/testimonial-st-joseph-bos-420.avif"
       }
     }
   },
