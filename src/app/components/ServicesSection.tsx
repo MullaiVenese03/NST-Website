@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
 import { ResponsivePicture } from "./ResponsivePicture";
+import { SectionCtaLink } from "./SectionCtaLink";
 import type { MediaSlug } from "../utils/media";
 import { VIEWPORT_ONCE } from "../utils/motionPresets";
 import { useLightExperience } from "../utils/performance";
@@ -182,39 +183,15 @@ export default function ServicesSection() {
             </motion.p>
           </div>
 
-          <motion.a
+          <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            href="/services"
-            className="inline-flex items-center gap-3 self-start sm:self-center mt-2 sm:mt-6 group flex-wrap"
-            style={{
-              fontWeight: 700,
-              fontSize: "16px",
-              letterSpacing: "1px",
-              color: "#015AAA",
-              textDecoration: "none",
-              flexShrink: 0,
-            }}
+            className="self-start sm:self-center mt-2 sm:mt-6 shrink-0"
           >
-            View all services
-            <svg
-              width="20"
-              height="12"
-              viewBox="0 0 20 12"
-              fill="none"
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            >
-              <path
-                d="M19 6L14 1M19 6L14 11M19 6H1"
-                stroke="#015AAA"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </motion.a>
+            <SectionCtaLink to="/services" label="View all services" />
+          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">

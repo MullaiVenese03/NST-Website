@@ -21,14 +21,14 @@ import { ResponsivePicture } from "../components/ResponsivePicture";
 import type { MediaSlug } from "../utils/media";
 
 const fadeUp: Variants = {
-  hidden:  { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 32 },
   visible: (i: number = 0) => ({
     opacity: 1, y: 0,
     transition: { duration: 0.52, delay: i * 0.1, ease: "easeOut" },
   }),
 };
-const fadeLeft: Variants  = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
-const fadeRight: Variants = { hidden: { opacity: 0, x:  36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
+const fadeLeft: Variants = { hidden: { opacity: 0, x: -36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
+const fadeRight: Variants = { hidden: { opacity: 0, x: 36 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } };
 
 function IconBadge({
   children,
@@ -64,96 +64,96 @@ function ServicesHero() {
         <Breadcrumbs className="mb-8" items={[...PAGE_BREADCRUMBS.services]} />
         <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-10">
 
-        <div className="flex-1 min-w-0">
-          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
-            Our Services
-          </motion.p>
+          <div className="flex-1 min-w-0">
+            <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
+              style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
+              Our Services
+            </motion.p>
 
-          <motion.h1 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.08, marginBottom: "20px", marginTop: 0 }}>
-            Smart Solutions.<br />Secure Future.
-          </motion.h1>
+            <motion.h1 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
+              style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.08, marginBottom: "20px", marginTop: 0 }}>
+              Smart Solutions.<br />Secure Future.
+            </motion.h1>
 
-          <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "44px", maxWidth: "540px" }}>
-            From innovative web experiences to enterprise-grade security, we build, protect, and scale what matters most.
-          </motion.p>
+            <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
+              style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "44px", maxWidth: "540px" }}>
+              From innovative web experiences to enterprise-grade security, we build, protect, and scale what matters most.
+            </motion.p>
 
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={3}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-0 border border-slate-100 rounded-2xl p-4 sm:p-6 bg-slate-50/30 shadow-sm w-full max-w-xl"
-          >
-            {[
-              {
-                icon: (
-                  <svg className="w-full h-full" fill="none" viewBox="0 0 57 48">
-                    <path d={svgPaths.p91c0280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
-                  </svg>
-                ),
-                label1: "Expert-Led",
-                label2: "Security"
-              },
-              {
-                icon: (
-                  <svg className="w-full h-full" fill="none" viewBox="0 0 51 56.5404">
-                    <path d={svgPaths.p35f7eb80} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
-                  </svg>
-                ),
-                label1: "Proactive",
-                label2: "Protection"
-              },
-              {
-                icon: (
-                  <svg className="w-full h-full" fill="none" viewBox="0 0 48.6877 48.6465">
-                    <path d={svgPaths.pe5e6700} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
-                    <path d={svgPaths.p308e5280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3"/>
-                  </svg>
-                ),
-                label1: "24/7 Threat",
-                label2: "Monitoring"
-              },
-            ].map((item, i) => (
-              <div key={i} className="flex flex-1 items-center min-w-0">
-                <div className="flex flex-col items-center gap-3 flex-1 px-3 sm:px-4 py-2 sm:py-0">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 relative flex items-center justify-center shrink-0">
-                    {item.icon}
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              custom={3}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-0 border border-slate-100 rounded-2xl p-4 sm:p-6 bg-slate-50/30 shadow-sm w-full max-w-xl"
+            >
+              {[
+                {
+                  icon: (
+                    <svg className="w-full h-full" fill="none" viewBox="0 0 57 48">
+                      <path d={svgPaths.p91c0280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+                    </svg>
+                  ),
+                  label1: "Expert-Led",
+                  label2: "Security"
+                },
+                {
+                  icon: (
+                    <svg className="w-full h-full" fill="none" viewBox="0 0 51 56.5404">
+                      <path d={svgPaths.p35f7eb80} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+                    </svg>
+                  ),
+                  label1: "Proactive",
+                  label2: "Protection"
+                },
+                {
+                  icon: (
+                    <svg className="w-full h-full" fill="none" viewBox="0 0 48.6877 48.6465">
+                      <path d={svgPaths.pe5e6700} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+                      <path d={svgPaths.p308e5280} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" />
+                    </svg>
+                  ),
+                  label1: "24/7 Threat",
+                  label2: "Monitoring"
+                },
+              ].map((item, i) => (
+                <div key={i} className="flex flex-1 items-center min-w-0">
+                  <div className="flex flex-col items-center gap-3 flex-1 px-3 sm:px-4 py-2 sm:py-0">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 relative flex items-center justify-center shrink-0">
+                      {item.icon}
+                    </div>
+                    <div className="text-center">
+                      <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                        {item.label1}
+                      </p>
+                      <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                        {item.label2}
+                      </p>
+                    </div>
                   </div>
-                  <div className="text-center">
-                    <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
-                      {item.label1}
-                    </p>
-                    <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
-                      {item.label2}
-                    </p>
-                  </div>
+                  {i < 2 && (
+                    <div className="hidden sm:block w-px self-stretch mx-1 shrink-0" style={{ background: "#e2e8f0", minHeight: "72px" }} aria-hidden />
+                  )}
                 </div>
-                {i < 2 && (
-                  <div className="hidden sm:block w-px self-stretch mx-1 shrink-0" style={{ background: "#e2e8f0", minHeight: "72px" }} aria-hidden />
-                )}
-              </div>
-            ))}
-          </motion.div>
-        </div>
+              ))}
+            </motion.div>
+          </div>
 
-        <motion.div ref={imgRef} className="flex-1 min-w-0 relative" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
-          <motion.div style={{ y }} className="w-full">
-            <ResponsivePicture
-              slug="services-hero"
-              alt="Smart Solutions – Security illustration"
-              className="w-full h-auto object-contain"
-              style={{ maxHeight: "520px" }}
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              priority
-            />
+          <motion.div ref={imgRef} className="flex-1 min-w-0 relative" variants={fadeRight} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
+            <motion.div style={{ y }} className="w-full">
+              <ResponsivePicture
+                slug="services-hero"
+                alt="Smart Solutions - Security illustration"
+                className="w-full h-auto object-contain"
+                style={{ maxHeight: "520px" }}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
+              />
+            </motion.div>
+            <div className="absolute -z-10 inset-0 rounded-full bg-[#015AAA]/8 opacity-40" aria-hidden
+              style={{ background: "radial-gradient(circle at 50% 40%, #015AAA 0%, transparent 70%)" }} />
           </motion.div>
-          <div className="absolute -z-10 inset-0 rounded-full bg-[#015AAA]/8 opacity-40" aria-hidden
-            style={{ background: "radial-gradient(circle at 50% 40%, #015AAA 0%, transparent 70%)" }} />
-        </motion.div>
         </div>
       </div>
     </section>
@@ -178,38 +178,38 @@ function ServiceCardsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-stretch">
           {serviceCards.map((card, i) => (
             <Link key={i} to={card.slug} className="no-underline text-inherit h-full block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/70 rounded-2xl min-w-0">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-              custom={i % 4}
-              className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer h-full min-h-[320px] sm:min-h-[360px]"
-            >
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                custom={i % 4}
+                className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer h-full min-h-[320px] sm:min-h-[360px]"
+              >
 
-              <div className="p-6 sm:p-8 pb-4 flex items-center justify-center min-h-[160px] sm:min-h-[192px]">
-                <div className="relative w-full max-w-[140px] sm:max-w-[160px] aspect-square flex items-center justify-center mx-auto">
-                  <div className="absolute inset-0 bg-blue-50/50 rounded-full scale-90 group-hover:scale-100 transition-transform duration-500" aria-hidden />
-                  <ResponsivePicture
-                    slug={card.mediaSlug}
-                    alt={card.title}
-                    className="relative z-10 w-full h-full max-h-[100px] sm:max-h-[120px] object-contain object-center transition-transform duration-500 group-hover:scale-105"
-                    profile="icon"
-                  />
+                <div className="p-6 sm:p-8 pb-4 flex items-center justify-center min-h-[160px] sm:min-h-[192px]">
+                  <div className="relative w-full max-w-[140px] sm:max-w-[160px] aspect-square flex items-center justify-center mx-auto">
+                    <div className="absolute inset-0 bg-blue-50/50 rounded-full scale-90 group-hover:scale-100 transition-transform duration-500" aria-hidden />
+                    <ResponsivePicture
+                      slug={card.mediaSlug}
+                      alt={card.title}
+                      className="relative z-10 w-full h-full max-h-[100px] sm:max-h-[120px] object-contain object-center transition-transform duration-500 group-hover:scale-105"
+                      profile="icon"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="px-6 sm:px-8 pb-6 sm:pb-8 flex flex-col flex-1 min-w-0">
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-[#015AAA] transition-colors duration-300 break-words">
-                  {card.title}
-                </h3>
-                <p className="text-sm sm:text-base text-slate-500 leading-relaxed flex-1 break-words">
-                  {card.desc}
-                </p>
-              </div>
+                <div className="px-6 sm:px-8 pb-6 sm:pb-8 flex flex-col flex-1 min-w-0">
+                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-[#015AAA] transition-colors duration-300 break-words">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-slate-500 leading-relaxed flex-1 break-words">
+                    {card.desc}
+                  </p>
+                </div>
 
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl origin-left" />
-            </motion.div>
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl origin-left" />
+              </motion.div>
             </Link>
           ))}
         </div>
@@ -476,19 +476,19 @@ export default function ServicesPage() {
       <TopNav />
 
       <main id="main-content">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        <ServicesHero />
-        <ServiceCardsSection />
-        <OurProcessSection />
-        <WhyChooseUsSection />
-        <ServicesFaqSection items={[...SERVICES_FAQ_ITEMS]} />
-        <FooterSection />
-        <ScrollToTop />
-      </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <ServicesHero />
+          <ServiceCardsSection />
+          <OurProcessSection />
+          <WhyChooseUsSection />
+          <ServicesFaqSection items={[...SERVICES_FAQ_ITEMS]} />
+          <FooterSection />
+          <ScrollToTop />
+        </motion.div>
       </main>
     </div>
   );

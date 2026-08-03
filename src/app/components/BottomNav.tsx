@@ -9,7 +9,7 @@ const navItems = [
   { name: "Services", href: "services", path: "/services" },
   { name: "Testimonials", href: "testimonials", path: "/clients" },
   { name: "EdTech", href: "edtech", path: "/edtech" },
-
+  { name: "Contact", href: "contact", path: "/#contact" },
 ];
 
 export default function BottomNav() {
@@ -29,7 +29,11 @@ export default function BottomNav() {
 
     if (location.pathname !== "/") {
       const currentItem = navItems.find((item) => item.path === location.pathname);
-      if (currentItem) setActiveSection(currentItem.href);
+      if (currentItem) {
+        setActiveSection(currentItem.href);
+      } else if (location.hash === "#contact") {
+        setActiveSection("contact");
+      }
     } else if (location.hash) {
       const hash = location.hash.replace("#", "");
       setActiveSection(hash);
@@ -68,12 +72,24 @@ export default function BottomNav() {
 
   return (
     <motion.div
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] w-[95%] max-w-4xl max-md:hidden"
+      className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-[100]"
+      style={{ width: "min(96vw, 52rem)" }}
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
     >
-      <div className="relative rounded-full border border-slate-200/90 bg-white/95 p-1 sm:p-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex items-stretch gap-0.5 sm:gap-1 overflow-x-auto overflow-y-hidden max-w-full [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:overflow-visible md:justify-between">
+      <div
+        className="relative rounded-full flex items-center justify-between max-w-full overflow-hidden"
+        style={{
+          background: "rgba(255,255,255,0.55)",
+          backdropFilter: "blur(18px) saturate(180%)",
+          WebkitBackdropFilter: "blur(18px) saturate(180%)",
+          border: "1px solid rgba(255,255,255,0.55)",
+          boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.6)",
+          padding: "clamp(3px, 0.6vw, 6px)",
+          gap: "clamp(1px, 0.4vw, 4px)",
+        }}
+      >
         {navItems.map((item) => {
           const isActive = activeSection === item.href;
 
@@ -82,11 +98,19 @@ export default function BottomNav() {
               key={item.name}
               type="button"
               onClick={() => handleClick(item)}
-              className={`relative shrink-0 min-w-[44px] min-h-[44px] rounded-full border-none px-2.5 sm:px-4 md:px-6 py-2.5 md:py-3 font-bold text-[11px] sm:text-xs md:text-sm transition-colors duration-200 cursor-pointer whitespace-nowrap flex items-center justify-center md:flex-1 ${
+              className={`relative rounded-full border-none font-bold cursor-pointer whitespace-nowrap flex items-center justify-center flex-1 transition-colors duration-200 ${
                 isActive
-                  ? "bg-[#014080] text-white shadow-md shadow-blue-900/25"
-                  : "bg-transparent text-gray-800 hover:bg-slate-100 hover:text-[#015aaa]"
+                  ? "bg-[#015aaa] text-white shadow-sm shadow-blue-900/20"
+                  : "bg-transparent text-gray-800 hover:bg-slate-100/70 hover:text-[#015aaa]"
               }`}
+              style={{
+                fontSize: "clamp(9px, 2vw, 13px)",
+                paddingLeft: "clamp(6px, 2.5vw, 20px)",
+                paddingRight: "clamp(6px, 2.5vw, 20px)",
+                paddingTop: "clamp(6px, 1.2vw, 10px)",
+                paddingBottom: "clamp(6px, 1.2vw, 10px)",
+                minHeight: "clamp(32px, 5vw, 44px)",
+              }}
             >
               {item.name}
             </motion.button>

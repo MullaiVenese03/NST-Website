@@ -47,13 +47,12 @@ export function navigateToContact(
   isHome: boolean,
 ) {
   const scrollToFooter = () =>
-    scrollToSection("contact", { behavior: "smooth", block: "start", maxAttempts: 96 });
+    scrollToSection("contact", { behavior: "smooth", block: "end", maxAttempts: 120 });
 
   if (isHome) {
     navigate({ pathname: "/", hash: "contact" });
-    requestAnimationFrame(() => {
-      requestAnimationFrame(scrollToFooter);
-    });
+    // Give the lazy-loaded footer time to mount before scrolling
+    setTimeout(scrollToFooter, 350);
     return;
   }
 
@@ -64,4 +63,5 @@ export function navigateToContact(
   }
 
   navigate({ pathname: "/", hash: "contact" });
+  setTimeout(scrollToFooter, 350);
 }

@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { Link } from "react-router";
 import svgPaths from "../../imports/EdTechSection/svg-v7pn74uo9y";
 import { ResponsivePicture } from "./ResponsivePicture";
 import { fadeHorizontalVariants, fadeUpVariants, VIEWPORT_ONCE } from "../utils/motionPresets";
@@ -119,48 +120,36 @@ export default function EdTechSection() {
             ))}
           </motion.ul>
 
-          <motion.a
+          <motion.div
             custom={4}
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
-            href="/edtech"
-            className="inline-flex items-center gap-2 group w-fit"
-            style={{
-              background: "#015AAA",
-              borderRadius: "8px",
-              padding: "10px 14px",
-              textDecoration: "none",
-            }}
+            className="w-fit"
           >
-            <span
-              style={{
-                fontWeight: 700,
-                fontSize: "13px",
-                letterSpacing: "0.96px",
-                color: "#fff",
-                textTransform: "uppercase",
-              }}
+            <Link
+              to="/edtech"
+              className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#015AAA] text-white font-bold text-xs uppercase tracking-[0.96px] no-underline hover:bg-[#014080] hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 group cursor-pointer shrink-0"
             >
-              Explore EdTech Platform
-            </span>
-            <svg
-              width="13"
-              height="10"
-              viewBox="0 0 13.5 9.5"
-              fill="none"
-              className="transition-transform duration-200 group-hover:translate-x-0.5"
-            >
-              <path
-                d={svgPaths.pbf23500}
-                stroke="white"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-              />
-            </svg>
-          </motion.a>
+              <span>Explore EdTech Platform</span>
+              <svg
+                width="13"
+                height="10"
+                viewBox="0 0 13.5 9.5"
+                fill="none"
+                className="transition-transform duration-200 group-hover:translate-x-1.5"
+              >
+                <path
+                  d={svgPaths.pbf23500}
+                  stroke="white"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="1.75"
+                />
+              </svg>
+            </Link>
+          </motion.div>
         </div>
 
         <motion.div

@@ -11,16 +11,19 @@ export default function FixedHeroSection() {
       className="flex w-full max-w-[min(100%,40rem)] flex-col items-center gap-8 text-center md:max-w-2xl md:items-start md:gap-6 md:text-left"
       style={GPU_LAYER}
     >
-      <h1 className="max-w-full text-5xl font-black leading-[1.12] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl">
-        <span className="flex flex-col gap-1">
-          <span>
-            <span className="text-[#015aaa]">One</span> Entry.
+      <h1
+        className="max-w-full text-5xl font-black leading-[1.12] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl"
+        style={{ fontWeight: 1200 }}
+      >
+        <span className="flex flex-col gap-1" style={{ fontWeight: 1200 }}>
+          <span style={{ fontWeight: 1200 }}>
+            <span className="text-[#015aaa]" style={{ fontWeight: 1200 }}>One</span> Entry.
           </span>
-          <span>
-            <span className="text-[#015aaa]">One</span> Device.
+          <span style={{ fontWeight: 1200 }}>
+            <span className="text-[#015aaa]" style={{ fontWeight: 1200 }}>One</span> Device.
           </span>
-          <span>
-            <span className="text-[#015aaa]">One</span> Purpose.
+          <span style={{ fontWeight: 1200 }}>
+            <span className="text-[#015aaa]" style={{ fontWeight: 1200 }}>One</span> Purpose.
           </span>
         </span>
       </h1>

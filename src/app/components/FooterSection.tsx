@@ -121,7 +121,7 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
   return (
     <footer
       id={anchorId ?? undefined}
-      className="w-full bg-white pt-12 sm:pt-16 lg:pt-20 overflow-x-clip scroll-mt-24"
+      className="w-full bg-white pt-12 sm:pt-16 lg:pt-20 pb-28 sm:pb-24 lg:pb-16 overflow-x-clip scroll-mt-24"
     >
       <motion.div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
@@ -174,7 +174,7 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
           </div>
         </motion.div>
 
-        <div className="pt-6 sm:pt-8 pb-8 md:pb-32 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6 border-b-2 border-b-blue-500">
+        <div className="pt-6 sm:pt-8 pb-8 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6">
           <motion.div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-center sm:text-left">
             <p className="text-slate-500 text-sm m-0">
               Copyright &copy; 2026{" "}

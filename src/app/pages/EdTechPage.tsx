@@ -67,7 +67,7 @@ export function NSTLogo() {
         decoding="async"
         className="w-10 h-10 flex-shrink-0 object-contain"
       />
-      <span style={{ fontFamily: 'var(--font-company)', fontWeight: 800, fontSize: "20px", letterSpacing: "0.5px", color: C.heading }}>
+      <span style={{ fontFamily: 'var(--font-company)', fontWeight: 1200, fontSize: "20px", letterSpacing: "0.5px", color: C.heading }}>
         NebulaSafe<span style={{ color: C.primary }}>Tech</span>
       </span>
     </div>
@@ -131,7 +131,7 @@ function EdTechHero() {
                 <Zap size={13} color={C.primary} fill={C.primary} />
                 <AnimatedNumber
                   value={s.val}
-                  style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "15px", color: C.heading }}
+                  style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "15px", color: C.heading }}
                 />
                 <span style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "12px", color: C.muted }}>{s.label}</span>
               </div>
@@ -167,7 +167,7 @@ function EdTechHero() {
               <div>
                 <AnimatedNumber
                   value={LEARNERS_REACHED_LABEL.replace(/,/g, "")}
-                  style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "18px", color: C.heading, margin: 0 }}
+                  style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "18px", color: C.heading, margin: 0 }}
                 />
                 <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "12px", color: C.muted, margin: 0 }}>Certificates Issued</p>
               </div>
@@ -215,7 +215,7 @@ function EdTechServicesSection() {
               What We Offer
             </span>
           </div>
-          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "clamp(28px,3.5vw,48px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
+          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "clamp(28px,3.5vw,48px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
             Everything You Need to Succeed
           </h2>
           <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: C.body, maxWidth: "520px", lineHeight: 1.7, margin: 0 }}>
@@ -318,7 +318,7 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
           <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full px-3 py-1"
             style={{ background: C.primary, boxShadow: "0 4px 12px rgba(10,102,194,0.4)" }}>
             <Star size={11} fill="white" color="white" />
-            <span style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "10px", letterSpacing: "0.5px", color: "#fff" }}>FEATURED</span>
+            <span style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "10px", letterSpacing: "0.5px", color: "#fff" }}>FEATURED</span>
           </div>
         )}
 
@@ -382,7 +382,7 @@ export function FeaturedProjectsSection() {
                 Student Projects
               </span>
             </div>
-            <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "clamp(26px,3.2vw,44px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
+            <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "clamp(26px,3.2vw,44px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
               Featured Projects
             </h2>
             <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "16px", color: C.body, lineHeight: 1.7, maxWidth: "480px", margin: 0 }}>
@@ -472,7 +472,7 @@ function ECommerceShoutout() {
               style={{ background: "#FFFFFF", boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}
               whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(0,0,0,0.3)" }}
               whileTap={{ scale: 0.96 }}>
-              <span style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "16px", color: C.primary }}>
+              <span style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "16px", color: C.primary }}>
                 Open Project Website
               </span>
               <ExternalLink size={16} color={C.primary} />
@@ -508,7 +508,7 @@ function ECommerceShoutout() {
                 <div>
                   <AnimatedNumber
                     value="+124%"
-                    style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "16px", color: "#059669", margin: 0 }}
+                    style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "16px", color: "#059669", margin: 0 }}
                   />
                   <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "11px", color: C.muted, margin: 0 }}>Placement Rate</p>
                 </div>
@@ -542,7 +542,7 @@ function LearningPathSection() {
               The Journey
             </span>
           </div>
-          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "clamp(26px,3.5vw,46px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
+          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "clamp(26px,3.5vw,46px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
             Your Learning Path
           </h2>
           <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: C.body, maxWidth: "480px", lineHeight: 1.7, margin: 0 }}>
@@ -611,7 +611,7 @@ function PlatformFeaturesSection() {
               Platform Advantages
             </span>
           </div>
-          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "clamp(26px,3.5vw,46px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
+          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "clamp(26px,3.5vw,46px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
             Why Learn with NST EdTech?
           </h2>
           <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: C.body, maxWidth: "500px", lineHeight: 1.7, margin: 0 }}>
@@ -716,7 +716,7 @@ function CTASection() {
           <div className="flex flex-wrap gap-4 items-center justify-center relative z-10">
             <motion.a href="#contact-form"
               className="flex items-center gap-2 no-underline rounded-[14px] px-8 py-4"
-              style={{ background: C.primary, color: "#fff", fontFamily: 'var(--font-family)', fontWeight: 800, fontSize: "16px", boxShadow: `0 8px 32px rgba(10,102,194,0.35)` }}
+              style={{ background: C.primary, color: "#fff", fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "16px", boxShadow: `0 8px 32px rgba(10,102,194,0.35)` }}
               whileHover={{ scale: 1.05, background: C.secondary }} whileTap={{ scale: 0.96 }}
               onClick={(e) => {
                 e.preventDefault();

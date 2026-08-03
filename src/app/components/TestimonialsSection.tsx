@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, Variants } from "motion/react";
+import { Link } from "react-router";
+import { SectionCtaLink } from "./SectionCtaLink";
 import { VIEWPORT_ONCE } from "../utils/motionPresets";
 import { useLightExperience } from "../utils/performance";
 import svgPaths from "../../imports/TestimonialsSection/svg-2ss3ybjdpk";
@@ -99,24 +101,31 @@ export default function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEWPORT_ONCE}
           transition={{ duration: 0.55 }}
-          className="mb-8 sm:mb-10"
+          className="mb-8 sm:mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
         >
-          <p
-            className="text-[#015AAA] font-bold text-base sm:text-lg uppercase tracking-wider mb-2 sm:mb-2.5"
-            style={{ fontFamily: "var(--font-family)" }}
-          >
-            Clients Love Us
-          </p>
-          <h2
-            className="font-bold text-slate-900 m-0"
-            style={{
-              fontFamily: "var(--font-family)",
-              fontSize: "clamp(1.5rem, 4vw, 2rem)",
-              letterSpacing: "0.04em",
-            }}
-          >
-            Trusted by Leaders
-          </h2>
+          <div>
+            <p
+              className="text-[#015AAA] font-bold text-base sm:text-lg uppercase tracking-wider mb-2 sm:mb-2.5"
+              style={{ fontFamily: "var(--font-family)" }}
+            >
+              Clients Love Us
+            </p>
+            <h2
+              className="font-bold text-slate-900 m-0"
+              style={{
+                fontFamily: "var(--font-family)",
+                fontSize: "clamp(1.5rem, 4vw, 2rem)",
+                letterSpacing: "0.04em",
+              }}
+            >
+              Trusted by Leaders
+            </h2>
+          </div>
+          <SectionCtaLink
+            to="/clients"
+            label="View all clients"
+            className="self-start sm:self-end"
+          />
         </motion.div>
 
         <div
