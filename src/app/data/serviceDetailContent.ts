@@ -1,18 +1,18 @@
 import type { ServiceSlug } from "../../seo/pageMeta";
 import type { MediaSlug } from "../utils/media";
 
-export type ServiceOffering = {
+type ServiceOffering = {
   title: string;
   description: string;
   mediaSlug: MediaSlug;
 };
 
-export type ServiceBenefit = {
+type ServiceBenefit = {
   title: string;
   description: string;
 };
 
-export type ServiceProcessStep = {
+type ServiceProcessStep = {
   num: string;
   title: string;
   description: string;
@@ -40,7 +40,7 @@ export type ServiceDetailContent = {
   ctaDescription: string;
 };
 
-export const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> = {
+const SERVICE_DETAIL_CONTENT: Record<ServiceSlug, ServiceDetailContent> = {
   "web-development": {
     slug: "web-development",
     eyebrow: "Full-Stack Web Development",

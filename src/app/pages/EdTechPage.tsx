@@ -148,7 +148,7 @@ function EdTechHero() {
                 className="w-full h-auto object-cover"
                 style={{ maxHeight: "500px" }}
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                priority={!light}
+                priority
               />
 
               <div className="absolute inset-0"

@@ -59,7 +59,7 @@ export default function HeroBackground() {
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
             src={HERO_VIDEO_URL}
             className={`${mediaClass} transition-opacity duration-500 ease-out ${
               videoReady ? "opacity-100" : "opacity-0"

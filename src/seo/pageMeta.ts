@@ -125,13 +125,6 @@ const SERVICE_DETAIL: Record<
   },
 };
 
-export function getServiceSlug(pathname: string): ServiceSlug | null {
-  const m = pathname.match(/^\/services\/([^/]+)\/?$/);
-  if (!m) return null;
-  const slug = m[1] as ServiceSlug;
-  return slug in SERVICE_DETAIL ? slug : null;
-}
-
 export function getServiceDetailSeo(slug: ServiceSlug) {
   return SERVICE_DETAIL[slug];
 }
@@ -195,19 +188,4 @@ export function serviceFaqForSlug(slug: ServiceSlug) {
               },
             ];
   return [...common, ...specific];
-}
-
-
-export const SITEMAP_STATIC_PATHS: { path: string; changefreq: string; priority: string }[] = [
-  { path: "/", changefreq: "weekly", priority: "1.0" },
-  { path: "/about", changefreq: "monthly", priority: "0.9" },
-  { path: "/services", changefreq: "monthly", priority: "0.9" },
-  { path: "/services/cybersecurity", changefreq: "monthly", priority: "0.85" },
-  { path: "/services/web-development", changefreq: "monthly", priority: "0.85" },
-  { path: "/services/ui-ux-design", changefreq: "monthly", priority: "0.85" },
-  { path: "/services/edtech-training", changefreq: "monthly", priority: "0.85" },
-  { path: "/clients", changefreq: "monthly", priority: "0.75" },
-  { path: "/edtech", changefreq: "monthly", priority: "0.85" },
-  { path: "/privacy-policy", changefreq: "yearly", priority: "0.4" },
-  { path: "/terms-and-conditions", changefreq: "yearly", priority: "0.4" },
-];
+}

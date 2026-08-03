@@ -148,6 +148,7 @@ function ServicesHero() {
               className="w-full h-auto object-contain"
               style={{ maxHeight: "520px" }}
               sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
             />
           </motion.div>
           <div className="absolute -z-10 inset-0 rounded-full bg-[#015AAA]/8 opacity-40" aria-hidden

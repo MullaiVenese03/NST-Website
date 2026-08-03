@@ -1,4 +1,4 @@
-import { useLayoutEffect, type RefObject } from "react";
+import { useEffect, type RefObject } from "react";
 import { useScroll, useTransform } from "motion/react";
 import type { Transition, Variants } from "motion/react";
 import { useLightExperience } from "./performance";
@@ -45,17 +45,12 @@ export function fadeHorizontalVariants(
     visible: { opacity: 1, x: 0, transition: { duration: 0.55, ease: EASE_OUT } },
   };
 }
-
-
-export const PARALLAX_REF_CLASS = "relative";
-
 function ensureParallaxPosition(ref: RefObject<HTMLElement | null>) {
   const node = ref.current;
-  if (!node) return false;
-  if (getComputedStyle(node).position === "static") {
+  if (!node) return;
+  if (!node.style.position || node.style.position === "static") {
     node.style.position = "relative";
   }
-  return true;
 }
 
 
@@ -65,11 +60,9 @@ export function useParallaxY(
 ): ReturnType<typeof useTransform<number, number>> {
   const light = useLightExperience();
 
-  useLayoutEffect(() => {
-    if (ensureParallaxPosition(ref)) return;
-    const frame = requestAnimationFrame(() => ensureParallaxPosition(ref));
-    return () => cancelAnimationFrame(frame);
-  });
+  useEffect(() => {
+    ensureParallaxPosition(ref);
+  }, [ref]);
 
   const { scrollYProgress } = useScroll({
     target: ref,

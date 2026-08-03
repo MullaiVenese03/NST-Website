@@ -1,0 +1,15 @@
+# NebulaSafeTech
+
+> NebulaSafeTech is a cybersecurity and digital solutions company based in Hosur, Tamil Nadu, India. Providing VAPT, secure engineering, full-stack web development, UI/UX design, and EdTech training programs for organizations and academic partners worldwide.
+
+## Core Documentation & Pages
+
+- [Home](https://www.nebulasafetech.com/): Official website landing page overview.
+- [About Us](https://www.nebulasafetech.com/about): Mission, vision, leadership, and company profile.
+- [Services Overview](https://www.nebulasafetech.com/services): Overview of cybersecurity, development, UI/UX, and EdTech service capabilities.
+- [Cybersecurity Services](https://www.nebulasafetech.com/services/cybersecurity): Vulnerability Assessment, Penetration Testing (VAPT), security hardening, and DevSecOps.
+- [Web Development Services](https://www.nebulasafetech.com/services/web-development): Full-stack React, Node, and cloud-native web product development.
+- [UI/UX Design Services](https://www.nebulasafetech.com/services/ui-ux-design): Accessible UI/UX design, design systems, and product interface specs.
+- [EdTech & Institutional Training Services](https://www.nebulasafetech.com/services/edtech-training): Academic cybersecurity workshops, MoUs, and curriculum development.
+- [EdTech Ecosystem](https://www.nebulasafetech.com/edtech): Student training programs, hands-on security learning paths, and academic partnerships.
+- [Client Programs](https://www.nebulasafetech.com/clients): Institutional partnerships, client testimonials, and delivered program metrics.

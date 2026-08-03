@@ -1,5 +1,4 @@
 {
-  "homepage": "https://mullaivenese03.github.io/NST-Website/",
   "name": "@figma/my-make-file",
   "private": true,
   "version": "0.0.1",
@@ -11,11 +10,10 @@
     "dev": "vite",
     "preview": "vite preview",
     "optimize:fonts": "node scripts/optimize-fonts.mjs",
-    "optimize:og": "node scripts/optimize-og.mjs",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "optimize:og": "node scripts/optimize-og.mjs"
   },
   "dependencies": {
+    "@formspree/core": "^4.0.0",
     "@formspree/react": "^3.0.0",
     "@microsoft/clarity": "^1.0.2",
     "@vercel/analytics": "^2.0.1",
@@ -33,7 +31,6 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "4.7.0",
-    "gh-pages": "^6.3.0",
     "sharp": "^0.34.5",
     "subset-font": "^2.5.0",
     "tailwindcss": "4.1.12",

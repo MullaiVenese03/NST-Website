@@ -48,7 +48,5 @@ export function sizesForProfile(profile: MediaProfile, override?: string): strin
 
 export const BRAND_MARK_URL = COMPANY_ICON.nav;
 
-export const HERO_POSTER_MOBILE = "/media/hero-poster/hero-poster-640.webp";
 export const HERO_VIDEO_URL = "/media/hero-bg-video.mp4";
 
-export const LOGO_ASSEMBLE_ANIMATION_URL = HERO_VIDEO_URL;

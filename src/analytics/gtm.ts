@@ -1,6 +1,6 @@
 import type { DataLayerEvent } from "./types";
 
-export function pushDataLayer(event: DataLayerEvent): void {
+function pushDataLayer(event: DataLayerEvent): void {
   if (typeof window === "undefined") return;
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push(event);

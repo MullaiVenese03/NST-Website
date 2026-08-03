@@ -1,5 +1,5 @@
 /** Official Formspree form hash - https://formspree.io/forms/xgoqvrkb */
-export const FORMSPREE_FORM_ID = "xgoqvrkb";
+const FORMSPREE_FORM_ID = "xgoqvrkb";
 
 const FORMSPREE_ID_PATTERN = /^[a-z0-9]{6,12}$/i;
 
@@ -22,4 +22,3 @@ function resolveFormIdFromEnv(): string {
 
 export const ACTIVE_FORMSPREE_FORM_ID = resolveFormIdFromEnv();
 
-export const FORMSPREE_ENDPOINT = `https://formspree.io/f/${ACTIVE_FORMSPREE_FORM_ID}`;

@@ -1,8 +1,9 @@
 {
   "name": "NebulaSafeTech",
   "short_name": "NST",
-  "description": "Cybersecurity and digital solutions in India",
+  "description": "Cybersecurity and Digital Solutions in India",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#015aaa",

@@ -105,7 +105,7 @@ export const CLIENT_PROGRAMS: ClientProgram[] = [
   },
 ];
 
-export const PARTNER_INSTITUTION_COUNT = new Set(
+const PARTNER_INSTITUTION_COUNT = new Set(
   CLIENT_PROGRAMS.map((p) => p.institution)
 ).size;
 

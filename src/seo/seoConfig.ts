@@ -10,7 +10,7 @@ export const BUSINESS_IDENTITY =
 export const BUSINESS_DESCRIPTION =
   "NebulaSafeTech is a cybersecurity and digital solutions company providing web development, UI/UX, SEO, and EdTech services for startups, enterprises, and academic partners.";
 
-export const DEFAULT_OG_IMAGE_PATH = "/og-image.webp";
+const DEFAULT_OG_IMAGE_PATH = "/og-image.webp";
 
 export function absoluteUrl(path: string): string {
   const p = path.startsWith("/") ? path : `/${path}`;

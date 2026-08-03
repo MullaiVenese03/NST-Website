@@ -204,6 +204,7 @@ function HeroAboutSection() {
               className="w-full h-auto max-h-[min(52vh,420px)] sm:max-h-none object-cover object-center rounded-[16px]"
               style={{ boxShadow: "0 8px 40px rgba(1,90,170,0.15)" }}
               sizes="(max-width: 1024px) 100vw, 50vw"
+              priority
             />
           </motion.div>
 

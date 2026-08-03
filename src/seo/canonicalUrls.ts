@@ -1,7 +1,7 @@
 import { SITE_ORIGIN } from "./seoConfig";
 
 
-export function canonicalPathFromPathname(pathname: string): string {
+function canonicalPathFromPathname(pathname: string): string {
   if (!pathname || pathname === "/") return "/";
   return pathname.replace(/\/+$/, "") || "/";
 }

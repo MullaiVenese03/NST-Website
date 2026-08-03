@@ -6,8 +6,6 @@ export function isAnalyticsEnabled(): boolean {
   return import.meta.env.PROD;
 }
 
-export const GTM_ID = import.meta.env.VITE_GTM_ID ?? "GTM-WTQS44T7";
-
 export const CLARITY_PROJECT_ID = import.meta.env.VITE_CLARITY_PROJECT_ID ?? "wum1ijwahj";
 
 export const CF_BEACON_TOKEN = import.meta.env.VITE_CF_BEACON_TOKEN ?? "";
