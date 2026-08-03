@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, Linkedin, Instagram, Twitter, type LucideIcon } from "lucide-react";
+import { Phone, Mail, MapPin, Linkedin, Instagram, Twitter, Youtube, type LucideIcon } from "lucide-react";
 import { BUSINESS_IDENTITY, BUSINESS_NAP } from "../../seo/seoConfig";
 
 const FOOTER_SERVICES = [
@@ -205,6 +205,9 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
             </SocialBtn>
             <SocialBtn href="https://twitter.com/nebulasafetech" label="Twitter">
               <Twitter size={20} strokeWidth={2} aria-hidden />
+            </SocialBtn>
+            <SocialBtn href="https://www.youtube.com/@NebulaSafeTech" label="NebulaSafeTech on YouTube">
+              <Youtube size={20} strokeWidth={2} aria-hidden />
             </SocialBtn>
           </div>
         </div>

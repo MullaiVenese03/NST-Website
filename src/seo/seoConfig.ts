@@ -25,6 +25,7 @@ export const SOCIAL_PROFILES = [
   "https://linkedin.com/company/nebulasafetech-nst/",
   "https://instagram.com/nebulasafetech",
   "https://twitter.com/nebulasafetech",
+  "https://www.youtube.com/@NebulaSafeTech",
 ] as const;
 
 /** Single source of truth for NAP (Name, Address, Phone) — footer, schema, GBP alignment. */
