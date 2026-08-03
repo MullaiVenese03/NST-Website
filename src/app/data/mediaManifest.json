@@ -801,6 +801,28 @@
       }
     }
   },
+  "testimonial-st-joseph-collage": {
+    "slug": "testimonial-st-joseph-collage",
+    "profile": "testimonial",
+    "width": 960,
+    "height": 540,
+    "intrinsicWidth": 1998,
+    "intrinsicHeight": 1124,
+    "defaultSrc": "/media/testimonial-st-joseph-collage/testimonial-st-joseph-collage-960.webp",
+    "defaultAvif": "/media/testimonial-st-joseph-collage/testimonial-st-joseph-collage-960.avif",
+    "sources": {
+      "webp": {
+        "400": "/media/testimonial-st-joseph-collage/testimonial-st-joseph-collage-400.webp",
+        "640": "/media/testimonial-st-joseph-collage/testimonial-st-joseph-collage-640.webp",
+        "960": "/media/testimonial-st-joseph-collage/testimonial-st-joseph-collage-960.webp"
+      },
+      "avif": {
+        "400": "/media/testimonial-st-joseph-collage/testimonial-st-joseph-collage-400.avif",
+        "640": "/media/testimonial-st-joseph-collage/testimonial-st-joseph-collage-640.avif",
+        "960": "/media/testimonial-st-joseph-collage/testimonial-st-joseph-collage-960.avif"
+      }
+    }
+  },
   "hero-poster": {
     "slug": "hero-poster",
     "profile": "hero",

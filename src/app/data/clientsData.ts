@@ -94,6 +94,15 @@ export const CLIENT_PROGRAMS: ClientProgram[] = [
     desc: "Conducted a cybersecurity workshop at Akshaya College of Engineering for students in the computer lab, covering practical threats, safe online habits, and how to build stronger security awareness in everyday digital work.",
     participants: "500+ Students",
   },
+  {
+    id: 10,
+    mediaSlug: "testimonial-st-joseph-collage",
+    institution: "St. Joseph College for Women",
+    category: "Academic",
+    label: "Keynote Speaker – 2026 Digital Conference",
+    desc: "St. Joseph College invited us as a keynote speaker for the 2026 Digital Conference, where we shared insights on emerging cyber threats, digital resilience strategies, and the future of cybersecurity in an increasingly connected world.",
+    participants: "50+ Students",
+  },
 ];
 
 export const PARTNER_INSTITUTION_COUNT = new Set(
