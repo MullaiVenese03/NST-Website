@@ -134,21 +134,21 @@ All client-facing variables use the `VITE_` prefix:
 
 ```env
 # Formspree Form Hash (from https://formspree.io/forms/<id>)
-VITE_FORMSPREE_FORM_ID=xgoqvrkb
+VITE_FORMSPREE_FORM_ID=your_formspree_form_id
 
 # Analytics Controls (enabled automatically in production unless set to false)
 VITE_ENABLE_ANALYTICS=true
-VITE_GTM_ID=GTM-WTQS44T7
-VITE_CLARITY_PROJECT_ID=wum1ijwahj
+VITE_GTM_ID=GTM-XXXXXXX
+VITE_CLARITY_PROJECT_ID=your_clarity_project_id
 
 # GA4 Measurement ID (linked inside Google Tag Manager)
-VITE_GA_ID=G-WQXJLGNBT6
+VITE_GA_ID=G-XXXXXXXXXX
 
 # Cloudflare Web Analytics Beacon Token
-VITE_CF_BEACON_TOKEN=e27bb43bf2644576bd8d4fee82a98414
+VITE_CF_BEACON_TOKEN=your_cloudflare_beacon_token
 
 # Google Search Console Verification Meta Tag Content
-VITE_GSC_VERIFICATION=of0W2w2D8JJApY0VCJZzEVQxsXMUZAOXcIkBuWICAjc
+VITE_GSC_VERIFICATION=your_gsc_verification_token
 ```
 
 ---
