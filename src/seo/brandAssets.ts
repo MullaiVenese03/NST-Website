@@ -1,6 +1,6 @@
 import { absoluteUrl } from "./seoConfig";
 
-/** Path segment with brackets — use encoded form in HTML href when needed. */
+/** Path segment with brackets - use encoded form in HTML href when needed. */
 const COMPANY_ICON_MEDIA_DIR = "/media/NST_-_Favicon_[Dark_Transparent]";
 const COMPANY_ICON_MEDIA_DIR_ENCODED =
   "/media/NST_-_Favicon_%5BDark_Transparent%5D";
@@ -19,7 +19,7 @@ const ROOT_FAVICONS = {
 export const COMPANY_ICON = {
   /** Sharp nav / small UI (generated 128px webp at public root) */
   nav: ROOT_FAVICONS.webp128,
-  /** Media folder — 480px source */
+  /** Media folder - 480px source */
   webp480: `${COMPANY_ICON_BASE}-480.webp`,
   webp480Encoded: `${COMPANY_ICON_BASE_ENCODED}-480.webp`,
   webp800: `${COMPANY_ICON_BASE}-800.webp`,

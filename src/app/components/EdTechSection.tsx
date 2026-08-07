@@ -43,12 +43,8 @@ export default function EdTechSection() {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
+            className="nst-eyebrow text-[#015AAA]"
             style={{
-              fontWeight: 700,
-              fontSize: "20px",
-              letterSpacing: "1.2px",
-              color: "#015AAA",
-              textTransform: "uppercase",
               marginBottom: "16px",
             }}
           >
@@ -61,14 +57,9 @@ export default function EdTechSection() {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
+            className="nst-h2 text-slate-900"
             style={{
-              fontWeight: 700,
-              fontSize: "clamp(28px, 3vw, 36px)",
-              letterSpacing: "0.64px",
-              color: "#000",
-              margin: 0,
               marginBottom: "12px",
-              lineHeight: 1.15,
             }}
           >
             Learn. Build. Grow
@@ -80,17 +71,13 @@ export default function EdTechSection() {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
+            className="nst-body-sm text-slate-500"
             style={{
-              fontWeight: 400,
-              fontSize: "14px",
-              letterSpacing: "2px",
-              color: "#4a5565",
-              lineHeight: 1.625,
               marginBottom: "28px",
             }}
           >
             Empowering the next generation of cybersecurity
-            <br />
+            <br className="hidden sm:inline" />{" "}
             professionals and entrepreneurs.
           </motion.p>
 
@@ -106,13 +93,7 @@ export default function EdTechSection() {
               <li key={i} className="flex items-start gap-3">
                 <CheckIcon />
                 <span
-                  style={{
-                    fontWeight: 600,
-                    fontSize: "16px",
-                    letterSpacing: "0.32px",
-                    color: "#000",
-                    lineHeight: 1.4,
-                  }}
+                  className="nst-body font-semibold text-slate-900"
                 >
                   {point}
                 </span>
@@ -130,7 +111,7 @@ export default function EdTechSection() {
           >
             <Link
               to="/edtech"
-              className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#015AAA] text-white font-bold text-xs uppercase tracking-[0.96px] no-underline hover:bg-[#014080] hover:shadow-lg hover:shadow-blue-500/25 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 group cursor-pointer shrink-0"
+              className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl bg-[#015AAA] text-white font-bold nst-ui uppercase no-underline hover:bg-[#014080] hover:shadow-sm hover:-translate-y-0.5 active:scale-95 transition-all duration-300 group cursor-pointer shrink-0"
             >
               <span>Explore EdTech Platform</span>
               <svg

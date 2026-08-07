@@ -18,6 +18,7 @@ import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../
 import { useParallaxY } from "../utils/motionPresets";
 
 import { ResponsivePicture } from "../components/ResponsivePicture";
+import { ServiceCard } from "../components/ServiceCard";
 import type { MediaSlug } from "../utils/media";
 
 const fadeUp: Variants = {
@@ -33,17 +34,21 @@ const fadeRight: Variants = { hidden: { opacity: 0, x: 36 }, visible: { opacity:
 function IconBadge({
   children,
   viewBox = "0 0 70 70",
+  className = "w-[44px] h-[44px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0",
+  iconClassName = "w-[26px] h-[26px] block",
 }: {
   children: React.ReactNode;
   viewBox?: string;
+  className?: string;
+  iconClassName?: string;
 }) {
   return (
     <div
-      className="w-[70px] h-[70px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0"
+      className={className}
       aria-hidden
     >
       <svg
-        className="w-[44px] h-[44px] block"
+        className={iconClassName}
         fill="none"
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
@@ -66,17 +71,20 @@ function ServicesHero() {
 
           <div className="flex-1 min-w-0">
             <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={0}
-              style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
+              className="nst-eyebrow text-[#015AAA]"
+              style={{ marginBottom: "18px" }}>
               Our Services
             </motion.p>
 
             <motion.h1 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
-              style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.08, marginBottom: "20px", marginTop: 0 }}>
-              Smart Solutions.<br />Secure Future.
+              className="nst-h1 text-slate-900"
+              style={{ marginBottom: "20px", marginTop: 0 }}>
+              Smart Solutions.<br className="hidden sm:inline" />{" "}Secure Future.
             </motion.h1>
 
             <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
-              style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "44px", maxWidth: "540px" }}>
+              className="nst-body text-slate-500"
+              style={{ marginBottom: "44px", maxWidth: "540px" }}>
               From innovative web experiences to enterprise-grade security, we build, protect, and scale what matters most.
             </motion.p>
 
@@ -124,10 +132,10 @@ function ServicesHero() {
                       {item.icon}
                     </div>
                     <div className="text-center">
-                      <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                      <p className="nst-small font-bold text-slate-900 text-center">
                         {item.label1}
                       </p>
-                      <p style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "16px", color: "#000", letterSpacing: "0.32px", textAlign: "center" }}>
+                      <p className="nst-small font-bold text-slate-900 text-center">
                         {item.label2}
                       </p>
                     </div>
@@ -175,42 +183,16 @@ function ServiceCardsSection() {
   return (
     <section className="w-full py-20 px-8 md:px-14 lg:px-20 overflow-hidden" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {serviceCards.map((card, i) => (
-            <Link key={i} to={card.slug} className="no-underline text-inherit h-full block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]/70 rounded-2xl min-w-0">
-              <motion.div
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.15 }}
-                custom={i % 4}
-                className="relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer h-full min-h-[320px] sm:min-h-[360px]"
-              >
-
-                <div className="p-6 sm:p-8 pb-4 flex items-center justify-center min-h-[160px] sm:min-h-[192px]">
-                  <div className="relative w-full max-w-[140px] sm:max-w-[160px] aspect-square flex items-center justify-center mx-auto">
-                    <div className="absolute inset-0 bg-blue-50/50 rounded-full scale-90 group-hover:scale-100 transition-transform duration-500" aria-hidden />
-                    <ResponsivePicture
-                      slug={card.mediaSlug}
-                      alt={card.title}
-                      className="relative z-10 w-full h-full max-h-[100px] sm:max-h-[120px] object-contain object-center transition-transform duration-500 group-hover:scale-105"
-                      profile="icon"
-                    />
-                  </div>
-                </div>
-
-                <div className="px-6 sm:px-8 pb-6 sm:pb-8 flex flex-col flex-1 min-w-0">
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 group-hover:text-[#015AAA] transition-colors duration-300 break-words">
-                    {card.title}
-                  </h3>
-                  <p className="text-sm sm:text-base text-slate-500 leading-relaxed flex-1 break-words">
-                    {card.desc}
-                  </p>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl origin-left" />
-              </motion.div>
-            </Link>
+            <ServiceCard
+              key={`${card.slug}-${card.title}`}
+              to={card.slug}
+              mediaSlug={card.mediaSlug}
+              title={card.title}
+              description={card.desc}
+              index={i}
+            />
           ))}
         </div>
       </div>
@@ -278,15 +260,18 @@ function OurProcessSection() {
       <div className="max-w-[1440px] mx-auto">
 
         <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "18px" }}>
+          className="nst-eyebrow text-[#015AAA]"
+          style={{ marginBottom: "18px" }}>
           Our Process
         </motion.p>
         <motion.h2 variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={1}
-          style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(28px,3.8vw,52px)", letterSpacing: "1.12px", color: "#000", lineHeight: 1.1, marginBottom: "14px", marginTop: 0 }}>
+          className="nst-h2 text-slate-900"
+          style={{ marginBottom: "14px", marginTop: 0 }}>
           How We Deliver Excellence
         </motion.h2>
         <motion.p variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={2}
-          style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, marginBottom: "48px", maxWidth: "580px" }}>
+          className="nst-body text-slate-500"
+          style={{ marginBottom: "48px", maxWidth: "580px" }}>
           We combine expertise, technology, and dedication to deliver solutions that drive growth and security.
         </motion.p>
 
@@ -300,7 +285,7 @@ function OurProcessSection() {
                 viewport={{ once: true }}
                 custom={i}
                 className="relative rounded-2xl bg-white border border-slate-100 shadow-sm flex flex-col items-center p-8 w-full group min-h-[320px] text-center"
-                whileHover={{ y: -6, boxShadow: "0 12px 32px rgba(1,90,170,0.1)" }}
+                whileHover={{ y: -4, boxShadow: "0 6px 16px rgba(1,90,170,0.06)" }}
                 transition={{ type: "spring", stiffness: 280, damping: 22 }}
               >
                 <motion.div className="mb-6 shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
@@ -309,10 +294,10 @@ function OurProcessSection() {
                 <div className="space-y-2 flex-1 flex flex-col items-center">
                   <AnimatedNumber
                     value={step.num}
-                    className="text-4xl font-black text-[#015AAA]/20 tracking-tighter"
+                    className="nst-stat text-[#015AAA]/20"
                   />
-                  <h4 className="text-xl font-bold text-slate-900">{step.title}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
+                  <h4 className="nst-h4 text-slate-900">{step.title}</h4>
+                  <p className="nst-small text-slate-500">{step.desc}</p>
                 </div>
               </motion.div>
 
@@ -336,7 +321,7 @@ const whyFeatures = [
     title: "Security First Approach",
     desc: "We prioritise security in every solution we build.",
     icon: (
-      <IconBadge viewBox="0 0 42 46">
+      <IconBadge viewBox="0 0 42 46" className="w-[44px] h-[44px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0" iconClassName="w-[26px] h-[26px] block">
         <path d={svgPaths.p24ca6630} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
       </IconBadge>
     ),
@@ -345,7 +330,7 @@ const whyFeatures = [
     title: "Tailored Solutions",
     desc: "Custom solutions designed to fit your unique business needs.",
     icon: (
-      <IconBadge>
+      <IconBadge className="w-[44px] h-[44px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0" iconClassName="w-[26px] h-[26px] block">
         <path d={svgPaths.p25ae1080} fill="#015AAA" />
         <path d={svgPaths.p24172b00} fill="#015AAA" />
       </IconBadge>
@@ -355,7 +340,7 @@ const whyFeatures = [
     title: "Advanced Technology",
     desc: "Leveraging the latest tools and frameworks for impactful results.",
     icon: (
-      <IconBadge>
+      <IconBadge className="w-[44px] h-[44px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0" iconClassName="w-[26px] h-[26px] block">
         <path d="M28 28H42V42H28V28Z" fill="#015AAA" />
         <path d={svgPaths.p11219e00} fill="#015AAA" />
       </IconBadge>
@@ -365,7 +350,7 @@ const whyFeatures = [
     title: "Reliable Support",
     desc: "24/7 support and continuous monitoring for your peace of mind.",
     icon: (
-      <IconBadge viewBox="0 0 44 46">
+      <IconBadge viewBox="0 0 44 46" className="w-[44px] h-[44px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0" iconClassName="w-[26px] h-[26px] block">
         <path d={svgPaths.p3ef4e500} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
         <path d={svgPaths.p2aa32d80} stroke="#015AAA" strokeLinecap="round" strokeLinejoin="round" strokeWidth="4" />
       </IconBadge>
@@ -375,7 +360,7 @@ const whyFeatures = [
     title: "Proven Track Record",
     desc: "Trusted by businesses and institutions worldwide.",
     icon: (
-      <IconBadge>
+      <IconBadge className="w-[44px] h-[44px] rounded-xl bg-[#015AAA]/15 flex items-center justify-center shrink-0" iconClassName="w-[26px] h-[26px] block">
         <path d={svgPaths.p293f3a00} fill="#015AAA" />
       </IconBadge>
     ),
@@ -392,15 +377,18 @@ function WhyChooseUsSection() {
 
         <div className="flex-1 min-w-0">
           <motion.p variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "18px", letterSpacing: "1.2px", color: "#015AAA", textTransform: "uppercase", marginBottom: "4px" }}>
+            className="nst-eyebrow text-[#015AAA]"
+            style={{ marginBottom: "4px" }}>
             Why Choose Us
           </motion.p>
           <motion.h2 variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "clamp(26px,3.6vw,50px)", letterSpacing: "1px", color: "#000", lineHeight: 1.1, marginTop: 0 }}>
-            Your Trusted Partner<br />in Security &amp; Innovation
+            className="nst-h2 text-slate-900"
+            style={{ marginTop: 0 }}>
+            Your Trusted Partner<br className="hidden sm:inline" />{" "}in Security &amp; Innovation
           </motion.h2>
           <motion.p variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "18px", letterSpacing: "0.4px", color: "#6D6D6D", lineHeight: 1.65, maxWidth: "480px" }}>
+            className="nst-body text-slate-500"
+            style={{ maxWidth: "480px" }}>
             We combine expertise, technology, and dedication to deliver solutions that drive growth and security.
           </motion.p>
 
@@ -430,15 +418,15 @@ function WhyChooseUsSection() {
               whileHover={{ x: 6 }}
               transition={{ type: "spring", stiffness: 300, damping: 24 }}
             >
-              <motion.div className="flex-shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+              <motion.div className="flex-shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
                 {feat.icon}
               </motion.div>
-              <div className="flex flex-col gap-1.5">
-                <h4 className="text-xl font-bold text-slate-900 group-hover:text-[#015AAA] transition-colors duration-300">{feat.title}</h4>
-                <p className="text-base text-slate-500 leading-relaxed">{feat.desc}</p>
+              <div className="flex flex-col gap-1">
+                <h4 className="nst-h4 text-slate-900 group-hover:text-[#015AAA] transition-colors duration-200">{feat.title}</h4>
+                <p className="nst-small text-slate-500">{feat.desc}</p>
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#015AAA] to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 ease-out origin-left pointer-events-none" aria-hidden />
             </motion.div>
           ))}
         </div>

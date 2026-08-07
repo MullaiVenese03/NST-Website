@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import type { PageSeo } from "./pageMeta";
 import { GSC_VERIFICATION } from "../analytics/analyticsConfig";
-import { absoluteUrl, defaultOgImageUrl, ORG_NAME } from "./seoConfig";
+import { absoluteUrl, defaultOgImageUrl, GEO_LOCATION, ORG_NAME, TWITTER_HANDLE } from "./seoConfig";
 
 const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
@@ -10,10 +10,8 @@ import { toJsonLdScript } from "./structuredData";
 
 export type SeoHeadProps = {
   meta: PageSeo;
-  
   ogImage?: string;
   noindex?: boolean;
-  
   structuredData?: object | object[];
 };
 
@@ -38,6 +36,13 @@ export function SeoHead({ meta, ogImage, noindex, structuredData }: SeoHeadProps
       {GSC_VERIFICATION ? <meta name="google-site-verification" content={GSC_VERIFICATION} /> : null}
       <link rel="canonical" href={canonical} />
 
+      {/* Geo Location Tags */}
+      <meta name="geo.region" content={GEO_LOCATION.region} />
+      <meta name="geo.placename" content={GEO_LOCATION.placename} />
+      <meta name="geo.position" content={GEO_LOCATION.position} />
+      <meta name="ICBM" content={GEO_LOCATION.position} />
+
+      {/* Open Graph Tags */}
       <meta property="og:locale" content="en_IN" />
       <meta property="og:site_name" content={ORG_NAME} />
       <meta property="og:type" content={meta.ogType ?? "website"} />
@@ -45,11 +50,15 @@ export function SeoHead({ meta, ogImage, noindex, structuredData }: SeoHeadProps
       <meta property="og:description" content={meta.description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:secure_url" content={imageUrl} />
       <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
       <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
       <meta property="og:image:alt" content={`${ORG_NAME} - preview image`} />
 
+      {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content={TWITTER_HANDLE} />
+      <meta name="twitter:creator" content={TWITTER_HANDLE} />
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
       <meta name="twitter:image" content={imageUrl} />
@@ -58,3 +67,4 @@ export function SeoHead({ meta, ogImage, noindex, structuredData }: SeoHeadProps
     </Helmet>
   );
 }
+

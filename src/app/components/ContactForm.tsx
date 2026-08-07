@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
+import { CustomSelect } from "./CustomSelect";
 import { ACTIVE_FORMSPREE_FORM_ID } from "../config/formspree";
 import {
   readContactFormValues,
@@ -72,18 +73,18 @@ export default function ContactForm({
       >
         <div className="mb-8 text-center md:text-left">
           <p
-            className="text-sm font-bold uppercase tracking-wider m-0 mb-2"
+            className="nst-eyebrow font-bold m-0 mb-2"
             style={{ color: accent }}
           >
             Contact
           </p>
           <h2
             id={`${id}-heading`}
-            className="text-2xl md:text-3xl font-bold text-slate-900 m-0 mb-2"
+            className="nst-h2 text-slate-900 m-0 mb-2"
           >
             {title}
           </h2>
-          <p className="text-slate-600 text-sm md:text-base leading-relaxed m-0 max-w-xl">{subtitle}</p>
+          <p className="nst-body-sm text-slate-600 m-0 max-w-xl">{subtitle}</p>
         </div>
 
         {state.succeeded ? (
@@ -95,13 +96,13 @@ export default function ContactForm({
             aria-live="polite"
           >
             <motion.div
-              className="w-14 h-14 rounded-full flex items-center justify-center mb-4"
+              className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
               style={{ background: `${accent}15`, color: accent }}
             >
-              <ArrowRight size={22} aria-hidden />
+              <ArrowRight size={24} aria-hidden />
             </motion.div>
-            <p className="text-slate-900 font-bold text-lg m-0">Thank you - we&apos;ll be in touch soon.</p>
-            <p className="text-slate-500 text-sm mt-2 m-0">Your message has been received.</p>
+            <p className="nst-h4 font-bold text-slate-900 m-0">Thank you - we&apos;ll be in touch soon.</p>
+            <p className="nst-small text-slate-500 mt-2 m-0">Your message has been received.</p>
           </motion.div>
         ) : (
           <form
@@ -216,20 +217,14 @@ export default function ContactForm({
                   Service type
                 </label>
                 {showServiceSelect ? (
-                  <select
+                  <CustomSelect
                     id={`${id}-service`}
                     name="service"
-                    defaultValue=""
+                    options={serviceOptions!}
+                    placeholder="Select a service"
                     disabled={state.submitting}
-                    className={`${inputClass} appearance-none`}
-                  >
-                    <option value="">Select a service</option>
-                    {serviceOptions!.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
+                    accentColor={accent}
+                  />
                 ) : (
                   <input
                     id={`${id}-service`}
@@ -285,8 +280,8 @@ export default function ContactForm({
               disabled={state.submitting}
               whileHover={state.submitting ? undefined : { scale: 1.01 }}
               whileTap={state.submitting ? undefined : { scale: 0.98 }}
-              className="w-full sm:w-auto min-w-[200px] text-white font-semibold py-3.5 px-8 rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg border-none cursor-pointer transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-              style={{ background: accent, boxShadow: `0 8px 24px ${accent}33` }}
+              className="w-full sm:w-auto min-w-[200px] text-white nst-ui font-semibold py-3.5 px-8 rounded-xl flex items-center justify-center gap-2 shadow-sm border-none cursor-pointer transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+              style={{ background: accent, boxShadow: `0 2px 8px ${accent}20` }}
               aria-disabled={state.submitting}
             >
               {state.submitting ? (

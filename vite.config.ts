@@ -168,6 +168,9 @@ export default defineConfig(({ mode }) => {
     hoistStylesheetEarly(),
     charsetFirstInHead(),
   ],
+  esbuild: {
+    drop: mode === "production" ? ["console", "debugger"] : [],
+  },
   build: {
     target: "es2020",
     minify: "esbuild",

@@ -123,3 +123,23 @@ export const EDTECH_IMPACT_STATS = [
   { val: `${PARTNER_INSTITUTION_COUNT}+`, label: "Partner Institutions" },
   { val: "100+", label: "Live Projects" },
 ] as const;
+
+export type PartnerLogoItem = {
+  id: number;
+  mediaSlug: MediaSlug;
+  alt: string;
+  name: string;
+  category: "Academic" | "Enterprises";
+};
+
+export const UNIFIED_PARTNER_LOGOS: PartnerLogoItem[] = [
+  { id: 1, mediaSlug: "logo-thirukkural-transport", alt: "Thirukkural Transport", name: "Thirukkural Transport", category: "Enterprises" },
+  { id: 2, mediaSlug: "logo-st-joseph-college", alt: "St. Joseph College for Women", name: "St. Joseph College", category: "Academic" },
+  { id: 3, mediaSlug: "logo-solamalai-college", alt: "Solamalai College of Engineering", name: "Solamalai College", category: "Academic" },
+  { id: 4, mediaSlug: "logo-dhanalakshmi-srinivasan", alt: "Dhanalakshmi Srinivasan College", name: "Dhanalakshmi Srinivasan", category: "Academic" },
+  { id: 5, mediaSlug: "logo-akshaya-college", alt: "Akshaya College of Engineering", name: "Akshaya College", category: "Academic" },
+  { id: 6, mediaSlug: "logo-nsr", alt: "NSR Technologies", name: "NSR Technologies", category: "Enterprises" },
+  { id: 7, mediaSlug: "logo-sgnl", alt: "SGNL Solutions", name: "SGNL Solutions", category: "Enterprises" },
+  { id: 8, mediaSlug: "logo-twomile-heavy-industries", alt: "Twomile Heavy Industries", name: "Twomile Heavy Ind.", category: "Enterprises" },
+  { id: 9, mediaSlug: "logo-p2task", alt: "P2Task Software", name: "P2Task Software", category: "Enterprises" },
+];

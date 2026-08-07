@@ -1,4 +1,41 @@
+# https://www.nebulasafetech.com/robots.txt
+# Directives for Search Engines & AI Search Crawlers
+
 User-agent: *
 Allow: /
 
+# Recognized Search Engine & AI Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ByteDance
+Allow: /
+
+# Production Origin & Sitemap References
+Host: https://www.nebulasafetech.com
 Sitemap: https://www.nebulasafetech.com/sitemap.xml
+

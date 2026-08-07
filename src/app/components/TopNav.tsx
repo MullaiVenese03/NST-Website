@@ -42,7 +42,7 @@ export default function TopNav() {
         backdropFilter: "blur(18px) saturate(180%)",
         WebkitBackdropFilter: "blur(18px) saturate(180%)",
         border: "1px solid rgba(255,255,255,0.55)",
-        boxShadow: "0 2px_16px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.6)",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6)",
       }}
       initial={light ? { opacity: 1, y: 0 } : { y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -56,7 +56,7 @@ export default function TopNav() {
       >
         <NstLogo />
         <span
-          className="text-base sm:text-lg md:text-xl font-black tracking-[0.03em] text-gray-900 uppercase select-none relative sm:top-[-4px] md:top-[-8px] lg:top-[-8px]"
+          className="text-lg md:text-xl font-black uppercase tracking-wider text-gray-900 select-none relative sm:top-[-4px] md:top-[-8px] lg:top-[-8px]"
           style={{ fontFamily: "var(--font-company)", lineHeight: 1 }}
         >
           NebulaSafeTech

@@ -67,7 +67,7 @@ export function NSTLogo() {
         decoding="async"
         className="w-10 h-10 flex-shrink-0 object-contain"
       />
-      <span style={{ fontFamily: 'var(--font-company)', fontWeight: 1200, fontSize: "20px", letterSpacing: "0.5px", color: C.heading }}>
+      <span style={{ fontFamily: 'var(--font-company)', fontWeight: 800, fontSize: "20px", letterSpacing: "0.5px", color: C.heading }}>
         NebulaSafe<span style={{ color: C.primary }}>Tech</span>
       </span>
     </div>
@@ -95,20 +95,22 @@ function EdTechHero() {
             className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6"
             style={{ background: C.accentMid, border: `1px solid ${C.border}` }}>
             <GraduationCap size={15} color={C.primary} />
-            <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "12px", letterSpacing: "1px", color: C.primary, textTransform: "uppercase" }}>
+            <span className="nst-eyebrow" style={{ color: C.primary }}>
               EdTech Ecosystem
             </span>
           </motion.div>
 
           <motion.h1 variants={fadeUp} initial="hidden" animate="visible" custom={1}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 900, fontSize: "clamp(40px,5.5vw,72px)", color: C.heading, lineHeight: 1.06, letterSpacing: "-1.5px", marginBottom: "24px", margin: "0 0 24px 0" }}>
+            className="nst-h1 text-slate-900"
+            style={{ marginBottom: "24px", margin: "0 0 24px 0" }}>
             Learn.<br />
             <span style={{ color: C.primary }}>Build.</span><br />
             Launch.
           </motion.h1>
 
           <motion.p variants={fadeUp} initial="hidden" animate="visible" custom={2}
-            style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "18px", color: C.body, lineHeight: 1.75, maxWidth: "480px", marginBottom: "40px", margin: "0 0 40px 0" }}>
+            className="nst-body text-slate-500"
+            style={{ maxWidth: "480px", marginBottom: "40px", margin: "0 0 40px 0" }}>
             Industry-grade training programs, real-world projects, and a software marketplace - all in one cybersecurity EdTech ecosystem built to launch your tech career.
           </motion.p>
 
@@ -116,7 +118,7 @@ function EdTechHero() {
             className="flex flex-wrap gap-4 mb-12">
             <motion.a href="#programs"
               className="flex items-center gap-2 no-underline"
-              style={{ background: C.primary, color: "#fff", borderRadius: "12px", padding: "14px 28px", fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "15px" }}
+              style={{ background: C.primary, color: "#fff", borderRadius: "12px", padding: "14px 28px", fontWeight: 700, fontSize: "15px" }}
               whileHover={{ scale: 1.04, background: C.secondary }} whileTap={{ scale: 0.96 }}>
               Explore Programs <ArrowRight size={16} />
             </motion.a>
@@ -127,13 +129,13 @@ function EdTechHero() {
             className="flex flex-wrap gap-3">
             {floatingStats.map((s, i) => (
               <div key={i} className="flex items-center gap-2 rounded-[10px] px-4 py-2"
-                style={{ background: "#fff", border: `1px solid ${C.border}`, boxShadow: "0 2px 8px rgba(10,102,194,0.06)" }}>
+                style={{ background: "#fff", border: `1px solid ${C.border}`, boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
                 <Zap size={13} color={C.primary} fill={C.primary} />
                 <AnimatedNumber
                   value={s.val}
-                  style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "15px", color: C.heading }}
+                  style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: "15px", color: C.heading }}
                 />
-                <span style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "12px", color: C.muted }}>{s.label}</span>
+                <span style={{ fontWeight: 500, fontSize: "13px", color: C.muted }}>{s.label}</span>
               </div>
             ))}
           </motion.div>
@@ -141,7 +143,7 @@ function EdTechHero() {
 
         <div ref={imgRef} className="flex-1 min-w-0 relative">
           <motion.div variants={fadeRight} initial="hidden" animate="visible" className="relative">
-            <motion.div style={{ y, boxShadow: "0 24px 64px rgba(10,102,194,0.15)", borderRadius: "20px" }} className="relative rounded-[20px] overflow-hidden">
+            <motion.div style={{ y }} className="relative rounded-[20px] overflow-hidden">
               <ResponsivePicture
                 slug="edtech-hero"
                 alt="Students learning cybersecurity"
@@ -150,9 +152,6 @@ function EdTechHero() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
-
-              <div className="absolute inset-0"
-                style={{ background: "linear-gradient(to top, rgba(8,58,117,0.35) 0%, transparent 50%)" }} />
             </motion.div>
 
             <motion.div
@@ -160,16 +159,16 @@ function EdTechHero() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 0.5 }}
               className="absolute -bottom-4 -left-6 rounded-[14px] p-4 flex items-center gap-3"
-              style={{ background: "#fff", border: `1px solid ${C.border}`, boxShadow: "0 8px 32px rgba(10,102,194,0.12)", minWidth: "200px" }}>
+              style={{ background: "#fff", border: `1px solid ${C.border}`, boxShadow: "0 4px 12px rgba(10,102,194,0.06)", minWidth: "200px" }}>
               <div className="rounded-[10px] p-2.5" style={{ background: C.accentMid }}>
                 <Award size={20} color={C.primary} />
               </div>
               <div>
                 <AnimatedNumber
                   value={LEARNERS_REACHED_LABEL.replace(/,/g, "")}
-                  style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "18px", color: C.heading, margin: 0 }}
+                  style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: "18px", color: C.heading, margin: 0 }}
                 />
-                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "12px", color: C.muted, margin: 0 }}>Certificates Issued</p>
+                <p style={{ fontWeight: 500, fontSize: "13px", color: C.muted, margin: 0 }}>Certificates Issued</p>
               </div>
             </motion.div>
 
@@ -178,11 +177,11 @@ function EdTechHero() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 1, duration: 0.5 }}
               className="absolute -top-4 -right-4 rounded-[14px] p-3 flex items-center gap-2"
-              style={{ background: "#fff", border: `1px solid ${C.border}`, boxShadow: "0 8px 32px rgba(10,102,194,0.12)" }}>
+              style={{ background: "#fff", border: `1px solid ${C.border}`, boxShadow: "0 4px 12px rgba(10,102,194,0.06)" }}>
               {[1,2,3,4,5].map(i => <Star key={i} size={13} fill="#F59E0B" color="#F59E0B" />)}
               <AnimatedNumber
                 value="4.9/5"
-                style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "13px", color: C.heading }}
+                style={{ fontWeight: 700, fontSize: "13px", color: C.heading }}
               />
             </motion.div>
           </motion.div>
@@ -211,14 +210,14 @@ function EdTechServicesSection() {
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2"
             style={{ background: C.accentMid, border: `1px solid ${C.border}` }}>
             <Lightbulb size={14} color={C.primary} />
-            <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "11px", letterSpacing: "1px", color: C.primary, textTransform: "uppercase" }}>
+            <span className="nst-eyebrow" style={{ color: C.primary }}>
               What We Offer
             </span>
           </div>
-          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "clamp(28px,3.5vw,48px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
+          <h2 className="nst-h2 text-slate-900" style={{ margin: 0 }}>
             Everything You Need to Succeed
           </h2>
-          <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: C.body, maxWidth: "520px", lineHeight: 1.7, margin: 0 }}>
+          <p className="nst-body text-slate-500" style={{ maxWidth: "520px", margin: 0 }}>
             A complete ecosystem combining training, practice, and career launch - built by cybersecurity professionals.
           </p>
         </motion.div>
@@ -230,7 +229,7 @@ function EdTechServicesSection() {
               <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i % 3}
                 className="group rounded-[16px] p-6 flex flex-col gap-4 cursor-pointer transition-all duration-300"
                 style={{ background: C.card, border: `1px solid ${C.border}` }}
-                whileHover={{ y: -6, boxShadow: `0 20px 48px rgba(10,102,194,0.12)`, borderColor: C.primary }}>
+                whileHover={{ y: -4, boxShadow: `0 6px 16px rgba(10,102,194,0.06)`, borderColor: C.primary }}>
 
                 <div className="rounded-[12px] p-3 w-fit transition-transform duration-300 group-hover:scale-110"
                   style={{ background: svc.bg }}>
@@ -238,10 +237,10 @@ function EdTechServicesSection() {
                 </div>
 
                 <div>
-                  <h3 style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "17px", color: C.heading, margin: "0 0 8px 0" }}>
+                  <h3 className="nst-h3 text-slate-900" style={{ margin: "0 0 8px 0" }}>
                     {svc.title}
                   </h3>
-                  <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "14px", color: C.body, lineHeight: 1.65, margin: 0 }}>
+                  <p className="nst-body-sm text-slate-500" style={{ margin: 0 }}>
                     {svc.desc}
                   </p>
                 </div>
@@ -303,7 +302,7 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
       variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index % 4}
       className="group rounded-[16px] bg-white overflow-hidden flex flex-col cursor-pointer"
       style={{ border: project.highlight ? `2px solid ${C.primary}` : `1px solid ${C.border}` }}
-      whileHover={{ y: -7, boxShadow: "0 24px 48px rgba(10,102,194,0.14)" }}
+      whileHover={{ y: -4, boxShadow: "0 6px 16px rgba(10,102,194,0.06)" }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
     >
 
@@ -316,39 +315,39 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
 
         {project.highlight && (
           <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-full px-3 py-1"
-            style={{ background: C.primary, boxShadow: "0 4px 12px rgba(10,102,194,0.4)" }}>
+            style={{ background: C.primary, boxShadow: "0 2px 8px rgba(10,102,194,0.15)" }}>
             <Star size={11} fill="white" color="white" />
-            <span style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "10px", letterSpacing: "0.5px", color: "#fff" }}>FEATURED</span>
+            <span style={{ fontWeight: 800, fontSize: "10px", letterSpacing: "0.5px", color: "#fff" }}>FEATURED</span>
           </div>
         )}
 
         <div className="absolute top-3 right-3 rounded-full px-3 py-1"
           style={{ background: diff.bg }}>
-          <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "10px", letterSpacing: "0.5px", color: diff.text }}>
+          <span style={{ fontWeight: 700, fontSize: "10px", letterSpacing: "0.5px", color: diff.text }}>
             {project.difficulty}
           </span>
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{ background: "rgba(10,102,194,0.8)" }}>
-          <span className="flex items-center gap-2" style={{ color: "#fff", fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "15px" }}>
+          <span className="flex items-center gap-2" style={{ color: "#fff", fontWeight: 700, fontSize: "15px" }}>
             View Project <ExternalLink size={15} />
           </span>
         </div>
       </div>
 
       <div className="p-5 flex flex-col gap-3 flex-1">
-        <h3 style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "17px", color: C.heading, margin: 0, lineHeight: 1.3 }}>
+        <h3 className="nst-h3 text-slate-900" style={{ margin: 0 }}>
           {project.title}
         </h3>
-        <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "13px", color: C.body, lineHeight: 1.6, margin: 0, flexGrow: 1 }}>
+        <p className="nst-small text-slate-500" style={{ margin: 0, flexGrow: 1 }}>
           {project.desc}
         </p>
 
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span key={tag} className="rounded-full px-3 py-1"
-              style={{ background: C.accentMid, fontFamily: 'var(--font-family)', fontWeight: 600, fontSize: "11px", color: C.primary }}>
+              style={{ background: C.accentMid, fontWeight: 600, fontSize: "11px", color: C.primary }}>
               {tag}
             </span>
           ))}
@@ -358,7 +357,7 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
           type="button"
           aria-label={`View project: ${project.title}`}
           className="flex items-center justify-center gap-2 rounded-[10px] py-2.5 mt-1 border-none cursor-pointer"
-          style={{ background: project.highlight ? C.primary : "transparent", border: project.highlight ? "none" : `1px solid ${C.border}`, color: project.highlight ? "#fff" : C.primary, fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "13px" }}
+          style={{ background: project.highlight ? C.primary : "transparent", border: project.highlight ? "none" : `1px solid ${C.border}`, color: project.highlight ? "#fff" : C.primary, fontWeight: 700, fontSize: "13px" }}
           whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
           View Project <ArrowRight size={14} />
         </motion.button>
@@ -378,20 +377,20 @@ export function FeaturedProjectsSection() {
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 w-fit"
               style={{ background: C.accentMid, border: `1px solid ${C.border}` }}>
               <Code2 size={14} color={C.primary} />
-              <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "11px", letterSpacing: "1px", color: C.primary, textTransform: "uppercase" }}>
+              <span className="nst-eyebrow" style={{ color: C.primary }}>
                 Student Projects
               </span>
             </div>
-            <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "clamp(26px,3.2vw,44px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
+            <h2 className="nst-h2 text-slate-900" style={{ margin: 0 }}>
               Featured Projects
             </h2>
-            <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "16px", color: C.body, lineHeight: 1.7, maxWidth: "480px", margin: 0 }}>
+            <p className="nst-body text-slate-500" style={{ maxWidth: "480px", margin: 0 }}>
               Real software built by NST learners - from concept to deployment.
             </p>
           </div>
           <motion.a href="#ecommerce"
             className="flex items-center gap-2 no-underline"
-            style={{ background: "#fff", color: C.primary, border: `2px solid ${C.border}`, borderRadius: "12px", padding: "14px 28px", fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "15px" }}
+            style={{ background: "#fff", color: C.primary, border: `2px solid ${C.border}`, borderRadius: "12px", padding: "14px 28px", fontWeight: 700, fontSize: "15px" }}
             whileHover={{ scale: 1.04, borderColor: C.primary, background: C.accent }} whileTap={{ scale: 0.96 }}>
             <Play size={15} fill={C.primary} /> View Projects
           </motion.a>
@@ -430,18 +429,20 @@ function ECommerceShoutout() {
               className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6 w-fit"
               style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.25)" }}>
               <ShoppingBag size={14} color="white" />
-              <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "11px", letterSpacing: "1px", color: "rgba(255,255,255,0.9)", textTransform: "uppercase" }}>
+              <span className="nst-eyebrow text-white/90">
                 Flagship Project
               </span>
             </motion.div>
 
             <motion.h2 variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              style={{ fontFamily: 'var(--font-family)', fontWeight: 900, fontSize: "clamp(28px,3.5vw,52px)", color: "#FFFFFF", letterSpacing: "-1px", lineHeight: 1.1, marginBottom: "20px", margin: "0 0 20px 0" }}>
+              className="nst-h2 text-white"
+              style={{ marginBottom: "20px", margin: "0 0 20px 0" }}>
               Build a Real<br />E-Commerce Platform
             </motion.h2>
 
             <motion.p variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: "rgba(255,255,255,0.8)", lineHeight: 1.7, maxWidth: "420px", marginBottom: "32px", margin: "0 0 32px 0" }}>
+              className="nst-body text-white/80"
+              style={{ maxWidth: "420px", marginBottom: "32px", margin: "0 0 32px 0" }}>
               Dive into a production-grade e-commerce build - from user auth and product catalogs to Stripe payments and an admin panel. This is what real-world development looks like.
             </motion.p>
 
@@ -457,7 +458,7 @@ function ECommerceShoutout() {
                   <div className="rounded-full p-1 flex-shrink-0" style={{ background: "rgba(255,255,255,0.2)" }}>
                     <CheckCircle size={13} color="white" />
                   </div>
-                  <span style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "14px", color: "rgba(255,255,255,0.85)" }}>
+                  <span style={{ fontWeight: 500, fontSize: "14px", color: "rgba(255,255,255,0.85)" }}>
                     {point}
                   </span>
                 </div>
@@ -469,16 +470,16 @@ function ECommerceShoutout() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 no-underline w-fit rounded-[14px] py-4 px-8"
-              style={{ background: "#FFFFFF", boxShadow: "0 8px 32px rgba(0,0,0,0.2)" }}
-              whileHover={{ scale: 1.05, boxShadow: "0 12px 40px rgba(0,0,0,0.3)" }}
+              style={{ background: "#FFFFFF", boxShadow: "0 4px 12px rgba(0,0,0,0.06)", border: `1px solid ${C.border}` }}
+              whileHover={{ scale: 1.03, boxShadow: "0 6px 16px rgba(0,0,0,0.08)" }}
               whileTap={{ scale: 0.96 }}>
-              <span style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "16px", color: C.primary }}>
+              <span style={{ fontWeight: 800, fontSize: "16px", color: C.primary }}>
                 Open Project Website
               </span>
               <ExternalLink size={16} color={C.primary} />
             </motion.a>
 
-            <p className="mt-4" style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "12px", color: "rgba(255,255,255,0.5)" }}>
+            <p className="mt-4" style={{ fontWeight: 400, fontSize: "12px", color: "rgba(255,255,255,0.5)" }}>
               Opens in a new tab → Hosted on NST EdTech platform
             </p>
           </div>
@@ -486,7 +487,7 @@ function ECommerceShoutout() {
           <div ref={imgRef} className="flex-1 relative flex items-center justify-end p-6 lg:p-10">
             <motion.div style={{ y }} className="relative w-full max-w-[500px]">
               <div className="rounded-[16px] overflow-hidden relative"
-                style={{ boxShadow: "0 24px 64px rgba(0,0,0,0.35)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                style={{ boxShadow: "0 6px 20px rgba(0,0,0,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}>
                 <ImageWithFallback
                   src="https://images.unsplash.com/photo-1763718528755-4bca23f82ac3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBkYXNoYm9hcmQlMjBtb2Rlcm4lMjB3ZWIlMjBhcHBsaWNhdGlvbiUyMFVJfGVufDF8fHx8MTc3Nzc0MjIwOXww&ixlib=rb-4.1.0&q=80&w=1080"
                   alt="E-Commerce Platform Dashboard"
@@ -501,16 +502,16 @@ function ECommerceShoutout() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.5 }}
                 className="absolute -bottom-4 -left-4 rounded-[12px] p-3 flex items-center gap-3"
-                style={{ background: "#fff", boxShadow: "0 8px 24px rgba(0,0,0,0.15)", minWidth: "160px" }}>
+                style={{ background: "#fff", border: `1px solid ${C.border}`, boxShadow: "0 4px 12px rgba(0,0,0,0.06)", minWidth: "160px" }}>
                 <div className="rounded-[8px] p-2" style={{ background: "#ECFDF5" }}>
-                  <BarChart3 size={18} color="#059669" />
+                  <TrendingUp size={18} color="#059669" />
                 </div>
                 <div>
                   <AnimatedNumber
                     value="+124%"
-                    style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "16px", color: "#059669", margin: 0 }}
+                    style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: "16px", color: "#059669", margin: 0 }}
                   />
-                  <p style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "11px", color: C.muted, margin: 0 }}>Placement Rate</p>
+                  <p style={{ fontWeight: 500, fontSize: "13px", color: C.muted, margin: 0 }}>Placement Rate</p>
                 </div>
               </motion.div>
             </motion.div>
@@ -521,62 +522,75 @@ function ECommerceShoutout() {
   );
 }
 
-const journeySteps = [
-  { step: "01", icon: BookOpen,  color: "#0A66C2", bg: "#EFF6FF", title: "Learn",    desc: "Access structured courses designed by cybersecurity & tech industry experts." },
-  { step: "02", icon: FlaskConical,color:"#7C3AED",bg:"#F5F3FF", title: "Practice", desc: "Work through hands-on labs, CTF challenges, and sandbox environments." },
-  { step: "03", icon: Wrench,    color: "#D97706", bg: "#FFFBEB", title: "Build",    desc: "Create real software products as part of your certified learning path." },
-  { step: "04", icon: Rocket,    color: "#059669", bg: "#ECFDF5", title: "Launch",   desc: "Publish on the NST marketplace, get certified, and land your dream job." },
-];
-
 function LearningPathSection() {
+  const steps = [
+    {
+      step: "01",
+      title: "Foundational Cyber Training",
+      desc: "Master network security, Linux basics, ethical hacking fundamentals, and web application security.",
+      color: "#015AAA",
+      bg: "#F0F7FF",
+      icon: Shield,
+    },
+    {
+      step: "02",
+      title: "Real-World Project Labs",
+      desc: "Work on active software projects, penetration testing simulations, and live threat defense scenarios.",
+      color: "#D97706",
+      bg: "#FFFBEB",
+      icon: Code2,
+    },
+    {
+      step: "03",
+      title: "Industry Certification & Portfolio",
+      desc: "Build a verified digital portfolio of work, earn course completion certificates, and prepare for career roles.",
+      color: "#059669",
+      bg: "#ECFDF5",
+      icon: Award,
+    },
+  ];
+
   return (
-    <section className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#FFFFFF" }}>
-      <div className="max-w-[1320px] mx-auto">
+    <section className="w-full py-16 md:py-20 px-8 md:px-14 lg:px-20 bg-white">
+      <div className="max-w-[1440px] mx-auto">
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2 text-center"
+        >
+          Learning Methodology
+        </motion.p>
+        <motion.h2
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          custom={1}
+          className="nst-h2 text-slate-900 m-0 mb-12 text-center"
+        >
+          How You Learn &amp; Build
+        </motion.h2>
 
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="flex flex-col items-center text-center gap-4 mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-2"
-            style={{ background: C.accentMid, border: `1px solid ${C.border}` }}>
-            <Target size={14} color={C.primary} />
-            <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "11px", letterSpacing: "1px", color: C.primary, textTransform: "uppercase" }}>
-              The Journey
-            </span>
-          </div>
-          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "clamp(26px,3.5vw,46px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
-            Your Learning Path
-          </h2>
-          <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: C.body, maxWidth: "480px", lineHeight: 1.7, margin: 0 }}>
-            A clear, structured path from beginner to industry-ready professional.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-5">
-          {journeySteps.map((step, i) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          {steps.map((step, i) => {
             const Icon = step.icon;
             return (
               <motion.div
-                key={i}
+                key={step.step}
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
                 custom={i}
-                className="group flex h-full flex-col items-center text-center gap-4 p-6 sm:p-8 rounded-[16px] transition-all duration-300 cursor-default min-h-[240px] sm:min-h-[260px]"
-                style={{ background: C.card, border: `1px solid ${C.border}` }}
-                whileHover={{ y: -6, boxShadow: `0 20px 48px rgba(10,102,194,0.1)`, borderColor: step.color }}
+                className="flex flex-col items-center text-center p-8 rounded-[24px] border border-slate-100 bg-slate-50 hover:border-slate-200 transition-all"
               >
-                <span style={{ fontFamily: "var(--font-family)", fontWeight: 800, fontSize: "12px", letterSpacing: "2px", color: step.color }}>
-                  STEP {step.step}
-                </span>
-                <div className="rounded-[16px] p-4 transition-transform duration-300 group-hover:scale-110 shrink-0" style={{ background: step.bg }}>
-                  <Icon size={30} color={step.color} strokeWidth={2} />
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-6" style={{ background: step.bg }}>
+                  <Icon size={32} color={step.color} />
                 </div>
-                <h3 className="m-0 text-lg sm:text-xl" style={{ fontFamily: "var(--font-family)", fontWeight: 800, color: C.heading }}>
-                  {step.title}
-                </h3>
-                <p className="m-0 mt-auto text-sm leading-relaxed max-w-[240px]" style={{ fontFamily: "var(--font-family)", fontWeight: 400, color: C.body }}>
-                  {step.desc}
-                </p>
+                <h3 className="nst-h4 text-slate-900 m-0 mb-3">{step.title}</h3>
+                <p className="nst-small text-slate-500 m-0">{step.desc}</p>
               </motion.div>
             );
           })}
@@ -589,52 +603,45 @@ function LearningPathSection() {
 const platformFeatures = [
   { icon: GraduationCap, title: "Industry-Relevant Curriculum",   desc: "Curated by working professionals and updated quarterly to match market demands." },
   { icon: Laptop,         title: "Real-World Projects",           desc: "Every course ends with a deployable project that belongs in your portfolio." },
-  { icon: Award,          title: "Certification",                 desc: "Earn NST-issued certificates recognised by partner companies and institutions." },
-  { icon: DollarSign,     title: "Monetisation Opportunities",    desc: "Sell your completed projects on the NST software marketplace." },
-  { icon: UserCheck,      title: "Expert Mentors",                desc: "1-on-1 guidance from certified ethical hackers and senior developers." },
-  { icon: Globe,          title: "Global Community",              desc: "Join 1,000+ learners, share projects, and grow your professional network." },
-  { icon: Building2,      title: "Institutional Partnerships",    desc: "MoU programs with colleges for campus certifications and collaborative projects." },
-  { icon: CheckCircle,    title: "Job Placement Support",         desc: "Resume reviews, mock interviews, and direct referrals to hiring partners." },
+  { icon: BookOpen,       title: "Hands-On Labs & Tools",        desc: "Access cloud-hosted lab environments with pre-configured security tools." },
+  { icon: Award,          title: "Verified Credentials",          desc: "Earn digital certificates with verifiable skills badges shareable on LinkedIn." },
+  { icon: Users,          title: "Expert Mentorship",             desc: "Direct guidance from cybersecurity practitioners with years of field experience." },
+  { icon: Rocket,         title: "Career & Placement Support",    desc: "Resume reviews, interview prep, and referral connections for top performers." },
 ];
 
 function PlatformFeaturesSection() {
   return (
-    <section className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: C.bg }}>
-      <div className="max-w-[1320px] mx-auto">
-
+    <section className="w-full py-16 md:py-20 px-8 md:px-14 lg:px-20 border-t border-slate-100" style={{ background: "#F8FAFE" }}>
+      <div className="max-w-[1440px] mx-auto">
         <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
           className="flex flex-col items-center text-center gap-4 mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full px-4 py-2"
-            style={{ background: C.accentMid, border: `1px solid ${C.border}` }}>
-            <Zap size={14} color={C.primary} fill={C.primary} />
-            <span style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "11px", letterSpacing: "1px", color: C.primary, textTransform: "uppercase" }}>
-              Platform Advantages
-            </span>
-          </div>
-          <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "clamp(26px,3.5vw,46px)", color: C.heading, letterSpacing: "-0.8px", lineHeight: 1.1, margin: 0 }}>
+          <p className="nst-eyebrow font-bold text-[#015AAA] m-0">
+            Platform Advantages
+          </p>
+          <h2 className="nst-h2 text-slate-900" style={{ margin: 0 }}>
             Why Learn with NST EdTech?
           </h2>
-          <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "17px", color: C.body, maxWidth: "500px", lineHeight: 1.7, margin: 0 }}>
+          <p className="nst-body text-slate-500" style={{ maxWidth: "500px", margin: 0 }}>
             Everything built around real outcomes - not just content consumption.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {platformFeatures.map((feat, i) => {
             const Icon = feat.icon;
             return (
               <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i % 4}
                 className="group rounded-[14px] p-5 flex flex-col gap-4 transition-all duration-300"
                 style={{ background: C.card, border: `1px solid ${C.border}` }}
-                whileHover={{ y: -5, borderColor: C.primary, boxShadow: "0 16px 40px rgba(10,102,194,0.1)" }}>
+                whileHover={{ y: -4, borderColor: C.primary, boxShadow: "0 6px 16px rgba(10,102,194,0.06)" }}>
                 <div className="rounded-[10px] p-2.5 w-fit transition-transform duration-200 group-hover:scale-110"
                   style={{ background: C.accentMid }}>
                   <Icon size={20} color={C.primary} strokeWidth={2} />
                 </div>
-                <h4 style={{ fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "15px", color: C.heading, margin: 0, lineHeight: 1.3 }}>
+                <h4 style={{ fontWeight: 700, fontSize: "15px", color: C.heading, margin: 0, lineHeight: 1.3 }}>
                   {feat.title}
                 </h4>
-                <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "13px", color: C.body, lineHeight: 1.6, margin: 0 }}>
+                <p style={{ fontWeight: 400, fontSize: "13px", color: C.body, lineHeight: 1.6, margin: 0 }}>
                   {feat.desc}
                 </p>
               </motion.div>
@@ -670,9 +677,9 @@ function StatsStrip() {
               </div>
               <AnimatedNumber
                 value={s.val}
-                style={{ fontFamily: 'var(--font-family)', fontWeight: 900, fontSize: "32px", color: C.heading, letterSpacing: "-1px" }}
+                className="nst-stat text-slate-900"
               />
-              <span style={{ fontFamily: 'var(--font-family)', fontWeight: 500, fontSize: "13px", color: C.muted, textAlign: "center" }}>
+              <span className="nst-body font-bold text-slate-500 text-center">
                 {s.label}
               </span>
             </motion.div>
@@ -700,15 +707,15 @@ function CTASection() {
             animate={{ y: [0, -8, 0] }}
             transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
             className="rounded-[20px] p-5 relative z-10"
-            style={{ background: `linear-gradient(135deg, ${C.primary} 0%, ${C.secondary} 100%)`, boxShadow: `0 16px 40px rgba(10,102,194,0.3)` }}>
+            style={{ background: `linear-gradient(135deg, ${C.primary} 0%, ${C.secondary} 100%)`, boxShadow: `0 6px 20px rgba(10,102,194,0.12)` }}>
             <GraduationCap size={36} color="white" />
           </motion.div>
 
           <div className="flex flex-col gap-4 items-center relative z-10">
-            <h2 style={{ fontFamily: 'var(--font-family)', fontWeight: 900, fontSize: "clamp(28px,4vw,54px)", color: C.heading, letterSpacing: "-1.2px", lineHeight: 1.08, margin: 0 }}>
-              Start Your Learning<br />Journey Today
+            <h2 className="nst-h1 text-slate-900" style={{ margin: 0 }}>
+              Start Your Learning<br className="hidden sm:inline" /> Journey Today
             </h2>
-            <p style={{ fontFamily: 'var(--font-family)', fontWeight: 400, fontSize: "18px", color: C.body, lineHeight: 1.7, maxWidth: "500px", margin: 0 }}>
+            <p className="nst-body text-slate-500" style={{ maxWidth: "500px", margin: 0 }}>
               Join 1,000+ learners already building the future of cybersecurity. No experience required - just a drive to grow.
             </p>
           </div>
@@ -716,7 +723,7 @@ function CTASection() {
           <div className="flex flex-wrap gap-4 items-center justify-center relative z-10">
             <motion.a href="#contact-form"
               className="flex items-center gap-2 no-underline rounded-[14px] px-8 py-4"
-              style={{ background: C.primary, color: "#fff", fontFamily: 'var(--font-family)', fontWeight: 1200, fontSize: "16px", boxShadow: `0 8px 32px rgba(10,102,194,0.35)` }}
+              style={{ background: C.primary, color: "#fff", fontWeight: 800, fontSize: "16px", boxShadow: `0 4px 14px rgba(10,102,194,0.15)` }}
               whileHover={{ scale: 1.05, background: C.secondary }} whileTap={{ scale: 0.96 }}
               onClick={(e) => {
                 e.preventDefault();
@@ -726,7 +733,7 @@ function CTASection() {
             </motion.a>
             <motion.a href="/clients"
               className="flex items-center gap-2 no-underline rounded-[14px] px-8 py-4"
-              style={{ background: "#fff", color: C.primary, border: `2px solid ${C.border}`, fontFamily: 'var(--font-family)', fontWeight: 700, fontSize: "15px" }}
+              style={{ background: "#fff", color: C.primary, border: `2px solid ${C.border}`, fontWeight: 700, fontSize: "15px" }}
               whileHover={{ scale: 1.04, borderColor: C.primary, background: C.accent }} whileTap={{ scale: 0.96 }}>
               View Our Clients <ChevronRight size={16} />
             </motion.a>
@@ -735,7 +742,7 @@ function CTASection() {
           <div className="flex flex-wrap items-center justify-center gap-3 relative z-10 pt-2">
             {PARTNER_INSTITUTION_NAMES.map((name) => (
               <span key={name} className="rounded-full px-4 py-2"
-                style={{ background: "#fff", border: `1px solid ${C.border}`, fontFamily: 'var(--font-family)', fontWeight: 600, fontSize: "11px", color: C.body }}>
+                style={{ background: "#fff", border: `1px solid ${C.border}`, fontWeight: 600, fontSize: "11px", color: C.body }}>
                 ✓ {name}
               </span>
             ))}

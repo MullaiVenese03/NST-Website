@@ -836,5 +836,27 @@
       },
       "avif": {}
     }
+  },
+  "how-to-start-career-cybersecurity-2026": {
+    "slug": "how-to-start-career-cybersecurity-2026",
+    "profile": "hero",
+    "width": 1280,
+    "height": 720,
+    "intrinsicWidth": 1280,
+    "intrinsicHeight": 720,
+    "defaultSrc": "/media/blogs/how-to-start-career-cybersecurity-2026.jpg",
+    "defaultAvif": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-1280.avif",
+    "sources": {
+      "webp": {
+        "640": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-640.webp",
+        "960": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-960.webp",
+        "1280": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-1280.webp"
+      },
+      "avif": {
+        "640": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-640.avif",
+        "960": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-960.avif",
+        "1280": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-1280.avif"
+      }
+    }
   }
 }

@@ -29,6 +29,11 @@ knip-report.txt
 .env.production
 .env.production.local
 
+# Local Blog Generation Prompt & Media Workspace
+# Docs/ contains local blog draft prompts, raw images, and content used during blog creation
+Docs/
+
+
 # IDE & Editor Files
 .vscode/*
 !.vscode/extensions.json

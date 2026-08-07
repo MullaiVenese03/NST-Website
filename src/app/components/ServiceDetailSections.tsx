@@ -57,7 +57,7 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
               initial="hidden"
               animate="visible"
               custom={0}
-              className="text-[#015AAA] text-sm md:text-base font-bold uppercase tracking-wider m-0 mb-3"
+              className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-3"
             >
               {content.eyebrow}
             </motion.p>
@@ -66,8 +66,7 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
               initial="hidden"
               animate="visible"
               custom={1}
-              className="text-[clamp(2rem,4.5vw,3.5rem)] font-bold text-slate-900 leading-[1.08] m-0 mb-4"
-              style={{ }}
+              className="nst-h1 text-slate-900 m-0 mb-4"
             >
               {content.heroHeadline}
               <br />
@@ -78,7 +77,7 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
               initial="hidden"
               animate="visible"
               custom={2}
-              className="text-lg text-slate-600 leading-relaxed m-0 mb-4 max-w-xl"
+              className="nst-body text-slate-600 m-0 mb-4 max-w-xl"
             >
               {content.tagline}
             </motion.p>
@@ -87,7 +86,7 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
               initial="hidden"
               animate="visible"
               custom={2}
-              className="text-base text-slate-500 leading-relaxed m-0 mb-6 max-w-xl"
+              className="nst-small text-slate-500 m-0 mb-6 max-w-xl"
             >
               {meta.summary}
             </motion.p>
@@ -119,14 +118,14 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
             >
               <a
                 href={`mailto:info@nebulasafetech.com?subject=${encodeURIComponent(meta.serviceType + " inquiry")}`}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#015AAA] text-white font-semibold px-6 py-3.5 no-underline hover:bg-[#014080] transition-colors shadow-lg shadow-blue-200/40"
+                className="nst-ui font-semibold inline-flex items-center justify-center gap-2 rounded-xl bg-[#015AAA] text-white px-6 py-3.5 no-underline hover:bg-[#014080] transition-colors shadow-sm"
               >
                 Discuss this service
                 <ArrowRight className="w-4 h-4" aria-hidden />
               </a>
               <Link
                 to="/services"
-                className="inline-flex items-center justify-center rounded-xl border border-slate-200 text-slate-800 font-semibold px-6 py-3.5 no-underline hover:border-[#015AAA]/40 hover:text-[#015AAA] transition-colors"
+                className="nst-ui font-semibold inline-flex items-center justify-center rounded-xl border border-slate-200 text-slate-800 px-6 py-3.5 no-underline hover:border-[#015AAA]/40 hover:text-[#015AAA] transition-colors"
               >
                 All services
               </Link>
@@ -141,7 +140,7 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
             animate="visible"
           >
             <motion.div
-              className="relative w-full rounded-3xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 md:p-10 shadow-xl shadow-slate-200/50 overflow-hidden"
+              className="relative w-full rounded-3xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 md:p-10 shadow-sm shadow-slate-100 overflow-hidden"
               style={{ y }}
             >
               <motion.div
@@ -180,7 +179,7 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-[#015AAA] text-sm md:text-base font-bold uppercase tracking-wider m-0 mb-2"
+          className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2"
         >
           Offerings
         </motion.p>
@@ -190,8 +189,7 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
           whileInView="visible"
           viewport={{ once: true }}
           custom={1}
-          className="text-2xl md:text-4xl font-bold text-slate-900 m-0 mb-3 leading-tight"
-          style={{ }}
+          className="nst-h2 text-slate-900 m-0 mb-3"
         >
           {content.offeringsTitle}
         </motion.h2>
@@ -201,7 +199,7 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
           whileInView="visible"
           viewport={{ once: true }}
           custom={2}
-          className="text-slate-600 text-base md:text-lg leading-relaxed m-0 mb-10 max-w-2xl"
+          className="nst-body text-slate-600 m-0 mb-10 max-w-2xl"
         >
           {content.offeringsSubtitle}
         </motion.p>
@@ -215,23 +213,23 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
               whileInView="visible"
               viewport={{ once: true, amount: 0.15 }}
               custom={i % 4}
-              className="group relative rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden h-full"
+              className="group relative rounded-2xl bg-white border border-slate-100 hover:border-slate-200/90 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col overflow-hidden h-full"
             >
-              <motion.div className="p-6 pb-2 flex items-center justify-center h-36 bg-gradient-to-b from-[#015AAA]/5 to-transparent">
+              <div className="p-5 pb-2 flex items-center justify-center h-28 sm:h-32 bg-gradient-to-b from-[#015AAA]/5 to-transparent shrink-0">
                 <ResponsivePicture
                   slug={item.mediaSlug}
                   alt=""
-                  className="max-h-[100px] w-auto object-contain transition-transform duration-500 group-hover:scale-110"
+                  className="max-h-16 sm:max-h-20 w-auto object-contain transition-transform duration-200 ease-out group-hover:scale-105"
                   profile="icon"
                 />
-              </motion.div>
-              <div className="px-6 pb-6 flex flex-col flex-1">
-                <h3 className="text-lg md:text-xl font-bold text-slate-900 m-0 mb-2 group-hover:text-[#015AAA] transition-colors">
+              </div>
+              <div className="p-5 pt-2 flex flex-col flex-1 min-w-0">
+                <h3 className="nst-h4 text-slate-900 m-0 mb-2 group-hover:text-[#015AAA] transition-colors duration-200">
                   {item.title}
                 </h3>
-                <p className="text-sm md:text-base text-slate-500 leading-relaxed m-0 flex-1">{item.description}</p>
+                <p className="nst-small text-slate-500 m-0 flex-1">{item.description}</p>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#015AAA] to-blue-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-b-2xl" />
+              <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#015AAA] to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 ease-out origin-left pointer-events-none" aria-hidden />
             </motion.article>
           ))}
         </div>
@@ -251,11 +249,11 @@ export function ServiceCapabilitiesSection({ content }: { content: ServiceDetail
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <p className="text-[#015AAA] text-sm md:text-base font-bold uppercase tracking-wider m-0 mb-2">Capabilities</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 m-0 mb-4 leading-tight" style={{ }}>
+          <p className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2">Capabilities</p>
+          <h2 className="nst-h2 text-slate-900 m-0 mb-4">
             {content.capabilitiesTitle}
           </h2>
-          <p className="text-slate-600 text-base leading-relaxed m-0">{content.tagline}</p>
+          <p className="nst-body text-slate-600 m-0">{content.tagline}</p>
         </motion.div>
 
         <motion.ul
@@ -269,7 +267,7 @@ export function ServiceCapabilitiesSection({ content }: { content: ServiceDetail
             <motion.li
               key={cap}
               variants={fadeUp}
-              className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-3.5 text-slate-800 font-medium text-sm md:text-base"
+              className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-3.5 text-slate-800 nst-small"
             >
               <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#015AAA]/10 text-[#015AAA] shrink-0">
                 <CheckCircle2 className="w-4 h-4" aria-hidden />
@@ -292,7 +290,7 @@ export function ServiceBenefitsSection({ content }: { content: ServiceDetailCont
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-[#015AAA] text-sm md:text-base font-bold uppercase tracking-wider m-0 mb-2 text-center"
+          className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2 text-center"
         >
           Why NebulaSafeTech
         </motion.p>
@@ -302,8 +300,7 @@ export function ServiceBenefitsSection({ content }: { content: ServiceDetailCont
           whileInView="visible"
           viewport={{ once: true }}
           custom={1}
-          className="text-2xl md:text-3xl font-bold text-slate-900 m-0 mb-10 text-center"
-          style={{ }}
+          className="nst-h2 text-slate-900 m-0 mb-10 text-center"
         >
           Built for outcomes, not checkboxes
         </motion.h2>
@@ -319,13 +316,13 @@ export function ServiceBenefitsSection({ content }: { content: ServiceDetailCont
               custom={i}
               className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm hover:shadow-md hover:border-[#015AAA]/20 transition-all duration-300 group"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#015AAA]/10 text-[#015AAA] flex items-center justify-center font-bold text-lg mb-5 group-hover:bg-[#015AAA] group-hover:text-white transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-[#015AAA]/10 text-[#015AAA] flex items-center justify-center font-bold mb-5 group-hover:bg-[#015AAA] group-hover:text-white transition-colors">
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <h3 className="text-xl font-bold text-slate-900 m-0 mb-2 group-hover:text-[#015AAA] transition-colors">
+              <h3 className="nst-h3 text-slate-900 m-0 mb-2 group-hover:text-[#015AAA] transition-colors">
                 {benefit.title}
               </h3>
-              <p className="text-slate-600 text-base leading-relaxed m-0">{benefit.description}</p>
+              <p className="nst-body text-slate-600 m-0">{benefit.description}</p>
             </motion.div>
           ))}
         </div>
@@ -343,7 +340,7 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="text-[#015AAA] text-sm md:text-base font-bold uppercase tracking-wider m-0 mb-2"
+          className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2"
         >
           Process
         </motion.p>
@@ -353,8 +350,7 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
           whileInView="visible"
           viewport={{ once: true }}
           custom={1}
-          className="text-2xl md:text-4xl font-bold text-slate-900 m-0 mb-3"
-          style={{ }}
+          className="nst-h2 text-slate-900 m-0 mb-3"
         >
           {content.processTitle}
         </motion.h2>
@@ -364,7 +360,7 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
           whileInView="visible"
           viewport={{ once: true }}
           custom={2}
-          className="text-slate-600 text-base md:text-lg m-0 mb-12 max-w-2xl"
+          className="nst-body text-slate-600 m-0 mb-12 max-w-2xl"
         >
           {content.processSubtitle}
         </motion.p>
@@ -378,11 +374,11 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
               whileInView="visible"
               viewport={{ once: true }}
               custom={i}
-              className="relative rounded-2xl bg-white border border-slate-100 p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col min-h-[200px]"
+              className="relative rounded-2xl bg-white border border-slate-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col min-h-[200px]"
             >
-              <AnimatedNumber value={step.num} className="text-3xl font-black text-[#015AAA]/25 tracking-tighter mb-3" />
-              <h3 className="text-lg font-bold text-slate-900 m-0 mb-2">{step.title}</h3>
-              <p className="text-sm text-slate-500 leading-relaxed m-0 mt-auto">{step.description}</p>
+              <AnimatedNumber value={step.num} className="nst-stat text-[#015AAA]/25 mb-3" />
+              <h3 className="nst-h4 text-slate-900 m-0 mb-2">{step.title}</h3>
+              <p className="nst-small text-slate-500 m-0 mt-auto">{step.description}</p>
             </motion.div>
           ))}
         </div>
@@ -438,20 +434,20 @@ export function ServiceCtaSection({ content }: { content: ServiceDetailContent }
 
         <div className="relative z-10 px-8 py-12 md:px-14 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
           <div className="max-w-xl">
-            <h2 className="text-2xl md:text-3xl font-bold text-white m-0 mb-3 leading-tight">{content.ctaHeadline}</h2>
-            <p className="text-blue-100 text-base md:text-lg leading-relaxed m-0">{content.ctaDescription}</p>
+            <h2 className="nst-h2 text-white m-0 mb-3">{content.ctaHeadline}</h2>
+            <p className="nst-body text-blue-100 m-0">{content.ctaDescription}</p>
           </div>
           <div className="flex flex-wrap gap-3 justify-center shrink-0">
             <a
               href="mailto:info@nebulasafetech.com"
-              className="inline-flex items-center gap-2 rounded-xl bg-white text-[#015AAA] font-bold px-7 py-3.5 no-underline hover:bg-blue-50 transition-colors shadow-lg"
+              className="nst-ui font-bold inline-flex items-center gap-2 rounded-xl bg-white text-[#015AAA] px-6 py-3.5 no-underline hover:bg-blue-50 transition-colors shadow-sm"
             >
               <Mail className="w-5 h-5" aria-hidden />
               Email us
             </a>
             <a
               href="#service-contact-form"
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-white/40 text-white font-semibold px-7 py-3.5 no-underline hover:bg-white/10 transition-colors"
+              className="nst-ui font-semibold inline-flex items-center gap-2 rounded-xl border-2 border-white/40 text-white px-6 py-3.5 no-underline hover:bg-white/10 transition-colors"
             >
               Contact form
               <ArrowRight className="w-4 h-4" aria-hidden />

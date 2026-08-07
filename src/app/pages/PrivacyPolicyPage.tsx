@@ -1,11 +1,13 @@
 import LegalDocLayout from "../components/LegalDocLayout";
 import { SeoHead } from "../../seo/SeoHead";
 import { PRIVACY_SEO } from "../../seo/pageMeta";
+import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
 
 export default function PrivacyPolicyPage() {
   return (
     <>
-      <SeoHead meta={PRIVACY_SEO} />
+      <SeoHead meta={PRIVACY_SEO} structuredData={pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.privacyPolicy)} />
+
       <LegalDocLayout
         documentTitle="Privacy Policy | NebulaSafeTech"
         badge="Privacy Policy"

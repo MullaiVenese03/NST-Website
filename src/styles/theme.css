@@ -23,17 +23,59 @@
   --input-background: #f3f3f5;
   --switch-background: #cbced4;
 
-  /* Centralized Typography System */
+  /* ─── Font Families ───────────────────────────────────────── */
   --font-heading: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-accent: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-
-  --font-family: var(--font-body);
+  --font-body:    "DM Sans",  system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-accent:  "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family:  var(--font-body);
   --font-company: "Overcame Demo Fallback", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-weight-normal: 500;
-  --font-weight-medium: 600;
-  --font-weight-bold: 700;
-  --font-weight-heavy: 1200;
+
+  /* ─── Font Weights ────────────────────────────────────────── */
+  --font-weight-normal:  500;
+  --font-weight-medium:  600;
+  --font-weight-bold:    700;
+  --font-weight-heavy:   800;   /* capped at 800 - visually "black" in Manrope */
+
+  /* ─── Typography Scale ────────────────────────────────────── *
+   *
+   *  Level               Token                  Value
+   *  ------------------  ---------------------  ----------------------------
+   *  Hero H1             --nst-size-h1-hero     clamp(2.5rem, 6vw, 4rem)     → 40px … 64px
+   *  Page H1             --nst-size-h1          clamp(2rem,   4.5vw, 3.25rem) → 32px … 52px
+   *  Section H2          --nst-size-h2          clamp(1.5rem, 3vw,  2.25rem) → 24px … 36px
+   *  H3 / Card heading   --nst-size-h3          1.25rem  (20px)
+   *  H4 / Feature title  --nst-size-h4          1.125rem (18px)
+   *  Body                --nst-size-body        1rem     (16px)
+   *  Secondary body      --nst-size-body-sm     0.9375rem (15px) - between sm and base
+   *  Small / metadata    --nst-size-sm          0.875rem (14px)
+   *  Eyebrow / label     --nst-size-eyebrow     0.8125rem (13px)
+   *  Micro               --nst-size-xs          0.75rem  (12px)
+   *
+   * ─────────────────────────────────────────────────────────── */
+  --nst-size-h1-hero:  clamp(2.125rem, 5.5vw, 4.5rem);
+  --nst-size-h1:       clamp(1.75rem, 4vw, 3rem);
+  --nst-size-h2:       clamp(1.375rem, 2.5vw, 2.125rem);
+  --nst-size-h3:       clamp(1.125rem, 1.5vw, 1.25rem);
+  --nst-size-h4:       clamp(1rem, 1.2vw, 1.125rem);
+  --nst-size-body:     clamp(0.9375rem, 1vw, 1rem);
+  --nst-size-body-sm:  clamp(0.875rem, 0.9vw, 0.9375rem);
+  --nst-size-sm:       0.875rem;
+  --nst-size-eyebrow:  clamp(0.8125rem, 0.8vw, 0.875rem);
+  --nst-size-xs:       0.8125rem;
+
+  /* ─── Line Heights ────────────────────────────────────────── */
+  --nst-lh-heading:  1.1;     /* tight - for H1, H2 */
+  --nst-lh-subhead:  1.25;    /* slightly looser - for H3, H4 */
+  --nst-lh-body:     1.65;    /* comfortable reading */
+  --nst-lh-ui:       1.4;     /* compact UI text - buttons, nav, labels */
+
+  /* ─── Letter Spacings ─────────────────────────────────────── */
+  --nst-ls-hero:    -0.02em;  /* tight for large display text */
+  --nst-ls-heading:  0.01em;  /* slight open for headings */
+  --nst-ls-eyebrow:  0.1em;   /* wide for small uppercase labels */
+  --nst-ls-ui:       0.03em;  /* subtle for nav / buttons */
+  --nst-ls-body:     0;       /* zero - body text reads best natural */
+
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -74,7 +116,7 @@
   --font-weight-normal: 500;
   --font-weight-medium: 600;
   --font-weight-bold: 700;
-  --font-weight-heavy: 1200;
+  --font-weight-heavy: 800;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -135,6 +177,7 @@
 }
 
 @layer utilities {
+  /* ─── Layout helpers ──────────────────────────────────────── */
   .nst-section-y {
     @apply py-12 sm:py-14 md:py-16 lg:py-20;
   }
@@ -143,29 +186,157 @@
     @apply px-4 sm:px-6 md:px-10 lg:px-16;
   }
 
+  /* ─── Font family helpers ─────────────────────────────────── */
   .font-heading {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
   }
 
   .font-body {
     font-family: var(--font-body);
-    font-weight: 500;
+    font-weight: var(--font-weight-normal);
   }
 
   .font-accent {
     font-family: var(--font-accent);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
   }
 
+  /* ─── Semantic typography classes ────────────────────────────
+   *
+   *  Use these classes directly on elements instead of writing
+   *  individual inline style={{ fontSize: "..." }} per component.
+   *  All responsive scaling is handled here via CSS variables.
+   *
+   * ─────────────────────────────────────────────────────────── */
+
+  /* Hero H1 - homepage headline, max visual weight */
+  .nst-h1-hero {
+    font-family: var(--font-heading);
+    font-size: var(--nst-size-h1-hero);
+    font-weight: var(--font-weight-heavy);
+    line-height: var(--nst-lh-heading);
+    letter-spacing: var(--nst-ls-hero);
+  }
+
+  /* Page H1 - inner page heroes (Services, About, Clients etc.) */
+  .nst-h1 {
+    font-family: var(--font-heading);
+    font-size: var(--nst-size-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-heading);
+    letter-spacing: var(--nst-ls-heading);
+  }
+
+  /* Section H2 - all section headings site-wide */
+  .nst-h2 {
+    font-family: var(--font-heading);
+    font-size: var(--nst-size-h2);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-heading);
+    letter-spacing: var(--nst-ls-heading);
+  }
+
+  /* H3 - sub-section headings, card groups */
+  .nst-h3 {
+    font-family: var(--font-accent);
+    font-size: var(--nst-size-h3);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-subhead);
+    letter-spacing: 0;
+  }
+
+  /* H4 / feature card title */
+  .nst-h4 {
+    font-family: var(--font-accent);
+    font-size: var(--nst-size-h4);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-subhead);
+    letter-spacing: 0;
+  }
+
+  /* Card title - same spec as H3, separate semantic class */
+  .nst-card-title {
+    font-family: var(--font-accent);
+    font-size: var(--nst-size-h3);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-subhead);
+    letter-spacing: 0;
+  }
+
+  /* Body - primary readable text */
+  .nst-body {
+    font-family: var(--font-body);
+    font-size: var(--nst-size-body);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--nst-lh-body);
+    letter-spacing: var(--nst-ls-body);
+  }
+
+  /* Secondary body - descriptions, subtitles */
+  .nst-body-sm {
+    font-family: var(--font-body);
+    font-size: var(--nst-size-body-sm);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--nst-lh-body);
+    letter-spacing: var(--nst-ls-body);
+  }
+
+  /* Small text - card descriptions, captions */
+  .nst-small {
+    font-family: var(--font-body);
+    font-size: var(--nst-size-sm);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--nst-lh-body);
+    letter-spacing: var(--nst-ls-body);
+  }
+
+  /* Eyebrow / section label - small uppercase colored tags above headings */
+  .nst-eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--nst-size-eyebrow);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-ui);
+    letter-spacing: var(--nst-ls-eyebrow);
+    text-transform: uppercase;
+  }
+
+  /* UI text - buttons, nav items, CTAs */
+  .nst-ui {
+    font-family: var(--font-body);
+    font-size: var(--nst-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--nst-lh-ui);
+    letter-spacing: var(--nst-ls-ui);
+  }
+
+  /* Metadata / micro labels */
+  .nst-meta {
+    font-family: var(--font-body);
+    font-size: var(--nst-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--nst-lh-ui);
+    letter-spacing: var(--nst-ls-eyebrow);
+  }
+
+  /* Stat/number display (About page, process steps) */
+  .nst-stat {
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+    letter-spacing: var(--nst-ls-hero);
+  }
+
+  /* Legacy helpers kept for backwards compatibility */
   .card-title, .feature-title {
     font-family: var(--font-accent);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
   }
 
   .stat-number {
     font-family: var(--font-heading);
-    font-weight: 1200;
+    font-weight: var(--font-weight-heavy);
   }
 }
 
@@ -178,9 +349,12 @@
   }
 
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
+    overflow-x: clip;
     font-family: var(--font-body);
-    font-weight: 500;
+    font-size: var(--nst-size-body);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--nst-lh-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -ms-overflow-style: none;
@@ -191,10 +365,10 @@
   }
 
   html {
-    @apply overflow-x-hidden;
+    overflow-x: clip;
     font-size: var(--font-size);
     font-family: var(--font-body);
-    font-weight: 500;
+    font-weight: var(--font-weight-normal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
@@ -211,35 +385,42 @@
     }
   }
 
+  /* Headings: font-family + weight only - sizes set per-element via .nst-* classes */
   h1 {
     font-family: var(--font-heading);
-    font-weight: 1200;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-heading);
   }
 
   h2, .hero-title, .section-title {
     font-family: var(--font-heading);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-heading);
   }
 
   h3, h4, .card-title, .feature-title {
     font-family: var(--font-accent);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
+    line-height: var(--nst-lh-subhead);
   }
 
   p, input, textarea, select, nav, label, a, li, td, th {
     font-family: var(--font-body);
-    font-weight: 500;
+    font-weight: var(--font-weight-normal);
   }
 
   button {
-    font-size: var(--text-base);
-    font-weight: 600;
-    line-height: 1.5;
+    font-family: var(--font-body);
+    font-size: var(--nst-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--nst-lh-ui);
   }
 
   input {
-    font-size: var(--text-base);
-    font-weight: 500;
-    line-height: 1.5;
+    font-size: var(--nst-size-body);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--nst-lh-ui);
   }
 }
+
+

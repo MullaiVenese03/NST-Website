@@ -1,21 +1,9 @@
 import { motion } from "motion/react";
 import { ResponsivePicture } from "./ResponsivePicture";
-import type { MediaSlug } from "../utils/media";
 import { VIEWPORT_ONCE } from "../utils/motionPresets";
+import { UNIFIED_PARTNER_LOGOS } from "../data/clientsData";
 
-const logos: { mediaSlug: MediaSlug; alt: string }[] = [
-  { mediaSlug: "logo-thirukkural-transport", alt: "Thirukkural Transport" },
-  { mediaSlug: "logo-st-joseph-college", alt: "St. Joseph College" },
-  { mediaSlug: "logo-solamalai-college", alt: "Solamalai College" },
-  { mediaSlug: "logo-dhanalakshmi-srinivasan", alt: "Dhanalakshmi Srinivasan College" },
-  { mediaSlug: "logo-akshaya-college", alt: "Akshaya College" },
-  { mediaSlug: "logo-nsr", alt: "NSR" },
-  { mediaSlug: "logo-sgnl", alt: "SGNL" },
-  { mediaSlug: "logo-twomile-heavy-industries", alt: "Twomile Heavy Industries" },
-  { mediaSlug: "logo-rapido", alt: "Rapido" },
-  { mediaSlug: "logo-p2task", alt: "P2Task" },
-];
-
+const logos = UNIFIED_PARTNER_LOGOS;
 const allLogos = [...logos, ...logos];
 
 export default function TrustedClientsSection() {
@@ -28,23 +16,22 @@ export default function TrustedClientsSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.4 }}
-            className="text-[#015aaa] font-bold text-[11px] tracking-[0.15em] uppercase mb-1"
+            className="nst-meta font-bold text-[#015aaa] tracking-[0.1em] uppercase mb-1"
           >
             Our Partners
           </motion.p>
 
-          <motion.p
+          <motion.h2
             initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={VIEWPORT_ONCE}
             transition={{ duration: 0.4, delay: 0.08 }}
-            className="text-xl sm:text-2xl md:text-3xl font-black text-gray-900 leading-[1.1]"
-            style={{ }}
+            className="nst-h3 font-bold text-gray-900"
           >
             Trusted by
             <br />
-            <span style={{ color: "#015AAA" }}>Industry & Academia</span>
-          </motion.p>
+            <span style={{ color: "#015AAA" }}>Industry &amp; Academia</span>
+          </motion.h2>
         </header>
 
         <div className="flex-1 relative w-full min-w-0 h-[120px] sm:h-[140px] md:h-[150px] overflow-hidden">

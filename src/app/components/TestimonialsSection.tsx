@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, Variants } from "motion/react";
 import { Link } from "react-router";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionCtaLink } from "./SectionCtaLink";
 import { VIEWPORT_ONCE } from "../utils/motionPresets";
 import { useLightExperience } from "../utils/performance";
@@ -105,18 +106,12 @@ export default function TestimonialsSection() {
         >
           <div>
             <p
-              className="text-[#015AAA] font-bold text-base sm:text-lg uppercase tracking-wider mb-2 sm:mb-2.5"
-              style={{ fontFamily: "var(--font-family)" }}
+              className="nst-eyebrow font-bold text-[#015AAA] mb-2 sm:mb-2.5"
             >
               Clients Love Us
             </p>
             <h2
-              className="font-bold text-slate-900 m-0"
-              style={{
-                fontFamily: "var(--font-family)",
-                fontSize: "clamp(1.5rem, 4vw, 2rem)",
-                letterSpacing: "0.04em",
-              }}
+              className="nst-h2 text-slate-900 m-0"
             >
               Trusted by Leaders
             </h2>
@@ -155,7 +150,7 @@ export default function TestimonialsSection() {
               {visibleSlides.map((slide, i) => (
                 <div
                   key={`${slide.mediaSlug}-${i}`}
-                  className="relative min-w-0 h-full rounded-lg overflow-hidden border border-[#c6c6c6] shadow-[2px_2px_4px_0px_rgba(0,0,0,0.25)]"
+                  className="relative min-w-0 h-full rounded-lg overflow-hidden border border-slate-200 shadow-sm"
                 >
                   <ResponsivePicture
                     slug={slide.mediaSlug}
@@ -178,8 +173,7 @@ export default function TestimonialsSection() {
                   />
 
                   <p
-                    className="absolute bottom-4 sm:bottom-5 left-0 right-0 text-center text-white font-bold text-sm sm:text-lg px-3 sm:px-4 m-0 leading-snug"
-                    style={{ fontFamily: "var(--font-family)", letterSpacing: "0.06em" }}
+                    className="absolute bottom-4 sm:bottom-5 left-0 right-0 text-center text-white nst-h4 font-bold px-3 sm:px-4 m-0"
                   >
                     {slide.cardTitle}
                   </p>
@@ -203,22 +197,19 @@ export default function TestimonialsSection() {
             >
               <div className="flex items-center gap-2 flex-wrap min-w-0">
                 <span
-                  className="font-bold text-base sm:text-lg text-slate-900"
-                  style={{ fontFamily: "var(--font-family)", letterSpacing: "0.02em" }}
+                  className="nst-h4 font-bold text-slate-900"
                 >
                   {slides[activeIndex].org}
                 </span>
                 <VerifiedIcon />
               </div>
               <p
-                className="text-sm sm:text-base text-[#6d6d6d] leading-relaxed m-0"
-                style={{ fontFamily: "var(--font-family)" }}
+                className="nst-body-sm text-[#6d6d6d] m-0"
               >
                 {slides[activeIndex].text}
               </p>
               <p
-                className="font-bold text-sm text-[#015AAA] m-0"
-                style={{ fontFamily: "var(--font-family)" }}
+                className="nst-small font-bold text-[#015AAA] m-0"
               >
                 {slides[activeIndex].participants}
               </p>
@@ -257,35 +248,19 @@ export default function TestimonialsSection() {
               <button
                 type="button"
                 onClick={goPrev}
-                className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent transition-transform duration-200 hover:scale-105 active:scale-95 shrink-0 min-h-[44px] min-w-[44px]"
+                className="flex items-center justify-center rounded-full cursor-pointer border border-slate-200 bg-white shadow-sm transition-transform duration-200 hover:scale-105 active:scale-95 shrink-0 min-h-[44px] min-w-[44px]"
                 aria-label="Previous testimonial"
               >
-                <svg className="w-10 h-10 sm:w-11 sm:h-11" viewBox="0 0 35.75 35.75" fill="none" aria-hidden>
-                  <path
-                    d={svgPaths.p2ebc4680}
-                    stroke="#015AAA"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                  />
-                </svg>
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-[#015AAA]" strokeWidth={2.2} />
               </button>
 
               <button
                 type="button"
                 onClick={goNext}
-                className="flex items-center justify-center rounded-full cursor-pointer border-none bg-transparent transition-transform duration-200 hover:scale-105 active:scale-95 shrink-0 min-h-[44px] min-w-[44px]"
+                className="flex items-center justify-center rounded-full cursor-pointer border border-slate-200 bg-white shadow-sm transition-transform duration-200 hover:scale-105 active:scale-95 shrink-0 min-h-[44px] min-w-[44px]"
                 aria-label="Next testimonial"
               >
-                <svg className="w-10 h-10 sm:w-11 sm:h-11" viewBox="0 0 35.75 35.75" fill="none" aria-hidden>
-                  <path
-                    d={svgPaths.p67ae800}
-                    stroke="#015AAA"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                  />
-                </svg>
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-[#015AAA]" strokeWidth={2.2} />
               </button>
             </div>
           </div>

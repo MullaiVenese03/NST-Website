@@ -2,6 +2,7 @@ import { COMPANY_ICON } from "../brandAssets";
 import {
   BUSINESS_DESCRIPTION,
   BUSINESS_NAP,
+  COMPANY_KNOWS_ABOUT,
   ORG_NAME,
   SITE_ORIGIN,
   SOCIAL_PROFILES,
@@ -21,12 +22,14 @@ export function organizationSchema() {
     description: BUSINESS_DESCRIPTION,
     telephone: BUSINESS_NAP.telephone,
     email: BUSINESS_NAP.email,
+    knowsAbout: [...COMPANY_KNOWS_ABOUT],
     contactPoint: {
       "@type": "ContactPoint",
       telephone: BUSINESS_NAP.telephone,
       email: BUSINESS_NAP.email,
       contactType: "customer service",
       areaServed: "IN",
+      availableLanguage: ["English", "Tamil"],
     },
     founder: {
       "@type": "Person",
@@ -35,3 +38,4 @@ export function organizationSchema() {
     address: napPostalAddress(),
   };
 }
+

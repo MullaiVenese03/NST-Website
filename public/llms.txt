@@ -1,15 +1,28 @@
 # NebulaSafeTech
 
-> NebulaSafeTech is a cybersecurity and digital solutions company based in Hosur, Tamil Nadu, India. Providing VAPT, secure engineering, full-stack web development, UI/UX design, and EdTech training programs for organizations and academic partners worldwide.
+> NebulaSafeTech is a cybersecurity and digital solutions company headquartered in Hosur, Tamil Nadu, India. Delivering enterprise VAPT assessments, secure software engineering, full-stack React/Node web application development, UI/UX product design, and EdTech cybersecurity training for organizations and academic partners worldwide.
+
+## Company Information
+- **Name**: NebulaSafeTech
+- **Location**: Hosur, Tamil Nadu, India
+- **Email**: info@nebulasafetech.com
+- **Phone**: +91 63810 13086
+- **Website**: https://www.nebulasafetech.com
+- **Key Offerings**: VAPT (Web, Network, Cloud), Full-Stack Web Development, Accessible UI/UX Design Systems, Institutional EdTech Workshops & Academic MoUs.
 
 ## Core Documentation & Pages
 
-- [Home](https://www.nebulasafetech.com/): Official website landing page overview.
-- [About Us](https://www.nebulasafetech.com/about): Mission, vision, leadership, and company profile.
-- [Services Overview](https://www.nebulasafetech.com/services): Overview of cybersecurity, development, UI/UX, and EdTech service capabilities.
-- [Cybersecurity Services](https://www.nebulasafetech.com/services/cybersecurity): Vulnerability Assessment, Penetration Testing (VAPT), security hardening, and DevSecOps.
-- [Web Development Services](https://www.nebulasafetech.com/services/web-development): Full-stack React, Node, and cloud-native web product development.
-- [UI/UX Design Services](https://www.nebulasafetech.com/services/ui-ux-design): Accessible UI/UX design, design systems, and product interface specs.
-- [EdTech & Institutional Training Services](https://www.nebulasafetech.com/services/edtech-training): Academic cybersecurity workshops, MoUs, and curriculum development.
-- [EdTech Ecosystem](https://www.nebulasafetech.com/edtech): Student training programs, hands-on security learning paths, and academic partnerships.
-- [Client Programs](https://www.nebulasafetech.com/clients): Institutional partnerships, client testimonials, and delivered program metrics.
+- [Home](https://www.nebulasafetech.com/): Official landing page, company value proposition, and interactive service showcase.
+- [About Us](https://www.nebulasafetech.com/about): Mission, vision, defenders-first philosophy, leadership team, and company history.
+- [Services Overview](https://www.nebulasafetech.com/services): Integrated suite of cybersecurity, web engineering, product design, and training services.
+- [Cybersecurity Services](https://www.nebulasafetech.com/services/cybersecurity): Vulnerability Assessment & Penetration Testing (VAPT), cloud security audits, API security, and DevSecOps pipelines.
+- [Web Development Services](https://www.nebulasafetech.com/services/web-development): Scalable full-stack web application development using React, Node.js, TypeScript, and modern cloud deployment architectures.
+- [UI/UX Design Services](https://www.nebulasafetech.com/services/ui-ux-design): Accessible, user-centered product design, interactive prototyping, and design systems for enterprise SaaS and security software.
+- [EdTech & Institutional Training](https://www.nebulasafetech.com/services/edtech-training): Academic cybersecurity workshops, institutional MoUs, curriculum development, and hands-on laboratory setups.
+- [EdTech Ecosystem](https://www.nebulasafetech.com/edtech): Student learning paths, practical ethical hacking labs, project guidance, and career preparation.
+- [Clients & Testimonials](https://www.nebulasafetech.com/clients): Institutional partnerships, client testimonials, program impact statistics, and case studies.
+- [Blog & Technical Insights](https://www.nebulasafetech.com/blogs): Technical articles, security frameworks, web development best practices, and career roadmaps.
+  - [How to Start a Career in Cybersecurity in 2026](https://www.nebulasafetech.com/blog/how-to-start-career-cybersecurity): Beginner roadmap for launching a cybersecurity career.
+- [Privacy Policy](https://www.nebulasafetech.com/privacy-policy): Official data collection, security, and privacy policy documentation.
+- [Terms & Conditions](https://www.nebulasafetech.com/terms-and-conditions): Terms governing site usage, client engagements, and educational programs.
+

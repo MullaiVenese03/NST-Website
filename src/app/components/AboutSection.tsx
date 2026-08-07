@@ -6,7 +6,7 @@ import { useLightExperience } from "../utils/performance";
 
 function UsersIcon() {
   return (
-    <svg className="w-12 h-12 sm:w-14 sm:h-14" viewBox="0 0 57 48" fill="none" aria-hidden>
+    <svg className="w-8 h-8 sm:w-9 sm:h-9" viewBox="0 0 57 48" fill="none" aria-hidden>
       <path
         d={svgPaths.p91c0280}
         stroke="#015AAA"
@@ -20,7 +20,7 @@ function UsersIcon() {
 
 function ShieldCheckIcon() {
   return (
-    <svg className="w-11 h-12 sm:w-12 sm:h-14" viewBox="0 0 51 56.5404" fill="none" aria-hidden>
+    <svg className="w-8 h-8 sm:w-9 sm:h-9" viewBox="0 0 51 56.5404" fill="none" aria-hidden>
       <path
         d={svgPaths.p35f7eb80}
         stroke="#015AAA"
@@ -34,7 +34,7 @@ function ShieldCheckIcon() {
 
 function Hours24Icon() {
   return (
-    <svg className="w-11 h-11 sm:w-12 sm:h-12" viewBox="0 0 48.6877 48.6473" fill="none" aria-hidden>
+    <svg className="w-8 h-8 sm:w-9 sm:h-9" viewBox="0 0 48.6877 48.6473" fill="none" aria-hidden>
       <path
         d={svgPaths.pe5e6700}
         stroke="#015AAA"
@@ -90,8 +90,7 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
-            className="text-[#015AAA] font-bold text-sm sm:text-base uppercase tracking-wider mb-3 sm:mb-4"
-            style={{ fontFamily: "var(--font-family)" }}
+            className="nst-eyebrow text-[#015AAA] font-bold mb-3 sm:mb-4"
           >
             About Us
           </motion.p>
@@ -102,15 +101,10 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
-            className="font-bold text-slate-900 leading-tight mb-4 sm:mb-5"
-            style={{
-              fontFamily: "var(--font-family)",
-              fontSize: "clamp(1.75rem, 5vw, 3rem)",
-              letterSpacing: "0.02em",
-            }}
+            className="nst-h2 text-slate-900 mb-4 sm:mb-5"
           >
             Built by defenders,
-            <br />
+            <br className="hidden sm:inline" />{" "}
             for defenders.
           </motion.h2>
 
@@ -120,10 +114,9 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
-            className="text-base sm:text-lg text-[#6d6d6d] leading-relaxed mb-8 sm:mb-10 max-w-xl"
-            style={{ fontFamily: "var(--font-family)" }}
+            className="nst-body text-[#6d6d6d] leading-relaxed mb-8 sm:mb-10 max-w-xl"
           >
-            <span style={{ fontFamily: "var(--font-family)" }}>NebulaSafeTech</span> was founded by
+            <span>NebulaSafeTech</span> was founded by
             cybersecurity experts with a mission to deliver enterprise-grade protection through
             innovation, transparency, and relentless dedication.
           </motion.p>
@@ -139,14 +132,13 @@ export default function AboutSection() {
             {features.map((f, i) => (
               <div
                 key={i}
-                className="flex flex-1 flex-col items-center justify-center gap-2 sm:gap-3 text-center min-h-[100px] sm:min-h-[120px] px-2 py-3 sm:py-0"
+                className="flex flex-1 flex-col items-center justify-center gap-2 sm:gap-3 text-center min-h-[90px] sm:min-h-[100px] px-2 py-3 sm:py-0"
               >
-                <div className="h-12 sm:h-14 flex items-center justify-center shrink-0" aria-hidden>
+                <div className="h-9 sm:h-10 flex items-center justify-center shrink-0" aria-hidden>
                   {f.icon}
                 </div>
                 <p
-                  className="font-bold text-sm sm:text-base text-slate-900 leading-snug m-0"
-                  style={{ fontFamily: "var(--font-family)" }}
+                  className="nst-small font-bold text-slate-900 leading-snug m-0"
                 >
                   {f.label1}
                   <br />
@@ -163,13 +155,12 @@ export default function AboutSection() {
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
             href="/about"
-            className="inline-flex items-center gap-3 group min-h-[44px] text-[#015AAA] font-bold text-sm sm:text-base tracking-wide no-underline"
-            style={{ fontFamily: "var(--font-family)" }}
+            className="nst-ui inline-flex items-center gap-3 group min-h-[44px] text-[#015AAA] font-bold no-underline"
           >
             Learn more about us
             <svg
-              width="20"
-              height="12"
+              width="16"
+              height="10"
               viewBox="0 0 20 12"
               fill="none"
               className="transition-transform duration-200 group-hover:translate-x-1 shrink-0"

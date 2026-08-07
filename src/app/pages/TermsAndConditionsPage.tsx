@@ -1,11 +1,13 @@
 import LegalDocLayout from "../components/LegalDocLayout";
 import { SeoHead } from "../../seo/SeoHead";
 import { TERMS_SEO } from "../../seo/pageMeta";
+import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
 
 export default function TermsAndConditionsPage() {
   return (
     <>
-      <SeoHead meta={TERMS_SEO} />
+      <SeoHead meta={TERMS_SEO} structuredData={pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.termsAndConditions)} />
+
       <LegalDocLayout
         documentTitle="Terms and Conditions | NebulaSafeTech"
         badge="Terms and Conditions"

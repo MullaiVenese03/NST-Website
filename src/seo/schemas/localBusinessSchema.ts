@@ -2,6 +2,8 @@ import { COMPANY_ICON } from "../brandAssets";
 import {
   BUSINESS_DESCRIPTION,
   BUSINESS_NAP,
+  COMPANY_KNOWS_ABOUT,
+  GEO_LOCATION,
   ORG_NAME,
   SITE_ORIGIN,
   SOCIAL_PROFILES,
@@ -21,6 +23,20 @@ export function localBusinessSchema() {
     telephone: BUSINESS_NAP.telephone,
     email: BUSINESS_NAP.email,
     address: napPostalAddress(),
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: GEO_LOCATION.latitude,
+      longitude: GEO_LOCATION.longitude,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    ],
+    knowsAbout: [...COMPANY_KNOWS_ABOUT],
     areaServed: {
       "@type": "Country",
       name: "India",
@@ -37,3 +53,4 @@ export function localBusinessSchema() {
     },
   };
 }
+

@@ -85,7 +85,7 @@ export default function BottomNav() {
           backdropFilter: "blur(18px) saturate(180%)",
           WebkitBackdropFilter: "blur(18px) saturate(180%)",
           border: "1px solid rgba(255,255,255,0.55)",
-          boxShadow: "0 2px 16px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.6)",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6)",
           padding: "clamp(3px, 0.6vw, 6px)",
           gap: "clamp(1px, 0.4vw, 4px)",
         }}
@@ -100,11 +100,11 @@ export default function BottomNav() {
               onClick={() => handleClick(item)}
               className={`relative rounded-full border-none font-bold cursor-pointer whitespace-nowrap flex items-center justify-center flex-1 transition-colors duration-200 ${
                 isActive
-                  ? "bg-[#015aaa] text-white shadow-sm shadow-blue-900/20"
+                  ? "bg-[#015aaa] text-white shadow-sm"
                   : "bg-transparent text-gray-800 hover:bg-slate-100/70 hover:text-[#015aaa]"
               }`}
               style={{
-                fontSize: "clamp(9px, 2vw, 13px)",
+                fontSize: "clamp(11px, 2vw, 13px)",
                 paddingLeft: "clamp(6px, 2.5vw, 20px)",
                 paddingRight: "clamp(6px, 2.5vw, 20px)",
                 paddingTop: "clamp(6px, 1.2vw, 10px)",

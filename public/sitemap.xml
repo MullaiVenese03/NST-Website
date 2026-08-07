@@ -1,68 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.nebulasafetech.com/</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>NebulaSafeTech - Cybersecurity and Digital Solutions</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/about</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>About NebulaSafeTech - Cybersecurity Defenders</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>NebulaSafeTech Services Overview</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services/cybersecurity</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>Cybersecurity & VAPT Services</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services/web-development</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>Full-Stack Web Development Services</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services/ui-ux-design</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>UI/UX Product Design Services</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services/edtech-training</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>EdTech & Institutional Cybersecurity Training</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/clients</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>NebulaSafeTech Client Programs & Testimonials</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/edtech</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>NebulaSafeTech EdTech Ecosystem</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.nebulasafetech.com/blogs</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>NebulaSafeTech Technology & Cybersecurity Blog</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.nebulasafetech.com/blog/how-to-start-career-cybersecurity</loc>
+    <lastmod>2026-08-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/media/blogs/how-to-start-career-cybersecurity-2026.jpg</image:loc>
+      <image:title>How to Start a Career in Cybersecurity in 2026</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/privacy-policy</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/terms-and-conditions</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>

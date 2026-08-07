@@ -10,27 +10,20 @@ export function SectionCtaLink({ to, label, className = "" }: SectionCtaLinkProp
   return (
     <Link
       to={to}
-      className={`inline-flex items-center gap-3 group flex-wrap no-underline shrink-0 ${className}`}
-      style={{
-        fontWeight: 700,
-        fontSize: "16px",
-        letterSpacing: "1px",
-        color: "#015AAA",
-        textDecoration: "none",
-        flexShrink: 0,
-      }}
+      className={`nst-ui font-bold inline-flex items-center gap-2 group flex-wrap no-underline shrink-0 text-[#015AAA] hover:text-[#014080] transition-colors ${className}`}
     >
       <span>{label}</span>
       <svg
-        width="20"
-        height="12"
+        width="16"
+        height="10"
         viewBox="0 0 20 12"
         fill="none"
-        className="transition-transform duration-200 group-hover:translate-x-1"
+        className="transition-transform duration-200 group-hover:translate-x-1 shrink-0"
+        aria-hidden
       >
         <path
           d="M19 6L14 1M19 6L14 11M19 6H1"
-          stroke="#015AAA"
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"

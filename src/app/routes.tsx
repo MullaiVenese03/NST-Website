@@ -15,6 +15,8 @@ const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 const ServiceDetailPage = lazy(() => import("./pages/ServiceDetailPage"));
 const ClientsPage = lazy(() => import("./pages/ClientsPage"));
 const EdTechPage = lazy(() => import("./pages/EdTechPage"));
+const BlogsPage = lazy(() => import("./pages/BlogsPage"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsAndConditionsPage = lazy(() => import("./pages/TermsAndConditionsPage"));
 
@@ -71,6 +73,10 @@ export const router = createBrowserRouter([
       { path: "services/:slug", Component: ServiceDetailPage },
       { path: "clients", Component: ClientsPage },
       { path: "edtech", Component: EdTechPage },
+      { path: "blogs", Component: BlogsPage },
+      { path: "blog", Component: BlogsPage },
+      { path: "blog/:slug", Component: BlogPostPage },
+      { path: "blogs/:slug", Component: BlogPostPage },
       { path: "privacy-policy", Component: PrivacyPolicyPage },
       { path: "terms-and-conditions", Component: TermsAndConditionsPage },
     ],

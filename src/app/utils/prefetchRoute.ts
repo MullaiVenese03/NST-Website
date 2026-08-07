@@ -6,6 +6,9 @@ const routeLoaders: Record<string, () => Promise<unknown>> = {
   "/services": () => import("../pages/ServicesPage"),
   "/clients": () => import("../pages/ClientsPage"),
   "/edtech": () => import("../pages/EdTechPage"),
+  "/blogs": () => import("../pages/BlogsPage"),
+  "/blog": () => import("../pages/BlogsPage"),
+  "/blog/how-to-start-career-cybersecurity": () => import("../pages/BlogPostPage"),
   "/privacy-policy": () => import("../pages/PrivacyPolicyPage"),
   "/terms-and-conditions": () => import("../pages/TermsAndConditionsPage"),
 };

@@ -11,75 +11,85 @@ export type PageSeo = {
 const baseKeywords = [
   "NebulaSafeTech",
   "NST",
-  "cybersecurity India",
-  "digital solutions",
+  "cybersecurity company India",
+  "VAPT India",
+  "penetration testing Hosur",
+  "web development agency Hosur",
+  "UI UX design studio Tamil Nadu",
+  "EdTech cybersecurity training",
   "Hosur",
   "Tamil Nadu",
 ];
 
 export const HOME_SEO: PageSeo = {
-  title: "NebulaSafeTech - Cybersecurity and Digital Solutions in India",
-  description: `${BUSINESS_IDENTITY} Practical VAPT, secure engineering, web development, UI/UX, and EdTech programs for organizations worldwide.`,
+  title: "NebulaSafeTech - Cybersecurity, VAPT & Digital Solutions in India",
+  description: `${BUSINESS_IDENTITY} Practical VAPT, secure web development, UI/UX design, and EdTech training programs for organizations worldwide.`,
   keywords: [
     ...baseKeywords,
-    "VAPT",
-    "secure development",
-    "web development company",
-    "cyber awareness",
+    "VAPT services",
+    "secure web application development",
+    "cloud security auditing",
+    "cybersecurity awareness training",
   ],
   canonicalPath: "/",
 };
 
 export const ABOUT_SEO: PageSeo = {
-  title: `About ${ORG_NAME} | Cybersecurity Experts in India`,
-  description: `${BUSINESS_IDENTITY} Learn how our defenders-first team delivers enterprise-grade security, transparency, and innovation for global clients.`,
-  keywords: [...baseKeywords, "about NebulaSafeTech", "cybersecurity team", "security company India"],
+  title: `About ${ORG_NAME} | Cybersecurity & Digital Engineering Experts`,
+  description: `${BUSINESS_IDENTITY} Learn how our defenders-first engineering team delivers enterprise-grade security, transparency, and product innovation.`,
+  keywords: [...baseKeywords, "about NebulaSafeTech", "cybersecurity team India", "security engineering experts"],
   canonicalPath: "/about",
 };
 
 export const SERVICES_SEO: PageSeo = {
   title: `Services | ${ORG_NAME} - Security, Web, UI/UX & Training`,
-  description: `${BUSINESS_DESCRIPTION} Explore assessments, cloud and application security, full-stack development, UI/UX, and academic training.`,
+  description: `${BUSINESS_DESCRIPTION} Explore VAPT vulnerability assessments, full-stack React web engineering, UI/UX design systems, and institutional cybersecurity training.`,
   keywords: [
     ...baseKeywords,
     "cybersecurity services",
-    "web security",
-    "cloud security",
-    "full-stack development",
-    "UI UX agency",
+    "web security vulnerability testing",
+    "cloud native security",
+    "full-stack web development",
+    "UI UX design systems",
   ],
   canonicalPath: "/services",
 };
 
 export const CLIENTS_SEO: PageSeo = {
-  title: `Clients & Programs | ${ORG_NAME}`,
-  description: `${BUSINESS_IDENTITY} Cybersecurity awareness programs, MoUs, and training delivered for academic institutions and enterprises across India.`,
-  keywords: [...baseKeywords, "cybersecurity training clients", "awareness program", "MoU cybersecurity"],
+  title: `Clients & Institutional Programs | ${ORG_NAME}`,
+  description: `${BUSINESS_IDENTITY} Cybersecurity awareness workshops, academic MoUs, and enterprise training programs delivered across India.`,
+  keywords: [...baseKeywords, "cybersecurity training clients", "academic MoU cybersecurity", "institutional security training"],
   canonicalPath: "/clients",
 };
 
 export const EDTECH_SEO: PageSeo = {
-  title: `EdTech & Career Programs | ${ORG_NAME}`,
-  description: `${BUSINESS_IDENTITY} Industry-grade cybersecurity training, hands-on labs, certifications, and project-based learning to launch tech careers.`,
-  keywords: [...baseKeywords, "cybersecurity EdTech", "ethical hacking course", "student projects", "NST training"],
+  title: `EdTech & Cybersecurity Career Programs | ${ORG_NAME}`,
+  description: `${BUSINESS_IDENTITY} Industry-grade cybersecurity learning paths, hands-on vulnerability labs, student certifications, and capstone project guidance.`,
+  keywords: [...baseKeywords, "cybersecurity EdTech", "ethical hacking labs", "student cybersecurity courses", "NST EdTech ecosystem"],
   canonicalPath: "/edtech",
 };
 
-/** /contact, /blog, /careers redirect via vercel.json — not indexed; contact is /#contact on home. */
+export const BLOGS_SEO: PageSeo = {
+  title: `Technology & Cybersecurity Blog | ${ORG_NAME}`,
+  description: `Read technical guides, VAPT methodologies, cloud-native architecture insights, and cybersecurity career roadmaps from ${ORG_NAME} engineers.`,
+  keywords: [...baseKeywords, "cybersecurity blog", "VAPT technical guides", "career in cybersecurity", "web security tutorials"],
+  canonicalPath: "/blogs",
+};
 
 export const PRIVACY_SEO: PageSeo = {
   title: `Privacy Policy | ${ORG_NAME}`,
-  description: `How ${ORG_NAME} collects, uses, and protects personal information across our website and cybersecurity, engineering, and EdTech services.`,
-  keywords: [...baseKeywords, "privacy policy", "data protection"],
+  description: `How ${ORG_NAME} collects, handles, and protects user data across our digital platforms, cybersecurity assessments, and educational services.`,
+  keywords: [...baseKeywords, "privacy policy", "data protection policy"],
   canonicalPath: "/privacy-policy",
 };
 
 export const TERMS_SEO: PageSeo = {
   title: `Terms & Conditions | ${ORG_NAME}`,
-  description: `Terms governing use of the ${ORG_NAME} website and engagement with our cybersecurity, development, and training services.`,
-  keywords: [...baseKeywords, "terms and conditions", "legal"],
+  description: `Official terms of service governing the use of ${ORG_NAME} website, client software engagements, and training programs.`,
+  keywords: [...baseKeywords, "terms and conditions", "terms of service"],
   canonicalPath: "/terms-and-conditions",
 };
+
 
 export type ServiceSlug = "web-development" | "cybersecurity" | "ui-ux-design" | "edtech-training";
 

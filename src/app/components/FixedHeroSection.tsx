@@ -8,32 +8,31 @@ export default function FixedHeroSection() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.65, ease: "easeOut" }}
-      className="flex w-full max-w-[min(100%,40rem)] flex-col items-center gap-8 text-center md:max-w-2xl md:items-start md:gap-6 md:text-left"
+      className="flex w-full max-w-[min(100%,44rem)] flex-col items-center gap-8 text-center md:max-w-3xl md:items-start md:gap-6 md:text-left"
       style={GPU_LAYER}
     >
       <h1
-        className="max-w-full text-5xl font-black leading-[1.12] tracking-tight text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl"
-        style={{ fontWeight: 1200 }}
+        className="nst-h1-hero max-w-full text-gray-900"
       >
-        <span className="flex flex-col gap-1" style={{ fontWeight: 1200 }}>
-          <span style={{ fontWeight: 1200 }}>
-            <span className="text-[#015aaa]" style={{ fontWeight: 1200 }}>One</span> Entry.
+        <span className="flex flex-col gap-1">
+          <span>
+            <span className="text-[#015aaa]">One</span> Entry.
           </span>
-          <span style={{ fontWeight: 1200 }}>
-            <span className="text-[#015aaa]" style={{ fontWeight: 1200 }}>One</span> Device.
+          <span>
+            <span className="text-[#015aaa]">One</span> Device.
           </span>
-          <span style={{ fontWeight: 1200 }}>
-            <span className="text-[#015aaa]" style={{ fontWeight: 1200 }}>One</span> Purpose.
+          <span>
+            <span className="text-[#015aaa]">One</span> Purpose.
           </span>
         </span>
       </h1>
 
-      <p className="max-w-xl text-xl font-medium leading-relaxed text-gray-600">
+      <p className="nst-body-sm max-w-xl text-gray-600">
         Cybersecurity and IT solutions built to protect what matters most - your data, your systems,
         your future.
       </p>
 
-      <div className="flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-gray-500 md:justify-start">
+      <div className="nst-small flex flex-wrap items-center justify-center gap-2 text-gray-500 md:justify-start">
         <Shield
           className="h-5 w-5 shrink-0 text-[#015aaa]"
           strokeWidth={2}

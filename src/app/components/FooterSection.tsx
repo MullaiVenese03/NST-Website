@@ -11,6 +11,12 @@ const FOOTER_SERVICES = [
   { label: "EdTech & Cybersecurity Training", path: "/services/edtech-training" },
 ] as const;
 
+const FOOTER_RESOURCES = [
+  { label: "Privacy Policy", path: "/privacy-policy" },
+  { label: "Terms & Conditions", path: "/terms-and-conditions" },
+  { label: "Blogs", path: "/blogs" },
+] as const;
+
 function FooterNavLink({ to, children }: { to: string; children: React.ReactNode }) {
   const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (!to.startsWith("#")) return;
@@ -25,7 +31,7 @@ function FooterNavLink({ to, children }: { to: string; children: React.ReactNode
   };
 
   const className =
-    "block no-underline text-[15px] font-medium text-slate-700 hover:text-[#015AAA] transition-colors duration-200";
+    "block no-underline nst-small text-slate-700 hover:text-[#015AAA] transition-colors duration-200";
 
   if (to.startsWith("#")) {
     return (
@@ -77,10 +83,10 @@ function ContactRow({
         <Icon size={20} />
       </motion.div>
       <motion.div className="min-w-0">
-        <p className="text-[12px] font-bold text-slate-400 uppercase tracking-widest leading-none mb-1 transition-colors duration-250 group-hover:text-[#015AAA]">
+        <p className="nst-meta font-bold uppercase text-slate-600 mb-1 transition-colors duration-250 group-hover:text-[#015AAA]">
           {label}
         </p>
-        <span className="text-[14px] font-semibold text-slate-800 transition-colors duration-250 group-hover:text-[#015AAA] break-words">
+        <span className="nst-small font-semibold text-slate-800 transition-colors duration-250 group-hover:text-[#015AAA] break-words">
           {value}
         </span>
       </motion.div>
@@ -113,7 +119,7 @@ function SocialBtn({
 }
 
 type FooterSectionProps = {
-  /** Omit on home page — the lazy-load wrapper already provides `#contact`. */
+  /** Omit on home page - the lazy-load wrapper already provides `#contact`. */
   anchorId?: string | null;
 };
 
@@ -124,12 +130,12 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
       className="w-full bg-white pt-12 sm:pt-16 lg:pt-20 pb-28 sm:pb-24 lg:pb-16 overflow-x-clip scroll-mt-24"
     >
       <motion.div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
-          <motion.div className="space-y-4 sm:space-y-5">
+        <motion.div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-12 items-start">
+          <motion.div className="lg:col-span-5 space-y-4 sm:space-y-5">
             <div className="space-y-3 sm:space-y-4">
-              <p className="text-[#015AAA] text-sm sm:text-base font-bold uppercase tracking-wider m-0">Get In Touch</p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 leading-tight m-0">Let&apos;s secure your world.</h2>
-              <p className="text-slate-600 text-sm leading-relaxed m-0 max-w-sm">{BUSINESS_IDENTITY}</p>
+              <p className="nst-eyebrow font-bold text-[#015AAA] m-0">Get In Touch</p>
+              <h2 className="nst-h2 text-slate-900 m-0">Let&apos;s secure your world.</h2>
+              <p className="nst-small text-slate-600 m-0 max-w-sm">{BUSINESS_IDENTITY}</p>
             </div>
 
             <motion.div className="space-y-3 sm:space-y-4">
@@ -149,9 +155,9 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
             </motion.div>
           </motion.div>
 
-          <div className="grid grid-cols-2 gap-x-10 sm:gap-x-16 lg:gap-x-20 gap-y-8 py-2 pb-10 sm:pb-12 lg:pb-14 min-w-0 w-full max-w-xl mx-auto lg:mx-0 lg:ml-auto justify-items-start text-start">
+          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-x-8 sm:gap-x-10 lg:gap-x-12 gap-y-8 py-2 pb-10 sm:pb-12 lg:pb-14 min-w-0 w-full justify-items-start text-start">
             <motion.div className="flex flex-col gap-5 sm:gap-6 min-w-0 items-start">
-              <p className="text-base sm:text-lg font-bold text-slate-900 m-0">Company</p>
+              <p className="nst-h4 font-bold text-slate-900 m-0">Company</p>
               <nav className="flex flex-col gap-3.5 sm:gap-4 items-start" aria-label="Company">
                 <FooterNavLink to="/">Home</FooterNavLink>
                 <FooterNavLink to="/about">About Us</FooterNavLink>
@@ -162,7 +168,7 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
             </motion.div>
 
             <div className="flex flex-col gap-5 sm:gap-6 min-w-0 items-start">
-              <p className="text-base sm:text-lg font-bold text-slate-900 m-0">Services</p>
+              <p className="nst-h4 font-bold text-slate-900 m-0">Services</p>
               <nav className="flex flex-col gap-3.5 sm:gap-4 items-start" aria-label="Services">
                 {FOOTER_SERVICES.map((service) => (
                   <FooterNavLink key={service.path} to={service.path}>
@@ -171,30 +177,28 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
                 ))}
               </nav>
             </div>
+
+            <div className="flex flex-col gap-5 sm:gap-6 min-w-0 items-start col-span-2 sm:col-span-1">
+              <p className="nst-h4 font-bold text-slate-900 m-0">Resources</p>
+              <nav className="flex flex-col gap-3.5 sm:gap-4 items-start" aria-label="Resources">
+                {FOOTER_RESOURCES.map((item) => (
+                  <FooterNavLink key={item.path} to={item.path}>
+                    {item.label}
+                  </FooterNavLink>
+                ))}
+              </nav>
+            </div>
           </div>
         </motion.div>
 
-        <div className="pt-6 sm:pt-8 pb-8 flex flex-col md:flex-row items-center justify-between gap-3 md:gap-6">
-          <motion.div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 text-center sm:text-left">
-            <p className="text-slate-500 text-sm m-0">
-              Copyright &copy; 2026{" "}
-              <span className="text-blue-500" style={{ fontFamily: "var(--font-company)" }}>
-                NebulaSafeTech
-              </span>
-              . All Rights Reserved.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-sm">
-              <Link to="/privacy-policy" className="text-slate-600 hover:text-[#015AAA] no-underline font-medium transition-colors">
-                Privacy Policy
-              </Link>
-              <span className="text-slate-300 hidden sm:inline" aria-hidden>
-                |
-              </span>
-              <Link to="/terms-and-conditions" className="text-slate-600 hover:text-[#015AAA] no-underline font-medium transition-colors">
-                Terms & Conditions
-              </Link>
-            </div>
-          </motion.div>
+        <div className="pt-6 sm:pt-8 pb-8 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 border-t border-slate-100">
+          <p className="text-slate-500 text-sm m-0 text-center sm:text-left">
+            Copyright &copy; 2026{" "}
+            <span className="text-[#015AAA]" style={{ fontFamily: "var(--font-company)" }}>
+              NebulaSafeTech
+            </span>
+            . All Rights Reserved.
+          </p>
 
           <div className="flex items-center justify-center gap-4">
             <SocialBtn href="https://linkedin.com/company/nebulasafetech-nst/" label="LinkedIn">

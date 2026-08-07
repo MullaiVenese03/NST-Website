@@ -7,6 +7,7 @@ export type ServiceSchemaInput = {
   name?: string;
   description?: string;
   url?: string;
+  category?: string;
 };
 
 export function serviceSchema(input: ServiceSchemaInput) {
@@ -17,6 +18,7 @@ export function serviceSchema(input: ServiceSchemaInput) {
     serviceType: input.serviceType,
     description: input.description,
     url: input.url,
+    category: input.category ?? "Cybersecurity & Technology Services",
     provider: {
       "@type": "ProfessionalService",
       "@id": LOCAL_BUSINESS_ID,
@@ -27,5 +29,40 @@ export function serviceSchema(input: ServiceSchemaInput) {
       "@type": "Country",
       name: "India",
     },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "NebulaSafeTech Core Services",
+      itemListElement: [
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Vulnerability Assessment and Penetration Testing (VAPT)",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "Full-Stack Web Application Development",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "UI/UX Product Design Systems",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: "EdTech & Institutional Cybersecurity Training",
+          },
+        },
+      ],
+    },
   };
 }
+

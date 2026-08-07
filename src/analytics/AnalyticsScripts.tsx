@@ -10,8 +10,19 @@ export function AnalyticsScripts() {
 
   useEffect(() => {
     if (!isAnalyticsEnabled()) return;
-    initClarity();
-    loadCloudflareBeacon();
+
+    const startAnalytics = () => {
+      initClarity();
+      loadCloudflareBeacon();
+    };
+
+    if ("requestIdleCallback" in window) {
+      const handle = requestIdleCallback(startAnalytics, { timeout: 3000 });
+      return () => cancelIdleCallback(handle);
+    }
+
+    const timer = setTimeout(startAnalytics, 1500);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -21,3 +32,4 @@ export function AnalyticsScripts() {
 
   return null;
 }
+
