@@ -858,5 +858,27 @@
         "1280": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-1280.avif"
       }
     }
+  },
+  "ai-agents-enterprise-data-security": {
+    "slug": "ai-agents-enterprise-data-security",
+    "profile": "hero",
+    "width": 1672,
+    "height": 941,
+    "intrinsicWidth": 1672,
+    "intrinsicHeight": 941,
+    "defaultSrc": "/media/blogs/ai-agents-enterprise-data-security.jpg",
+    "defaultAvif": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-1280.avif",
+    "sources": {
+      "webp": {
+        "640": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-640.webp",
+        "960": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-960.webp",
+        "1280": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-1280.webp"
+      },
+      "avif": {
+        "640": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-640.avif",
+        "960": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-960.avif",
+        "1280": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-1280.avif"
+      }
+    }
   }
 }

@@ -6,7 +6,7 @@ import FooterSection from "../components/FooterSection";
 import ScrollToTop from "../components/ScrollToTop";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { ResponsivePicture } from "../components/ResponsivePicture";
-import { BlogTableOfContents, type TocItem } from "../components/BlogTableOfContents";
+import { BlogTableOfContents } from "../components/BlogTableOfContents";
 import { BlogArticleContent } from "../components/BlogArticleContent";
 import { BlogCta } from "../components/BlogCta";
 import { BlogCard } from "../components/BlogCard";
@@ -15,30 +15,8 @@ import { SITE_ORIGIN, ORG_NAME } from "../../seo/seoConfig";
 import { blogPostingSchema } from "../../seo/schemas/blogSchema";
 import { faqPageSchema, breadcrumbListSchema } from "../../seo/schemas/faqSchema";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
-import { getBlogPostBySlug, getRelatedBlogPosts } from "../data/blogsData";
+import { getBlogPostBySlug, getRelatedBlogPosts, getPostToc } from "../data/blogsData";
 import type { PageSeo } from "../../seo/pageMeta";
-
-const BLOG_ONE_TOC_ITEMS: TocItem[] = [
-  { id: "my-cybersecurity-journey", title: "My Cybersecurity Journey", level: 2 },
-  { id: "watch-video", title: "Watch Original Video", level: 2 },
-  { id: "course-requirement", title: "Do You Need a Course?", level: 2 },
-  { id: "self-learning-vs-structured-courses", title: "Self-Learning vs Courses", level: 3 },
-  { id: "what-to-learn-first", title: "What Should You Learn First?", level: 2 },
-  { id: "learn-networking", title: "1. Networking Fundamentals", level: 2 },
-  { id: "operating-systems", title: "2. Operating Systems", level: 2 },
-  { id: "learn-linux", title: "3. Learn Linux", level: 2 },
-  { id: "programming-scripting", title: "4. Programming & Scripting", level: 2 },
-  { id: "roadmap-as-map", title: "5. Roadmap as a Map", level: 2 },
-  { id: "independent-research", title: "6. Research Independently", level: 2 },
-  { id: "hands-on-practice", title: "7. Hands-On Practice", level: 2 },
-  { id: "note-taking", title: "8. Take Notes", level: 2 },
-  { id: "practical-roadmap", title: "Practical Roadmap", level: 2 },
-  { id: "common-mistakes", title: "What Beginners Get Wrong", level: 2 },
-  { id: "self-learning-lessons", title: "Self-Learning Lessons", level: 2 },
-  { id: "frequently-asked-questions", title: "Frequently Asked Questions", level: 2 },
-  { id: "final-thoughts", title: "Final Thoughts", level: 2 },
-  { id: "continue-learning", title: "Continue Learning", level: 2 },
-];
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -55,7 +33,8 @@ export default function BlogPostPage() {
   if (!post) {
     const notFoundMeta: PageSeo = {
       title: `Article Not Found | ${ORG_NAME}`,
-      description: "The requested blog article could not be found. Explore our latest technology and cybersecurity guides.",
+      description:
+        "The requested blog article could not be found. Explore our latest technology and cybersecurity guides.",
       keywords: ["cybersecurity blog", "NebulaSafeTech"],
       canonicalPath: "/blogs",
     };
@@ -105,6 +84,8 @@ export default function BlogPostPage() {
     { name: post.title, path: articleCanonicalPath },
   ];
 
+  const tocItems = getPostToc(post);
+
   const structuredData = [
     blogPostingSchema({
       title: post.title,
@@ -113,7 +94,7 @@ export default function BlogPostPage() {
       url: `${SITE_ORIGIN}${articleCanonicalPath}`,
       image: post.featuredImage
         ? `${SITE_ORIGIN}${post.featuredImage.src}`
-        : `${SITE_ORIGIN}/media/blogs/how-to-start-career-cybersecurity-2026.jpg`,
+        : `${SITE_ORIGIN}/media/blogs/${post.slug}.jpg`,
       datePublished: post.publishedIsoDate,
       dateModified: post.updatedIsoDate || post.publishedIsoDate,
       author: {
@@ -133,7 +114,7 @@ export default function BlogPostPage() {
     <div className="w-full min-h-screen bg-white overflow-x-clip">
       <SeoHead
         meta={pageMeta}
-        ogImage={featuredImg?.src || "/media/blogs/how-to-start-career-cybersecurity-2026.jpg"}
+        ogImage={featuredImg?.src || `/media/blogs/${post.slug}.jpg`}
         structuredData={structuredData}
       />
       <TopNav />
@@ -154,7 +135,7 @@ export default function BlogPostPage() {
               {post.title}
             </h1>
 
-            {/* Header Meta Row with LinkedIn Profile Photo */}
+            {/* Header Meta Row */}
             <div className="flex flex-wrap items-center gap-y-3 gap-x-6 text-slate-600 nst-ui text-sm pt-4 border-t border-slate-200/60">
               <div className="flex items-center gap-3">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden bg-[#015AAA] text-white flex items-center justify-center font-bold text-sm shadow-xs shrink-0 border border-slate-200">
@@ -188,7 +169,12 @@ export default function BlogPostPage() {
 
               <div className="flex items-center gap-1.5 text-slate-500">
                 <Calendar size={15} className="text-[#015AAA]" />
-                <span>{post.date}</span>
+                <span>Published: {post.date}</span>
+                {post.updatedDate && post.updatedDate !== post.date ? (
+                  <span className="ml-1 text-slate-400">
+                    (Updated: {post.updatedDate})
+                  </span>
+                ) : null}
               </div>
 
               <div className="flex items-center gap-1.5 text-slate-500">
@@ -202,17 +188,19 @@ export default function BlogPostPage() {
         {/* Article & Sidebar Container */}
         <section className="w-full px-4 sm:px-8 md:px-14 lg:px-20 py-12">
           <div className="max-w-7xl mx-auto space-y-16">
-            
-            {/* Top 2-Column Layout: Left Sticky TOC | Right Main Article */}
+            {/* 2-Column Layout: Left Sticky TOC | Right Main Article */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-              
-              {/* Left Column: Sticky Table of Contents ONLY */}
-              <aside className="hidden lg:block lg:col-span-3 sticky top-6 self-start">
-                <BlogTableOfContents items={BLOG_ONE_TOC_ITEMS} />
-              </aside>
+              {/* Left Column: Sticky Table of Contents */}
+              {tocItems.length > 0 ? (
+                <aside className="hidden lg:block lg:col-span-3 sticky top-6 self-start">
+                  <BlogTableOfContents items={tocItems} />
+                </aside>
+              ) : null}
 
               {/* Right Column: Article Content */}
-              <article className="lg:col-span-8 min-w-0">
+              <article
+                className={`${tocItems.length > 0 ? "lg:col-span-8" : "lg:col-span-12"} min-w-0 max-w-4xl mx-auto w-full`}
+              >
                 {/* Featured Image */}
                 {post.mediaSlug ? (
                   <div className="mb-10 rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-100 aspect-[16/9] w-full">
@@ -227,7 +215,9 @@ export default function BlogPostPage() {
                 ) : featuredImg ? (
                   <div className="mb-10 rounded-2xl overflow-hidden shadow-sm border border-slate-100 bg-slate-100 aspect-[16/9] w-full">
                     <picture>
-                      {featuredImg.webpSrc ? <source type="image/webp" srcSet={featuredImg.webpSrc} /> : null}
+                      {featuredImg.webpSrc ? (
+                        <source type="image/webp" srcSet={featuredImg.webpSrc} />
+                      ) : null}
                       <img
                         src={featuredImg.src}
                         alt={featuredImg.alt}
@@ -242,19 +232,20 @@ export default function BlogPostPage() {
                 ) : null}
 
                 {/* Mobile Table of Contents (Shown on screens < lg) */}
-                <div className="lg:hidden mb-8">
-                  <BlogTableOfContents items={BLOG_ONE_TOC_ITEMS} />
-                </div>
+                {tocItems.length > 0 ? (
+                  <div className="lg:hidden mb-8">
+                    <BlogTableOfContents items={tocItems} />
+                  </div>
+                ) : null}
 
                 {/* Article Content Component */}
                 <BlogArticleContent post={post} />
               </article>
             </div>
 
-            {/* Bottom Full-Width Cards Container (Spans full width under both columns) */}
+            {/* Bottom Full-Width Cards Container */}
             <div className="w-full space-y-10 pt-10 border-t border-slate-200">
-              
-              {/* 1. Rajiv Sharma Author Bio Card with LinkedIn Profile Photo */}
+              {/* 1. Author Bio Card */}
               <div className="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200/80 flex flex-col sm:flex-row items-start gap-6 shadow-xs w-full">
                 <div className="relative w-20 h-20 rounded-full overflow-hidden shrink-0 border-2 border-[#015AAA]/20 shadow-sm bg-[#015AAA]">
                   {post.author.avatar ? (
@@ -316,7 +307,6 @@ export default function BlogPostPage() {
                 </div>
               ) : null}
             </div>
-
           </div>
         </section>
 
@@ -324,7 +314,9 @@ export default function BlogPostPage() {
         {relatedPosts.length > 0 ? (
           <section className="w-full bg-[#F8FAFE] py-16 px-4 sm:px-8 md:px-14 lg:px-20 border-t border-slate-100">
             <div className="max-w-6xl mx-auto">
-              <h2 className="nst-h3 text-slate-900 mb-8 text-xl font-bold">Related Articles</h2>
+              <h2 className="nst-h3 text-slate-900 mb-8 text-xl font-bold">
+                Related Articles
+              </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {relatedPosts.map((rPost, idx) => (
                   <BlogCard key={rPost.id} post={rPost} index={idx} />

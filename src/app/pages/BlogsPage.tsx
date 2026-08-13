@@ -28,7 +28,11 @@ export default function BlogsPage() {
   const filteredPosts =
     activeCategory === "All Articles"
       ? BLOG_POSTS
-      : BLOG_POSTS.filter((post) => post.category === activeCategory);
+      : BLOG_POSTS.filter(
+          (post) =>
+            post.category === activeCategory ||
+            (activeCategory === "Cybersecurity" && post.category.includes("Cybersecurity"))
+        );
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
