@@ -34,10 +34,10 @@ export const blogPostAiAgentsSecurity: BlogPost = {
     height: 941,
   },
   author: {
-    name: "Raju Sharma",
+    name: "Rajiv Sharma",
     role: "Cybersecurity Engineer & Founder",
-    avatar: "/media/authors/raju-sharma.webp",
-    bio: "Raju Sharma is a cybersecurity engineer and founder at NebulaSafeTech, focusing on defensive security, zero-trust architectures, and data-layer protection for enterprise environments.",
+    avatar: "/media/authors/rajiv-sharma.webp",
+    bio: "Rajiv Sharma is a cybersecurity engineer and founder at NebulaSafeTech, focusing on defensive security, zero-trust architectures, and data-layer protection for enterprise environments.",
     profileUrl: "https://www.linkedin.com/company/nebulasafetech",
   },
   faqs: [
