@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { List, ChevronDown } from "lucide-react";
 
 export interface TocItem {
@@ -15,6 +15,11 @@ interface BlogTableOfContentsProps {
 export function BlogTableOfContents({ items, className = "" }: BlogTableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>(items[0]?.id || "");
   const [isOpenMobile, setIsOpenMobile] = useState<boolean>(false);
+
+  // Refs for auto-scrolling the active TOC item into view inside the TOC list
+  const desktopListRef = useRef<HTMLOListElement>(null);
+  const mobileListRef = useRef<HTMLOListElement>(null);
+  const activeItemRefs = useRef<Map<string, HTMLLIElement>>(new Map());
 
   useEffect(() => {
     if (!items.length) return;
@@ -41,6 +46,33 @@ export function BlogTableOfContents({ items, className = "" }: BlogTableOfConten
     return () => window.removeEventListener("scroll", handleScroll);
   }, [items]);
 
+  // Auto-scroll the active TOC item into view inside the TOC list container
+  useEffect(() => {
+    if (!activeId) return;
+    const activeEl = activeItemRefs.current.get(activeId);
+    if (!activeEl) return;
+
+    // Desktop list
+    if (desktopListRef.current) {
+      const list = desktopListRef.current;
+      const itemTop = activeEl.offsetTop;
+      const itemBottom = itemTop + activeEl.offsetHeight;
+      const listScrollTop = list.scrollTop;
+      const listHeight = list.clientHeight;
+
+      if (itemTop < listScrollTop) {
+        list.scrollTo({ top: itemTop - 8, behavior: "smooth" });
+      } else if (itemBottom > listScrollTop + listHeight) {
+        list.scrollTo({ top: itemBottom - listHeight + 8, behavior: "smooth" });
+      }
+    }
+
+    // Mobile list (only when open)
+    if (mobileListRef.current) {
+      activeEl.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+  }, [activeId]);
+
   if (!items.length) return null;
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -53,6 +85,15 @@ export function BlogTableOfContents({ items, className = "" }: BlogTableOfConten
       setActiveId(id);
       setIsOpenMobile(false);
       window.history.pushState(null, "", `#${id}`);
+    }
+  };
+
+  // Helper to register/unregister active item refs
+  const setItemRef = (id: string) => (node: HTMLLIElement | null) => {
+    if (node) {
+      activeItemRefs.current.set(id, node);
+    } else {
+      activeItemRefs.current.delete(id);
     }
   };
 
@@ -80,12 +121,13 @@ export function BlogTableOfContents({ items, className = "" }: BlogTableOfConten
         </button>
 
         {isOpenMobile ? (
-          <ol className="mt-4 pt-3 border-t border-slate-200/60 list-none m-0 p-0 flex flex-col gap-2 max-h-80 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+          <ol ref={mobileListRef} className="mt-4 pt-3 border-t border-slate-200/60 list-none m-0 p-0 flex flex-col gap-2 max-h-80 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {items.map((item) => {
               const isActive = activeId === item.id;
               return (
                 <li
                   key={item.id}
+                  ref={setItemRef(item.id)}
                   className="m-0"
                   style={{ paddingLeft: item.level === 3 ? "1rem" : "0rem" }}
                 >
@@ -113,12 +155,13 @@ export function BlogTableOfContents({ items, className = "" }: BlogTableOfConten
           <List size={16} />
           <span>Table of Contents</span>
         </div>
-        <ol className="list-none m-0 p-0 flex flex-col gap-1 max-h-[calc(100vh-140px)] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-1">
+        <ol ref={desktopListRef} className="list-none m-0 p-0 flex flex-col gap-1 max-h-[calc(100vh-140px)] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pr-1">
           {items.map((item) => {
             const isActive = activeId === item.id;
             return (
               <li
                 key={item.id}
+                ref={setItemRef(item.id)}
                 className="m-0"
                 style={{ paddingLeft: item.level === 3 ? "0.85rem" : "0rem" }}
               >
@@ -141,3 +184,4 @@ export function BlogTableOfContents({ items, className = "" }: BlogTableOfConten
     </nav>
   );
 }
+

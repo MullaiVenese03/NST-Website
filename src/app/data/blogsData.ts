@@ -1,12 +1,13 @@
 import type { MediaSlug } from "../utils/media";
 import type { TocItem } from "../components/BlogTableOfContents";
+import { blogPostRansomwareDataProtection } from "./blogs/ransomwareDataProtection";
 import { blogPostAiAgentsSecurity } from "./blogs/aiAgentsEnterpriseDataSecurity";
 import { blogPostOne } from "./blogs/howToStartCareerCybersecurity";
 
 export type BlogCategory =
   | "All Articles"
   | "Cybersecurity"
-  | "Cybersecurity Insights"
+  | "Cybersecurity"
   | "Cloud & Web"
   | "Engineering";
 
@@ -101,7 +102,7 @@ export interface BlogPost {
   seoTitle?: string;
   metaDescription: string;
   excerpt: string;
-  category: "Cybersecurity" | "Cybersecurity Insights" | "Cloud & Web" | "Engineering";
+  category: "Cybersecurity" | "Cybersecurity" | "Cloud & Web" | "Engineering";
   primaryKeyword?: string;
   secondaryKeywords?: string[];
   date: string;
@@ -125,7 +126,11 @@ export interface BlogPost {
   toc?: TocItem[];
 }
 
-export const BLOG_POSTS: BlogPost[] = [blogPostAiAgentsSecurity, blogPostOne];
+export const BLOG_POSTS: BlogPost[] = [
+  blogPostRansomwareDataProtection,
+  blogPostAiAgentsSecurity,
+  blogPostOne,
+];
 
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return BLOG_POSTS.find((p) => p.slug === slug);

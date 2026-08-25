@@ -9,7 +9,7 @@ export const blogPostAiAgentsSecurity: BlogPost = {
     "AI agents can access enterprise files, apps, and data. Learn the risks, recent Rovo findings, and practical controls for safer AI adoption.",
   excerpt:
     "AI agents are moving beyond answering questions to performing multi-step tasks across enterprise systems. Learn the security risks, recent Atlassian Rovo findings, and practical controls for safe deployment.",
-  category: "Cybersecurity Insights",
+  category: "Cybersecurity",
   primaryKeyword: "AI agents enterprise data security",
   secondaryKeywords: [
     "AI agent security",
@@ -38,7 +38,7 @@ export const blogPostAiAgentsSecurity: BlogPost = {
     role: "Cybersecurity Engineer & Founder",
     avatar: "/media/authors/rajiv-sharma.webp",
     bio: "Rajiv Sharma is a cybersecurity engineer and founder at NebulaSafeTech, focusing on defensive security, zero-trust architectures, and data-layer protection for enterprise environments.",
-    profileUrl: "https://www.linkedin.com/company/nebulasafetech",
+    profileUrl: "https://www.linkedin.com/in/rajiv-sharma-nebula/",
   },
   faqs: [
     {
@@ -932,62 +932,62 @@ Audit + Monitoring + Revocation`,
           items: [
             {
               id: 1,
-              text: "Atlassian — Rovo's 2026 agentic capabilities and cross-system tool use.",
+              text: "Atlassian - Rovo's 2026 agentic capabilities and cross-system tool use.",
               url: "https://www.atlassian.com/blog/rovo/long-horizon-whats-changed",
             },
             {
               id: 2,
-              text: "Atlassian — Rovo MCP Server and enterprise integrations.",
+              text: "Atlassian - Rovo MCP Server and enterprise integrations.",
               url: "https://www.atlassian.com/blog/announcements/atlassian-rovo-mcp-ga",
             },
             {
               id: 3,
-              text: "CSO Online — Reporting on the Rovo prompt-injection/data-exfiltration disclosure.",
+              text: "CSO Online - Reporting on the Rovo prompt-injection/data-exfiltration disclosure.",
               url: "https://www.csoonline.com/article/4207306/one-click-flaw-in-atlassian-rovo-exposed-enterprise-data-via-prompt-injection-attack.html",
             },
             {
               id: 4,
-              text: "The Hacker News — Reporting on RovoBlast and attacker-controlled instructions.",
+              text: "The Hacker News - Reporting on RovoBlast and attacker-controlled instructions.",
               url: "https://thehackernews.com/2026/08/atlassian-rovo-can-be-tricked-into.html",
             },
             {
               id: 5,
-              text: "Microsoft Learn — Least privilege for AI agents.",
+              text: "Microsoft Learn - Least privilege for AI agents.",
               url: "https://learn.microsoft.com/en-us/security/zero-trust/sfi/least-privilege-for-ai-agents",
             },
             {
               id: 6,
-              text: "Microsoft Learn — Securing AI agents at scale.",
+              text: "Microsoft Learn - Securing AI agents at scale.",
               url: "https://learn.microsoft.com/en-us/security/security-for-ai/agent-365-security",
             },
             {
               id: 7,
-              text: "Microsoft Learn — Managing autonomous agentic AI risk.",
+              text: "Microsoft Learn - Managing autonomous agentic AI risk.",
               url: "https://learn.microsoft.com/en-us/security/zero-trust/sfi/manage-agentic-risk",
             },
             {
               id: 8,
-              text: "OWASP GenAI Security Project — Prompt Injection.",
+              text: "OWASP GenAI Security Project - Prompt Injection.",
               url: "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
             },
             {
               id: 9,
-              text: "NIST — Insights into AI Agent Security from a Large-Scale Red-Teaming Competition.",
+              text: "NIST - Insights into AI Agent Security from a Large-Scale Red-Teaming Competition.",
               url: "https://www.nist.gov/blogs/caisi-research-blog/insights-ai-agent-security-large-scale-red-teaming-competition",
             },
             {
               id: 10,
-              text: "NIST NCCoE — Software and AI Agent Identity and Authorization concept paper.",
+              text: "NIST NCCoE - Software and AI Agent Identity and Authorization concept paper.",
               url: "https://www.nccoe.nist.gov/sites/default/files/2026-02/accelerating-the-adoption-of-software-and-ai-agent-identity-and-authorization-concept-paper.pdf",
             },
             {
               id: 11,
-              text: "Recent research — Agentic AI vulnerabilities and mitigation.",
+              text: "Recent research - Agentic AI vulnerabilities and mitigation.",
               url: "https://arxiv.org/abs/2608.10530",
             },
             {
               id: 12,
-              text: "Recent research — Rethinking agent security around deterministic access controls.",
+              text: "Recent research - Rethinking agent security around deterministic access controls.",
               url: "https://arxiv.org/abs/2608.12172",
             },
           ],

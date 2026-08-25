@@ -170,7 +170,7 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
               {block.title}
             </div>
           ) : null}
-          <pre className="font-mono text-xs sm:text-sm text-[#38bdf8] overflow-x-auto whitespace-pre leading-relaxed m-0">
+          <pre className="font-mono text-xs sm:text-sm text-[#38bdf8] overflow-x-auto whitespace-pre leading-relaxed m-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {block.content}
           </pre>
         </div>

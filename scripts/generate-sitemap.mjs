@@ -70,6 +70,15 @@ const SITEMAP_ROUTES = [
     image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "NebulaSafeTech Technology & Cybersecurity Blog" },
   },
   {
+    path: "/blog/ransomware-data-theft-protect-business-2026",
+    changefreq: "weekly",
+    priority: "0.85",
+    image: {
+      loc: `${SITE_ORIGIN}/media/blogs/ransomware-data-theft-protect-business-2026.jpg`,
+      title: "Ransomware Data Theft: How to Protect Your Business in 2026",
+    },
+  },
+  {
     path: "/blog/ai-agents-enterprise-data-security",
     changefreq: "weekly",
     priority: "0.85",
