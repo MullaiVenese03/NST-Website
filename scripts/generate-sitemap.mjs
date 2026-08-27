@@ -70,6 +70,15 @@ const SITEMAP_ROUTES = [
     image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "NebulaSafeTech Technology & Cybersecurity Blog" },
   },
   {
+    path: "/blog/shadow-ai-agents-enterprise-security-risk",
+    changefreq: "weekly",
+    priority: "0.85",
+    image: {
+      loc: `${SITE_ORIGIN}/media/blogs/shadow-ai-agents-enterprise-security-risk.jpg`,
+      title: "Shadow AI Agents: Enterprise Security Risks in 2026",
+    },
+  },
+  {
     path: "/blog/ransomware-data-theft-protect-business-2026",
     changefreq: "weekly",
     priority: "0.85",

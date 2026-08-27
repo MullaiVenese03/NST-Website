@@ -22,6 +22,7 @@
 - [EdTech Ecosystem](https://www.nebulasafetech.com/edtech): Student learning paths, practical ethical hacking labs, project guidance, and career preparation.
 - [Clients & Testimonials](https://www.nebulasafetech.com/clients): Institutional partnerships, client testimonials, program impact statistics, and case studies.
 - [Blog & Technical Insights](https://www.nebulasafetech.com/blogs): Technical articles, security frameworks, web development best practices, and career roadmaps.
+  - [Shadow AI Agents: Enterprise Security Risks in 2026](https://www.nebulasafetech.com/blog/shadow-ai-agents-enterprise-security-risk): How shadow AI agents enter enterprise environments without complete visibility, what access they may hold, and how to discover, govern, and control them.
   - [Ransomware Data Theft: How to Protect Your Business in 2026](https://www.nebulasafetech.com/blog/ransomware-data-theft-protect-business-2026): How modern ransomware combines data theft and extortion, why backups alone are not enough, and how layered data-security controls reduce business risk.
   - [AI Agents & Enterprise Data Security: Risks & Controls](https://www.nebulasafetech.com/blog/ai-agents-enterprise-data-security): Security risks of AI agents accessing enterprise data, with practical controls for safe deployment.
   - [How to Start a Career in Cybersecurity in 2026](https://www.nebulasafetech.com/blog/how-to-start-career-cybersecurity): Beginner roadmap for launching a cybersecurity career.

@@ -3,6 +3,7 @@ import type { TocItem } from "../components/BlogTableOfContents";
 import { blogPostRansomwareDataProtection } from "./blogs/ransomwareDataProtection";
 import { blogPostAiAgentsSecurity } from "./blogs/aiAgentsEnterpriseDataSecurity";
 import { blogPostOne } from "./blogs/howToStartCareerCybersecurity";
+import { blogPostShadowAiAgents } from "./blogs/shadowAiAgents";
 
 export type BlogCategory =
   | "All Articles"
@@ -127,6 +128,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  blogPostShadowAiAgents,
   blogPostRansomwareDataProtection,
   blogPostAiAgentsSecurity,
   blogPostOne,

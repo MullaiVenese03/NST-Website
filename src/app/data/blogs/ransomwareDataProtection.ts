@@ -103,7 +103,7 @@ export const blogPostRansomwareDataProtection: BlogPost = {
     primaryActionText: "Explore NEX",
     primaryActionUrl: "/services/cybersecurity",
     secondaryActionText: "Talk to NebulaSafeTech",
-    secondaryActionUrl: "/contact",
+    secondaryActionUrl: "/about",
   },
   sections: [
     // ─────────────────────────────────────────────────────────────────────────
