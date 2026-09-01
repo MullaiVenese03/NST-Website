@@ -4,6 +4,7 @@ import { blogPostRansomwareDataProtection } from "./blogs/ransomwareDataProtecti
 import { blogPostAiAgentsSecurity } from "./blogs/aiAgentsEnterpriseDataSecurity";
 import { blogPostOne } from "./blogs/howToStartCareerCybersecurity";
 import { blogPostShadowAiAgents } from "./blogs/shadowAiAgents";
+import { blogPostAiAgentIdentity } from "./blogs/aiAgentIdentityDataAccess";
 
 export type BlogCategory =
   | "All Articles"
@@ -128,6 +129,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  blogPostAiAgentIdentity,
   blogPostShadowAiAgents,
   blogPostRansomwareDataProtection,
   blogPostAiAgentsSecurity,

@@ -70,6 +70,15 @@ const SITEMAP_ROUTES = [
     image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "NebulaSafeTech Technology & Cybersecurity Blog" },
   },
   {
+    path: "/blog/ai-agent-security-identity-access-enterprise-data",
+    changefreq: "weekly",
+    priority: "0.85",
+    image: {
+      loc: `${SITE_ORIGIN}/media/blogs/ai-agent-security-identity-access-enterprise-data.png`,
+      title: "AI Agent Security: Identity, Access & Data Protection",
+    },
+  },
+  {
     path: "/blog/shadow-ai-agents-enterprise-security-risk",
     changefreq: "weekly",
     priority: "0.85",
