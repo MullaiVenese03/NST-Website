@@ -11,15 +11,45 @@ import { toJsonLdScript } from "./structuredData";
 export type SeoHeadProps = {
   meta: PageSeo;
   ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
+  ogImageAlt?: string;
+  ogImageType?: string;
   noindex?: boolean;
   structuredData?: object | object[];
 };
 
-export function SeoHead({ meta, ogImage, noindex, structuredData }: SeoHeadProps) {
+export function SeoHead({
+  meta,
+  ogImage,
+  ogImageWidth,
+  ogImageHeight,
+  ogImageAlt,
+  ogImageType,
+  noindex,
+  structuredData,
+}: SeoHeadProps) {
   const canonical = canonicalUrlFromPathname(meta.canonicalPath);
-  const imageUrl = ogImage?.startsWith("http") ? ogImage : ogImage ? absoluteUrl(ogImage) : defaultOgImageUrl();
+  const imageUrl = ogImage?.startsWith("http")
+    ? ogImage
+    : ogImage
+    ? absoluteUrl(ogImage)
+    : defaultOgImageUrl();
   const kw = meta.keywords.join(", ");
-  const robots = noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+  const robots = noindex
+    ? "noindex, nofollow"
+    : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+
+  const imageWidth = ogImageWidth ?? OG_IMAGE_WIDTH;
+  const imageHeight = ogImageHeight ?? OG_IMAGE_HEIGHT;
+  const imageAlt = ogImageAlt ?? (meta.title ? `${meta.title} | ${ORG_NAME}` : `${ORG_NAME} - preview image`);
+  const imageType =
+    ogImageType ??
+    (imageUrl.endsWith(".png")
+      ? "image/png"
+      : imageUrl.endsWith(".webp")
+      ? "image/webp"
+      : "image/jpeg");
 
   const scripts =
     structuredData !== undefined ? (
@@ -51,9 +81,10 @@ export function SeoHead({ meta, ogImage, noindex, structuredData }: SeoHeadProps
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={imageUrl} />
       <meta property="og:image:secure_url" content={imageUrl} />
-      <meta property="og:image:width" content={String(OG_IMAGE_WIDTH)} />
-      <meta property="og:image:height" content={String(OG_IMAGE_HEIGHT)} />
-      <meta property="og:image:alt" content={`${ORG_NAME} - preview image`} />
+      <meta property="og:image:type" content={imageType} />
+      <meta property="og:image:width" content={String(imageWidth)} />
+      <meta property="og:image:height" content={String(imageHeight)} />
+      <meta property="og:image:alt" content={imageAlt} />
 
       {/* Twitter Cards */}
       <meta name="twitter:card" content="summary_large_image" />
@@ -62,6 +93,7 @@ export function SeoHead({ meta, ogImage, noindex, structuredData }: SeoHeadProps
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
       <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={imageAlt} />
 
       {scripts}
     </Helmet>

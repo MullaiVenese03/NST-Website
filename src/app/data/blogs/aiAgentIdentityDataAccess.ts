@@ -26,12 +26,11 @@ export const blogPostAiAgentIdentity: BlogPost = {
   publishedIsoDate: "2026-09-01T00:00:00Z",
   readTime: "14 min read",
   featuredImage: {
-    src: "/media/blogs/ai-agent-security-identity-access-enterprise-data.png",
-    webpSrc:
-      "/media/blogs/ai-agent-security-identity-access-enterprise-data.webp",
-    alt: "AI agent security architecture showing identity, authorization, controlled data access, and sensitive enterprise data",
-    width: 1536,
-    height: 1024,
+    src: "/media/blogs/ai-agent-identity-enterprise-data-access.jpg",
+    webpSrc: "/media/blogs/ai-agent-identity-enterprise-data-access.webp",
+    alt: "AI agent with verified identity requiring access control, authorization, and least privilege to reach sensitive enterprise files",
+    width: 1672,
+    height: 941,
   },
   author: {
     name: "Rajiv Sharma",

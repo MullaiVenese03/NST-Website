@@ -40,11 +40,11 @@ export const blogPostRansomwareDataProtection: BlogPost = {
   publishedIsoDate: "2026-08-25T00:00:00Z",
   readTime: "13 min read",
   featuredImage: {
-    src: `/media/blogs/${SLUG}.jpg`,
-    webpSrc: `/media/blogs/${SLUG}.webp`,
-    alt: "Ransomware attack path showing stolen enterprise data protected by layered security controls",
-    width: 1280,
-    height: 720,
+    src: "/media/blogs/ransomware-data-theft-extortion-protection.jpg",
+    webpSrc: "/media/blogs/ransomware-data-theft-extortion-protection.webp",
+    alt: "Cyber attacker exfiltrating confidential enterprise files and financial data in a modern ransomware extortion attack",
+    width: 1672,
+    height: 941,
   },
   author: {
     name: "Rajiv Sharma",

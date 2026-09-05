@@ -32,6 +32,7 @@ knip-report.txt
 # Local Blog Generation Prompt & Media Workspace
 # Docs/ contains local blog draft prompts, raw images, and content used during blog creation
 Docs/
+.blog_automation
 
 
 # IDE & Editor Files

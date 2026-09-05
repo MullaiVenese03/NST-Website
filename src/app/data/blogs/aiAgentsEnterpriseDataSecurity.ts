@@ -1,7 +1,7 @@
 import type { BlogPost } from "../blogsData";
 
 export const blogPostAiAgentsSecurity: BlogPost = {
-  id: "1",
+  id: "2",
   slug: "ai-agents-enterprise-data-security",
   title: "AI Agents Are Accessing Enterprise Data. Is Your Security Ready?",
   seoTitle: "AI Agents & Enterprise Data Security: Risks & Controls",
@@ -25,11 +25,11 @@ export const blogPostAiAgentsSecurity: BlogPost = {
   updatedDate: "August 13, 2026",
   updatedIsoDate: "2026-08-13T00:00:00Z",
   readTime: "12 min read",
-  mediaSlug: "ai-agents-enterprise-data-security",
+  mediaSlug: "ai-agents-sensitive-enterprise-data-access",
   featuredImage: {
-    src: "/media/blogs/ai-agents-enterprise-data-security.jpg",
-    webpSrc: "/media/blogs/ai-agents-enterprise-data-security.webp",
-    alt: "AI agents accessing enterprise data through controlled security boundaries",
+    src: "/media/blogs/ai-agents-sensitive-enterprise-data-access.jpg",
+    webpSrc: "/media/blogs/ai-agents-sensitive-enterprise-data-access.webp",
+    alt: "AI agent accessing sensitive enterprise data files, databases, and business applications",
     width: 1672,
     height: 941,
   },

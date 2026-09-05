@@ -1,5 +1,6 @@
 import type { MediaSlug } from "../utils/media";
 import type { TocItem } from "../components/BlogTableOfContents";
+import { blogPostDataSovereigntyAI } from "./blogs/dataSovereigntyAI";
 import { blogPostRansomwareDataProtection } from "./blogs/ransomwareDataProtection";
 import { blogPostAiAgentsSecurity } from "./blogs/aiAgentsEnterpriseDataSecurity";
 import { blogPostOne } from "./blogs/howToStartCareerCybersecurity";
@@ -129,6 +130,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  blogPostDataSovereigntyAI,
   blogPostAiAgentIdentity,
   blogPostShadowAiAgents,
   blogPostRansomwareDataProtection,

@@ -26,9 +26,9 @@ export const blogPostShadowAiAgents: BlogPost = {
   featuredImage: {
     src: "/media/blogs/shadow-ai-agents-enterprise-security-risk.jpg",
     webpSrc: "/media/blogs/shadow-ai-agents-enterprise-security-risk.webp",
-    alt: "Shadow AI agents operating outside enterprise security visibility — governance and risk overview",
-    width: 1536,
-    height: 1024,
+    alt: "Hidden shadow AI agents operating behind an enterprise employee accessing sensitive internal documents and APIs",
+    width: 1672,
+    height: 941,
   },
   author: {
     name: "Rajiv Sharma",
@@ -355,7 +355,7 @@ export const blogPostShadowAiAgents: BlogPost = {
       blocks: [
         {
           type: "p",
-          text: "Shadow IT traditionally refers to technology used without formal IT approval or management. Shadow AI overlaps with this problem but introduces additional complexity. A shadow AI agent may be built inside an approved application, created by an authorized employee, connected using legitimate credentials, and performing a legitimate business task — yet it may still operate outside complete governance.",
+          text: "Shadow IT traditionally refers to technology used without formal IT approval or management. Shadow AI overlaps with this problem but introduces additional complexity. A shadow AI agent may be built inside an approved application, created by an authorized employee, connected using legitimate credentials, and performing a legitimate business task - yet it may still operate outside complete governance.",
         },
         {
           type: "p",
@@ -395,7 +395,7 @@ export const blogPostShadowAiAgents: BlogPost = {
         },
         {
           type: "p",
-          text: "By contrast, a properly scoped agent with access only to explicitly defined project data is not risk-free — it is simply more containable. This is why **blast radius reduction** should be a major design principle for AI agent security.",
+          text: "By contrast, a properly scoped agent with access only to explicitly defined project data is not risk-free - it is simply more containable. This is why **blast radius reduction** should be a major design principle for AI agent security.",
         },
         {
           type: "callout",

@@ -6,11 +6,13 @@
   "scripts": {
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "generate:favicons": "node scripts/generate-favicons.mjs",
-    "build": "node scripts/generate-sitemap.mjs && node scripts/generate-favicons.mjs && node scripts/optimize-og.mjs && vite build",
+    "build": "node scripts/generate-sitemap.mjs && node scripts/generate-favicons.mjs && node scripts/optimize-og.mjs && vite build && node scripts/prerender-seo.mjs",
     "dev": "vite",
     "preview": "vite preview",
+    "prerender:seo": "node scripts/prerender-seo.mjs",
     "optimize:fonts": "node scripts/optimize-fonts.mjs",
-    "optimize:og": "node scripts/optimize-og.mjs"
+    "optimize:og": "node scripts/optimize-og.mjs",
+    "optimize:blogs": "node scripts/optimize-blog-images.mjs"
   },
   "dependencies": {
     "@formspree/core": "^4.0.0",

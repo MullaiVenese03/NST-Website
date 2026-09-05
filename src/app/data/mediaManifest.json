@@ -837,47 +837,113 @@
       "avif": {}
     }
   },
-  "how-to-start-career-cybersecurity-2026": {
-    "slug": "how-to-start-career-cybersecurity-2026",
+  "cybersecurity-career-beginner-roadmap-guide": {
+    "slug": "cybersecurity-career-beginner-roadmap-guide",
     "profile": "hero",
     "width": 1280,
     "height": 720,
     "intrinsicWidth": 1280,
     "intrinsicHeight": 720,
-    "defaultSrc": "/media/blogs/how-to-start-career-cybersecurity-2026.jpg",
-    "defaultAvif": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-1280.avif",
+    "defaultSrc": "/media/blogs/cybersecurity-career-beginner-roadmap-guide.jpg",
+    "defaultAvif": "/media/blogs/cybersecurity-career-beginner-roadmap-guide/cybersecurity-career-beginner-roadmap-guide-1280.avif",
     "sources": {
       "webp": {
-        "640": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-640.webp",
-        "960": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-960.webp",
-        "1280": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-1280.webp"
+        "640": "/media/blogs/cybersecurity-career-beginner-roadmap-guide/cybersecurity-career-beginner-roadmap-guide-640.webp",
+        "960": "/media/blogs/cybersecurity-career-beginner-roadmap-guide/cybersecurity-career-beginner-roadmap-guide-960.webp",
+        "1280": "/media/blogs/cybersecurity-career-beginner-roadmap-guide/cybersecurity-career-beginner-roadmap-guide-1280.webp"
       },
       "avif": {
-        "640": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-640.avif",
-        "960": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-960.avif",
-        "1280": "/media/blogs/how-to-start-career-cybersecurity-2026/how-to-start-career-cybersecurity-2026-1280.avif"
+        "640": "/media/blogs/cybersecurity-career-beginner-roadmap-guide/cybersecurity-career-beginner-roadmap-guide-640.avif",
+        "960": "/media/blogs/cybersecurity-career-beginner-roadmap-guide/cybersecurity-career-beginner-roadmap-guide-960.avif",
+        "1280": "/media/blogs/cybersecurity-career-beginner-roadmap-guide/cybersecurity-career-beginner-roadmap-guide-1280.avif"
       }
     }
   },
-  "ai-agents-enterprise-data-security": {
-    "slug": "ai-agents-enterprise-data-security",
+  "ai-agents-sensitive-enterprise-data-access": {
+    "slug": "ai-agents-sensitive-enterprise-data-access",
     "profile": "hero",
     "width": 1672,
     "height": 941,
     "intrinsicWidth": 1672,
     "intrinsicHeight": 941,
-    "defaultSrc": "/media/blogs/ai-agents-enterprise-data-security.jpg",
-    "defaultAvif": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-1280.avif",
+    "defaultSrc": "/media/blogs/ai-agents-sensitive-enterprise-data-access.jpg",
+    "defaultAvif": "/media/blogs/ai-agents-sensitive-enterprise-data-access/ai-agents-sensitive-enterprise-data-access-1280.avif",
     "sources": {
       "webp": {
-        "640": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-640.webp",
-        "960": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-960.webp",
-        "1280": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-1280.webp"
+        "640": "/media/blogs/ai-agents-sensitive-enterprise-data-access/ai-agents-sensitive-enterprise-data-access-640.webp",
+        "960": "/media/blogs/ai-agents-sensitive-enterprise-data-access/ai-agents-sensitive-enterprise-data-access-960.webp",
+        "1280": "/media/blogs/ai-agents-sensitive-enterprise-data-access/ai-agents-sensitive-enterprise-data-access-1280.webp"
       },
       "avif": {
-        "640": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-640.avif",
-        "960": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-960.avif",
-        "1280": "/media/blogs/ai-agents-enterprise-data-security/ai-agents-enterprise-data-security-1280.avif"
+        "640": "/media/blogs/ai-agents-sensitive-enterprise-data-access/ai-agents-sensitive-enterprise-data-access-640.avif",
+        "960": "/media/blogs/ai-agents-sensitive-enterprise-data-access/ai-agents-sensitive-enterprise-data-access-960.avif",
+        "1280": "/media/blogs/ai-agents-sensitive-enterprise-data-access/ai-agents-sensitive-enterprise-data-access-1280.avif"
+      }
+    }
+  },
+  "ransomware-data-theft-extortion-protection": {
+    "slug": "ransomware-data-theft-extortion-protection",
+    "profile": "hero",
+    "width": 1672,
+    "height": 941,
+    "intrinsicWidth": 1672,
+    "intrinsicHeight": 941,
+    "defaultSrc": "/media/blogs/ransomware-data-theft-extortion-protection.jpg",
+    "defaultAvif": "/media/blogs/ransomware-data-theft-extortion-protection/ransomware-data-theft-extortion-protection-1280.avif",
+    "sources": {
+      "webp": {
+        "640": "/media/blogs/ransomware-data-theft-extortion-protection/ransomware-data-theft-extortion-protection-640.webp",
+        "960": "/media/blogs/ransomware-data-theft-extortion-protection/ransomware-data-theft-extortion-protection-960.webp",
+        "1280": "/media/blogs/ransomware-data-theft-extortion-protection/ransomware-data-theft-extortion-protection-1280.webp"
+      },
+      "avif": {
+        "640": "/media/blogs/ransomware-data-theft-extortion-protection/ransomware-data-theft-extortion-protection-640.avif",
+        "960": "/media/blogs/ransomware-data-theft-extortion-protection/ransomware-data-theft-extortion-protection-960.avif",
+        "1280": "/media/blogs/ransomware-data-theft-extortion-protection/ransomware-data-theft-extortion-protection-1280.avif"
+      }
+    }
+  },
+  "shadow-ai-agents-enterprise-security-risk": {
+    "slug": "shadow-ai-agents-enterprise-security-risk",
+    "profile": "hero",
+    "width": 1672,
+    "height": 941,
+    "intrinsicWidth": 1672,
+    "intrinsicHeight": 941,
+    "defaultSrc": "/media/blogs/shadow-ai-agents-enterprise-security-risk.jpg",
+    "defaultAvif": "/media/blogs/shadow-ai-agents-enterprise-security-risk/shadow-ai-agents-enterprise-security-risk-1280.avif",
+    "sources": {
+      "webp": {
+        "640": "/media/blogs/shadow-ai-agents-enterprise-security-risk/shadow-ai-agents-enterprise-security-risk-640.webp",
+        "960": "/media/blogs/shadow-ai-agents-enterprise-security-risk/shadow-ai-agents-enterprise-security-risk-960.webp",
+        "1280": "/media/blogs/shadow-ai-agents-enterprise-security-risk/shadow-ai-agents-enterprise-security-risk-1280.webp"
+      },
+      "avif": {
+        "640": "/media/blogs/shadow-ai-agents-enterprise-security-risk/shadow-ai-agents-enterprise-security-risk-640.avif",
+        "960": "/media/blogs/shadow-ai-agents-enterprise-security-risk/shadow-ai-agents-enterprise-security-risk-960.avif",
+        "1280": "/media/blogs/shadow-ai-agents-enterprise-security-risk/shadow-ai-agents-enterprise-security-risk-1280.avif"
+      }
+    }
+  },
+  "ai-agent-identity-enterprise-data-access": {
+    "slug": "ai-agent-identity-enterprise-data-access",
+    "profile": "hero",
+    "width": 1672,
+    "height": 941,
+    "intrinsicWidth": 1672,
+    "intrinsicHeight": 941,
+    "defaultSrc": "/media/blogs/ai-agent-identity-enterprise-data-access.jpg",
+    "defaultAvif": "/media/blogs/ai-agent-identity-enterprise-data-access/ai-agent-identity-enterprise-data-access-1280.avif",
+    "sources": {
+      "webp": {
+        "640": "/media/blogs/ai-agent-identity-enterprise-data-access/ai-agent-identity-enterprise-data-access-640.webp",
+        "960": "/media/blogs/ai-agent-identity-enterprise-data-access/ai-agent-identity-enterprise-data-access-960.webp",
+        "1280": "/media/blogs/ai-agent-identity-enterprise-data-access/ai-agent-identity-enterprise-data-access-1280.webp"
+      },
+      "avif": {
+        "640": "/media/blogs/ai-agent-identity-enterprise-data-access/ai-agent-identity-enterprise-data-access-640.avif",
+        "960": "/media/blogs/ai-agent-identity-enterprise-data-access/ai-agent-identity-enterprise-data-access-960.avif",
+        "1280": "/media/blogs/ai-agent-identity-enterprise-data-access/ai-agent-identity-enterprise-data-access-1280.avif"
       }
     }
   }

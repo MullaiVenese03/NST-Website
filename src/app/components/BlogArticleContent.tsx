@@ -89,7 +89,7 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
   switch (block.type) {
     case "p":
       return (
-        <p className="mb-5 text-slate-700 leading-[1.8] text-[17px]">
+        <p className="mb-4 text-slate-700 font-body leading-[1.75] text-[16px] sm:text-[17px]">
           {parseInlineMarkdown(block.text)}
         </p>
       );
@@ -98,7 +98,7 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
       return (
         <h3
           id={block.id}
-          className="scroll-mt-28 nst-h3 text-slate-900 mt-10 mb-4 text-xl font-bold border-b border-slate-100 pb-1"
+          className="scroll-mt-28 nst-h3 font-heading text-slate-900 mt-8 mb-3 text-lg sm:text-xl font-bold tracking-tight border-b border-slate-100/60 pb-1"
         >
           {parseInlineMarkdown(block.title)}
         </h3>
@@ -108,7 +108,7 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
       return (
         <h4
           id={block.id}
-          className="scroll-mt-28 nst-h4 text-slate-900 mt-8 mb-3 text-lg font-bold"
+          className="scroll-mt-28 nst-h4 font-heading text-slate-900 mt-6 mb-2 text-base sm:text-lg font-semibold tracking-tight"
         >
           {parseInlineMarkdown(block.title)}
         </h4>
@@ -116,7 +116,7 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
 
     case "quote":
       return (
-        <blockquote className="my-6 p-5 px-6 rounded-2xl bg-slate-50 border-l-4 border-[#015AAA] text-slate-800 text-base sm:text-lg font-medium shadow-xs">
+        <blockquote className="my-5 p-4 px-5 rounded-xl bg-slate-50 border-l-4 border-[#015AAA] text-slate-800 text-sm sm:text-base font-medium shadow-xs">
           {block.label ? (
             <span className="block font-bold text-slate-900 mb-1">{block.label}</span>
           ) : null}
@@ -135,9 +135,9 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
       if (isSuccess) bgClass = "bg-emerald-50 border-emerald-500 text-emerald-950";
 
       return (
-        <div className={`my-6 p-5 rounded-2xl border-l-4 shadow-xs text-base ${bgClass}`}>
+        <div className={`my-5 p-4 sm:p-5 rounded-xl border-l-4 shadow-xs text-sm sm:text-base ${bgClass}`}>
           {block.title ? (
-            <h4 className="font-bold mb-1 text-inherit text-lg">{block.title}</h4>
+            <h4 className="font-bold mb-1 text-inherit text-base sm:text-lg">{block.title}</h4>
           ) : null}
           <p className="m-0 leading-relaxed">{parseInlineMarkdown(block.text)}</p>
         </div>
@@ -147,7 +147,7 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
     case "list":
       if (block.style === "ordered") {
         return (
-          <ol className="list-decimal pl-6 space-y-2 mb-6 text-slate-700 leading-relaxed text-[17px]">
+          <ol className="list-decimal pl-5 sm:pl-6 space-y-2 mb-5 text-slate-700 font-body leading-relaxed text-[16px] sm:text-[17px]">
             {block.items.map((item, idx) => (
               <li key={idx}>{parseInlineMarkdown(item)}</li>
             ))}
@@ -155,7 +155,7 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
         );
       }
       return (
-        <ul className="list-disc pl-6 space-y-2 mb-6 text-slate-700 leading-relaxed text-[17px]">
+        <ul className="list-disc pl-5 sm:pl-6 space-y-2 mb-5 text-slate-700 font-body leading-relaxed text-[16px] sm:text-[17px]">
           {block.items.map((item, idx) => (
             <li key={idx}>{parseInlineMarkdown(item)}</li>
           ))}
@@ -283,8 +283,8 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
 
 function RenderSection({ section }: { section: ArticleSection }) {
   return (
-    <section id={section.id} className="scroll-mt-28 mb-12">
-      <h2 className="nst-h2 text-slate-900 mb-6 pb-2 border-b border-slate-100 text-2xl sm:text-3xl">
+    <section id={section.id} className="scroll-mt-28 mb-10">
+      <h2 className="nst-h2 font-heading text-slate-900 mt-10 mb-4 pb-2 border-b border-slate-150 text-xl sm:text-2xl font-bold tracking-tight">
         {section.title}
       </h2>
       {section.blocks.map((block, idx) => (

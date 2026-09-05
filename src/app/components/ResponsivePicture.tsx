@@ -12,6 +12,7 @@ export type ResponsivePictureProps = {
   slug: MediaSlug;
   alt: string;
   className?: string;
+  pictureClassName?: string;
   style?: CSSProperties;
   sizes?: string;
 
@@ -23,6 +24,7 @@ export function ResponsivePicture({
   slug,
   alt,
   className,
+  pictureClassName,
   style,
   sizes: sizesOverride,
   priority = false,
@@ -41,7 +43,7 @@ export function ResponsivePicture({
   const dimensions = getMediaDimensions(entry);
 
   return (
-    <picture>
+    <picture className={pictureClassName}>
       {avifSrcSet && defaultAvif ? (
         <source type="image/avif" srcSet={avifSrcSet} sizes={sizes} />
       ) : null}
