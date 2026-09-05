@@ -31,10 +31,20 @@ export function prefetchRoute(path: string): void {
 
 export function prefetchCommonRoutes(): void {
   if (typeof window === "undefined") return;
-  const run = () => prefetchRoute("/services");
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(run, { timeout: 8000 });
-  } else {
-    setTimeout(run, 5000);
-  }
+  const run = () => {
+    prefetchRoute("/services");
+  };
+  const onInteraction = () => {
+    window.removeEventListener("pointerdown", onInteraction);
+    window.removeEventListener("touchstart", onInteraction);
+    window.removeEventListener("scroll", onInteraction);
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(run, { timeout: 3000 });
+    } else {
+      setTimeout(run, 1500);
+    }
+  };
+  window.addEventListener("pointerdown", onInteraction, { once: true, passive: true });
+  window.addEventListener("touchstart", onInteraction, { once: true, passive: true });
+  window.addEventListener("scroll", onInteraction, { once: true, passive: true });
 }

@@ -29,6 +29,7 @@ export const COMPANY_ICON = {
 
 export function companyIconLinks() {
   return [
+    { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
     { rel: "icon", href: ROOT_FAVICONS.ico, sizes: "any" },
     { rel: "icon", type: "image/png", href: ROOT_FAVICONS.png32, sizes: "32x32" },
     { rel: "icon", type: "image/webp", href: COMPANY_ICON.webp480Encoded, sizes: "480x480" },

@@ -36,7 +36,7 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;");
 }
 
-function injectMetadata(templateHtml, meta) {
+function injectMetadata(templateHtml, meta, isHome = false) {
   let html = templateHtml;
 
   // 1. Authoritative Title
@@ -98,7 +98,17 @@ function injectMetadata(templateHtml, meta) {
     <meta name="twitter:image:alt" content="${escapeHtml(meta.imageAlt || meta.title)}" />
   `;
 
-  return html.replace("</head>", `${ogTags.trim()}\n  </head>`);
+  html = html.replace("</head>", `${ogTags.trim()}\n  </head>`);
+
+  if (!isHome) {
+    const pageHeading = meta.h1 || meta.title;
+    html = html.replace(
+      /<h1 class="sr-only">[\s\S]*?<\/h1>/i,
+      `<h1 class="sr-only">${escapeHtml(pageHeading)}</h1>`
+    );
+  }
+
+  return html;
 }
 
 async function loadBlogPosts() {
@@ -132,15 +142,15 @@ async function run() {
     {
       dir: dist,
       meta: {
-        title: "NebulaSafeTech - Cybersecurity, VAPT & Digital Solutions in India",
+        title: "NebulaSafeTech | Cybersecurity, VAPT & Digital Solutions",
         description:
-          "NebulaSafeTech is a cybersecurity and digital solutions company based in Hosur, Tamil Nadu, India. Practical VAPT, secure web development, UI/UX design, and EdTech training programs for organizations worldwide.",
+          "NebulaSafeTech delivers expert VAPT cybersecurity, secure web development, UI/UX design, and EdTech training for organizations across India and worldwide.",
         canonicalUrl: `${SITE_ORIGIN}/`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
         imageWidth: 1200,
         imageHeight: 630,
-        imageAlt: "NebulaSafeTech - Cybersecurity, VAPT & Digital Solutions in India",
+        imageAlt: "NebulaSafeTech | Cybersecurity, VAPT & Digital Solutions",
         ogType: "website",
       },
     },
@@ -253,7 +263,7 @@ async function run() {
 
   for (const page of staticPages) {
     mkdirSync(page.dir, { recursive: true });
-    const rendered = injectMetadata(baseHtml, page.meta);
+    const rendered = injectMetadata(baseHtml, page.meta, page.dir === dist);
     writeFileSync(path.join(page.dir, "index.html"), rendered, "utf-8");
     if (page.dir !== dist) {
       writeFileSync(`${page.dir}.html`, rendered, "utf-8");
@@ -289,7 +299,7 @@ async function run() {
       ogType: "article",
     };
 
-    const renderedBlogHtml = injectMetadata(baseHtml, blogMeta);
+    const renderedBlogHtml = injectMetadata(baseHtml, blogMeta, false);
     writeFileSync(path.join(blogDir, "index.html"), renderedBlogHtml, "utf-8");
     writeFileSync(path.join(blogBaseDir, `${post.slug}.html`), renderedBlogHtml, "utf-8");
     console.log(`prerender-seo: [OK] /blog/${post.slug} -> og:image = ${imageUrl}`);

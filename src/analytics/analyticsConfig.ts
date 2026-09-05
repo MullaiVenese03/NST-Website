@@ -3,6 +3,14 @@ export function isAnalyticsEnabled(): boolean {
   const flag = import.meta.env.VITE_ENABLE_ANALYTICS;
   if (flag === "false") return false;
   if (flag === "true") return true;
+  if (
+    typeof window !== "undefined" &&
+    (window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1" ||
+      window.location.hostname.endsWith(".local"))
+  ) {
+    return false;
+  }
   return import.meta.env.PROD;
 }
 

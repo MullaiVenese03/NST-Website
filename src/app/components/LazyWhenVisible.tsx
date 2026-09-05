@@ -15,7 +15,7 @@ type LazyWhenVisibleProps = {
 export function LazyWhenVisible({
   loader,
   fallback = null,
-  rootMargin = "280px 0px",
+  rootMargin = "0px 0px 0px 0px",
   minHeight = 120,
   className,
   id,

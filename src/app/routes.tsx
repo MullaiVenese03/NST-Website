@@ -7,9 +7,8 @@ import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 import { AnalyticsScripts } from "../analytics/AnalyticsScripts";
 import { RouteAnalytics } from "../analytics/RouteAnalytics";
 
-const BottomNav = lazy(() => import("./components/BottomNav"));
-
-const HomePage = lazy(() => import("./pages/HomePage"));
+import BottomNav from "./components/BottomNav";
+import HomePage from "./pages/HomePage";
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 const ServiceDetailPage = lazy(() => import("./pages/ServiceDetailPage"));
@@ -53,11 +52,7 @@ function RootLayout() {
       <Suspense fallback={<PageFallback />}>
         <Outlet />
       </Suspense>
-      {!hideBottomNav ? (
-        <Suspense fallback={null}>
-          <BottomNav />
-        </Suspense>
-      ) : null}
+      {!hideBottomNav ? <BottomNav /> : null}
     </div>
   );
 }

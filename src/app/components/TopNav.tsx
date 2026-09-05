@@ -1,8 +1,6 @@
-import { motion } from "motion/react";
 import { useNavigate, useLocation } from "react-router";
 import { brandMarkUrl } from "../../brandMark";
 import { scrollToTopInstant } from "../utils/scroll";
-import { useLightExperience } from "../utils/performance";
 
 function NstLogo() {
   return (
@@ -20,7 +18,6 @@ function NstLogo() {
 }
 
 export default function TopNav() {
-  const light = useLightExperience();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,7 +31,7 @@ export default function TopNav() {
   };
 
   return (
-    <motion.nav
+    <nav
       aria-label="Primary"
       className="absolute top-4 sm:top-5 left-4 sm:left-6 md:left-[50px] z-20 inline-flex items-center min-h-[44px] sm:min-h-[48px] md:min-h-[52px] px-3.5 sm:px-4 md:px-5 py-2 rounded-full"
       style={{
@@ -44,9 +41,6 @@ export default function TopNav() {
         border: "1px solid rgba(255,255,255,0.55)",
         boxShadow: "0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6)",
       }}
-      initial={light ? { opacity: 1, y: 0 } : { y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: light ? 0.2 : 0.5, ease: "easeOut" }}
     >
       <button
         type="button"
@@ -62,6 +56,6 @@ export default function TopNav() {
           NebulaSafeTech
         </span>
       </button>
-    </motion.nav>
+    </nav>
   );
 }

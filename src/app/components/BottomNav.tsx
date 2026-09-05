@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { navigateToContact, scrollToSection, scrollToTopInstant } from "../utils/scroll";
@@ -71,12 +70,9 @@ export default function BottomNav() {
   };
 
   return (
-    <motion.div
-      className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-[100]"
+    <div
+      className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-[100] transition-opacity duration-200"
       style={{ width: "min(96vw, 52rem)" }}
-      initial={{ y: 100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4, ease: "easeOut" }}
     >
       <div
         className="relative rounded-full flex items-center justify-between max-w-full overflow-hidden"
@@ -94,7 +90,7 @@ export default function BottomNav() {
           const isActive = activeSection === item.href;
 
           return (
-            <motion.button
+            <button
               key={item.name}
               type="button"
               onClick={() => handleClick(item)}
@@ -113,10 +109,10 @@ export default function BottomNav() {
               }}
             >
               {item.name}
-            </motion.button>
+            </button>
           );
         })}
       </div>
-    </motion.div>
+    </div>
   );
 }

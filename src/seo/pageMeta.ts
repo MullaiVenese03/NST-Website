@@ -22,8 +22,9 @@ const baseKeywords = [
 ];
 
 export const HOME_SEO: PageSeo = {
-  title: "NebulaSafeTech - Cybersecurity, VAPT & Digital Solutions in India",
-  description: `${BUSINESS_IDENTITY} Practical VAPT, secure web development, UI/UX design, and EdTech training programs for organizations worldwide.`,
+  title: "NebulaSafeTech | Cybersecurity, VAPT & Digital Solutions",
+  description:
+    "NebulaSafeTech delivers expert VAPT cybersecurity, secure web development, UI/UX design, and EdTech training for organizations across India and worldwide.",
   keywords: [
     ...baseKeywords,
     "VAPT services",

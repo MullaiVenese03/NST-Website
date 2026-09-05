@@ -7,6 +7,22 @@ export function initClarity(): void {
   if (typeof window === "undefined" || initialized) return;
   if (!isAnalyticsEnabled() || !CLARITY_PROJECT_ID) return;
 
+  try {
+    const win = window as unknown as { clarity?: { (...args: unknown[]): void; q?: unknown[] } };
+    win.clarity =
+      win.clarity ||
+      function () {
+        (win.clarity!.q = win.clarity!.q || []).push(arguments);
+      };
+    win.clarity("consentv2", {
+      ad_Storage: "denied",
+      analytics_Storage: "denied",
+    });
+    win.clarity("consent", false);
+  } catch {
+    // fallback if window is unavailable
+  }
+
   Clarity.init(CLARITY_PROJECT_ID);
   initialized = true;
 }

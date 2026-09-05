@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import EnhancedHeroSection from "../components/EnhancedHeroSection";
 import TopNav from "../components/TopNav";
@@ -20,6 +20,21 @@ const SECTION_IDS = ["hero", "clients", "about", "services", "testimonials", "ed
 export default function HomePage() {
   const motionEnabled = useMotionEnabled();
   const location = useLocation();
+  const [shouldLoadScrollToTop, setShouldLoadScrollToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 150) {
+        setShouldLoadScrollToTop(true);
+      }
+    };
+    if (window.scrollY > 150) {
+      setShouldLoadScrollToTop(true);
+      return;
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!location.hash) scrollToTopInstant();
@@ -128,9 +143,11 @@ export default function HomePage() {
         className="relative w-full scroll-mt-24"
       />
 
-      <Suspense fallback={null}>
-        <ScrollToTop />
-      </Suspense>
+      {shouldLoadScrollToTop ? (
+        <Suspense fallback={null}>
+          <ScrollToTop />
+        </Suspense>
+      ) : null}
     </main>
   );
 

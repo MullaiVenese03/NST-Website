@@ -26,17 +26,17 @@ if (!existsSync(src)) {
 
 const input = sharp(src);
 
-await input.clone().resize(32, 32, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toFile(outPng32);
+await input.clone().resize(32, 32, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png({ compressionLevel: 9 }).toFile(outPng32);
 
 await input
   .clone()
   .resize(180, 180, { fit: "contain", background: { r: 255, g: 255, b: 255, alpha: 0 } })
-  .png()
+  .png({ compressionLevel: 9 })
   .toFile(outApple);
 
-await input.clone().resize(128, 128, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).webp({ quality: 90 }).toFile(outWebp128);
+await input.clone().resize(128, 128, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).webp({ quality: 85 }).toFile(outWebp128);
 
-await input.clone().resize(192, 192, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toFile(outPng192);
+await input.clone().resize(192, 192, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).png({ compressionLevel: 9 }).toFile(outPng192);
 
 const sizes = [16, 32, 48];
 const pngBuffers = await Promise.all(

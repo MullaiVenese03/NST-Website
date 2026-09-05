@@ -17,12 +17,28 @@ function injectAnalyticsHtml(env: Record<string, string>, mode: string): Plugin 
   const gsc = env.VITE_GSC_VERIFICATION?.trim() ?? "";
 
   const gtmHead = enabled
-    ? `<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${gtmId}');</script>
+    ? `<!-- Google Tag Manager (Deferred to avoid main-thread blocking) -->
+<script>
+window.dataLayer = window.dataLayer || [];
+function loadGTM() {
+  if (window._gtmLoaded) return;
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return;
+  window._gtmLoaded = true;
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${gtmId}');
+}
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(loadGTM, { timeout: 4000 });
+} else {
+  window.addEventListener('load', function() { setTimeout(loadGTM, 2000); });
+}
+['scroll', 'touchstart', 'click'].forEach(function(e) {
+  window.addEventListener(e, loadGTM, { once: true, passive: true });
+});
+</script>
 <!-- End Google Tag Manager -->`
     : "";
 
@@ -80,12 +96,28 @@ function charsetFirstInHead(): Plugin {
 /** Mirrors vercel.json CSP on preview so Formspree/CSP issues reproduce locally. */
 function vercelCspOnPreview(): Plugin {
   const csp =
-    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.clarity.ms https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://www.google-analytics.com https://*.clarity.ms; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://*.clarity.ms https://cloudflareinsights.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://www.googletagmanager.com; media-src 'self'; worker-src 'self'; manifest-src 'self'; upgrade-insecure-requests";
+    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.clarity.ms https://www.clarity.ms https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://www.google-analytics.com https://*.clarity.ms https://*.bing.com https://i.ytimg.com https://*.ytimg.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://*.clarity.ms https://*.bing.com https://cloudflareinsights.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src 'self' https://www.googletagmanager.com https://www.youtube-nocookie.com https://www.youtube.com; media-src 'self'; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests";
   return {
     name: "vercel-csp-on-preview",
     configurePreviewServer(server) {
       server.middlewares.use((_req, res, next) => {
         res.setHeader("Content-Security-Policy", csp);
+        next();
+      });
+    },
+  };
+}
+
+function mockVercelOnPreview(): Plugin {
+  return {
+    name: "mock-vercel-on-preview",
+    configurePreviewServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (req.url?.startsWith("/_vercel/")) {
+          res.setHeader("Content-Type", "application/javascript");
+          res.end("// vercel mock");
+          return;
+        }
         next();
       });
     },
@@ -122,9 +154,9 @@ function hoistStylesheetEarly(): Plugin {
     apply: "build",
     enforce: "post",
     transformIndexHtml(html) {
-      const m = html.match(/<link rel="stylesheet"[^>]*>/);
+      const m = html.match(/<link rel="stylesheet"[^>]*href="[^"]*\/assets\/[^"]*\.css"[^>]*>/i);
       if (!m) return html;
-      const cssLink = m[0].replace(/\s*crossorigin(?:="[^"]*")?/i, "");
+      const cssLink = m[0];
       const stripped = html.replace(m[0], "");
       if (!stripped.includes("</title>")) return html;
       return stripped.replace("</title>", `</title>\n    ${cssLink}`);
@@ -159,6 +191,7 @@ export default defineConfig(({ mode }) => {
     tailwindcss(),
     htmlCharsetResponseHeader(),
     vercelCspOnPreview(),
+    mockVercelOnPreview(),
     compression({
       algorithms: ["gzip", "brotliCompress"],
       exclude: [/\.(br|gz)$/, /\.(png|jpe?g|webp|avif|gif|svg|ico|mp4|webm)$/],
@@ -170,12 +203,13 @@ export default defineConfig(({ mode }) => {
   ],
   esbuild: {
     drop: mode === "production" ? ["console", "debugger"] : [],
+    legalComments: "none",
   },
   build: {
     target: "es2020",
     minify: "esbuild",
     cssMinify: true,
-    modulePreload: false,
+    modulePreload: true,
     cssCodeSplit: true,
     sourcemap: false,
     rollupOptions: {
