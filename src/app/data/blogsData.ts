@@ -6,6 +6,7 @@ import { blogPostAiAgentsSecurity } from "./blogs/aiAgentsEnterpriseDataSecurity
 import { blogPostOne } from "./blogs/howToStartCareerCybersecurity";
 import { blogPostShadowAiAgents } from "./blogs/shadowAiAgents";
 import { blogPostAiAgentIdentity } from "./blogs/aiAgentIdentityDataAccess";
+import { blogPostModernWebDevelopment2026 } from "./blogs/modernWebDevelopment2026";
 
 export type BlogCategory =
   | "All Articles"
@@ -130,6 +131,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  blogPostModernWebDevelopment2026,
   blogPostDataSovereigntyAI,
   blogPostAiAgentIdentity,
   blogPostShadowAiAgents,
