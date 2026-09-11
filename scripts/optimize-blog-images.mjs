@@ -18,7 +18,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const blogsBaseDir = path.join(root, "Docs", "Blogs");
+const blogsBaseDir = existsSync(path.join(root, "Docs", "Blogs"))
+  ? path.join(root, "Docs", "Blogs")
+  : path.join(root, ".blog_automation", "Blogs");
 const mediaRootDir = path.join(root, "public", "media", "blogs");
 
 mkdirSync(mediaRootDir, { recursive: true });
@@ -114,6 +116,28 @@ export const BLOG_IMAGE_REGISTRY = [
       srcFile: "Data_Sovereignty_AI_Sensitive_Enterprise_Files_Thumbnail.png",
       outputBaseName: "data-sovereignty-ai-sensitive-enterprise-files",
       generatePng: true,
+    },
+    images: [],
+  },
+  {
+    blogNumber: 7,
+    folderName: "#7",
+    slug: "modern-web-development-2026-ai-performance-ux",
+    thumbnail: {
+      srcFile: "Modern-Web-Development-2026-Ai-Performance-ux-Thumbnail.png",
+      outputBaseName: "modern-web-development-2026-ai-performance-ux",
+      generatePng: false,
+    },
+    images: [],
+  },
+  {
+    blogNumber: 8,
+    folderName: "#8",
+    slug: "web-design-2026-ui-ux-user-experience",
+    thumbnail: {
+      srcFile: "Web_Design_UI_UX_2026_Thumbnail.png",
+      outputBaseName: "web-design-2026-ui-ux-user-experience",
+      generatePng: false,
     },
     images: [],
   },

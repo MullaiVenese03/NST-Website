@@ -8,6 +8,8 @@ const routeLoaders: Record<string, () => Promise<unknown>> = {
   "/edtech": () => import("../pages/EdTechPage"),
   "/blogs": () => import("../pages/BlogsPage"),
   "/blog": () => import("../pages/BlogsPage"),
+  "/blog/web-design-2026-ui-ux-user-experience": () => import("../pages/BlogPostPage"),
+  "/blog/modern-web-development-2026-ai-performance-ux": () => import("../pages/BlogPostPage"),
   "/blog/data-sovereignty-ai-sensitive-enterprise-files": () => import("../pages/BlogPostPage"),
   "/blog/ai-agent-security-identity-access-enterprise-data": () => import("../pages/BlogPostPage"),
   "/blog/shadow-ai-agents-enterprise-security-risk": () => import("../pages/BlogPostPage"),
