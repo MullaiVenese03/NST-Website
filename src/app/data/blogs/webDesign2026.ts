@@ -37,8 +37,8 @@ export const blogPostWebDesign2026: BlogPost = {
     src: "/media/blogs/web-design-2026-ui-ux-user-experience.jpg",
     webpSrc: "/media/blogs/web-design-2026-ui-ux-user-experience.webp",
     alt: "Modern web design interface showing responsive UI and UX design principles across desktop and mobile screens",
-    width: 1672,
-    height: 941,
+    width: 1670,
+    height: 942,
   },
   author: {
     name: "Mullaivenese",

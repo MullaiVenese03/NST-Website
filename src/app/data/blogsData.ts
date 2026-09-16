@@ -8,10 +8,10 @@ import { blogPostShadowAiAgents } from "./blogs/shadowAiAgents";
 import { blogPostAiAgentIdentity } from "./blogs/aiAgentIdentityDataAccess";
 import { blogPostModernWebDevelopment2026 } from "./blogs/modernWebDevelopment2026";
 import { blogPostWebDesign2026 } from "./blogs/webDesign2026";
+import { blogPostUiUxDesignProcess2026 } from "./blogs/uiUxDesignProcess2026";
 
 export type BlogCategory =
   | "All Articles"
-  | "Cybersecurity"
   | "Cybersecurity"
   | "Cloud & Web"
   | "Engineering";
@@ -132,6 +132,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  blogPostUiUxDesignProcess2026,
   blogPostWebDesign2026,
   blogPostModernWebDevelopment2026,
   blogPostDataSovereigntyAI,

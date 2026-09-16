@@ -141,6 +141,17 @@ export const BLOG_IMAGE_REGISTRY = [
     },
     images: [],
   },
+  {
+    blogNumber: 9,
+    folderName: "#9",
+    slug: "ui-ux-design-process-modern-websites-2026",
+    thumbnail: {
+      srcFile: "UI_UX_Design_Process_2026_Thumbnail.png",
+      outputBaseName: "ui-ux-design-process-modern-websites-2026",
+      generatePng: false,
+    },
+    images: [],
+  },
 ];
 
 /**

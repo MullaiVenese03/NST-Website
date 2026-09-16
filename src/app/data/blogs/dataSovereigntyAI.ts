@@ -31,7 +31,7 @@ export const blogPostDataSovereigntyAI: BlogPost = {
     webpSrc:
       "/media/blogs/data-sovereignty-ai-sensitive-enterprise-files.webp",
     alt: "Enterprise data sovereignty concept showing sensitive files protected by encryption, access control, and secure devices",
-    width: 1672,
+    width: 1671,
     height: 941,
   },
   author: {

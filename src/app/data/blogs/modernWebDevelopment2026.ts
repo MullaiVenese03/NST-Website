@@ -36,8 +36,8 @@ export const blogPostModernWebDevelopment2026: BlogPost = {
     src: "/media/blogs/modern-web-development-2026-ai-performance-ux.jpg",
     webpSrc: "/media/blogs/modern-web-development-2026-ai-performance-ux.webp",
     alt: "Modern web development in 2026 - AI, performance, full-stack engineering, and UX changing how websites are built",
-    width: 1672,
-    height: 941,
+    width: 1670,
+    height: 942,
   },
   author: {
     name: "Mullaivenese",
