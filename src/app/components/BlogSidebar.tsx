@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { ArrowRight, ExternalLink, Sparkles, BookOpen, Clock } from "lucide-react";
+import { ArrowRight, Sparkles, BookOpen, Clock } from "lucide-react";
 import { BlogTableOfContents, type TocItem } from "./BlogTableOfContents";
 import type { BlogPost } from "../data/blogsData";
 
@@ -31,7 +31,8 @@ export function BlogSidebar({
 
       {/* 2. Contextual Sidebar CTA Widget */}
       {post.cta && (
-        <aside
+        <div
+          role="region"
           aria-label="Highlighted service"
           className="rounded-2xl p-4 sm:p-5 bg-gradient-to-br from-[#015AAA]/10 via-[#015AAA]/5 to-slate-50 border border-[#015AAA]/20 shadow-xs relative overflow-hidden"
         >
@@ -48,14 +49,26 @@ export function BlogSidebar({
             {post.cta.description}
           </p>
 
-          <Link
-            to={post.cta.primaryActionUrl}
-            className="w-full py-2 px-3 rounded-lg bg-[#015AAA] hover:bg-[#013566] text-white text-xs font-semibold text-center inline-flex items-center justify-center gap-1.5 shadow-xs transition-all no-underline cursor-pointer"
-          >
-            <span>{post.cta.primaryActionText}</span>
-            <ArrowRight size={13} />
-          </Link>
-        </aside>
+          {post.cta.primaryActionUrl.startsWith("http") ? (
+            <a
+              href={post.cta.primaryActionUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-2 px-3 rounded-lg bg-[#015AAA] hover:bg-[#013566] text-white text-xs font-semibold text-center inline-flex items-center justify-center gap-1.5 shadow-xs transition-all no-underline cursor-pointer"
+            >
+              <span>{post.cta.primaryActionText}</span>
+              <ArrowRight size={13} />
+            </a>
+          ) : (
+            <Link
+              to={post.cta.primaryActionUrl}
+              className="w-full py-2 px-3 rounded-lg bg-[#015AAA] hover:bg-[#013566] text-white text-xs font-semibold text-center inline-flex items-center justify-center gap-1.5 shadow-xs transition-all no-underline cursor-pointer"
+            >
+              <span>{post.cta.primaryActionText}</span>
+              <ArrowRight size={13} />
+            </Link>
+          )}
+        </div>
       )}
 
       {/* 3. Recommended Articles (Compact preview with mini thumbnail) */}
