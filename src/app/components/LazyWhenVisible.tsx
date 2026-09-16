@@ -30,7 +30,13 @@ export function LazyWhenVisible({
     if (id && hash === id) return true;
     return false;
   });
-  const LazyComponent = lazy(loader);
+
+  // Stable lazy component — created once per mount, never recreated on re-render
+  const LazyComponent = useRef<ReturnType<typeof lazy> | null>(null);
+  if (LazyComponent.current === null) {
+    LazyComponent.current = lazy(loader);
+  }
+  const Component = LazyComponent.current;
 
   useEffect(() => {
     const target = hashTarget ?? id;
@@ -62,7 +68,7 @@ export function LazyWhenVisible({
   return (
     <div ref={ref} className={className} id={id} style={{ minHeight }}>
       {visible ? (
-        <Suspense fallback={fallback}>{<LazyComponent />}</Suspense>
+        <Suspense fallback={fallback}>{<Component />}</Suspense>
       ) : (
         fallback
       )}

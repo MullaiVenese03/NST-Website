@@ -40,9 +40,9 @@ export function BlogSidebar({
             <span>NebulaSafeTech</span>
           </div>
 
-          <h4 className="font-heading text-slate-900 text-sm font-bold leading-snug mb-1.5 m-0">
+          <p className="font-heading text-slate-900 text-sm font-bold leading-snug mb-1.5 m-0">
             {post.cta.statement}
-          </h4>
+          </p>
 
           <p className="text-xs text-slate-600 font-body leading-relaxed mb-3 line-clamp-2 m-0">
             {post.cta.description}
@@ -62,7 +62,7 @@ export function BlogSidebar({
       {relatedPosts && relatedPosts.length > 0 && (
         <div className="rounded-2xl border border-slate-200/80 bg-white p-4 shadow-xs">
           <div className="flex items-center justify-between gap-2 mb-3">
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <span className="text-[10px] font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
               <BookOpen size={12} className="text-[#015AAA]" />
               <span>Recommended</span>
             </span>
@@ -110,11 +110,11 @@ export function BlogSidebar({
                   <span className="inline-block text-[10px] font-bold text-[#015AAA] uppercase tracking-wider mb-0.5">
                     {rPost.category}
                   </span>
-                  <h5 className="text-xs font-bold text-slate-900 group-hover:text-[#015AAA] transition-colors leading-snug line-clamp-2 m-0 mb-1">
+                  <p className="text-xs font-bold text-slate-900 group-hover:text-[#015AAA] transition-colors leading-snug line-clamp-2 m-0 mb-1">
                     {rPost.title}
-                  </h5>
-                  <div className="flex items-center gap-1.5 text-[10px] text-slate-400">
-                    <Clock size={10} className="text-slate-400" />
+                  </p>
+                  <div className="flex items-center gap-1.5 text-[10px] text-slate-600">
+                    <Clock size={10} className="text-slate-600" />
                     <span>{rPost.readTime}</span>
                   </div>
                 </div>

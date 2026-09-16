@@ -100,14 +100,6 @@ function injectMetadata(templateHtml, meta, isHome = false) {
 
   html = html.replace("</head>", `${ogTags.trim()}\n  </head>`);
 
-  if (!isHome) {
-    const pageHeading = meta.h1 || meta.title;
-    html = html.replace(
-      /<h1 class="sr-only">[\s\S]*?<\/h1>/i,
-      `<h1 class="sr-only">${escapeHtml(pageHeading)}</h1>`
-    );
-  }
-
   return html;
 }
 
@@ -259,6 +251,81 @@ async function run() {
         ogType: "website",
       },
     },
+    {
+      dir: path.join(dist, "blog"),
+      meta: {
+        title: `Technology & Cybersecurity Blog | ${ORG_NAME}`,
+        description:
+          "Read technical guides, VAPT methodologies, cloud-native architecture insights, and cybersecurity career roadmaps from NebulaSafeTech engineers.",
+        canonicalUrl: `${SITE_ORIGIN}/blogs`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `Technology & Cybersecurity Blog | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
+      dir: path.join(dist, "services", "cybersecurity"),
+      meta: {
+        title: `Cybersecurity Services & Assessments | ${ORG_NAME}`,
+        description:
+          `${ORG_NAME} in Hosur, Tamil Nadu delivers practical cybersecurity services including VAPT, application and cloud security, network hardening, and awareness programs for teams across India and abroad.`,
+        canonicalUrl: `${SITE_ORIGIN}/services/cybersecurity`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `Cybersecurity Services & Assessments | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
+      dir: path.join(dist, "services", "web-development"),
+      meta: {
+        title: `Full-Stack Web Development | ${ORG_NAME}`,
+        description:
+          `${ORG_NAME} builds scalable, secure web applications from Hosur, India with modern stacks, secure SDLC practices, and production-ready delivery for startups and enterprises.`,
+        canonicalUrl: `${SITE_ORIGIN}/services/web-development`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `Full-Stack Web Development | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
+      dir: path.join(dist, "services", "ui-ux-design"),
+      meta: {
+        title: `UI/UX Design & Product Experience | ${ORG_NAME}`,
+        description:
+          `${ORG_NAME} crafts accessible, conversion-focused UI and UX for security products, SaaS, and marketing sites—aligned with your brand and engineering constraints.`,
+        canonicalUrl: `${SITE_ORIGIN}/services/ui-ux-design`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `UI/UX Design & Product Experience | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
+      dir: path.join(dist, "services", "edtech-training"),
+      meta: {
+        title: `EdTech & Cybersecurity Training | ${ORG_NAME}`,
+        description:
+          "Structured cybersecurity training, labs, certifications, and institutional programs that connect learners to real-world projects from NebulaSafeTech.",
+        canonicalUrl: `${SITE_ORIGIN}/services/edtech-training`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `EdTech & Cybersecurity Training | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
   ];
 
   for (const page of staticPages) {
@@ -272,11 +339,15 @@ async function run() {
 
   // 2. Every Blog Post -> Distinct, uncropped, absolute thumbnail Open Graph
   const blogBaseDir = path.join(dist, "blog");
+  const blogsBaseDir = path.join(dist, "blogs");
   mkdirSync(blogBaseDir, { recursive: true });
+  mkdirSync(blogsBaseDir, { recursive: true });
 
   for (const post of blogPosts) {
     const blogDir = path.join(blogBaseDir, post.slug);
+    const blogsDir = path.join(blogsBaseDir, post.slug);
     mkdirSync(blogDir, { recursive: true });
+    mkdirSync(blogsDir, { recursive: true });
 
     // Resolves public thumbnail asset to absolute production URL
     const imageRelativeSrc = post.featuredImage?.src || "/og-image.jpg";
@@ -302,6 +373,8 @@ async function run() {
     const renderedBlogHtml = injectMetadata(baseHtml, blogMeta, false);
     writeFileSync(path.join(blogDir, "index.html"), renderedBlogHtml, "utf-8");
     writeFileSync(path.join(blogBaseDir, `${post.slug}.html`), renderedBlogHtml, "utf-8");
+    writeFileSync(path.join(blogsDir, "index.html"), renderedBlogHtml, "utf-8");
+    writeFileSync(path.join(blogsBaseDir, `${post.slug}.html`), renderedBlogHtml, "utf-8");
     console.log(`prerender-seo: [OK] /blog/${post.slug} -> og:image = ${imageUrl}`);
   }
 

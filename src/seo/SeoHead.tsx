@@ -7,6 +7,7 @@ const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
 import { canonicalUrlFromPathname } from "./canonicalUrls";
 import { toJsonLdScript } from "./structuredData";
+import { webPageSchema } from "./schemas/webPageSchema";
 
 export type SeoHeadProps = {
   meta: PageSeo;
@@ -51,9 +52,25 @@ export function SeoHead({
       ? "image/webp"
       : "image/jpeg");
 
+  const pageSchema = !noindex
+    ? webPageSchema({
+        url: canonical,
+        name: meta.title,
+        description: meta.description,
+      })
+    : null;
+
+  const combinedData = pageSchema
+    ? structuredData
+      ? Array.isArray(structuredData)
+        ? [pageSchema, ...structuredData]
+        : [pageSchema, structuredData]
+      : pageSchema
+    : structuredData;
+
   const scripts =
-    structuredData !== undefined ? (
-      <script type="application/ld+json">{toJsonLdScript(structuredData)}</script>
+    combinedData !== undefined && combinedData !== null ? (
+      <script type="application/ld+json">{toJsonLdScript(combinedData)}</script>
     ) : null;
 
   return (

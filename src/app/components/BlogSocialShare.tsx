@@ -158,7 +158,7 @@ export function BlogSocialShare({
       aria-label="Share this article"
       className={`flex flex-col items-center gap-2 p-2 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-sm ${className}`}
     >
-      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 pt-1">
+      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-600 pt-1">
         Share
       </span>
 

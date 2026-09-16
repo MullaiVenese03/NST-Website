@@ -70,7 +70,8 @@ export default function BottomNav() {
   };
 
   return (
-    <div
+    <nav
+      aria-label="Main navigation"
       className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-[100] transition-opacity duration-200"
       style={{ width: "min(96vw, 52rem)" }}
     >
@@ -94,6 +95,8 @@ export default function BottomNav() {
               key={item.name}
               type="button"
               onClick={() => handleClick(item)}
+              aria-label={item.name}
+              aria-current={isActive ? "page" : undefined}
               className={`relative rounded-full border-none font-bold cursor-pointer whitespace-nowrap flex items-center justify-center flex-1 transition-colors duration-200 ${
                 isActive
                   ? "bg-[#015aaa] text-white shadow-sm"
@@ -113,6 +116,6 @@ export default function BottomNav() {
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 }

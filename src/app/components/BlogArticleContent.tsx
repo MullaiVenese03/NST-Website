@@ -137,7 +137,7 @@ function RenderBlock({ block }: { block: ArticleBlock }) {
       return (
         <div className={`my-5 p-4 sm:p-5 rounded-xl border-l-4 shadow-xs text-sm sm:text-base ${bgClass}`}>
           {block.title ? (
-            <h4 className="font-bold mb-1 text-inherit text-base sm:text-lg">{block.title}</h4>
+            <p className="font-bold mb-1 text-inherit text-base sm:text-lg m-0">{block.title}</p>
           ) : null}
           <p className="m-0 leading-relaxed">{parseInlineMarkdown(block.text)}</p>
         </div>

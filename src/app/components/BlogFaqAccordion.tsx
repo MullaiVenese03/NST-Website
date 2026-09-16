@@ -40,15 +40,15 @@ export function BlogFaqAccordion({ items, className = "" }: BlogFaqAccordionProp
       <div className="flex items-center justify-between gap-4 mb-4 pb-2 border-b border-slate-100">
         <div className="flex items-center gap-2">
           <HelpCircle size={22} className="text-[#015AAA]" />
-          <h2 className="nst-h2 text-slate-900 m-0">Frequently Asked Questions</h2>
+          <p className="nst-h2 text-slate-900 m-0 font-bold">Frequently Asked Questions</p>
         </div>
 
         <button
           type="button"
           onClick={toggleAll}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#015AAA] hover:text-[#013566] bg-[#015AAA]/10 px-3 py-1.5 rounded-full border border-[#015AAA]/20 transition-colors cursor-pointer border-none"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-[#015AAA] px-3 py-1.5 rounded-full transition-colors cursor-pointer border-none hover:bg-[#013566]"
         >
-          <ChevronsUpDown size={14} />
+          <ChevronsUpDown size={14} aria-hidden />
           <span>{allOpen ? "Collapse All" : "Expand All"}</span>
         </button>
       </div>

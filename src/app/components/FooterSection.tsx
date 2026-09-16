@@ -31,28 +31,24 @@ function FooterNavLink({ to, children }: { to: string; children: React.ReactNode
   };
 
   const className =
-    "block no-underline nst-small text-slate-700 hover:text-[#015AAA] transition-colors duration-200";
+    "block no-underline nst-small text-slate-700 hover:text-[#015AAA] transition-colors duration-200 hover:translate-x-0.5 transition-transform";
 
   if (to.startsWith("#")) {
     return (
-      <motion.a
+      <a
         href={to}
         onClick={handleHashClick}
         className={className}
-        whileHover={{ x: 2 }}
-        transition={{ type: "spring", stiffness: 400, damping: 25 }}
       >
         {children}
-      </motion.a>
+      </a>
     );
   }
 
   return (
-    <motion.div whileHover={{ x: 2 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
-      <Link to={to} className={className}>
-        {children}
-      </Link>
-    </motion.div>
+    <Link to={to} className={className}>
+      {children}
+    </Link>
   );
 }
 

@@ -139,7 +139,7 @@ export default function BlogPostPage() {
         {/* ARTICLE HEADER / HERO AREA (Compact, Informative)                 */}
         {/* Flow: Breadcrumb -> Category -> H1 -> Meta -> Featured Image     */}
         {/* ================================================================= */}
-        <header className="w-full bg-gradient-to-b from-[#F8FAFE] via-[#F8FAFE] to-white pt-6 sm:pt-8 pb-8 sm:pb-10 px-4 sm:px-8 md:px-14 lg:px-20 border-b border-slate-100">
+        <header aria-label="Article header" className="w-full bg-gradient-to-b from-[#F8FAFE] via-[#F8FAFE] to-white pt-6 sm:pt-8 pb-8 sm:pb-10 px-4 sm:px-8 md:px-14 lg:px-20 border-b border-slate-100">
           <div className="max-w-5xl mx-auto">
             {/* 1. Breadcrumb */}
             <Breadcrumbs items={breadcrumbItems} className="mb-4" />
@@ -186,17 +186,17 @@ export default function BlogPostPage() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 text-slate-500 text-xs">
+              <div className="flex items-center gap-1.5 text-slate-600 text-xs">
                 <Calendar size={13} className="text-[#015AAA]" />
                 <span>Published: {post.date}</span>
                 {post.updatedDate && post.updatedDate !== post.date ? (
-                  <span className="ml-1 text-slate-400">
+                  <span className="ml-1 text-slate-600">
                     (Updated: {post.updatedDate})
                   </span>
                 ) : null}
               </div>
 
-              <div className="flex items-center gap-1.5 text-slate-500 text-xs">
+              <div className="flex items-center gap-1.5 text-slate-600 text-xs">
                 <Clock size={13} className="text-[#015AAA]" />
                 <span>{post.readTime}</span>
               </div>
@@ -225,6 +225,7 @@ export default function BlogPostPage() {
                     height={featuredImg.height}
                     loading="eager"
                     decoding="sync"
+                    {...{ fetchpriority: "high" }}
                     className="w-full h-full object-contain object-center block"
                   />
                 </picture>
@@ -332,9 +333,9 @@ export default function BlogPostPage() {
 
                 <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="font-heading text-slate-900 m-0 text-base sm:text-lg font-bold">
+                    <h2 className="font-heading text-slate-900 m-0 text-base sm:text-lg font-bold">
                       Written by {post.author.name}
-                    </h3>
+                    </h2>
                     <span className="text-[11px] text-[#015AAA] font-semibold bg-[#015AAA]/10 px-2.5 py-0.5 rounded-full border border-[#015AAA]/20">
                       {post.author.role}
                     </span>
