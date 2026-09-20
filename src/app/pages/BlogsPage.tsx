@@ -13,7 +13,7 @@ import { BLOG_POSTS, type BlogCategory } from "../data/blogsData";
 import { BlogCard } from "../components/BlogCard";
 
 export default function BlogsPage() {
-  const [activeCategory, setActiveCategory] = useState<BlogCategory>("All Articles");
+  const [activeCategory, setActiveCategory] = useState<BlogCategory>("All");
 
   useEffect(() => {
     scrollToTopInstant();
@@ -24,20 +24,16 @@ export default function BlogsPage() {
   }, []);
 
   const categories: BlogCategory[] = [
-    "All Articles",
+    "All",
     "Cybersecurity",
-    "Cloud & Web",
-    "Engineering",
+    "Web Development",
+    "Web Design",
   ];
 
   const filteredPosts =
-    activeCategory === "All Articles"
+    activeCategory === "All"
       ? BLOG_POSTS
-      : BLOG_POSTS.filter(
-        (post) =>
-          post.category === activeCategory ||
-          (activeCategory === "Cybersecurity" && post.category.includes("Cybersecurity"))
-      );
+      : BLOG_POSTS.filter((post) => post.category === activeCategory);
 
   return (
     <div className="w-full min-h-screen bg-white overflow-x-hidden">
@@ -80,13 +76,9 @@ export default function BlogsPage() {
                 {categories.map((cat) => {
                   const isActive = activeCategory === cat;
                   const count =
-                    cat === "All Articles"
+                    cat === "All"
                       ? BLOG_POSTS.length
-                      : BLOG_POSTS.filter(
-                        (post) =>
-                          post.category === cat ||
-                          (cat === "Cybersecurity" && post.category.includes("Cybersecurity"))
-                      ).length;
+                      : BLOG_POSTS.filter((post) => post.category === cat).length;
 
                   return (
                     <button
@@ -168,7 +160,7 @@ export default function BlogsPage() {
                   </p>
                   <button
                     type="button"
-                    onClick={() => setActiveCategory("All Articles")}
+                    onClick={() => setActiveCategory("All")}
                     className="mt-2 text-xs font-bold text-[#015AAA] hover:underline cursor-pointer border-none bg-transparent"
                   >
                     View All Articles →

@@ -8,7 +8,7 @@ type LazyWhenVisibleProps = {
   minHeight?: number | string;
   className?: string;
   id?: string;
-  
+
   hashTarget?: string;
 };
 
@@ -31,7 +31,7 @@ export function LazyWhenVisible({
     return false;
   });
 
-  // Stable lazy component — created once per mount, never recreated on re-render
+  // Stable lazy component - created once per mount, never recreated on re-render
   const LazyComponent = useRef<ReturnType<typeof lazy> | null>(null);
   if (LazyComponent.current === null) {
     LazyComponent.current = lazy(loader);

@@ -8,6 +8,7 @@ const routeLoaders: Record<string, () => Promise<unknown>> = {
   "/edtech": () => import("../pages/EdTechPage"),
   "/blogs": () => import("../pages/BlogsPage"),
   "/blog": () => import("../pages/BlogsPage"),
+  "/blog/modern-full-stack-web-development-2026": () => import("../pages/BlogPostPage"),
   "/blog/ui-ux-design-process-modern-websites-2026": () => import("../pages/BlogPostPage"),
   "/blog/web-design-2026-ui-ux-user-experience": () => import("../pages/BlogPostPage"),
   "/blog/modern-web-development-2026-ai-performance-ux": () => import("../pages/BlogPostPage"),

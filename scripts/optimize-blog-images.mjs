@@ -152,6 +152,17 @@ export const BLOG_IMAGE_REGISTRY = [
     },
     images: [],
   },
+  {
+    blogNumber: 10,
+    folderName: "#10",
+    slug: "modern-full-stack-web-development-2026",
+    thumbnail: {
+      srcFile: "Full_Stack_Web_Development_2026_Thumbnail.png",
+      outputBaseName: "modern-full-stack-web-development-2026",
+      generatePng: false,
+    },
+    images: [],
+  },
 ];
 
 /**

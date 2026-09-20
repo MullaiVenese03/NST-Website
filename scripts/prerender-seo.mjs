@@ -70,8 +70,8 @@ function injectMetadata(templateHtml, meta, isHome = false) {
     (meta.imageUrl.endsWith(".png")
       ? "image/png"
       : meta.imageUrl.endsWith(".webp")
-      ? "image/webp"
-      : "image/jpeg");
+        ? "image/webp"
+        : "image/jpeg");
 
   const ogTags = `
     <!-- Open Graph Metadata (Authoritative) -->
@@ -301,7 +301,7 @@ async function run() {
       meta: {
         title: `UI/UX Design & Product Experience | ${ORG_NAME}`,
         description:
-          `${ORG_NAME} crafts accessible, conversion-focused UI and UX for security products, SaaS, and marketing sites—aligned with your brand and engineering constraints.`,
+          `${ORG_NAME} crafts accessible, conversion-focused UI and UX for security products, SaaS, and marketing sites-aligned with your brand and engineering constraints.`,
         canonicalUrl: `${SITE_ORIGIN}/services/ui-ux-design`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
@@ -355,8 +355,8 @@ async function run() {
     const imageType = imageUrl.endsWith(".png")
       ? "image/png"
       : imageUrl.endsWith(".webp")
-      ? "image/webp"
-      : "image/jpeg";
+        ? "image/webp"
+        : "image/jpeg";
 
     const blogMeta = {
       title: `${post.seoTitle || post.title} | ${ORG_NAME}`,

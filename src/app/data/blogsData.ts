@@ -9,12 +9,13 @@ import { blogPostAiAgentIdentity } from "./blogs/aiAgentIdentityDataAccess";
 import { blogPostModernWebDevelopment2026 } from "./blogs/modernWebDevelopment2026";
 import { blogPostWebDesign2026 } from "./blogs/webDesign2026";
 import { blogPostUiUxDesignProcess2026 } from "./blogs/uiUxDesignProcess2026";
+import { blogPostModernFullStackWebDevelopment2026 } from "./blogs/modernFullStackWebDevelopment2026";
 
 export type BlogCategory =
-  | "All Articles"
+  | "All"
   | "Cybersecurity"
-  | "Cloud & Web"
-  | "Engineering";
+  | "Web Development"
+  | "Web Design";
 
 export interface BlogAuthor {
   name: string;
@@ -107,7 +108,7 @@ export interface BlogPost {
   seoTitle?: string;
   metaDescription: string;
   excerpt: string;
-  category: "Cybersecurity" | "Cybersecurity" | "Cloud & Web" | "Engineering";
+  category: "Cybersecurity" | "Web Development" | "Web Design";
   primaryKeyword?: string;
   secondaryKeywords?: string[];
   date: string;
@@ -132,6 +133,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  blogPostModernFullStackWebDevelopment2026,
   blogPostUiUxDesignProcess2026,
   blogPostWebDesign2026,
   blogPostModernWebDevelopment2026,

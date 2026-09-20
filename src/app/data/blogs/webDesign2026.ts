@@ -4,7 +4,7 @@ import type { BlogPost } from "../blogsData";
  * Blog #8 - Web Design in 2026: How Better UI/UX Creates Faster, More Accessible Websites
  *
  * Author: Mullaivenese
- * Category: Cloud & Web (Web Design & UI/UX)
+ * Category: Web Design
  * Published: September 11, 2026
  */
 export const blogPostWebDesign2026: BlogPost = {
@@ -17,7 +17,7 @@ export const blogPostWebDesign2026: BlogPost = {
     "Learn how modern web design in 2026 combines UI/UX, responsive layouts, accessibility, performance, design systems, and AI-aware interfaces to create better websites.",
   excerpt:
     "A website can look impressive and still provide a poor user experience. In 2026, strong web design is increasingly built around a combination of clear UX, responsive UI, accessibility, performance, consistent design systems, and thoughtful interaction design.",
-  category: "Cloud & Web",
+  category: "Web Design",
   primaryKeyword: "web design trends 2026",
   secondaryKeywords: [
     "UI/UX design",

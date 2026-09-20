@@ -4,7 +4,7 @@ import type { BlogPost } from "../blogsData";
  * Blog #9 - From Idea to Interface: The Complete UI/UX Design Process for Modern Websites in 2026
  *
  * Author: Mullaivenese
- * Category: Cloud & Web (Web Design & UI/UX)
+ * Category: Web Design
  * Published: September 16, 2026
  */
 export const blogPostUiUxDesignProcess2026: BlogPost = {
@@ -17,7 +17,7 @@ export const blogPostUiUxDesignProcess2026: BlogPost = {
     "Learn the complete UI/UX design process for modern websites, from user research and information architecture to wireframes, prototypes, design systems, accessibility, testing, and developer handoff.",
   excerpt:
     "Good UI/UX is not a collection of attractive screens. It is a structured process for turning user needs and business goals into a clear, usable, and scalable digital experience. Learn the complete design process from research to developer handoff.",
-  category: "Cloud & Web",
+  category: "Web Design",
   primaryKeyword: "UI UX design process",
   secondaryKeywords: [
     "web design process",

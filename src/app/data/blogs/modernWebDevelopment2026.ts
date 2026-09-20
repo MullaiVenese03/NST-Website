@@ -4,7 +4,7 @@ import type { BlogPost } from "../blogsData";
  * Blog #7 - The Modern Web in 2026: How AI, Performance, and UX Are Changing Full-Stack Development
  *
  * Author: Mullaivenese
- * Category: Cloud & Web (Web Development)
+ * Category: Web Development
  * Published: September 8, 2026
  */
 export const blogPostModernWebDevelopment2026: BlogPost = {
@@ -17,7 +17,7 @@ export const blogPostModernWebDevelopment2026: BlogPost = {
     "Discover how AI-assisted development, server-first architecture, performance, accessibility, and modern UX are changing how websites and web applications are built in 2026.",
   excerpt:
     "Modern web development is becoming less about choosing a trendy technology and more about designing an entire system around performance, usability, maintainability, and intelligent automation. This article explores the most important changes shaping web development and UI/UX design in 2026.",
-  category: "Cloud & Web",
+  category: "Web Development",
   primaryKeyword: "modern web development 2026",
   secondaryKeywords: [
     "AI-assisted development",
