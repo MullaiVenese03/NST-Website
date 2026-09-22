@@ -163,6 +163,17 @@ export const BLOG_IMAGE_REGISTRY = [
     },
     images: [],
   },
+  {
+    blogNumber: 11,
+    folderName: "#11",
+    slug: "ai-built-website-problem-2026",
+    thumbnail: {
+      srcFile: "AI_Built_Website_Problem_2026_Thumbnail.png",
+      outputBaseName: "ai-built-website-problem-2026",
+      generatePng: false,
+    },
+    images: [],
+  },
 ];
 
 /**
