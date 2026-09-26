@@ -1,6 +1,47 @@
 import { useNavigate, useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { navigateToContact, scrollToSection, scrollToTopInstant } from "../utils/scroll";
+import {
+  Home,
+  Info,
+  Briefcase,
+  MessageSquare,
+  GraduationCap,
+  Phone,
+  type LucideProps,
+} from "lucide-react";
+import type React from "react";
+
+// ─── Icon map ─────────────────────────────────────────────────────────────────
+
+const ICON_MAP: Record<string, React.ComponentType<LucideProps>> = {
+  Home: Home,
+  About: Info,
+  Services: Briefcase,
+  Testimonials: MessageSquare,
+  EdTech: GraduationCap,
+  Contact: Phone,
+};
+
+/**
+ * Renders a lucide icon for the given nav item name.
+ * Shown on mobile (below sm breakpoint), hidden on tablet/desktop.
+ */
+function NavIcon({ name, className }: { name: string; className?: string }) {
+  const Icon = ICON_MAP[name];
+  if (!Icon) return null;
+  return (
+    <Icon
+      size={20}
+      strokeWidth={2}
+      aria-hidden="true"
+      focusable="false"
+      className={className}
+    />
+  );
+}
+
+// ─── Nav data ─────────────────────────────────────────────────────────────────
 
 const navItems = [
   { name: "Home", href: "hero", path: "/" },
@@ -111,7 +152,10 @@ export default function BottomNav() {
                 minHeight: "clamp(32px, 5vw, 44px)",
               }}
             >
-              {item.name}
+              {/* Mobile (below sm): icon only — text is visually hidden but aria-label covers a11y */}
+              <NavIcon name={item.name} className="sm:hidden" />
+              {/* Tablet / Desktop (sm and above): existing text label — completely unchanged */}
+              <span className="hidden sm:inline">{item.name}</span>
             </button>
           );
         })}
