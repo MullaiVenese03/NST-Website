@@ -174,6 +174,17 @@ export const BLOG_IMAGE_REGISTRY = [
     },
     images: [],
   },
+  {
+    blogNumber: 12,
+    folderName: "#12",
+    slug: "how-often-should-your-company-do-vapt-2026",
+    thumbnail: {
+      srcFile: "VAPT_2026_Checklist_Thumbnail.png",
+      outputBaseName: "vapt-2026-checklist",
+      generatePng: false,
+    },
+    images: [],
+  },
 ];
 
 /**
