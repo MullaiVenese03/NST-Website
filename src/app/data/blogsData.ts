@@ -12,6 +12,7 @@ import { blogPostUiUxDesignProcess2026 } from "./blogs/uiUxDesignProcess2026";
 import { blogPostModernFullStackWebDevelopment2026 } from "./blogs/modernFullStackWebDevelopment2026";
 import { blogPostAiBuiltWebsiteProblem2026 } from "./blogs/aiBuiltWebsiteProblem2026";
 import { blogPostVapt2026Checklist } from "./blogs/vapt2026Checklist";
+import { blogPostAiAgentAttackSurface2026 } from "./blogs/aiAgentAttackSurface2026";
 
 export type BlogCategory =
   | "All"
@@ -135,6 +136,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  blogPostAiAgentAttackSurface2026,
   blogPostVapt2026Checklist,
   blogPostAiBuiltWebsiteProblem2026,
   blogPostModernFullStackWebDevelopment2026,

@@ -185,6 +185,17 @@ export const BLOG_IMAGE_REGISTRY = [
     },
     images: [],
   },
+  {
+    blogNumber: 13,
+    folderName: "#13",
+    slug: "ai-agent-attack-surface-security-checklist-2026",
+    thumbnail: {
+      srcFile: "AI_Agent_Attack_Surface_2026_Thumbnail.png",
+      outputBaseName: "ai-agent-attack-surface-security-checklist-2026",
+      generatePng: false,
+    },
+    images: [],
+  },
 ];
 
 /**
