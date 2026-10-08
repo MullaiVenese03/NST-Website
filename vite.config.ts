@@ -27,7 +27,9 @@ function loadGTM() {
   (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;var n=d.querySelector('[nonce]');
+  n&&j.setAttribute('nonce',n.nonce||n.getAttribute('nonce'));
+  f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','${gtmId}');
 }
 if ('requestIdleCallback' in window) {
@@ -96,7 +98,7 @@ function charsetFirstInHead(): Plugin {
 /** Mirrors vercel.json CSP on preview so Formspree/CSP issues reproduce locally. */
 function vercelCspOnPreview(): Plugin {
   const csp =
-    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://*.clarity.ms https://www.clarity.ms https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: blob: https://www.google-analytics.com https://*.clarity.ms https://*.bing.com https://i.ytimg.com https://*.ytimg.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://*.clarity.ms https://*.bing.com https://cloudflareinsights.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src 'self' https://www.googletagmanager.com https://www.youtube-nocookie.com https://www.youtube.com; media-src 'self'; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests";
+    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com https://*.clarity.ms https://www.clarity.ms https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://tagmanager.google.com; img-src 'self' data: blob: https://www.googletagmanager.com https://ssl.gstatic.com https://www.google-analytics.com https://*.google-analytics.com https://*.google.com https://*.clarity.ms https://*.bing.com https://i.ytimg.com https://*.ytimg.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io https://www.google-analytics.com https://region1.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://*.google.com https://*.g.doubleclick.net https://*.clarity.ms https://*.bing.com https://cloudflareinsights.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src 'self' https://www.googletagmanager.com https://www.youtube-nocookie.com https://www.youtube.com; media-src 'self'; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests";
   return {
     name: "vercel-csp-on-preview",
     configurePreviewServer(server) {
