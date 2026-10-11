@@ -10,6 +10,7 @@ import {
   type ContactFormFieldErrors,
 } from "../utils/contactFormValidation";
 import { getFormspreeErrorMessage } from "../utils/contactFormspree";
+import { trackContactFormSuccess } from "@/analytics/gtm";
 
 export type ContactFormProps = {
   id?: string;
@@ -45,6 +46,7 @@ export default function ContactForm({
 
   useEffect(() => {
     if (!state.succeeded) return;
+    trackContactFormSuccess();
     setErrors({});
     setFormKey((k) => k + 1);
     const timer = window.setTimeout(() => reset(), 4500);

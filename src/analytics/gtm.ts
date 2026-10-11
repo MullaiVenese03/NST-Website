@@ -14,3 +14,9 @@ export function trackPageView(pagePath: string, pageTitle?: string): void {
     page_location: window.location.href,
   });
 }
+
+/** Fires exactly once when Formspree confirms a successful submission.
+ *  No PII is included — event name only. */
+export function trackContactFormSuccess(): void {
+  pushDataLayer({ event: "contact_form_success" });
+}
