@@ -1,7 +1,7 @@
 /**
  * scripts/prerender-seo.mjs
  *
- * Pre-renders authoritative Open Graph and Twitter/X metadata into static HTML files
+ * Pre-renders authoritative Open Graph, Twitter/X, and JSON-LD metadata into static HTML files
  * for all routes in `dist/`, including:
  * 1. Homepage & non-blog pages -> Company branding social image (og-image.jpg / og-image.webp)
  * 2. Blogs listing page -> Approved blogs listing social image (og-image.jpg / og-image.webp)
@@ -9,7 +9,10 @@
  *
  * This ensures that social platforms and crawlers (Facebook, LinkedIn, Twitter/X,
  * WhatsApp, Slack, Discord, Telegram, Google, Bing) receive the exact, unique,
- * publicly accessible thumbnail without executing JavaScript.
+ * publicly accessible metadata and structured data without executing JavaScript.
+ *
+ * Also adds data-rh="true" attributes to match react-helmet-async so that
+ * client-side hydration does not create duplicate tags.
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
@@ -36,34 +39,23 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;");
 }
 
-function injectMetadata(templateHtml, meta, isHome = false) {
+function injectMetadata(templateHtml, meta, routePath, post, prerenderSchemas) {
   let html = templateHtml;
 
   // 1. Authoritative Title
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(meta.title)}</title>`);
 
-  // 2. Authoritative Meta Description
-  if (html.match(/<meta\s+name=["']description["'][\s\S]*?>/i)) {
-    html = html.replace(
-      /<meta\s+name=["']description["'][\s\S]*?>/i,
-      `<meta name="description" content="${escapeHtml(meta.description)}" />`
-    );
-  }
-
-  // 3. Authoritative Canonical Link
-  if (html.match(/<link\s+rel=["']canonical["'][\s\S]*?>/i)) {
-    html = html.replace(
-      /<link\s+rel=["']canonical["'][\s\S]*?>/i,
-      `<link rel="canonical" href="${meta.canonicalUrl}" />`
-    );
-  } else {
-    html = html.replace("</head>", `  <link rel="canonical" href="${meta.canonicalUrl}" />\n  </head>`);
-  }
-
-  // 4. Remove any existing Open Graph or Twitter tags & comments to guarantee NO duplicate/conflicting tags
+  // 2. Remove all existing canonical links, alternate hreflang, descriptions, robots, OG, Twitter, geo, and ld+json
+  html = html.replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>\s*/gi, "");
+  html = html.replace(/<link\s+[^>]*rel=["']alternate["'][^>]*>\s*/gi, "");
+  html = html.replace(/<meta\s+[^>]*name=["']description["'][^>]*>\s*/gi, "");
+  html = html.replace(/<meta\s+[^>]*name=["']robots["'][^>]*>\s*/gi, "");
   html = html.replace(/<!--\s*(?:Open Graph|Twitter)[^>]*-->\s*/gi, "");
-  html = html.replace(/<meta\s+property=["']og:[\s\S]*?>\s*/gi, "");
-  html = html.replace(/<meta\s+name=["']twitter:[\s\S]*?>\s*/gi, "");
+  html = html.replace(/<meta\s+[^>]*property=["']og:[\s\S]*?>\s*/gi, "");
+  html = html.replace(/<meta\s+[^>]*name=["']twitter:[\s\S]*?>\s*/gi, "");
+  html = html.replace(/<meta\s+[^>]*name=["']geo\.[\s\S]*?>\s*/gi, "");
+  html = html.replace(/<meta\s+[^>]*name=["']ICBM["'][^>]*>\s*/gi, "");
+  html = html.replace(/<script\s+[^>]*type=["']application\/ld\+json["'][\s\S]*?<\/script>\s*/gi, "");
 
   const imageType =
     meta.imageType ||
@@ -73,32 +65,49 @@ function injectMetadata(templateHtml, meta, isHome = false) {
         ? "image/webp"
         : "image/jpeg");
 
-  const ogTags = `
-    <!-- Open Graph Metadata (Authoritative) -->
-    <meta property="og:locale" content="en_IN" />
-    <meta property="og:site_name" content="${ORG_NAME}" />
-    <meta property="og:type" content="${meta.ogType || 'website'}" />
-    <meta property="og:title" content="${escapeHtml(meta.title)}" />
-    <meta property="og:description" content="${escapeHtml(meta.description)}" />
-    <meta property="og:url" content="${meta.canonicalUrl}" />
-    <meta property="og:image" content="${meta.imageUrl}" />
-    <meta property="og:image:secure_url" content="${meta.imageUrl}" />
-    <meta property="og:image:type" content="${imageType}" />
-    <meta property="og:image:width" content="${meta.imageWidth || 1200}" />
-    <meta property="og:image:height" content="${meta.imageHeight || 630}" />
-    <meta property="og:image:alt" content="${escapeHtml(meta.imageAlt || meta.title)}" />
+  const globalJson = prerenderSchemas.getGlobalSchemaJson();
+  const pageJson = prerenderSchemas.getPageSchemaJson(routePath, post);
 
-    <!-- Twitter / X Cards (Authoritative) -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="${TWITTER_HANDLE}" />
-    <meta name="twitter:creator" content="${TWITTER_HANDLE}" />
-    <meta name="twitter:title" content="${escapeHtml(meta.title)}" />
-    <meta name="twitter:description" content="${escapeHtml(meta.description)}" />
-    <meta name="twitter:image" content="${meta.imageUrl}" />
-    <meta name="twitter:image:alt" content="${escapeHtml(meta.imageAlt || meta.title)}" />
-  `;
+  const headTags = `
+  <meta data-rh="true" name="description" content="${escapeHtml(meta.description)}" />
+  <meta data-rh="true" name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link data-rh="true" rel="canonical" href="${meta.canonicalUrl}" />
 
-  html = html.replace("</head>", `${ogTags.trim()}\n  </head>`);
+  <!-- Geo Location Tags -->
+  <meta data-rh="true" name="geo.region" content="IN-TN" />
+  <meta data-rh="true" name="geo.placename" content="Hosur, Tamil Nadu, India" />
+  <meta data-rh="true" name="geo.position" content="12.7409;77.8253" />
+  <meta data-rh="true" name="ICBM" content="12.7409;77.8253" />
+
+  <!-- Open Graph Metadata (Authoritative) -->
+  <meta data-rh="true" property="og:locale" content="en_IN" />
+  <meta data-rh="true" property="og:site_name" content="${ORG_NAME}" />
+  <meta data-rh="true" property="og:type" content="${meta.ogType || 'website'}" />
+  <meta data-rh="true" property="og:title" content="${escapeHtml(meta.title)}" />
+  <meta data-rh="true" property="og:description" content="${escapeHtml(meta.description)}" />
+  <meta data-rh="true" property="og:url" content="${meta.canonicalUrl}" />
+  <meta data-rh="true" property="og:image" content="${meta.imageUrl}" />
+  <meta data-rh="true" property="og:image:secure_url" content="${meta.imageUrl}" />
+  <meta data-rh="true" property="og:image:type" content="${imageType}" />
+  <meta data-rh="true" property="og:image:width" content="${meta.imageWidth || 1200}" />
+  <meta data-rh="true" property="og:image:height" content="${meta.imageHeight || 630}" />
+  <meta data-rh="true" property="og:image:alt" content="${escapeHtml(meta.imageAlt || meta.title)}" />
+
+  <!-- Twitter / X Cards (Authoritative) -->
+  <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+  <meta data-rh="true" name="twitter:site" content="${TWITTER_HANDLE}" />
+  <meta data-rh="true" name="twitter:creator" content="${TWITTER_HANDLE}" />
+  <meta data-rh="true" name="twitter:title" content="${escapeHtml(meta.title)}" />
+  <meta data-rh="true" name="twitter:description" content="${escapeHtml(meta.description)}" />
+  <meta data-rh="true" name="twitter:image" content="${meta.imageUrl}" />
+  <meta data-rh="true" name="twitter:image:alt" content="${escapeHtml(meta.imageAlt || meta.title)}" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script data-rh="true" type="application/ld+json">${globalJson}</script>
+  <script data-rh="true" type="application/ld+json">${pageJson}</script>
+`;
+
+  html = html.replace("</head>", `${headTags.trim()}\n  </head>`);
 
   return html;
 }
@@ -117,6 +126,20 @@ async function loadBlogPosts() {
   return moduleShim.exports.BLOG_POSTS || [];
 }
 
+async function loadPrerenderSchemas() {
+  const res = await build({
+    entryPoints: [path.join(root, "src", "seo", "prerenderSchemas.ts")],
+    bundle: true,
+    format: "cjs",
+    write: false,
+  });
+
+  const moduleShim = { exports: {} };
+  const fn = new Function("module", "exports", res.outputFiles[0].text);
+  fn(moduleShim, moduleShim.exports);
+  return moduleShim.exports;
+}
+
 async function run() {
   const indexHtmlPath = path.join(dist, "index.html");
   if (!existsSync(indexHtmlPath)) {
@@ -126,6 +149,7 @@ async function run() {
 
   const baseHtml = readFileSync(indexHtmlPath, "utf-8");
   const blogPosts = await loadBlogPosts();
+  const prerenderSchemas = await loadPrerenderSchemas();
 
   console.log(`prerender-seo: Loaded ${blogPosts.length} blog posts dynamically.`);
 
@@ -133,6 +157,7 @@ async function run() {
   const staticPages = [
     {
       dir: dist,
+      routePath: "/",
       meta: {
         title: "NebulaSafeTech | Cybersecurity, VAPT & Digital Solutions",
         description:
@@ -148,6 +173,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "blogs"),
+      routePath: "/blogs",
       meta: {
         title: `Technology & Cybersecurity Blog | ${ORG_NAME}`,
         description:
@@ -163,6 +189,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "about"),
+      routePath: "/about",
       meta: {
         title: `About ${ORG_NAME} | Cybersecurity & Digital Engineering Experts`,
         description:
@@ -178,6 +205,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "services"),
+      routePath: "/services",
       meta: {
         title: `Services | ${ORG_NAME} - Security, Web, UI/UX & Training`,
         description:
@@ -193,6 +221,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "clients"),
+      routePath: "/clients",
       meta: {
         title: `Clients & Institutional Programs | ${ORG_NAME}`,
         description:
@@ -208,6 +237,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "edtech"),
+      routePath: "/edtech",
       meta: {
         title: `EdTech & Cybersecurity Career Programs | ${ORG_NAME}`,
         description:
@@ -223,6 +253,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "privacy-policy"),
+      routePath: "/privacy-policy",
       meta: {
         title: `Privacy Policy | ${ORG_NAME}`,
         description:
@@ -238,6 +269,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "terms-and-conditions"),
+      routePath: "/terms-and-conditions",
       meta: {
         title: `Terms & Conditions | ${ORG_NAME}`,
         description:
@@ -253,6 +285,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "blog"),
+      routePath: "/blogs",
       meta: {
         title: `Technology & Cybersecurity Blog | ${ORG_NAME}`,
         description:
@@ -268,6 +301,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "services", "cybersecurity"),
+      routePath: "/services/cybersecurity",
       meta: {
         title: `Cybersecurity Services & Assessments | ${ORG_NAME}`,
         description:
@@ -283,6 +317,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "services", "web-development"),
+      routePath: "/services/web-development",
       meta: {
         title: `Full-Stack Web Development | ${ORG_NAME}`,
         description:
@@ -298,6 +333,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "services", "ui-ux-design"),
+      routePath: "/services/ui-ux-design",
       meta: {
         title: `UI/UX Design & Product Experience | ${ORG_NAME}`,
         description:
@@ -313,6 +349,7 @@ async function run() {
     },
     {
       dir: path.join(dist, "services", "edtech-training"),
+      routePath: "/services/edtech-training",
       meta: {
         title: `EdTech & Cybersecurity Training | ${ORG_NAME}`,
         description:
@@ -330,7 +367,7 @@ async function run() {
 
   for (const page of staticPages) {
     mkdirSync(page.dir, { recursive: true });
-    const rendered = injectMetadata(baseHtml, page.meta, page.dir === dist);
+    const rendered = injectMetadata(baseHtml, page.meta, page.routePath, undefined, prerenderSchemas);
     writeFileSync(path.join(page.dir, "index.html"), rendered, "utf-8");
     if (page.dir !== dist) {
       writeFileSync(`${page.dir}.html`, rendered, "utf-8");
@@ -370,7 +407,7 @@ async function run() {
       ogType: "article",
     };
 
-    const renderedBlogHtml = injectMetadata(baseHtml, blogMeta, false);
+    const renderedBlogHtml = injectMetadata(baseHtml, blogMeta, `/blog/${post.slug}`, post, prerenderSchemas);
     writeFileSync(path.join(blogDir, "index.html"), renderedBlogHtml, "utf-8");
     writeFileSync(path.join(blogBaseDir, `${post.slug}.html`), renderedBlogHtml, "utf-8");
     writeFileSync(path.join(blogsDir, "index.html"), renderedBlogHtml, "utf-8");
