@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
@@ -10,7 +10,7 @@ import {
   type ContactFormFieldErrors,
 } from "../utils/contactFormValidation";
 import { getFormspreeErrorMessage } from "../utils/contactFormspree";
-import { trackContactFormSuccess } from "@/analytics/gtm";
+import { trackContactFormSuccess } from "../../analytics/gtm";
 
 export type ContactFormProps = {
   id?: string;
@@ -40,18 +40,39 @@ export default function ContactForm({
   const [errors, setErrors] = useState<ContactFormFieldErrors>({});
   const [formKey, setFormKey] = useState(0);
 
+  // Stable ref for reset to avoid effect re-executions caused by Formspree's unstable reset identity
+  const resetRef = useRef(reset);
+  resetRef.current = reset;
+
+  // Idempotency guard: ensures exactly one track event per successful submission lifecycle
+  const hasTrackedSuccessRef = useRef(false);
+
   const accent = variant === "edtech" ? "#0A66C2" : "#015AAA";
   const formspreeErrorMessage = getFormspreeErrorMessage(state.errors);
   const showServiceSelect = Boolean(serviceOptions?.length) && !defaultService;
 
   useEffect(() => {
-    if (!state.succeeded) return;
-    trackContactFormSuccess();
-    setErrors({});
-    setFormKey((k) => k + 1);
-    const timer = window.setTimeout(() => reset(), 4500);
+    if (!state.succeeded) {
+      hasTrackedSuccessRef.current = false;
+      return;
+    }
+
+    if (!hasTrackedSuccessRef.current) {
+      hasTrackedSuccessRef.current = true;
+      trackContactFormSuccess();
+    }
+
+    // Only update errors if not already empty to prevent superfluous re-renders
+    setErrors((prev) => (Object.keys(prev).length > 0 ? {} : prev));
+
+    // Reset the form and bump key after the 4.5s success message expires
+    const timer = window.setTimeout(() => {
+      resetRef.current();
+      setFormKey((k) => k + 1);
+    }, 4500);
+
     return () => window.clearTimeout(timer);
-  }, [state.succeeded, reset]);
+  }, [state.succeeded]);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,6 +82,7 @@ export default function ContactForm({
       return;
     }
     setErrors({});
+    hasTrackedSuccessRef.current = false;
     void handleSubmit(e);
   };
 
