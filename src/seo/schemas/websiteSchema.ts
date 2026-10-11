@@ -13,14 +13,6 @@ export function websiteSchema() {
       "@id": `${SITE_ORIGIN}/#organization`,
       name: ORG_NAME,
     },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE_ORIGIN}/blogs?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 

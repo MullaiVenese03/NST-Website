@@ -1,9 +1,39 @@
 {
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "nebulasafetech.com"
+        }
+      ],
+      "destination": "https://www.nebulasafetech.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blogs",
+      "has": [
+        {
+          "type": "query",
+          "key": "q"
+        }
+      ],
+      "destination": "/blogs",
+      "permanent": true
+    },
     { "source": "/contact", "destination": "/#contact", "permanent": false },
     { "source": "/careers", "destination": "/", "permanent": false }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "rewrites": [
+    { "source": "/cgi-bin(.*)", "destination": "/api/not-found" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
   "headers": [
     {
       "source": "/((?!assets/|media/|.*\\.).*)",

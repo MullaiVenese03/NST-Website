@@ -18,6 +18,7 @@ const BlogsPage = lazy(() => import("./pages/BlogsPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsAndConditionsPage = lazy(() => import("./pages/TermsAndConditionsPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 function PageFallback() {
   return (
@@ -74,6 +75,7 @@ export const router = createBrowserRouter([
       { path: "blogs/:slug", Component: BlogPostPage },
       { path: "privacy-policy", Component: PrivacyPolicyPage },
       { path: "terms-and-conditions", Component: TermsAndConditionsPage },
+      { path: "*", Component: NotFoundPage },
     ],
   },
 ]);
