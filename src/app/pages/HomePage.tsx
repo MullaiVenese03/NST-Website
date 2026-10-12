@@ -6,7 +6,6 @@ import { HeroParallax } from "../components/HeroParallax";
 import { LazyWhenVisible } from "../components/LazyWhenVisible";
 import { SeoHead } from "../../seo/SeoHead";
 import { HOME_SEO } from "../../seo/pageMeta";
-import { pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
 import { enableSmoothScroll, scrollToSection, scrollToTopInstant } from "../utils/scroll";
 import { prefetchCommonRoutes } from "../utils/prefetchRoute";
 import { useMotionEnabled } from "../utils/performance";
@@ -153,7 +152,7 @@ export default function HomePage() {
 
   return (
     <div className="bg-white min-h-screen overflow-x-clip w-full max-w-[100vw]">
-      <SeoHead meta={HOME_SEO} structuredData={pageBreadcrumbJsonLd([{ name: "Home", path: "/" }])} />
+      <SeoHead meta={HOME_SEO} />
       <TopNav />
       <div className="w-full relative z-10 min-w-0">{mainContent}</div>
     </div>

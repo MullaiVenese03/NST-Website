@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, Variants } from "motion/react";
-import { Link } from "react-router";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionCtaLink } from "./SectionCtaLink";
 import { VIEWPORT_ONCE } from "../utils/motionPresets";
@@ -23,7 +22,7 @@ const CARD_GAP = 24;
 
 function VerifiedIcon() {
   return (
-    <svg width="18" height="18" viewBox="0 0 15.5 15.5" fill="none" className="flex-shrink-0">
+    <svg width="18" height="18" viewBox="0 0 15.5 15.5" fill="none" className="flex-shrink-0" aria-hidden="true">
       <path
         d={svgPaths.p37b30500}
         stroke="#015AAA"
@@ -48,11 +47,15 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     updateWidth();
+    let rafId: number;
     const ro = new ResizeObserver(() => {
-      requestAnimationFrame(updateWidth);
+      rafId = requestAnimationFrame(updateWidth);
     });
     if (containerRef.current) ro.observe(containerRef.current);
-    return () => ro.disconnect();
+    return () => {
+      ro.disconnect();
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [updateWidth]);
 
   const cardsPerView = containerWidth >= TWO_CARD_MIN_WIDTH ? 2 : 1;
@@ -72,6 +75,7 @@ export default function TestimonialsSection() {
   };
 
   const goTo = (i: number) => {
+    if (i === activeIndex) return;
     setDirection(i > activeIndex ? 1 : -1);
     setActiveIndex(i);
   };

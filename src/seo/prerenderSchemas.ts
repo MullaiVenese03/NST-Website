@@ -11,7 +11,6 @@ import {
   ABOUT_SEO,
   SERVICES_SEO,
   TESTIMONIALS_SEO,
-  CLIENTS_SEO,
   EDTECH_SEO,
   BLOGS_SEO,
   PRIVACY_SEO,
@@ -40,8 +39,7 @@ export function getPageSchemaJson(routePath: string, post?: BlogPost): string {
       name: HOME_SEO.title,
       description: HOME_SEO.description,
     });
-    const breadcrumb = breadcrumbListSchema([{ name: "Home", path: "/" }], SITE_ORIGIN);
-    return toJsonLdScript([pageSchema, breadcrumb]);
+    return toJsonLdScript(pageSchema);
   }
 
   if (routePath === "/about") {
@@ -77,7 +75,7 @@ export function getPageSchemaJson(routePath: string, post?: BlogPost): string {
   }
 
   if (routePath.startsWith("/services/")) {
-    const slug = routePath.replace("/services/", "") as ServiceSlug;
+    const slug = routePath.replace(/^\/services\//, "").replace(/\/$/, "") as ServiceSlug;
     const meta = getServiceDetailSeo(slug);
     if (!meta) return "";
     const pageSchema = webPageSchema({

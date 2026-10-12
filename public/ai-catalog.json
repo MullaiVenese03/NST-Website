@@ -1,5 +1,4 @@
 {
-  "$schema": "https://raw.githubusercontent.com/ards-project/ard-spec/main/spec/schemas/ai-catalog.schema.json",
   "specVersion": "1.0",
   "host": {
     "displayName": "NebulaSafeTech",
@@ -8,7 +7,7 @@
   },
   "entries": [
     {
-      "identifier": "urn:ai:nebulasafetech.com:doc:overview",
+      "identifier": "urn:air:nebulasafetech.com:doc:overview",
       "displayName": "NebulaSafeTech AI & Cybersecurity Documentation",
       "type": "text/markdown",
       "url": "https://www.nebulasafetech.com/llms.txt",
