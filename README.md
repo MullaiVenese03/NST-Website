@@ -141,7 +141,6 @@ VITE_FORMSPREE_FORM_ID=your_formspree_form_id
 # Analytics Controls (enabled automatically in production unless set to false)
 VITE_ENABLE_ANALYTICS=true
 VITE_GTM_ID=GTM-XXXXXXX
-VITE_CLARITY_PROJECT_ID=your_clarity_project_id
 
 # GA4 Measurement ID (linked inside Google Tag Manager)
 VITE_GA_ID=G-XXXXXXXXXX
@@ -160,7 +159,7 @@ VITE_GSC_VERIFICATION=your_gsc_verification_token
 The website uses a non-duplicating multi-tier telemetry stack:
 
 - **Google Tag Manager (GTM)**: Injected into `index.html` via `vite.config.ts`. GA4 property (`G-WQXJLGNBT6`) routes entirely inside GTM tags.
-- **Microsoft Clarity**: Initialized via `@microsoft/clarity` NPM package (`src/analytics/clarity.ts`). No duplicate script in GTM.
+- **Microsoft Clarity**: Managed and fired exclusively through Google Tag Manager (container `GTM-WTQS44T7`, project ID `wum1ijwahj`). No direct NPM package or duplicate script initialization.
 - **Cloudflare Web Analytics**: Dynamic beacon script loaded in `src/analytics/cloudflareBeacon.ts`.
 - **Vercel Analytics & Speed Insights**: Embedded in `src/app/App.tsx` for real-time Web Vitals metrics.
 - **SPA Pageview Tracking**: `useRouteAnalytics` hook pushes `event: "page_view"` events to GTM `dataLayer` on route navigation, skipping the initial page load to prevent double-counting.
