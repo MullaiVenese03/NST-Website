@@ -634,6 +634,41 @@ async function runValidation() {
   }
 
   // =========================================================================
+  // CHECK 8: Agentic Browsing Manifest & CSP DoubleClick Verification
+  // =========================================================================
+  console.log("\n--- 8. AUDITING AGENTIC BROWSING & CSP COMPLIANCE ---");
+  const aiCatalogPath = path.join(root, "public", ".well-known", "ai-catalog.json");
+  if (!existsSync(aiCatalogPath)) {
+    fail(`Missing Agentic Resource Discovery manifest at ${aiCatalogPath}`);
+  } else {
+    try {
+      const manifest = JSON.parse(readFileSync(aiCatalogPath, "utf-8"));
+      if (manifest.specVersion !== "1.0") {
+        fail(`ai-catalog.json specVersion must be '1.0', got '${manifest.specVersion}'`);
+      } else if (!manifest.host?.displayName || !manifest.host?.identifier) {
+        fail("ai-catalog.json missing required host metadata (displayName, identifier)");
+      } else if (!Array.isArray(manifest.entries) || manifest.entries.length === 0) {
+        fail("ai-catalog.json missing entries array or has 0 entries");
+      } else {
+        pass("Confirmed valid Agentic Resource Discovery manifest (specVersion 1.0, valid host & entries).");
+      }
+    } catch (err) {
+      fail(`ai-catalog.json failed JSON parsing: ${err.message}`);
+    }
+  }
+
+  // Check CSP in vercel.json includes stats.g.doubleclick.net
+  const cspHeader = vercelConfig.headers?.find((h) =>
+    h.headers?.some((hdr) => hdr.key === "Content-Security-Policy")
+  );
+  const cspVal = cspHeader?.headers?.find((hdr) => hdr.key === "Content-Security-Policy")?.value || "";
+  if (!cspVal.includes("https://stats.g.doubleclick.net")) {
+    fail("CSP in vercel.json missing https://stats.g.doubleclick.net in connect-src / img-src");
+  } else {
+    pass("Confirmed CSP permits https://stats.g.doubleclick.net (resolves DoubleClick/GA4 violation).");
+  }
+
+  // =========================================================================
   // SUMMARY REPORT
   // =========================================================================
   console.log("\n===============================================================");

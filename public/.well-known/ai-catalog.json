@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ards-project/ard-spec/main/spec/schemas/ai-catalog.schema.json",
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "NebulaSafeTech",
+    "identifier": "https://www.nebulasafetech.com",
+    "documentationUrl": "https://www.nebulasafetech.com/llms.txt"
+  },
+  "entries": [
+    {
+      "identifier": "urn:ai:nebulasafetech.com:doc:overview",
+      "displayName": "NebulaSafeTech AI & Cybersecurity Documentation",
+      "type": "text/markdown",
+      "url": "https://www.nebulasafetech.com/llms.txt",
+      "description": "Authoritative documentation on NebulaSafeTech cybersecurity services, VAPT assessment methodology, secure web development, UI/UX engineering, and educational resources.",
+      "representativeQueries": [
+        "What services does NebulaSafeTech provide?",
+        "How does NebulaSafeTech perform VAPT and cybersecurity testing?",
+        "Where can I find NebulaSafeTech contact and company information?"
+      ]
+    }
+  ]
+}

@@ -13,12 +13,13 @@ const ROOT_FAVICONS = {
   ico: "/favicon.ico",
   png32: "/favicon-32x32.png",
   appleTouch: "/apple-touch-icon.png",
+  webp72: "/company-icon-72.webp",
   webp128: "/company-icon-128.webp",
 } as const;
 
 export const COMPANY_ICON = {
-  /** Sharp nav / small UI (generated 128px webp at public root) */
-  nav: ROOT_FAVICONS.webp128,
+  /** Sharp nav / small UI (optimized 72px 2x retina webp for 36x36 at public root) */
+  nav: ROOT_FAVICONS.webp72,
   /** Media folder - 480px source */
   webp480: `${COMPANY_ICON_BASE}-480.webp`,
   webp480Encoded: `${COMPANY_ICON_BASE_ENCODED}-480.webp`,

@@ -6,7 +6,6 @@ import { DeferredCompanyFont } from "./components/DeferredCompanyFont";
 import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 import { AnalyticsScripts } from "../analytics/AnalyticsScripts";
 import { RouteAnalytics } from "../analytics/RouteAnalytics";
-import { getBlogPostBySlug } from "./data/blogsData";
 
 import BottomNav from "./components/BottomNav";
 import HomePage from "./pages/HomePage";
@@ -20,14 +19,7 @@ const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsAndConditionsPage = lazy(() => import("./pages/TermsAndConditionsPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
-
-function LegacyBlogSlugRedirect() {
-  const { slug } = useParams<{ slug: string }>();
-  if (slug && getBlogPostBySlug(slug)) {
-    return <Navigate to={`/blogs/${slug}`} replace />;
-  }
-  return <NotFoundPage />;
-}
+const LegacyBlogSlugRedirect = lazy(() => import("./components/LegacyBlogSlugRedirect"));
 
 function PageFallback() {
   return (

@@ -32,12 +32,14 @@ function loadGTM() {
   f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','${gtmId}');
 }
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(loadGTM, { timeout: 4000 });
-} else {
-  window.addEventListener('load', function() { setTimeout(loadGTM, 2000); });
-}
-['scroll', 'touchstart', 'click'].forEach(function(e) {
+window.addEventListener('load', function() {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(loadGTM, { timeout: 6000 });
+  } else {
+    setTimeout(loadGTM, 3500);
+  }
+});
+['scroll', 'touchstart', 'click', 'pointerdown', 'keydown'].forEach(function(e) {
   window.addEventListener(e, loadGTM, { once: true, passive: true });
 });
 </script>
@@ -98,7 +100,7 @@ function charsetFirstInHead(): Plugin {
 /** Mirrors vercel.json CSP on preview so Formspree/CSP issues reproduce locally. */
 function vercelCspOnPreview(): Plugin {
   const csp =
-    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com https://*.clarity.ms https://www.clarity.ms https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://tagmanager.google.com; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://www.google-analytics.com https://*.google.com https://*.clarity.ms https://*.bing.com https://i.ytimg.com https://*.ytimg.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io https://www.googletagmanager.com https://*.google-analytics.com https://www.google-analytics.com https://region1.google-analytics.com https://*.google.com https://*.clarity.ms https://*.bing.com https://cloudflareinsights.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src 'self' https://www.googletagmanager.com https://www.youtube-nocookie.com https://www.youtube.com; media-src 'self'; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests";
+    "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://formspree.io; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://tagmanager.google.com https://*.clarity.ms https://www.clarity.ms https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://tagmanager.google.com; img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://www.google-analytics.com https://*.google.com https://stats.g.doubleclick.net https://*.clarity.ms https://*.bing.com https://i.ytimg.com https://*.ytimg.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://formspree.io https://www.googletagmanager.com https://*.google-analytics.com https://www.google-analytics.com https://region1.google-analytics.com https://*.google.com https://stats.g.doubleclick.net https://*.clarity.ms https://*.bing.com https://cloudflareinsights.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://fonts.googleapis.com https://fonts.gstatic.com; frame-src 'self' https://www.googletagmanager.com https://www.youtube-nocookie.com https://www.youtube.com; media-src 'self'; worker-src 'self' blob:; manifest-src 'self'; upgrade-insecure-requests";
   return {
     name: "vercel-csp-on-preview",
     configurePreviewServer(server) {

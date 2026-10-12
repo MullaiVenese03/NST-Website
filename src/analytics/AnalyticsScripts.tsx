@@ -11,18 +11,39 @@ export function AnalyticsScripts() {
   useEffect(() => {
     if (!isAnalyticsEnabled()) return;
 
+    let started = false;
     const startAnalytics = () => {
+      if (started) return;
+      started = true;
       initClarity();
       loadCloudflareBeacon();
     };
 
-    if ("requestIdleCallback" in window) {
-      const handle = requestIdleCallback(startAnalytics, { timeout: 3000 });
-      return () => cancelIdleCallback(handle);
+    const triggers = ["scroll", "touchstart", "click", "pointerdown", "keydown"];
+    const onInteract = () => {
+      startAnalytics();
+      triggers.forEach((e) => window.removeEventListener(e, onInteract));
+    };
+    triggers.forEach((e) => window.addEventListener(e, onInteract, { once: true, passive: true }));
+
+    const onLoad = () => {
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(startAnalytics, { timeout: 6000 });
+      } else {
+        setTimeout(startAnalytics, 3500);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      onLoad();
+    } else {
+      window.addEventListener("load", onLoad, { once: true });
     }
 
-    const timer = setTimeout(startAnalytics, 1500);
-    return () => clearTimeout(timer);
+    return () => {
+      triggers.forEach((e) => window.removeEventListener(e, onInteract));
+      window.removeEventListener("load", onLoad);
+    };
   }, []);
 
   useEffect(() => {

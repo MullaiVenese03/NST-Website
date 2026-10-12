@@ -17,6 +17,7 @@ const outIco = path.join(root, "public", "favicon.ico");
 const outPng32 = path.join(root, "public", "favicon-32x32.png");
 const outApple = path.join(root, "public", "apple-touch-icon.png");
 const outWebp128 = path.join(root, "public", "company-icon-128.webp");
+const outWebp72 = path.join(root, "public", "company-icon-72.webp");
 const outPng192 = path.join(root, "public", "icon-192.png");
 
 if (!existsSync(src)) {
@@ -33,6 +34,8 @@ await input
   .resize(180, 180, { fit: "contain", background: { r: 255, g: 255, b: 255, alpha: 0 } })
   .png({ compressionLevel: 9 })
   .toFile(outApple);
+
+await input.clone().resize(72, 72, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).webp({ quality: 85 }).toFile(outWebp72);
 
 await input.clone().resize(128, 128, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } }).webp({ quality: 85 }).toFile(outWebp128);
 

@@ -11,6 +11,7 @@ function NstLogo() {
         width={36}
         height={36}
         decoding="async"
+        fetchPriority="high"
         className="w-full h-full object-contain block"
       />
     </div>
