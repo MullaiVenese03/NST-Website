@@ -67,7 +67,7 @@ export default function BlogPostPage() {
     );
   }
 
-  const articleCanonicalPath = `/blog/${post.slug}`;
+  const articleCanonicalPath = `/blogs/${post.slug}`;
   const pageMeta: PageSeo = {
     title: `${post.seoTitle || post.title} | ${ORG_NAME}`,
     description: post.metaDescription,

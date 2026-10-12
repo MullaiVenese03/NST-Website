@@ -1,11 +1,12 @@
 import { lazy, Suspense, useEffect } from "react";
-import { createBrowserRouter, Outlet, useLocation } from "react-router";
+import { createBrowserRouter, Navigate, Outlet, useLocation, useParams } from "react-router";
 import { GlobalStructuredData } from "../seo/GlobalStructuredData";
 import { SkipToContent } from "./components/SkipToContent";
 import { DeferredCompanyFont } from "./components/DeferredCompanyFont";
 import ScrollToTopOnNavigate from "./components/ScrollToTopOnNavigate";
 import { AnalyticsScripts } from "../analytics/AnalyticsScripts";
 import { RouteAnalytics } from "../analytics/RouteAnalytics";
+import { getBlogPostBySlug } from "./data/blogsData";
 
 import BottomNav from "./components/BottomNav";
 import HomePage from "./pages/HomePage";
@@ -19,6 +20,14 @@ const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsAndConditionsPage = lazy(() => import("./pages/TermsAndConditionsPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+
+function LegacyBlogSlugRedirect() {
+  const { slug } = useParams<{ slug: string }>();
+  if (slug && getBlogPostBySlug(slug)) {
+    return <Navigate to={`/blogs/${slug}`} replace />;
+  }
+  return <NotFoundPage />;
+}
 
 function PageFallback() {
   return (
@@ -67,12 +76,13 @@ export const router = createBrowserRouter([
       { path: "about", Component: AboutPage },
       { path: "services", Component: ServicesPage },
       { path: "services/:slug", Component: ServiceDetailPage },
-      { path: "clients", Component: ClientsPage },
+      { path: "testimonials", Component: ClientsPage },
+      { path: "clients", element: <Navigate to="/testimonials" replace /> },
       { path: "edtech", Component: EdTechPage },
       { path: "blogs", Component: BlogsPage },
-      { path: "blog", Component: BlogsPage },
-      { path: "blog/:slug", Component: BlogPostPage },
       { path: "blogs/:slug", Component: BlogPostPage },
+      { path: "blog", element: <Navigate to="/blogs" replace /> },
+      { path: "blog/:slug", Component: LegacyBlogSlugRedirect },
       { path: "privacy-policy", Component: PrivacyPolicyPage },
       { path: "terms-and-conditions", Component: TermsAndConditionsPage },
       { path: "*", Component: NotFoundPage },

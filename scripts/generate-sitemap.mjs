@@ -5,6 +5,7 @@ import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { build } from "esbuild";
+import { syncVercelRedirects } from "./sync-redirects.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, "..");
@@ -72,7 +73,7 @@ async function run() {
       image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "EdTech & Institutional Cybersecurity Training" },
     },
     {
-      path: "/clients",
+      path: "/testimonials",
       changefreq: "monthly",
       priority: "0.75",
       image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "NebulaSafeTech Client Programs & Testimonials" },
@@ -96,7 +97,7 @@ async function run() {
     const imgSrc = post.featuredImage?.webpSrc || post.featuredImage?.src || "/og-image.webp";
     const imgLoc = `${SITE_ORIGIN}${imgSrc.startsWith("/") ? imgSrc : `/${imgSrc}`}`;
     return {
-      path: `/blog/${post.slug}`,
+      path: `/blogs/${post.slug}`,
       changefreq: "weekly",
       priority: "0.85",
       image: {
@@ -146,6 +147,7 @@ ${urls.join("\n")}
   const sitemapPath = path.join(root, "public", "sitemap.xml");
   writeFileSync(sitemapPath, xml, "utf-8");
   console.log(`Wrote ${sitemapPath} (${allRoutes.length} URLs, lastmod=${lastmod})`);
+  await syncVercelRedirects();
 }
 
 function escapeXml(unsafe) {

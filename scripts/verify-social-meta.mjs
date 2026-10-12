@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -8,13 +8,13 @@ const distDir = path.resolve(__dirname, "..", "dist");
 function checkPage(filePath, expectedType, label) {
   const content = readFileSync(filePath, "utf-8");
 
-  const ogImages = [...content.matchAll(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/gi)].map(m => m[1]);
-  const twImages = [...content.matchAll(/<meta\s+name=["']twitter:image["']\s+content=["']([^"']+)["']/gi)].map(m => m[1]);
-  const ogTitles = [...content.matchAll(/<meta\s+property=["']og:title["']\s+content=["']([^"']+)["']/gi)].map(m => m[1]);
-  const twTitles = [...content.matchAll(/<meta\s+name=["']twitter:title["']\s+content=["']([^"']+)["']/gi)].map(m => m[1]);
-  const ogTypes = [...content.matchAll(/<meta\s+property=["']og:type["']\s+content=["']([^"']+)["']/gi)].map(m => m[1]);
-  const ogUrls = [...content.matchAll(/<meta\s+property=["']og:url["']\s+content=["']([^"']+)["']/gi)].map(m => m[1]);
-  const twCards = [...content.matchAll(/<meta\s+name=["']twitter:card["']\s+content=["']([^"']+)["']/gi)].map(m => m[1]);
+  const ogImages = [...content.matchAll(/<meta\s+[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/gi)].map(m => m[1]);
+  const twImages = [...content.matchAll(/<meta\s+[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/gi)].map(m => m[1]);
+  const ogTitles = [...content.matchAll(/<meta\s+[^>]*property=["']og:title["'][^>]*content=["']([^"']+)["']/gi)].map(m => m[1]);
+  const twTitles = [...content.matchAll(/<meta\s+[^>]*name=["']twitter:title["'][^>]*content=["']([^"']+)["']/gi)].map(m => m[1]);
+  const ogTypes = [...content.matchAll(/<meta\s+[^>]*property=["']og:type["'][^>]*content=["']([^"']+)["']/gi)].map(m => m[1]);
+  const ogUrls = [...content.matchAll(/<meta\s+[^>]*property=["']og:url["'][^>]*content=["']([^"']+)["']/gi)].map(m => m[1]);
+  const twCards = [...content.matchAll(/<meta\s+[^>]*name=["']twitter:card["'][^>]*content=["']([^"']+)["']/gi)].map(m => m[1]);
 
   console.log(`\n========================================`);
   console.log(`PAGE: ${label}`);
@@ -72,13 +72,26 @@ checkPage(path.join(distDir, "index.html"), "website", "Homepage");
 // 2. Blogs listing page
 checkPage(path.join(distDir, "blogs", "index.html"), "website", "Blogs Listing Page");
 
-// 3. Blog pages
-const blogBase = path.join(distDir, "blog");
-const blogDirs = readdirSync(blogBase).filter(f => statSync(path.join(blogBase, f)).isDirectory());
+// 3. Testimonials page
+checkPage(path.join(distDir, "testimonials", "index.html"), "website", "Testimonials Page");
+
+// 4. Assert absence of legacy prerendered directories
+if (existsSync(path.join(distDir, "clients"))) {
+  console.error("ERROR: dist/clients directory still exists in production build! Should be redirect only.");
+  process.exitCode = 1;
+}
+if (existsSync(path.join(distDir, "blog"))) {
+  console.error("ERROR: dist/blog directory still exists in production build! Should be redirect only.");
+  process.exitCode = 1;
+}
+
+// 5. Individual blog pages in dist/blogs
+const blogsBase = path.join(distDir, "blogs");
+const blogDirs = readdirSync(blogsBase).filter(f => statSync(path.join(blogsBase, f)).isDirectory());
 
 const blogResults = [];
 for (const slug of blogDirs) {
-  const result = checkPage(path.join(blogBase, slug, "index.html"), "article", `Blog: ${slug}`);
+  const result = checkPage(path.join(blogsBase, slug, "index.html"), "article", `Blog: ${slug}`);
   blogResults.push(result);
 }
 

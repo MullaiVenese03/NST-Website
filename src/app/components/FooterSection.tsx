@@ -158,7 +158,7 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
                 <FooterNavLink to="/">Home</FooterNavLink>
                 <FooterNavLink to="/about">About Us</FooterNavLink>
                 <FooterNavLink to="/services">Services</FooterNavLink>
-                <FooterNavLink to="/clients">Clients</FooterNavLink>
+                <FooterNavLink to="/testimonials">Testimonials</FooterNavLink>
                 <FooterNavLink to="/edtech">EdTech</FooterNavLink>
               </nav>
             </motion.div>

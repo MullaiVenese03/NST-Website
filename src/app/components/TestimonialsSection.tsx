@@ -117,8 +117,8 @@ export default function TestimonialsSection() {
             </h2>
           </div>
           <SectionCtaLink
-            to="/clients"
-            label="View all clients"
+            to="/testimonials"
+            label="View all testimonials"
             className="self-start sm:self-end"
           />
         </motion.div>

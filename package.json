@@ -6,10 +6,11 @@
   "scripts": {
     "generate:sitemap": "node scripts/generate-sitemap.mjs",
     "generate:favicons": "node scripts/generate-favicons.mjs",
-    "build": "node scripts/generate-sitemap.mjs && node scripts/generate-favicons.mjs && node scripts/optimize-og.mjs && vite build && node scripts/prerender-seo.mjs",
+    "build": "node scripts/generate-sitemap.mjs && node scripts/generate-favicons.mjs && node scripts/optimize-og.mjs && vite build && node scripts/prerender-seo.mjs && node scripts/validate-seo.mjs",
     "dev": "vite",
     "preview": "vite preview",
     "prerender:seo": "node scripts/prerender-seo.mjs",
+    "validate:seo": "node scripts/validate-seo.mjs",
     "optimize:fonts": "node scripts/optimize-fonts.mjs",
     "optimize:og": "node scripts/optimize-og.mjs",
     "optimize:blogs": "node scripts/optimize-blog-images.mjs"

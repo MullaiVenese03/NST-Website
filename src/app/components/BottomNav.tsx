@@ -47,7 +47,7 @@ const navItems = [
   { name: "Home", href: "hero", path: "/" },
   { name: "About", href: "about", path: "/about" },
   { name: "Services", href: "services", path: "/services" },
-  { name: "Testimonials", href: "testimonials", path: "/clients" },
+  { name: "Testimonials", href: "testimonials", path: "/testimonials" },
   { name: "EdTech", href: "edtech", path: "/edtech" },
   { name: "Contact", href: "contact", path: "/#contact" },
 ];

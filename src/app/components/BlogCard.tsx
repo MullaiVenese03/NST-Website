@@ -12,7 +12,7 @@ export interface BlogCardProps {
 }
 
 export const BlogCard = memo(function BlogCard({ post, index }: BlogCardProps) {
-  const targetUrl = `/blog/${post.slug}`;
+  const targetUrl = `/blogs/${post.slug}`;
 
   return (
     <motion.article

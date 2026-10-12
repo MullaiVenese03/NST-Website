@@ -1,6 +1,156 @@
 {
   "redirects": [
     {
+      "source": "/clients",
+      "destination": "https://www.nebulasafetech.com/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/clients/",
+      "destination": "https://www.nebulasafetech.com/testimonials",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "https://www.nebulasafetech.com/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/blog/",
+      "destination": "https://www.nebulasafetech.com/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agent-attack-surface-security-checklist-2026",
+      "destination": "https://www.nebulasafetech.com/blogs/ai-agent-attack-surface-security-checklist-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agent-attack-surface-security-checklist-2026/",
+      "destination": "https://www.nebulasafetech.com/blogs/ai-agent-attack-surface-security-checklist-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-often-should-your-company-do-vapt-2026",
+      "destination": "https://www.nebulasafetech.com/blogs/how-often-should-your-company-do-vapt-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-often-should-your-company-do-vapt-2026/",
+      "destination": "https://www.nebulasafetech.com/blogs/how-often-should-your-company-do-vapt-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-built-website-problem-2026",
+      "destination": "https://www.nebulasafetech.com/blogs/ai-built-website-problem-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-built-website-problem-2026/",
+      "destination": "https://www.nebulasafetech.com/blogs/ai-built-website-problem-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/modern-full-stack-web-development-2026",
+      "destination": "https://www.nebulasafetech.com/blogs/modern-full-stack-web-development-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/modern-full-stack-web-development-2026/",
+      "destination": "https://www.nebulasafetech.com/blogs/modern-full-stack-web-development-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ui-ux-design-process-modern-websites-2026",
+      "destination": "https://www.nebulasafetech.com/blogs/ui-ux-design-process-modern-websites-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ui-ux-design-process-modern-websites-2026/",
+      "destination": "https://www.nebulasafetech.com/blogs/ui-ux-design-process-modern-websites-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/web-design-2026-ui-ux-user-experience",
+      "destination": "https://www.nebulasafetech.com/blogs/web-design-2026-ui-ux-user-experience",
+      "permanent": true
+    },
+    {
+      "source": "/blog/web-design-2026-ui-ux-user-experience/",
+      "destination": "https://www.nebulasafetech.com/blogs/web-design-2026-ui-ux-user-experience",
+      "permanent": true
+    },
+    {
+      "source": "/blog/modern-web-development-2026-ai-performance-ux",
+      "destination": "https://www.nebulasafetech.com/blogs/modern-web-development-2026-ai-performance-ux",
+      "permanent": true
+    },
+    {
+      "source": "/blog/modern-web-development-2026-ai-performance-ux/",
+      "destination": "https://www.nebulasafetech.com/blogs/modern-web-development-2026-ai-performance-ux",
+      "permanent": true
+    },
+    {
+      "source": "/blog/data-sovereignty-ai-sensitive-enterprise-files",
+      "destination": "https://www.nebulasafetech.com/blogs/data-sovereignty-ai-sensitive-enterprise-files",
+      "permanent": true
+    },
+    {
+      "source": "/blog/data-sovereignty-ai-sensitive-enterprise-files/",
+      "destination": "https://www.nebulasafetech.com/blogs/data-sovereignty-ai-sensitive-enterprise-files",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agent-security-identity-access-enterprise-data",
+      "destination": "https://www.nebulasafetech.com/blogs/ai-agent-security-identity-access-enterprise-data",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agent-security-identity-access-enterprise-data/",
+      "destination": "https://www.nebulasafetech.com/blogs/ai-agent-security-identity-access-enterprise-data",
+      "permanent": true
+    },
+    {
+      "source": "/blog/shadow-ai-agents-enterprise-security-risk",
+      "destination": "https://www.nebulasafetech.com/blogs/shadow-ai-agents-enterprise-security-risk",
+      "permanent": true
+    },
+    {
+      "source": "/blog/shadow-ai-agents-enterprise-security-risk/",
+      "destination": "https://www.nebulasafetech.com/blogs/shadow-ai-agents-enterprise-security-risk",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ransomware-data-theft-protect-business-2026",
+      "destination": "https://www.nebulasafetech.com/blogs/ransomware-data-theft-protect-business-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ransomware-data-theft-protect-business-2026/",
+      "destination": "https://www.nebulasafetech.com/blogs/ransomware-data-theft-protect-business-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agents-enterprise-data-security",
+      "destination": "https://www.nebulasafetech.com/blogs/ai-agents-enterprise-data-security",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ai-agents-enterprise-data-security/",
+      "destination": "https://www.nebulasafetech.com/blogs/ai-agents-enterprise-data-security",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-start-career-cybersecurity",
+      "destination": "https://www.nebulasafetech.com/blogs/how-to-start-career-cybersecurity",
+      "permanent": true
+    },
+    {
+      "source": "/blog/how-to-start-career-cybersecurity/",
+      "destination": "https://www.nebulasafetech.com/blogs/how-to-start-career-cybersecurity",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
@@ -27,12 +177,30 @@
       "destination": "/blogs",
       "permanent": true
     },
-    { "source": "/contact", "destination": "/#contact", "permanent": false },
-    { "source": "/careers", "destination": "/", "permanent": false }
+    {
+      "source": "/contact",
+      "destination": "/#contact",
+      "permanent": false
+    },
+    {
+      "source": "/careers",
+      "destination": "/",
+      "permanent": false
+    }
   ],
   "rewrites": [
-    { "source": "/cgi-bin(.*)", "destination": "/api/not-found" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/cgi-bin(.*)",
+      "destination": "/api/not-found"
+    },
+    {
+      "source": "/blog/(.*)",
+      "destination": "/api/not-found"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
@@ -51,10 +219,22 @@
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
         },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Cross-Origin-Opener-Policy",
+          "value": "same-origin"
+        },
         {
           "key": "Permissions-Policy",
           "value": "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"

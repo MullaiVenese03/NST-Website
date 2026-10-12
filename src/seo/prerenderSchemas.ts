@@ -10,6 +10,7 @@ import {
   HOME_SEO,
   ABOUT_SEO,
   SERVICES_SEO,
+  TESTIMONIALS_SEO,
   CLIENTS_SEO,
   EDTECH_SEO,
   BLOGS_SEO,
@@ -103,11 +104,11 @@ export function getPageSchemaJson(routePath: string, post?: BlogPost): string {
     return toJsonLdScript([pageSchema, sSchema, faq, breadcrumb]);
   }
 
-  if (routePath === "/clients") {
+  if (routePath === "/testimonials" || routePath === "/clients") {
     const pageSchema = webPageSchema({
-      url: `${SITE_ORIGIN}/clients`,
-      name: CLIENTS_SEO.title,
-      description: CLIENTS_SEO.description,
+      url: `${SITE_ORIGIN}/testimonials`,
+      name: TESTIMONIALS_SEO.title,
+      description: TESTIMONIALS_SEO.description,
     });
     const breadcrumb = breadcrumbListSchema([...PAGE_BREADCRUMBS.testimonials], SITE_ORIGIN);
     return toJsonLdScript([pageSchema, breadcrumb]);
@@ -154,7 +155,7 @@ export function getPageSchemaJson(routePath: string, post?: BlogPost): string {
   }
 
   if (post) {
-    const articleCanonicalPath = `/blog/${post.slug}`;
+    const articleCanonicalPath = `/blogs/${post.slug}`;
     const pageSchema = webPageSchema({
       url: `${SITE_ORIGIN}${articleCanonicalPath}`,
       name: `${post.seoTitle || post.title} | ${ORG_NAME}`,

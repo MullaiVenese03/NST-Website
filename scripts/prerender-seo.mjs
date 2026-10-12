@@ -15,7 +15,7 @@
  * client-side hydration does not create duplicate tags.
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, existsSync, rmSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { build } from "esbuild";
@@ -43,7 +43,7 @@ function injectMetadata(templateHtml, meta, routePath, post, prerenderSchemas) {
   let html = templateHtml;
 
   // 1. Authoritative Title
-  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(meta.title)}</title>`);
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title data-rh="true">${escapeHtml(meta.title)}</title>`);
 
   // 2. Remove all existing canonical links, alternate hreflang, descriptions, robots, OG, Twitter, geo, and ld+json
   html = html.replace(/<link\s+[^>]*rel=["']canonical["'][^>]*>\s*/gi, "");
@@ -151,6 +151,26 @@ async function run() {
   const blogPosts = await loadBlogPosts();
   const prerenderSchemas = await loadPrerenderSchemas();
 
+  // Clean up any legacy prerendered artifacts from old builds to prevent serving 200 on old paths
+  const legacyDirs = [
+    path.join(dist, "clients"),
+    path.join(dist, "blog"),
+  ];
+  const legacyFiles = [
+    path.join(dist, "clients.html"),
+    path.join(dist, "blog.html"),
+  ];
+  for (const d of legacyDirs) {
+    if (existsSync(d)) {
+      rmSync(d, { recursive: true, force: true });
+    }
+  }
+  for (const f of legacyFiles) {
+    if (existsSync(f)) {
+      rmSync(f, { force: true });
+    }
+  }
+
   console.log(`prerender-seo: Loaded ${blogPosts.length} blog posts dynamically.`);
 
   // 1. Homepage & Non-blog pages
@@ -220,18 +240,18 @@ async function run() {
       },
     },
     {
-      dir: path.join(dist, "clients"),
-      routePath: "/clients",
+      dir: path.join(dist, "testimonials"),
+      routePath: "/testimonials",
       meta: {
-        title: `Clients & Institutional Programs | ${ORG_NAME}`,
+        title: `Client Testimonials & Institutional Programs | ${ORG_NAME}`,
         description:
           "Cybersecurity awareness workshops, academic MoUs, and enterprise training programs delivered across India by NebulaSafeTech.",
-        canonicalUrl: `${SITE_ORIGIN}/clients`,
+        canonicalUrl: `${SITE_ORIGIN}/testimonials`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
         imageWidth: 1200,
         imageHeight: 630,
-        imageAlt: `Clients & Institutional Programs | ${ORG_NAME}`,
+        imageAlt: `Client Testimonials & Institutional Programs | ${ORG_NAME}`,
         ogType: "website",
       },
     },
@@ -280,22 +300,6 @@ async function run() {
         imageWidth: 1200,
         imageHeight: 630,
         imageAlt: `Terms & Conditions | ${ORG_NAME}`,
-        ogType: "website",
-      },
-    },
-    {
-      dir: path.join(dist, "blog"),
-      routePath: "/blogs",
-      meta: {
-        title: `Technology & Cybersecurity Blog | ${ORG_NAME}`,
-        description:
-          "Read technical guides, VAPT methodologies, cloud-native architecture insights, and cybersecurity career roadmaps from NebulaSafeTech engineers.",
-        canonicalUrl: `${SITE_ORIGIN}/blogs`,
-        imageUrl: DEFAULT_OG_IMAGE,
-        imageType: "image/jpeg",
-        imageWidth: 1200,
-        imageHeight: 630,
-        imageAlt: `Technology & Cybersecurity Blog | ${ORG_NAME}`,
         ogType: "website",
       },
     },
@@ -375,15 +379,11 @@ async function run() {
   }
 
   // 2. Every Blog Post -> Distinct, uncropped, absolute thumbnail Open Graph
-  const blogBaseDir = path.join(dist, "blog");
   const blogsBaseDir = path.join(dist, "blogs");
-  mkdirSync(blogBaseDir, { recursive: true });
   mkdirSync(blogsBaseDir, { recursive: true });
 
   for (const post of blogPosts) {
-    const blogDir = path.join(blogBaseDir, post.slug);
     const blogsDir = path.join(blogsBaseDir, post.slug);
-    mkdirSync(blogDir, { recursive: true });
     mkdirSync(blogsDir, { recursive: true });
 
     // Resolves public thumbnail asset to absolute production URL
@@ -398,7 +398,7 @@ async function run() {
     const blogMeta = {
       title: `${post.seoTitle || post.title} | ${ORG_NAME}`,
       description: post.metaDescription,
-      canonicalUrl: `${SITE_ORIGIN}/blog/${post.slug}`,
+      canonicalUrl: `${SITE_ORIGIN}/blogs/${post.slug}`,
       imageUrl,
       imageType,
       imageWidth: post.featuredImage?.width || 1672,
@@ -407,12 +407,10 @@ async function run() {
       ogType: "article",
     };
 
-    const renderedBlogHtml = injectMetadata(baseHtml, blogMeta, `/blog/${post.slug}`, post, prerenderSchemas);
-    writeFileSync(path.join(blogDir, "index.html"), renderedBlogHtml, "utf-8");
-    writeFileSync(path.join(blogBaseDir, `${post.slug}.html`), renderedBlogHtml, "utf-8");
+    const renderedBlogHtml = injectMetadata(baseHtml, blogMeta, `/blogs/${post.slug}`, post, prerenderSchemas);
     writeFileSync(path.join(blogsDir, "index.html"), renderedBlogHtml, "utf-8");
     writeFileSync(path.join(blogsBaseDir, `${post.slug}.html`), renderedBlogHtml, "utf-8");
-    console.log(`prerender-seo: [OK] /blog/${post.slug} -> og:image = ${imageUrl}`);
+    console.log(`prerender-seo: [OK] /blogs/${post.slug} -> og:image = ${imageUrl}`);
   }
 
   console.log("prerender-seo: All social sharing metadata pre-rendered successfully.");

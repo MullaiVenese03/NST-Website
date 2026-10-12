@@ -731,11 +731,11 @@ function CTASection() {
               }}>
               Contact Form <ArrowRight size={16} />
             </motion.a>
-            <motion.a href="/clients"
+            <motion.a href="/testimonials"
               className="flex items-center gap-2 no-underline rounded-[14px] px-8 py-4"
               style={{ background: "#fff", color: C.primary, border: `2px solid ${C.border}`, fontWeight: 700, fontSize: "15px" }}
               whileHover={{ scale: 1.04, borderColor: C.primary, background: C.accent }} whileTap={{ scale: 0.96 }}>
-              View Our Clients <ChevronRight size={16} />
+              View Our Testimonials <ChevronRight size={16} />
             </motion.a>
           </div>
 

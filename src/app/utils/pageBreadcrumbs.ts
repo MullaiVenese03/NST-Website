@@ -13,7 +13,7 @@ export const PAGE_BREADCRUMBS = {
   ],
   testimonials: [
     { name: "Home", path: "/" },
-    { name: "Testimonials", path: "/clients" },
+    { name: "Testimonials", path: "/testimonials" },
   ],
   edtech: [
     { name: "Home", path: "/" },

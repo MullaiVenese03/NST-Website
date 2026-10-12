@@ -91,7 +91,7 @@ export function BlogSidebar({
             {relatedPosts.slice(0, 3).map((rPost) => (
               <Link
                 key={rPost.id}
-                to={`/blog/${rPost.slug}`}
+                to={`/blogs/${rPost.slug}`}
                 className="py-3 first:pt-0 last:pb-0 group flex items-center gap-3 text-left no-underline"
               >
                 {/* Mini Thumbnail - Preserves full uncropped image */}

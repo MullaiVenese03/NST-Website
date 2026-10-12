@@ -56,12 +56,20 @@ export const SERVICES_SEO: PageSeo = {
   canonicalPath: "/services",
 };
 
-export const CLIENTS_SEO: PageSeo = {
-  title: `Clients & Institutional Programs | ${ORG_NAME}`,
-  description: `${BUSINESS_IDENTITY} Cybersecurity awareness workshops, academic MoUs, and enterprise training programs delivered across India.`,
-  keywords: [...baseKeywords, "cybersecurity training clients", "academic MoU cybersecurity", "institutional security training"],
-  canonicalPath: "/clients",
+export const TESTIMONIALS_SEO: PageSeo = {
+  title: `Client Testimonials & Institutional Programs | ${ORG_NAME}`,
+  description: `${BUSINESS_IDENTITY} Explore testimonials, cybersecurity awareness workshops, academic MoUs, and enterprise training programs delivered across India.`,
+  keywords: [
+    ...baseKeywords,
+    "cybersecurity testimonials",
+    "client reviews",
+    "academic MoU cybersecurity",
+    "institutional security training",
+  ],
+  canonicalPath: "/testimonials",
 };
+
+export const CLIENTS_SEO = TESTIMONIALS_SEO;
 
 export const EDTECH_SEO: PageSeo = {
   title: `EdTech & Cybersecurity Career Programs | ${ORG_NAME}`,

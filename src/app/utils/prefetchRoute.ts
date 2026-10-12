@@ -1,23 +1,12 @@
 const prefetched = new Set<string>();
 
-const routeLoaders: Record<string, () => Promise<unknown>> = {
+const staticRouteLoaders: Record<string, () => Promise<unknown>> = {
   "/": () => import("../pages/HomePage"),
   "/about": () => import("../pages/AboutPage"),
   "/services": () => import("../pages/ServicesPage"),
-  "/clients": () => import("../pages/ClientsPage"),
+  "/testimonials": () => import("../pages/ClientsPage"),
   "/edtech": () => import("../pages/EdTechPage"),
   "/blogs": () => import("../pages/BlogsPage"),
-  "/blog": () => import("../pages/BlogsPage"),
-  "/blog/modern-full-stack-web-development-2026": () => import("../pages/BlogPostPage"),
-  "/blog/ui-ux-design-process-modern-websites-2026": () => import("../pages/BlogPostPage"),
-  "/blog/web-design-2026-ui-ux-user-experience": () => import("../pages/BlogPostPage"),
-  "/blog/modern-web-development-2026-ai-performance-ux": () => import("../pages/BlogPostPage"),
-  "/blog/data-sovereignty-ai-sensitive-enterprise-files": () => import("../pages/BlogPostPage"),
-  "/blog/ai-agent-security-identity-access-enterprise-data": () => import("../pages/BlogPostPage"),
-  "/blog/shadow-ai-agents-enterprise-security-risk": () => import("../pages/BlogPostPage"),
-  "/blog/ransomware-data-theft-protect-business-2026": () => import("../pages/BlogPostPage"),
-  "/blog/ai-agents-enterprise-data-security": () => import("../pages/BlogPostPage"),
-  "/blog/how-to-start-career-cybersecurity": () => import("../pages/BlogPostPage"),
   "/privacy-policy": () => import("../pages/PrivacyPolicyPage"),
   "/terms-and-conditions": () => import("../pages/TermsAndConditionsPage"),
 };
@@ -26,7 +15,12 @@ const routeLoaders: Record<string, () => Promise<unknown>> = {
 export function prefetchRoute(path: string): void {
   const normalized = path.split("#")[0] || "/";
   if (prefetched.has(normalized)) return;
-  const loader = routeLoaders[normalized];
+  let loader = staticRouteLoaders[normalized];
+  if (!loader && (normalized.startsWith("/blogs/") || normalized.startsWith("/blog/"))) {
+    loader = () => import("../pages/BlogPostPage");
+  } else if (!loader && normalized.startsWith("/services/")) {
+    loader = () => import("../pages/ServiceDetailPage");
+  }
   if (!loader) return;
   prefetched.add(normalized);
   void loader();

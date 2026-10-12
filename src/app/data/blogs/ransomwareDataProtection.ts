@@ -1025,7 +1025,7 @@ Stolen copies still exist`,
         },
         {
           type: "p",
-          text: "If your organization is evaluating how to protect sensitive files and organizational data as part of a broader defense-in-depth strategy, explore how [AI agents affect enterprise data access](/blog/ai-agents-enterprise-data-security) and what a controlled data-security layer can contribute.",
+          text: "If your organization is evaluating how to protect sensitive files and organizational data as part of a broader defense-in-depth strategy, explore how [AI agents affect enterprise data access](/blogs/ai-agents-enterprise-data-security) and what a controlled data-security layer can contribute.",
         },
       ],
     },

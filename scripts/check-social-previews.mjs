@@ -73,13 +73,13 @@ async function checkAll() {
     }
 
     // Check pre-rendered HTML in dist
-    const distHtmlPath = path.join(root, "dist", "blog", post.slug, "index.html");
+    const distHtmlPath = path.join(root, "dist", "blogs", post.slug, "index.html");
     if (fs.existsSync(distHtmlPath)) {
       const html = fs.readFileSync(distHtmlPath, "utf8");
-      const ogMatch = html.match(/<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i);
-      const twMatch = html.match(/<meta\s+name=["']twitter:image["']\s+content=["']([^"']+)["']/i);
-      const ogW = html.match(/<meta\s+property=["']og:image:width["']\s+content=["']([^"']+)["']/i);
-      const ogH = html.match(/<meta\s+property=["']og:image:height["']\s+content=["']([^"']+)["']/i);
+      const ogMatch = html.match(/<meta\s+[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i);
+      const twMatch = html.match(/<meta\s+[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i);
+      const ogW = html.match(/<meta\s+[^>]*property=["']og:image:width["'][^>]*content=["']([^"']+)["']/i);
+      const ogH = html.match(/<meta\s+[^>]*property=["']og:image:height["'][^>]*content=["']([^"']+)["']/i);
       
       const expectedUrl = `https://www.nebulasafetech.com${fi.src.startsWith("/") ? fi.src : `/${fi.src}`}`;
       const ogUrl = ogMatch ? ogMatch[1] : null;
@@ -101,7 +101,7 @@ async function checkAll() {
         console.log(`  [OK] Social meta in dist matches current featuredImage.`);
       }
     } else {
-      console.warn(`  [WARN] dist/blog/${post.slug}/index.html does not exist.`);
+      console.warn(`  [WARN] dist/blogs/${post.slug}/index.html does not exist.`);
     }
   }
 

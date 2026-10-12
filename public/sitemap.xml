@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.nebulasafetech.com/</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -13,7 +13,7 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/about</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -23,7 +23,7 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -33,7 +33,7 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services/cybersecurity</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -43,7 +43,7 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services/web-development</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -53,7 +53,7 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services/ui-ux-design</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -63,7 +63,7 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/services/edtech-training</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -72,8 +72,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/clients</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/testimonials</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
     <image:image>
@@ -83,7 +83,7 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/edtech</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -93,7 +93,7 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/blogs</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -102,8 +102,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/ai-agent-attack-surface-security-checklist-2026</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/ai-agent-attack-surface-security-checklist-2026</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -112,8 +112,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/how-often-should-your-company-do-vapt-2026</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/how-often-should-your-company-do-vapt-2026</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -122,8 +122,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/ai-built-website-problem-2026</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/ai-built-website-problem-2026</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -132,8 +132,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/modern-full-stack-web-development-2026</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/modern-full-stack-web-development-2026</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -142,8 +142,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/ui-ux-design-process-modern-websites-2026</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/ui-ux-design-process-modern-websites-2026</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -152,8 +152,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/web-design-2026-ui-ux-user-experience</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/web-design-2026-ui-ux-user-experience</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -162,8 +162,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/modern-web-development-2026-ai-performance-ux</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/modern-web-development-2026-ai-performance-ux</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -172,8 +172,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/data-sovereignty-ai-sensitive-enterprise-files</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/data-sovereignty-ai-sensitive-enterprise-files</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -182,8 +182,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/ai-agent-security-identity-access-enterprise-data</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/ai-agent-security-identity-access-enterprise-data</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -192,8 +192,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/shadow-ai-agents-enterprise-security-risk</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/shadow-ai-agents-enterprise-security-risk</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -202,8 +202,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/ransomware-data-theft-protect-business-2026</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/ransomware-data-theft-protect-business-2026</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -212,8 +212,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/ai-agents-enterprise-data-security</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/ai-agents-enterprise-data-security</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -222,8 +222,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://www.nebulasafetech.com/blog/how-to-start-career-cybersecurity</loc>
-    <lastmod>2026-10-11</lastmod>
+    <loc>https://www.nebulasafetech.com/blogs/how-to-start-career-cybersecurity</loc>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image>
@@ -233,13 +233,13 @@
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/privacy-policy</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://www.nebulasafetech.com/terms-and-conditions</loc>
-    <lastmod>2026-10-11</lastmod>
+    <lastmod>2026-10-12</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
