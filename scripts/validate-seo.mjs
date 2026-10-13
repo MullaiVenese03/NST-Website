@@ -668,6 +668,12 @@ async function runValidation() {
     pass("Confirmed CSP permits https://stats.g.doubleclick.net (resolves DoubleClick/GA4 violation).");
   }
 
+  if (!cspVal.includes("https://www.google.co.in")) {
+    fail("CSP in vercel.json missing https://www.google.co.in in img-src (resolves Google Ads ga-audiences violation)");
+  } else {
+    pass("Confirmed CSP permits https://www.google.co.in (resolves Google Ads ga-audiences violation).");
+  }
+
   // =========================================================================
   // SUMMARY REPORT
   // =========================================================================

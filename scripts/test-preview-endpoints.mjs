@@ -53,6 +53,9 @@ async function run() {
       const hasDblClick = home.headers["content-security-policy"].includes("stats.g.doubleclick.net");
       console.log(`CSP contains stats.g.doubleclick.net: ${hasDblClick}`);
       if (!hasDblClick) failed = true;
+      const hasGoogleCoIn = home.headers["content-security-policy"].includes("https://www.google.co.in");
+      console.log(`CSP contains https://www.google.co.in: ${hasGoogleCoIn}`);
+      if (!hasGoogleCoIn) failed = true;
     }
     const hasHeroMarkup = home.body.includes("One</span> Purpose.") && home.body.includes("company-icon-72.webp");
     console.log(`Prerendered hero injected into #root: ${hasHeroMarkup}`);
