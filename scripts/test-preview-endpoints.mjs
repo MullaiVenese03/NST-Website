@@ -106,13 +106,6 @@ async function run() {
     const hasBlogMeta = blog.body.includes("AI Agents") && blog.body.includes("og:image");
     console.log(`Contains blog prerendered metadata: ${hasBlogMeta}`);
 
-    // 6. Test /0138bf1db8ee4112916efd593da4e115.txt
-    console.log("\n--- Testing GET /0138bf1db8ee4112916efd593da4e115.txt ---");
-    const keyFile = await fetchUrl("/0138bf1db8ee4112916efd593da4e115.txt");
-    console.log(`Status: ${keyFile.statusCode}`);
-    console.log(`Key file content valid: ${keyFile.body.trim() === "0138bf1db8ee4112916efd593da4e115"}`);
-    if (keyFile.statusCode !== 200 || keyFile.body.trim() !== "0138bf1db8ee4112916efd593da4e115") failed = true;
-
     console.log("\n==========================================");
     if (failed) {
       console.error("ENDPOINT VALIDATION FAILED!");

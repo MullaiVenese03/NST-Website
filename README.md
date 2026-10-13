@@ -218,21 +218,6 @@ The build process automatically runs:
 | `npm run generate:favicons` | Regenerates favicon assets in `public/` |
 | `npm run optimize:og` | Generates `public/og-image.webp` |
 | `npm run optimize:fonts` | Subsets TTF fonts in `scripts/font-sources/` to WOFF2 in `src/assets/fonts/` |
-| `npm run submit:indexnow` | Submits changed, new, or specified canonical URLs to IndexNow protocol |
-| `npm run test:indexnow` | Executes comprehensive test suite for IndexNow URL submission & security |
-
----
-
-## 🔍 IndexNow URL Submission Automation
-
-NebulaSafeTech automatically notifies participating search engines (Bing, Yandex, Seznam, Naver) via the **IndexNow** protocol when public pages or blog posts are published, updated, or removed.
-
-- **Verification Key**: `public/0138bf1db8ee4112916efd593da4e115.txt`
-- **Verification Endpoint**: `https://www.nebulasafetech.com/0138bf1db8ee4112916efd593da4e115.txt`
-- **Core Library**: `scripts/indexnow-core.mjs`
-- **CLI Tool**: `scripts/submit-indexnow.mjs`
-- **Serverless Endpoint**: `api/indexnow.js` (`POST /api/indexnow`, authenticated via `Bearer <INDEXNOW_SECRET>`)
-- **Automated Workflow**: `.github/workflows/indexnow.yml` runs on push to `main` when blog posts or pages change.
 
 ---
 
