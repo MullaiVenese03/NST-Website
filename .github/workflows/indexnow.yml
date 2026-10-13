@@ -1,0 +1,69 @@
+name: IndexNow URL Submission
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/app/data/blogs/**'
+      - 'src/app/data/blogsData.ts'
+      - 'src/app/pages/**'
+      - 'src/app/routes.tsx'
+      - 'src/app/data/serviceDetailContent.ts'
+      - 'src/app/data/clientsData.ts'
+      - 'public/sitemap.xml'
+      - 'scripts/generate-sitemap.mjs'
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'Specific URL(s) to submit (space-separated, or leave empty to auto-detect from Git)'
+        required: false
+        default: ''
+      dry_run:
+        description: 'Dry run mode (validate payload without pinging IndexNow API)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: indexnow-submission
+  cancel-in-progress: false
+
+jobs:
+  submit-indexnow:
+    name: Submit Changed URLs to IndexNow
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # Fetch full commit history so git diff between before and sha works reliably
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Detect changed canonical URLs
+        id: detect
+        run: |
+          node scripts/detect-changed-urls.mjs \
+            --base "${{ github.event.before }}" \
+            --head "${{ github.sha }}" \
+            --output .indexnow-urls.txt
+        env:
+          MANUAL_URLS: ${{ inputs.urls }}
+
+      - name: Submit URLs to IndexNow
+        run: |
+          node scripts/submit-indexnow.mjs \
+            --urls-file .indexnow-urls.txt \
+            --changed-only \
+            --verify-live \
+            ${{ inputs.dry_run == true && '--dry-run' || '' }}
+        env:
+          # Optional GitHub repository secret.
+          # If not configured, script reads the key from public/0138bf1db8ee4112916efd593da4e115.txt.
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}

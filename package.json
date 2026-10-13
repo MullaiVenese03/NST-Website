@@ -14,7 +14,8 @@
     "optimize:fonts": "node scripts/optimize-fonts.mjs",
     "optimize:og": "node scripts/optimize-og.mjs",
     "optimize:blogs": "node scripts/optimize-blog-images.mjs",
-    "submit:indexnow": "node scripts/submit-indexnow.mjs"
+    "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "test:indexnow": "node scripts/test-indexnow-automation.mjs"
   },
   "dependencies": {
     "@formspree/core": "^4.0.0",
