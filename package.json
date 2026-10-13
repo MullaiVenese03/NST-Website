@@ -13,7 +13,9 @@
     "validate:seo": "node scripts/validate-seo.mjs",
     "optimize:fonts": "node scripts/optimize-fonts.mjs",
     "optimize:og": "node scripts/optimize-og.mjs",
-    "optimize:blogs": "node scripts/optimize-blog-images.mjs"
+    "optimize:blogs": "node scripts/optimize-blog-images.mjs",
+    "submit:indexnow": "node scripts/submit-indexnow.mjs",
+    "test:indexnow": "node scripts/test-indexnow.mjs"
   },
   "dependencies": {
     "@formspree/core": "^4.0.0",

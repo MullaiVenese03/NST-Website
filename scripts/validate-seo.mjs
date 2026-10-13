@@ -675,6 +675,22 @@ async function runValidation() {
   }
 
   // =========================================================================
+  // CHECK 9: IndexNow Protocol Key File & Configuration Audit
+  // =========================================================================
+  console.log("\n--- 9. AUDITING INDEXNOW PROTOCOL KEY & CONFIGURATION ---");
+  const indexNowKeyPath = path.join(root, "public", "0138bf1db8ee4112916efd593da4e115.txt");
+  if (!existsSync(indexNowKeyPath)) {
+    fail("Missing IndexNow key file at public/0138bf1db8ee4112916efd593da4e115.txt");
+  } else {
+    const keyVal = readFileSync(indexNowKeyPath, "utf-8").trim();
+    if (keyVal !== "0138bf1db8ee4112916efd593da4e115") {
+      fail(`IndexNow key content mismatch in 0138bf1db8ee4112916efd593da4e115.txt: '${keyVal}'`);
+    } else {
+      pass("Confirmed IndexNow verification key file (public/0138bf1db8ee4112916efd593da4e115.txt) is present and valid.");
+    }
+  }
+
+  // =========================================================================
   // SUMMARY REPORT
   // =========================================================================
   console.log("\n===============================================================");
