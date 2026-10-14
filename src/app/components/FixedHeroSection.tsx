@@ -1,3 +1,6 @@
+import { Link } from "react-router";
+import { ArrowRight } from "lucide-react";
+
 const GPU_LAYER = {
   willChange: "transform, opacity",
   transform: "translateZ(0)",
@@ -29,9 +32,7 @@ export default function FixedHeroSection() {
       className="flex w-full max-w-[min(100%,44rem)] flex-col items-center gap-8 text-center md:max-w-3xl md:items-start md:gap-6 md:text-left"
       style={GPU_LAYER}
     >
-      <h1
-        className="nst-h1-hero max-w-full text-gray-900"
-      >
+      <h1 className="nst-h1-hero max-w-full text-gray-900">
         <span className="flex flex-col gap-1">
           <span>
             <span className="text-[#015aaa]">One</span> Entry.
@@ -49,6 +50,23 @@ export default function FixedHeroSection() {
         Cybersecurity and IT solutions built to protect what matters most - your data, your systems,
         your future.
       </p>
+
+      {/* Hero Calls to Action */}
+      <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
+        <Link
+          to="/contact"
+          className="nst-ui font-semibold inline-flex items-center justify-center gap-2 rounded-xl bg-[#015AAA] text-white px-4 sm:px-5 py-2.5 min-h-[42px] w-full sm:w-auto max-w-[270px] sm:max-w-none no-underline hover:bg-[#014080] transition-colors shadow-xs hover:shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA] text-xs sm:text-sm whitespace-nowrap"
+        >
+          <span>Request a Security Assessment</span>
+          <ArrowRight size={14} aria-hidden="true" />
+        </Link>
+        <Link
+          to="/services"
+          className="nst-ui font-semibold inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200/90 bg-white/80 backdrop-blur-xs text-slate-700 px-4 sm:px-5 py-2.5 min-h-[42px] w-full sm:w-auto max-w-[270px] sm:max-w-none no-underline hover:bg-white hover:border-slate-300 hover:text-[#015AAA] transition-colors shadow-xs focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA] text-xs sm:text-sm whitespace-nowrap"
+        >
+          <span>Explore Our Services</span>
+        </Link>
+      </div>
 
       <div className="nst-small flex flex-wrap items-center justify-center gap-2 text-gray-500 md:justify-start">
         <ShieldIcon className="h-5 w-5 shrink-0 text-[#015aaa]" />

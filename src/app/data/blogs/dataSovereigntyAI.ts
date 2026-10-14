@@ -8,7 +8,7 @@ export const blogPostDataSovereigntyAI: BlogPost = {
   seoTitle:
     "Data Sovereignty in the Age of AI: Protecting Sensitive Enterprise Files",
   metaDescription:
-    "AI and cloud adoption are changing enterprise data security. Learn how data sovereignty, access control, encryption, device binding, and auditability can protect sensitive files.",
+    "Learn how enterprise data sovereignty, access controls, cryptographic protection, and device binding safeguard sensitive corporate files.",
   excerpt:
     "AI and cloud services are changing how organizations access sensitive information. Data sovereignty is about maintaining meaningful control over data - including where it is stored, who can access it, how access is enforced, how activity is audited, and what happens when access needs to be removed.",
   category: "Cybersecurity",

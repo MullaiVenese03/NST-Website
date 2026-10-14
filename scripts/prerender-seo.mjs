@@ -187,7 +187,7 @@ async function run() {
       meta: {
         title: "NebulaSafeTech | Cybersecurity, VAPT & Digital Solutions",
         description:
-          "NebulaSafeTech delivers expert VAPT cybersecurity, secure web development, UI/UX design, and EdTech training for organizations across India and worldwide.",
+          "NebulaSafeTech delivers VAPT cybersecurity, secure web application development, UI/UX design, and practical EdTech training programs.",
         canonicalUrl: `${SITE_ORIGIN}/`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
@@ -219,7 +219,7 @@ async function run() {
       meta: {
         title: `About ${ORG_NAME} | Cybersecurity & Digital Engineering Experts`,
         description:
-          "NebulaSafeTech is a cybersecurity and digital solutions company based in Hosur, Tamil Nadu, India. Learn how our defenders-first engineering team delivers enterprise-grade security.",
+          "Learn how NebulaSafeTech's defenders-first engineering team in Hosur, India delivers enterprise cybersecurity, secure software, and innovation.",
         canonicalUrl: `${SITE_ORIGIN}/about`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
@@ -235,7 +235,7 @@ async function run() {
       meta: {
         title: `Services | ${ORG_NAME} - Security, Web, UI/UX & Training`,
         description:
-          "Explore VAPT vulnerability assessments, full-stack React web engineering, UI/UX design systems, and institutional cybersecurity training from NebulaSafeTech.",
+          "Explore NebulaSafeTech services including VAPT security assessments, full-stack web engineering, UI/UX product design, and corporate training.",
         canonicalUrl: `${SITE_ORIGIN}/services`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
@@ -251,7 +251,7 @@ async function run() {
       meta: {
         title: `Client Testimonials & Institutional Programs | ${ORG_NAME}`,
         description:
-          "Cybersecurity awareness workshops, academic MoUs, and enterprise training programs delivered across India by NebulaSafeTech.",
+          "Explore testimonials, cybersecurity awareness workshops, academic MoUs, and enterprise training programs delivered across India by NebulaSafeTech.",
         canonicalUrl: `${SITE_ORIGIN}/testimonials`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
@@ -315,7 +315,7 @@ async function run() {
       meta: {
         title: `Cybersecurity Services & Assessments | ${ORG_NAME}`,
         description:
-          `${ORG_NAME} in Hosur, Tamil Nadu delivers practical cybersecurity services including VAPT, application and cloud security, network hardening, and awareness programs for teams across India and abroad.`,
+          "Protect systems with comprehensive VAPT assessments, application security, cloud auditing, network hardening, and actionable remediation from NST.",
         canonicalUrl: `${SITE_ORIGIN}/services/cybersecurity`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
@@ -331,7 +331,7 @@ async function run() {
       meta: {
         title: `Full-Stack Web Development | ${ORG_NAME}`,
         description:
-          `${ORG_NAME} builds scalable, secure web applications from Hosur, India with modern stacks, secure SDLC practices, and production-ready delivery for startups and enterprises.`,
+          "Build scalable, high-performance web applications with modern React stacks, secure development lifecycles, and cloud-ready architectures from NST.",
         canonicalUrl: `${SITE_ORIGIN}/services/web-development`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
@@ -347,7 +347,7 @@ async function run() {
       meta: {
         title: `UI/UX Design & Product Experience | ${ORG_NAME}`,
         description:
-          `${ORG_NAME} crafts accessible, conversion-focused UI and UX for security products, SaaS, and marketing sites-aligned with your brand and engineering constraints.`,
+          "Craft accessible, conversion-focused interfaces, design systems, and seamless user experiences for SaaS platforms and modern digital products.",
         canonicalUrl: `${SITE_ORIGIN}/services/ui-ux-design`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
@@ -363,13 +363,29 @@ async function run() {
       meta: {
         title: `EdTech & Cybersecurity Training | ${ORG_NAME}`,
         description:
-          "Structured cybersecurity training, labs, certifications, and institutional programs that connect learners to real-world projects from NebulaSafeTech.",
+          "Advance technical capabilities through hands-on cybersecurity labs, industry certifications, and institutional learning programs from NST.",
         canonicalUrl: `${SITE_ORIGIN}/services/edtech-training`,
         imageUrl: DEFAULT_OG_IMAGE,
         imageType: "image/jpeg",
         imageWidth: 1200,
         imageHeight: 630,
         imageAlt: `EdTech & Cybersecurity Training | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
+      dir: path.join(dist, "contact"),
+      routePath: "/contact",
+      meta: {
+        title: `Contact ${ORG_NAME} | Cybersecurity, Web Development & Training Inquiries`,
+        description:
+          "Get in touch with NebulaSafeTech to discuss cybersecurity assessments, custom web engineering, UI/UX design, or institutional training programs.",
+        canonicalUrl: `${SITE_ORIGIN}/contact`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `Contact ${ORG_NAME} | Cybersecurity, Web Development & Training Inquiries`,
         ogType: "website",
       },
     },

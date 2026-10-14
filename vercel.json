@@ -176,16 +176,6 @@
       ],
       "destination": "/blogs",
       "permanent": true
-    },
-    {
-      "source": "/contact",
-      "destination": "/#contact",
-      "permanent": false
-    },
-    {
-      "source": "/careers",
-      "destination": "/",
-      "permanent": false
     }
   ],
   "rewrites": [
@@ -203,6 +193,10 @@
     },
     {
       "source": "/services/:slug+",
+      "destination": "/api/not-found"
+    },
+    {
+      "source": "/careers",
       "destination": "/api/not-found"
     },
     {

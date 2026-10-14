@@ -43,25 +43,9 @@ export function scrollToSection(
 }
 
 export function navigateToContact(
-  navigate: (to: { pathname: string; hash?: string }) => void,
-  isHome: boolean,
+  navigate: (to: string) => void,
+  _isHome?: boolean,
 ) {
-  const scrollToFooter = () =>
-    scrollToSection("contact", { behavior: "smooth", block: "end", maxAttempts: 120 });
-
-  if (isHome) {
-    navigate({ pathname: "/", hash: "contact" });
-    // Give the lazy-loaded footer time to mount before scrolling
-    setTimeout(scrollToFooter, 350);
-    return;
-  }
-
-  if (document.getElementById("contact")) {
-    window.history.replaceState(null, "", `${window.location.pathname}#contact`);
-    scrollToFooter();
-    return;
-  }
-
-  navigate({ pathname: "/", hash: "contact" });
-  setTimeout(scrollToFooter, 350);
-}
+  scrollToTopInstant();
+  navigate("/contact");
+}

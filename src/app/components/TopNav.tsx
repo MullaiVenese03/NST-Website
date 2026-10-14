@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import { brandMarkUrl } from "../../brandMark";
 import { scrollToTopInstant } from "../utils/scroll";
 
@@ -19,15 +19,14 @@ function NstLogo() {
 }
 
 export default function TopNav() {
-  const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLogoClick = () => {
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === "/") {
+      e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       scrollToTopInstant();
-      navigate("/");
     }
   };
 
@@ -43,9 +42,9 @@ export default function TopNav() {
         boxShadow: "0 2px 8px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.6)",
       }}
     >
-      <button
-        type="button"
-        className="flex items-center gap-2.5 sm:gap-3 cursor-pointer border-none bg-transparent p-0 text-left rounded-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015aaa]/60"
+      <Link
+        to="/"
+        className="flex items-center gap-2.5 sm:gap-3 border-none bg-transparent p-0 text-left rounded-xl no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015aaa]/60"
         onClick={handleLogoClick}
         aria-label="NebulaSafeTech home"
       >
@@ -56,7 +55,7 @@ export default function TopNav() {
         >
           NebulaSafeTech
         </span>
-      </button>
+      </Link>
     </nav>
   );
 }

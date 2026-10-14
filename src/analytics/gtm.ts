@@ -20,3 +20,13 @@ export function trackPageView(pagePath: string, pageTitle?: string): void {
 export function trackContactFormSuccess(): void {
   pushDataLayer({ event: "contact_form_success" });
 }
+
+/** Fires when a user clicks the WhatsApp contact link.
+ *  No PII is included — click source only. */
+export function trackWhatsAppClick(source: string = "website"): void {
+  pushDataLayer({
+    event: "whatsapp_click",
+    click_source: source,
+  });
+}
+

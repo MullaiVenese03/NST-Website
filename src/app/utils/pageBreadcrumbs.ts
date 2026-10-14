@@ -31,6 +31,10 @@ export const PAGE_BREADCRUMBS = {
     { name: "Home", path: "/" },
     { name: "Terms & Conditions", path: "/terms-and-conditions" },
   ],
+  contact: [
+    { name: "Home", path: "/" },
+    { name: "Contact", path: "/contact" },
+  ],
 } as const satisfies Record<string, readonly BreadcrumbItem[]>;
 
 

@@ -24,7 +24,7 @@ const baseKeywords = [
 export const HOME_SEO: PageSeo = {
   title: "NebulaSafeTech | Cybersecurity, VAPT & Digital Solutions",
   description:
-    "NebulaSafeTech delivers expert VAPT cybersecurity, secure web development, UI/UX design, and EdTech training for organizations across India and worldwide.",
+    "NebulaSafeTech delivers VAPT cybersecurity, secure web application development, UI/UX design, and practical EdTech training programs.",
   keywords: [
     ...baseKeywords,
     "VAPT services",
@@ -45,14 +45,16 @@ export const NOT_FOUND_SEO = {
 
 export const ABOUT_SEO: PageSeo = {
   title: `About ${ORG_NAME} | Cybersecurity & Digital Engineering Experts`,
-  description: `${BUSINESS_IDENTITY} Learn how our defenders-first engineering team delivers enterprise-grade security, transparency, and product innovation.`,
+  description:
+    "Learn how NebulaSafeTech's defenders-first engineering team in Hosur, India delivers enterprise cybersecurity, secure software, and innovation.",
   keywords: [...baseKeywords, "about NebulaSafeTech", "cybersecurity team India", "security engineering experts"],
   canonicalPath: "/about",
 };
 
 export const SERVICES_SEO: PageSeo = {
   title: `Services | ${ORG_NAME} - Security, Web, UI/UX & Training`,
-  description: `${BUSINESS_DESCRIPTION} Explore VAPT vulnerability assessments, full-stack React web engineering, UI/UX design systems, and institutional cybersecurity training.`,
+  description:
+    "Explore NebulaSafeTech services including VAPT security assessments, full-stack web engineering, UI/UX product design, and corporate training.",
   keywords: [
     ...baseKeywords,
     "cybersecurity services",
@@ -66,7 +68,8 @@ export const SERVICES_SEO: PageSeo = {
 
 export const TESTIMONIALS_SEO: PageSeo = {
   title: `Client Testimonials & Institutional Programs | ${ORG_NAME}`,
-  description: `${BUSINESS_IDENTITY} Explore testimonials, cybersecurity awareness workshops, academic MoUs, and enterprise training programs delivered across India.`,
+  description:
+    "Explore testimonials, cybersecurity awareness workshops, academic MoUs, and enterprise training programs delivered across India by NebulaSafeTech.",
   keywords: [
     ...baseKeywords,
     "cybersecurity testimonials",
@@ -81,7 +84,8 @@ export const CLIENTS_SEO = TESTIMONIALS_SEO;
 
 export const EDTECH_SEO: PageSeo = {
   title: `EdTech & Cybersecurity Career Programs | ${ORG_NAME}`,
-  description: `${BUSINESS_IDENTITY} Industry-grade cybersecurity learning paths, hands-on vulnerability labs, student certifications, and capstone project guidance.`,
+  description:
+    "Industry-grade cybersecurity learning paths, hands-on vulnerability labs, student certifications, and capstone project guidance from NebulaSafeTech.",
   keywords: [...baseKeywords, "cybersecurity EdTech", "ethical hacking labs", "student cybersecurity courses", "NST EdTech ecosystem"],
   canonicalPath: "/edtech",
 };
@@ -107,6 +111,22 @@ export const TERMS_SEO: PageSeo = {
   canonicalPath: "/terms-and-conditions",
 };
 
+export const CONTACT_SEO: PageSeo = {
+  title: `Contact ${ORG_NAME} | Cybersecurity, Web Development & Training Inquiries`,
+  description:
+    "Get in touch with NebulaSafeTech to discuss cybersecurity assessments, custom web engineering, UI/UX design, or institutional training programs.",
+  keywords: [
+    ...baseKeywords,
+    "contact NebulaSafeTech",
+    "cybersecurity inquiry",
+    "VAPT consultation",
+    "web development quote",
+    "Hosur cybersecurity company",
+  ],
+  canonicalPath: "/contact",
+};
+
+
 
 export type ServiceSlug = "web-development" | "cybersecurity" | "ui-ux-design" | "edtech-training";
 
@@ -116,7 +136,8 @@ const SERVICE_DETAIL: Record<
 > = {
   "web-development": {
     title: `Full-Stack Web Development | ${ORG_NAME}`,
-    description: `${ORG_NAME} builds scalable, secure web applications from Hosur, India with modern stacks, secure SDLC practices, and production-ready delivery for startups and enterprises.`,
+    description:
+      "Build scalable, high-performance web applications with modern React stacks, secure development lifecycles, and cloud-ready architectures from NST.",
     keywords: [...baseKeywords, "full-stack web development", "React development", "Node.js", "secure web apps"],
     canonicalPath: "/services/web-development",
     serviceType: "Full-Stack Web Development",
@@ -125,7 +146,8 @@ const SERVICE_DETAIL: Record<
   },
   cybersecurity: {
     title: `Cybersecurity Services & Assessments | ${ORG_NAME}`,
-    description: `${ORG_NAME} in Hosur, Tamil Nadu delivers practical cybersecurity services including VAPT, application and cloud security, network hardening, and awareness programs for teams across India and abroad.`,
+    description:
+      "Protect systems with comprehensive VAPT assessments, application security, cloud auditing, network hardening, and actionable remediation from NST.",
     keywords: [...baseKeywords, "VAPT", "penetration testing", "cloud security", "application security"],
     canonicalPath: "/services/cybersecurity",
     serviceType: "Cybersecurity Services",
@@ -134,7 +156,8 @@ const SERVICE_DETAIL: Record<
   },
   "ui-ux-design": {
     title: `UI/UX Design & Product Experience | ${ORG_NAME}`,
-    description: `${ORG_NAME} crafts accessible, conversion-focused UI and UX for security products, SaaS, and marketing sites-aligned with your brand and engineering constraints.`,
+    description:
+      "Craft accessible, conversion-focused interfaces, design systems, and seamless user experiences for SaaS platforms and modern digital products.",
     keywords: [...baseKeywords, "UI UX design", "product design", "Figma", "design systems"],
     canonicalPath: "/services/ui-ux-design",
     serviceType: "UI/UX Design Services",
@@ -143,7 +166,8 @@ const SERVICE_DETAIL: Record<
   },
   "edtech-training": {
     title: `EdTech & Cybersecurity Training | ${ORG_NAME}`,
-    description: `${BUSINESS_IDENTITY} Structured cybersecurity training, labs, certifications, and institutional programs that connect learners to real-world projects.`,
+    description:
+      "Advance technical capabilities through hands-on cybersecurity labs, industry certifications, and institutional learning programs from NST.",
     keywords: [...baseKeywords, "cybersecurity training", "EdTech programs", "student certifications"],
     canonicalPath: "/services/edtech-training",
     serviceType: "EdTech & Cybersecurity Training",

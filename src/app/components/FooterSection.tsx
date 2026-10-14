@@ -1,7 +1,8 @@
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, Linkedin, Instagram, Twitter, Youtube, type LucideIcon } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Linkedin, Instagram, Twitter, Youtube, type LucideIcon } from "lucide-react";
 import { BUSINESS_IDENTITY, BUSINESS_NAP } from "../../seo/seoConfig";
+import { trackWhatsAppClick } from "../../analytics/gtm";
 
 const FOOTER_SERVICES = [
   { label: "All Services", path: "/services" },
@@ -57,11 +58,13 @@ function ContactRow({
   label,
   value,
   href,
+  onClick,
 }: {
   icon: LucideIcon;
   label: string;
   value: string;
   href: string;
+  onClick?: () => void;
 }) {
   const isExternal = href.startsWith("http");
 
@@ -70,6 +73,7 @@ function ContactRow({
       href={href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
+      onClick={onClick}
       className="group flex items-center gap-4 rounded-xl px-3 py-2.5 -mx-3 no-underline border border-transparent hover:border-[#015AAA]/15 hover:bg-[#015AAA]/5 transition-all duration-250"
       whileHover={{ x: 2 }}
       transition={{ type: "spring", stiffness: 420, damping: 26 }}
@@ -141,6 +145,13 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
                 value={BUSINESS_NAP.telephone}
                 href={`tel:${BUSINESS_NAP.telephoneE164}`}
               />
+              <ContactRow
+                icon={MessageCircle}
+                label="WhatsApp"
+                value={BUSINESS_NAP.telephone}
+                href={`https://wa.me/916381013086?text=${encodeURIComponent("Hello NebulaSafeTech, I would like to discuss your services.")}`}
+                onClick={() => trackWhatsAppClick("footer")}
+              />
               <ContactRow icon={Mail} label="Email" value={BUSINESS_NAP.email} href={`mailto:${BUSINESS_NAP.email}`} />
               <ContactRow
                 icon={MapPin}
@@ -160,6 +171,7 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
                 <FooterNavLink to="/services">Services</FooterNavLink>
                 <FooterNavLink to="/testimonials">Testimonials</FooterNavLink>
                 <FooterNavLink to="/edtech">EdTech</FooterNavLink>
+                <FooterNavLink to="/contact">Contact</FooterNavLink>
               </nav>
             </motion.div>
 

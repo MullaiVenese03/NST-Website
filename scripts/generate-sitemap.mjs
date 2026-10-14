@@ -90,6 +90,12 @@ async function run() {
       priority: "0.8",
       image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "NebulaSafeTech Technology & Cybersecurity Blog" },
     },
+    {
+      path: "/contact",
+      changefreq: "monthly",
+      priority: "0.85",
+      image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "Contact NebulaSafeTech - Inquire About Services" },
+    },
   ];
 
   /** Dynamic blog routes from BLOG_POSTS */

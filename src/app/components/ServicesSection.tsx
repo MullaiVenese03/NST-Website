@@ -23,21 +23,21 @@ const services: Omit<ServiceCardProps, "index">[] = [
     mediaSlug: "Icons--application-security",
     title: "Application Security",
     description:
-      "Create innovative frameworks to build executable software with security, privacy, and trust.",
+      "Identify flaws in application logic, APIs, and dependencies with source code reviews and remediation guidance.",
   },
   {
     to: "/services/cybersecurity",
     mediaSlug: "Icons--network-security",
     title: "Network Security",
     description:
-      "Create innovative frameworks to build executable software with security, privacy, and trust.",
+      "Assess network exposure, firewall policies, segmentation, and access controls to eliminate attack paths.",
   },
   {
     to: "/services/cybersecurity",
     mediaSlug: "Icons--encryption-data-protection",
     title: "Encryption & Data Protection",
     description:
-      "Create innovative frameworks to build executable software with security, privacy, and trust.",
+      "Protect sensitive data at rest and in transit with robust cryptographic standards and key management.",
   },
   {
     to: "/services/web-development",

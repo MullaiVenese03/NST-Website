@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { Link } from "react-router";
 import { motion } from "motion/react";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
@@ -19,11 +20,13 @@ export type ContactFormProps = {
   defaultService?: string;
   serviceOptions?: string[];
   className?: string;
+  cardClassName?: string;
   variant?: "default" | "edtech";
+  showEyebrow?: boolean;
 };
 
 const inputClass =
-  "w-full bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#015AAA] focus:ring-2 focus:ring-[#015AAA]/15 transition-all placeholder:text-slate-400 text-slate-900";
+  "w-full bg-white border border-slate-200 rounded-xl px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm outline-none focus:border-[#015AAA] focus:ring-2 focus:ring-[#015AAA]/15 transition-all placeholder:text-slate-400 text-slate-900";
 
 const SUPPORT_EMAIL = "info@nebulasafetech.com";
 
@@ -34,7 +37,9 @@ export default function ContactForm({
   defaultService = "",
   serviceOptions,
   className = "",
+  cardClassName,
   variant = "default",
+  showEyebrow = true,
 }: ContactFormProps) {
   const [state, handleSubmit, reset] = useForm(ACTIVE_FORMSPREE_FORM_ID);
   const [errors, setErrors] = useState<ContactFormFieldErrors>({});
@@ -89,26 +94,28 @@ export default function ContactForm({
   return (
     <section id={id} className={`scroll-mt-28 ${className}`} aria-labelledby={`${id}-heading`}>
       <motion.div
-        className="max-w-3xl mx-auto rounded-2xl border border-slate-100 bg-white p-6 md:p-10 shadow-sm"
+        className={cardClassName || "w-full max-w-3xl mx-auto rounded-2xl border border-slate-200/80 bg-white p-5 sm:p-7 md:p-8 shadow-xs"}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="mb-8 text-center md:text-left">
-          <p
-            className="nst-eyebrow font-bold m-0 mb-2"
-            style={{ color: accent }}
-          >
-            Contact
-          </p>
+        <div className="mb-5 sm:mb-6 text-left">
+          {showEyebrow && (
+            <p
+              className="nst-eyebrow font-bold m-0 mb-1.5"
+              style={{ color: accent }}
+            >
+              Contact
+            </p>
+          )}
           <h2
             id={`${id}-heading`}
-            className="nst-h2 text-slate-900 m-0 mb-2"
+            className="nst-h3 font-bold text-slate-900 m-0 mb-1.5"
           >
             {title}
           </h2>
-          <p className="nst-body-sm text-slate-600 m-0 max-w-xl">{subtitle}</p>
+          {subtitle && <p className="nst-body-sm text-slate-600 m-0 max-w-xl">{subtitle}</p>}
         </div>
 
         {state.succeeded ? (
@@ -279,11 +286,11 @@ export default function ContactForm({
                 name="message"
                 placeholder="How can we help? *"
                 required
-                rows={5}
+                rows={4}
                 disabled={state.submitting}
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? `${id}-message-error` : undefined}
-                className={`${inputClass} resize-none min-h-[120px]`}
+                className={`${inputClass} resize-none min-h-[105px]`}
               />
               {errors.message ? (
                 <p id={`${id}-message-error`} className="text-red-600 text-xs mt-1.5 m-0" role="alert">
@@ -299,27 +306,37 @@ export default function ContactForm({
               )}
             </div>
 
-            <motion.button
-              type="submit"
-              disabled={state.submitting}
-              whileHover={state.submitting ? undefined : { scale: 1.01 }}
-              whileTap={state.submitting ? undefined : { scale: 0.98 }}
-              className="w-full sm:w-auto min-w-[200px] text-white nst-ui font-semibold py-3.5 px-8 rounded-xl flex items-center justify-center gap-2 shadow-sm border-none cursor-pointer transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-              style={{ background: accent, boxShadow: `0 2px 8px ${accent}20` }}
-              aria-disabled={state.submitting}
-            >
-              {state.submitting ? (
-                <>
-                  <Loader2 size={16} className="animate-spin" aria-hidden />
-                  Sending…
-                </>
-              ) : (
-                <>
-                  Send message
-                  <ArrowRight size={16} aria-hidden />
-                </>
-              )}
-            </motion.button>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3.5 pt-1.5">
+              <motion.button
+                type="submit"
+                disabled={state.submitting}
+                whileHover={state.submitting ? undefined : { scale: 1.01 }}
+                whileTap={state.submitting ? undefined : { scale: 0.98 }}
+                className="w-full sm:w-auto min-w-[170px] text-white nst-ui font-semibold py-2.5 sm:py-3 px-6 sm:px-7 rounded-xl flex items-center justify-center gap-2 shadow-xs border-none cursor-pointer transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                style={{ background: accent, boxShadow: `0 2px 8px ${accent}20` }}
+                aria-disabled={state.submitting}
+              >
+                {state.submitting ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" aria-hidden />
+                    Sending…
+                  </>
+                ) : (
+                  <>
+                    Send message
+                    <ArrowRight size={15} aria-hidden />
+                  </>
+                )}
+              </motion.button>
+
+              <p className="nst-meta text-slate-500 m-0 text-xs text-center sm:text-left">
+                Inquiries are protected under our{" "}
+                <Link to="/privacy-policy" className="text-[#015AAA] underline hover:text-[#014080]">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
           </form>
         )}
       </motion.div>

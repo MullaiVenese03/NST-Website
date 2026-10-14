@@ -1,6 +1,6 @@
-import { useNavigate, useLocation } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import { navigateToContact, scrollToSection, scrollToTopInstant } from "../utils/scroll";
+import { scrollToTopInstant } from "../utils/scroll";
 import {
   Home,
   Info,
@@ -49,11 +49,10 @@ const navItems = [
   { name: "Services", href: "services", path: "/services" },
   { name: "Testimonials", href: "testimonials", path: "/testimonials" },
   { name: "EdTech", href: "edtech", path: "/edtech" },
-  { name: "Contact", href: "contact", path: "/#contact" },
+  { name: "Contact", href: "contact", path: "/contact" },
 ];
 
 export default function BottomNav() {
-  const navigate = useNavigate();
   const location = useLocation();
   const [activeSection, setActiveSection] = useState("hero");
 
@@ -67,47 +66,31 @@ export default function BottomNav() {
     };
     window.addEventListener("sectionChange", handleSectionChange);
 
-    if (location.pathname !== "/") {
+    if (location.pathname === "/") {
+      if (location.hash) {
+        const hash = location.hash.replace("#", "");
+        setActiveSection(hash);
+      } else {
+        setActiveSection("hero");
+      }
+    } else {
       const currentItem = navItems.find((item) => item.path === location.pathname);
       if (currentItem) {
         setActiveSection(currentItem.href);
-      } else if (location.hash === "#contact") {
-        setActiveSection("contact");
       }
-    } else if (location.hash) {
-      const hash = location.hash.replace("#", "");
-      setActiveSection(hash);
-    } else {
-      setActiveSection("hero");
     }
 
     return () => window.removeEventListener("sectionChange", handleSectionChange);
   }, [location.pathname, location.hash]);
 
-  const handleClick = (item: (typeof navItems)[0]) => {
-    if (item.href === "contact") {
-      navigateToContact(navigate, location.pathname === "/");
-      return;
-    }
-
-    if (location.pathname === "/" && (item.path === "/" || item.path.startsWith("/#"))) {
-      const sectionId = item.path === "/" ? item.href : item.path.split("#")[1];
-
-      if (item.path === "/") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        scrollToSection(sectionId);
-      }
-      return;
-    }
-
+  const handleLinkClick = (item: (typeof navItems)[0], e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === item.path) {
+      e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
 
     scrollToTopInstant();
-    navigate(item.path);
   };
 
   return (
@@ -132,13 +115,13 @@ export default function BottomNav() {
           const isActive = activeSection === item.href;
 
           return (
-            <button
+            <Link
               key={item.name}
-              type="button"
-              onClick={() => handleClick(item)}
+              to={item.path}
+              onClick={(e) => handleLinkClick(item, e)}
               aria-label={item.name}
               aria-current={isActive ? "page" : undefined}
-              className={`relative rounded-full border-none font-bold cursor-pointer whitespace-nowrap flex items-center justify-center flex-1 transition-colors duration-200 ${
+              className={`relative rounded-full border-none font-bold whitespace-nowrap flex items-center justify-center flex-1 no-underline transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015aaa]/60 ${
                 isActive
                   ? "bg-[#015aaa] text-white shadow-sm"
                   : "bg-transparent text-gray-800 hover:bg-slate-100/70 hover:text-[#015aaa]"
@@ -156,7 +139,7 @@ export default function BottomNav() {
               <NavIcon name={item.name} className="sm:hidden" />
               {/* Tablet / Desktop (sm and above): existing text label — completely unchanged */}
               <span className="hidden sm:inline">{item.name}</span>
-            </button>
+            </Link>
           );
         })}
       </div>

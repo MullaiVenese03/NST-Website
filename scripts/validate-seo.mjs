@@ -146,6 +146,12 @@ async function runValidation() {
       expectedCanonical: `${SITE_ORIGIN}/terms-and-conditions`,
       expectedTextSnippet: "Terms & Conditions",
     },
+    {
+      route: "/contact",
+      file: path.join(distDir, "contact", "index.html"),
+      expectedCanonical: `${SITE_ORIGIN}/contact`,
+      expectedTextSnippet: "Contact",
+    },
   ];
 
   // Add all 13 blog posts under /blogs/:slug
@@ -198,12 +204,51 @@ async function runValidation() {
     const desc = extractFirstMatch(html, /<meta\s+[^>]*name=["']description["']\s+content=["']([^"']*)["'][^>]*>/i);
     if (!desc || desc.length < 15) {
       fail(`${r.route}: Meta description missing or suspiciously short ("${desc}")`);
+    } else if (desc.length > 160) {
+      fail(`${r.route}: Meta description too long (${desc.length} chars, target 120-150): "${desc}"`);
     } else {
       if (seenDescriptions.has(desc)) {
         fail(`Duplicate description detected between ${r.route} and ${seenDescriptions.get(desc)}: "${desc}"`);
       } else {
         seenDescriptions.set(desc, r.route);
       }
+    }
+
+    // Open Graph description checks
+    const ogDescCount = countMatches(html, /<meta\s+[^>]*property=["']og:description["'][^>]*>/gi);
+    if (ogDescCount !== 1) {
+      fail(`${r.route}: Expected exactly 1 og:description, found ${ogDescCount}`);
+    }
+    const ogDesc = extractFirstMatch(html, /<meta\s+[^>]*property=["']og:description["']\s+content=["']([^"']*)["'][^>]*>/i);
+    if (!ogDesc || ogDesc.length < 15) {
+      fail(`${r.route}: og:description missing or suspiciously short ("${ogDesc}")`);
+    } else if (ogDesc.length > 160) {
+      fail(`${r.route}: og:description too long (${ogDesc.length} chars, target 120-150): "${ogDesc}"`);
+    }
+
+    // Hreflang checks: monolingual website must not have incorrect global alternate links pointing to homepage
+    const hreflangCount = countMatches(html, /<link\s+[^>]*hreflang=["'][^"']*["'][^>]*>/gi);
+    if (hreflangCount > 0) {
+      fail(`${r.route}: Found ${hreflangCount} hreflang alternate link(s). Monolingual en-IN website must not declare unlocalized alternate pages.`);
+    }
+
+    // Favicon checks: no duplicate link rel="icon" with identical href
+    const iconLinks = [...html.matchAll(/<link\s+[^>]*rel=["'](?:shortcut\s+)?icon["'][^>]*>/gi)];
+    const seenIconHrefs = new Set();
+    for (const il of iconLinks) {
+      const href = extractFirstMatch(il[0], /href=["']([^"']*)["']/i);
+      if (href) {
+        if (seenIconHrefs.has(href)) {
+          fail(`${r.route}: Duplicate favicon link with href="${href}"`);
+        }
+        seenIconHrefs.add(href);
+      }
+    }
+
+    // Search Console verification: no duplicate verification meta tags
+    const gscCount = countMatches(html, /<meta\s+[^>]*name=["']google-site-verification["'][^>]*>/gi);
+    if (gscCount > 1) {
+      fail(`${r.route}: Found ${gscCount} duplicate google-site-verification tags`);
     }
 
     // Canonical checks
@@ -249,6 +294,10 @@ async function runValidation() {
           }
           if (serialized.includes("https://www.nebulasafetech.com/blog/")) {
             fail(`${r.route}: Structured data still references legacy path https://www.nebulasafetech.com/blog/`);
+          }
+          // Verify no SearchAction in JSON-LD (website does not feature internal search)
+          if (serialized.includes("SearchAction")) {
+            fail(`${r.route}: JSON-LD contains unsupported SearchAction markup. Website does not have an internal search engine.`);
           }
         } catch (e) {
           fail(`${r.route}: Malformed JSON-LD syntax: ${e.message}`);
@@ -358,6 +407,18 @@ async function runValidation() {
     } else {
       pass("All sitemap entries use absolute HTTPS www.nebulasafetech.com URLs.");
     }
+
+    // 7. Check that 404 page and non-existent /careers are excluded from sitemap
+    if (locSet.has(`${SITE_ORIGIN}/404`) || locSet.has(`${SITE_ORIGIN}/api/not-found`)) {
+      fail("404 error page must not be included in sitemap.xml");
+    } else {
+      pass("Confirmed 404 pages are excluded from sitemap.xml");
+    }
+    if (locSet.has(`${SITE_ORIGIN}/careers`)) {
+      fail("Non-existent /careers route must not be included in sitemap.xml");
+    } else {
+      pass("Confirmed /careers is excluded from sitemap.xml");
+    }
   }
 
   // =========================================================================
@@ -437,6 +498,28 @@ async function runValidation() {
       fail("Missing fallback rewrite { source: '/blog/(.*)', destination: '/api/not-found' } in vercel.json for genuine 404 on unknown slugs.");
     } else {
       pass("Confirmed unknown legacy blog slugs rewrite to /api/not-found (HTTP 404 response).");
+    }
+
+    // 5. Careers route server policy: must NOT soft-404 redirect to /
+    const careersRedirect = redirects.find((r) => r.source === "/careers");
+    if (careersRedirect) {
+      fail(`Found invalid redirect for /careers to "${careersRedirect.destination}". Careers route must not soft-404 redirect to homepage.`);
+    } else {
+      pass("Confirmed /careers does not soft-404 redirect to homepage.");
+    }
+    const careersRewrite = rewrites.find((r) => r.source === "/careers" && r.destination === "/api/not-found");
+    if (!careersRewrite) {
+      fail("Missing rewrite { source: '/careers', destination: '/api/not-found' } in vercel.json for genuine 404 response.");
+    } else {
+      pass("Confirmed /careers rewrites to /api/not-found (genuine HTTP 404 response).");
+    }
+
+    // 6. Contact route: must NOT redirect to /#contact
+    const contactRedirect = redirects.find((r) => r.source === "/contact");
+    if (contactRedirect) {
+      fail(`Found invalid redirect for /contact to "${contactRedirect.destination}". /contact has its own dedicated page.`);
+    } else {
+      pass("Confirmed /contact has no legacy redirects to hash fragments.");
     }
   }
 
@@ -530,6 +613,9 @@ async function runValidation() {
 
     // 3. Evaluate rewrites in order
     for (const rule of vercelRewrites) {
+      if (rule.source === "/careers" && (reqPath === "/careers" || reqPath === "/careers/")) {
+        return { type: "rewrite", status: 404, destination: rule.destination };
+      }
       if (rule.source === "/cgi-bin(.*)" && reqPath.startsWith("/cgi-bin")) {
         return { type: "rewrite", status: 404, destination: rule.destination };
       }
@@ -635,6 +721,23 @@ async function runValidation() {
     },
     {
       path: "/blogs/ai-agents-enterprise-data-security",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 200,
+    },
+    {
+      path: "/careers",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 404,
+      expectedDest: "/api/not-found",
+    },
+    {
+      path: "/careers/",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 404,
+      expectedDest: "/api/not-found",
+    },
+    {
+      path: "/contact",
       host: "www.nebulasafetech.com",
       expectedStatus: 200,
     },

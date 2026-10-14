@@ -171,9 +171,9 @@ function ServicesHero() {
 const serviceCards: { slug: string; mediaSlug: MediaSlug; title: string; desc: string }[] = [
   { slug: "/services/cybersecurity", mediaSlug: "Icons--web-security", title: "Web Security", desc: "Secure your web apps with advanced vulnerability detection and real-time threat mitigation." },
   { slug: "/services/cybersecurity", mediaSlug: "Icons--cloud-security", title: "Cloud Security", desc: "Secure cloud infrastructure and integrate security into your dev lifecycle seamlessly." },
-  { slug: "/services/cybersecurity", mediaSlug: "Icons--application-security", title: "Application Security", desc: "Create innovative frameworks to build executable software security with privacy and trust." },
-  { slug: "/services/cybersecurity", mediaSlug: "Icons--network-security", title: "Network Security", desc: "Create innovative frameworks to executable software security - built for privacy and trust." },
-  { slug: "/services/cybersecurity", mediaSlug: "Icons--encryption-data-protection", title: "Encryption & Data Protection", desc: "Create innovative frameworks to executable software security we built, privacy, and trust." },
+  { slug: "/services/cybersecurity", mediaSlug: "Icons--application-security", title: "Application Security", desc: "Identify flaws in application logic, APIs, and dependencies with source code reviews and remediation guidance." },
+  { slug: "/services/cybersecurity", mediaSlug: "Icons--network-security", title: "Network Security", desc: "Assess network exposure, firewall policies, segmentation, and access controls to eliminate attack paths." },
+  { slug: "/services/cybersecurity", mediaSlug: "Icons--encryption-data-protection", title: "Encryption & Data Protection", desc: "Protect sensitive data at rest and in transit with robust cryptographic standards and key management." },
   { slug: "/services/web-development", mediaSlug: "Icons--full-stack-web-dev", title: "Full-Stack Web Development", desc: "Scalable, high-performance web applications built with modern technologies." },
   { slug: "/services/ui-ux-design", mediaSlug: "Icons--web-design-uiux", title: "Web Design & UI/UX Development", desc: "Pixel-perfect designs and intuitive experiences that engage users and drive results." },
   { slug: "/services/edtech-training", mediaSlug: "Icons--academic-training", title: "Academic Training", desc: "Practical training and real-world learning experiences that build skills and prepare you for industry." },

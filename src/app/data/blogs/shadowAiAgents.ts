@@ -6,7 +6,7 @@ export const blogPostShadowAiAgents: BlogPost = {
   title: "Shadow AI Agents: The Enterprise Security Risk You Can't See",
   seoTitle: "Shadow AI Agents: Enterprise Security Risks in 2026",
   metaDescription:
-    "Shadow AI agents can access enterprise data, APIs, and SaaS tools without complete security oversight. Learn the risks and how to govern AI agent access.",
+    "Unsanctioned AI agents create blind spots across APIs and data stores. Learn practical governance steps to detect and secure shadow agents.",
   excerpt:
     "AI agents are entering enterprise environments faster than security teams can discover and govern them. Shadow AI agents may connect to enterprise data, SaaS apps, and APIs without complete visibility into who created them, what permissions they hold, or what actions they can take.",
   category: "Cybersecurity",

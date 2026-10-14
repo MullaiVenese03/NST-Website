@@ -15,6 +15,7 @@ import {
   BLOGS_SEO,
   PRIVACY_SEO,
   TERMS_SEO,
+  CONTACT_SEO,
   getServiceDetailSeo,
   SERVICES_FAQ_ITEMS,
   serviceFaqForSlug,
@@ -150,6 +151,16 @@ export function getPageSchemaJson(routePath: string, post?: BlogPost): string {
     });
     const breadcrumb = breadcrumbListSchema([...PAGE_BREADCRUMBS.termsAndConditions], SITE_ORIGIN);
     return toJsonLdScript([pageSchema, breadcrumb]);
+  }
+
+  if (routePath === "/contact") {
+    const pageSchema = webPageSchema({
+      url: `${SITE_ORIGIN}/contact`,
+      name: CONTACT_SEO.title,
+      description: CONTACT_SEO.description,
+    });
+    const breadcrumb = breadcrumbListSchema([...PAGE_BREADCRUMBS.contact], SITE_ORIGIN);
+    return toJsonLdScript([pageSchema, localBusinessSchema(), breadcrumb]);
   }
 
   if (post) {

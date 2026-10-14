@@ -13,7 +13,7 @@ export const blogPostVapt2026Checklist: BlogPost = {
   title: "How Often Should Your Company Do VAPT? A 2026 Checklist",
   seoTitle: "How Often Should Your Company Do VAPT? A 2026 Checklist",
   metaDescription:
-    "How often should a company perform VAPT? Follow this practical 2026 checklist: test after major new features, every 6–12 months, and after security incidents.",
+    "Determine how often your company needs VAPT assessments with this practical checklist for major releases, compliance, and annual reviews.",
   excerpt:
     "Vulnerability Assessment and Penetration Testing is not something a company should do once and forget. Your technology changes, new features are released, and attack techniques evolve. This practical 2026 guide explains the trigger-based VAPT strategy that balances recurring baseline testing with change-driven assessments.",
   category: "Cybersecurity",

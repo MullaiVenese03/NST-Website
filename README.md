@@ -169,7 +169,7 @@ The website uses a non-duplicating multi-tier telemetry stack:
 ## 🔍 SEO & Metadata Architecture
 
 - **Meta Management**: `SeoHead.tsx` uses `react-helmet-async` to render titles, descriptions, canonical URLs, OG images, OpenGraph `secure_url`, Twitter site/creator cards (`@nebulasafetech`), and geographic location metadata (`geo.region`, `geo.placename`, `geo.position`, `ICBM`).
-- **JSON-LD Schemas**: Injected via `GlobalStructuredData.tsx` and route components (`Organization`, `LocalBusiness` with GeoCoordinates, `WebSite` with `SearchAction`, `Service` with `hasOfferCatalog`, `BlogPosting`, `FAQPage`, `BreadcrumbList`).
+- **JSON-LD Schemas**: Injected via `GlobalStructuredData.tsx` and route components (`Organization`, `LocalBusiness` with GeoCoordinates, `WebSite`, `Service` with `hasOfferCatalog`, `BlogPosting`, `FAQPage`, `BreadcrumbList`).
 - **Dynamic Sitemap**: `scripts/generate-sitemap.mjs` runs during `npm run build` to output `public/sitemap.xml` with Google image sitemap tags (`xmlns:image`) matching active production routes and blog articles.
 - **Crawler & AI Directives**: `public/robots.txt` specifies crawling rules for search engines (Googlebot, Bingbot, DuckDuckBot, Applebot) and AI search agents (GPTBot, ClaudeBot, PerplexityBot, ByteDance) referencing `https://www.nebulasafetech.com/sitemap.xml`.
 - **LLM Context Manifest**: `public/llms.txt` provides structured markdown context and route mapping for LLM AI models and agents.

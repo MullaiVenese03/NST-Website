@@ -13,7 +13,7 @@ export const blogPostOne: BlogPost = {
   title: "How to Start a Career in Cybersecurity in 2026: A Practical Beginner's Guide",
   seoTitle: "How to Start a Career in Cybersecurity in 2026",
   metaDescription:
-    "Learn how to start a career in cybersecurity in 2026 with a practical roadmap covering networking, Linux, programming, hands-on practice, and self-learning.",
+    "Start your cybersecurity career with a practical 2026 roadmap covering networking fundamentals, Linux, security labs, and certifications.",
   excerpt:
     "Starting a career in cybersecurity can feel overwhelming. Learn the practical roadmap: build strong networking & OS fundamentals, master Linux, learn basic scripting, and practice continuously.",
   category: "Cybersecurity",

@@ -102,6 +102,16 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.nebulasafetech.com/contact</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://www.nebulasafetech.com/og-image.webp</image:loc>
+      <image:title>Contact NebulaSafeTech - Inquire About Services</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.nebulasafetech.com/blogs/ai-agent-attack-surface-security-checklist-2026</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>

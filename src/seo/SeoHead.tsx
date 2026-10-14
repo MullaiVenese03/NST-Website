@@ -1,6 +1,5 @@
 import { Helmet } from "react-helmet-async";
 import type { PageSeo } from "./pageMeta";
-import { GSC_VERIFICATION } from "../analytics/analyticsConfig";
 import { absoluteUrl, defaultOgImageUrl, GEO_LOCATION, ORG_NAME, TWITTER_HANDLE } from "./seoConfig";
 
 const OG_IMAGE_WIDTH = 1200;
@@ -80,7 +79,6 @@ export function SeoHead({
       <meta name="description" content={meta.description} />
       {kw ? <meta name="keywords" content={kw} /> : null}
       <meta name="robots" content={robots} />
-      {GSC_VERIFICATION ? <meta name="google-site-verification" content={GSC_VERIFICATION} /> : null}
       <link rel="canonical" href={canonical} />
 
       {/* Geo Location Tags */}

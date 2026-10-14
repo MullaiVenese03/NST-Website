@@ -18,6 +18,7 @@ const BlogsPage = lazy(() => import("./pages/BlogsPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
 const PrivacyPolicyPage = lazy(() => import("./pages/PrivacyPolicyPage"));
 const TermsAndConditionsPage = lazy(() => import("./pages/TermsAndConditionsPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 const LegacyBlogSlugRedirect = lazy(() => import("./components/LegacyBlogSlugRedirect"));
 
@@ -77,6 +78,7 @@ export const router = createBrowserRouter([
       { path: "blog/:slug", Component: LegacyBlogSlugRedirect },
       { path: "privacy-policy", Component: PrivacyPolicyPage },
       { path: "terms-and-conditions", Component: TermsAndConditionsPage },
+      { path: "contact", Component: ContactPage },
       { path: "*", Component: NotFoundPage },
     ],
   },

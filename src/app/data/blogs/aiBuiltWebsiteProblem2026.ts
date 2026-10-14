@@ -13,7 +13,7 @@ export const blogPostAiBuiltWebsiteProblem2026: BlogPost = {
   title: "The AI-Built Website Problem in 2026: Fast to Launch, Hard to Trust",
   seoTitle: "The AI-Built Website Problem in 2026: Fast to Launch, Hard to Trust",
   metaDescription:
-    "AI can build websites faster than ever, but speed can create security flaws, technical debt, accessibility gaps, poor UX and performance problems. Learn how to build AI-assisted websites safely in 2026.",
+    "Explore why AI-generated websites often introduce security flaws, accessibility issues, and technical debt, and learn how to build safely.",
   excerpt:
     "AI has made it dramatically faster to launch a website. But faster development creates a new responsibility. A website can be generated in hours and still take months to make reliable, secure, accessible, and maintainable. This article covers the real problems with AI-built websites and how to avoid them.",
   category: "Web Development",

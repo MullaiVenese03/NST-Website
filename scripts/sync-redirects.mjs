@@ -99,8 +99,6 @@ export async function syncVercelRedirects() {
       destination: "/blogs",
       permanent: true,
     },
-    { source: "/contact", destination: "/#contact", permanent: false },
-    { source: "/careers", destination: "/", permanent: false },
   ];
 
   const allRedirects = [...migrationRedirects, ...blogRedirects, ...baseRedirects];
@@ -111,6 +109,7 @@ export async function syncVercelRedirects() {
     { source: "/blog/(.*)", destination: "/api/not-found" },
     { source: "/blogs/:slug+", destination: "/api/not-found" },
     { source: "/services/:slug+", destination: "/api/not-found" },
+    { source: "/careers", destination: "/api/not-found" },
     { source: "/(.*)", destination: "/index.html" },
   ];
 

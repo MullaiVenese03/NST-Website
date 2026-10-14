@@ -14,7 +14,7 @@ export const blogPostWebDesign2026: BlogPost = {
     "Web Design in 2026: How Better UI/UX Creates Faster, More Accessible Websites",
   seoTitle: "Web Design in 2026: UI/UX, Accessibility & Performance",
   metaDescription:
-    "Learn how modern web design in 2026 combines UI/UX, responsive layouts, accessibility, performance, design systems, and AI-aware interfaces to create better websites.",
+    "Explore how 2026 web design balances UI/UX aesthetics, responsive layouts, WCAG accessibility, and high performance for modern websites.",
   excerpt:
     "A website can look impressive and still provide a poor user experience. In 2026, strong web design is increasingly built around a combination of clear UX, responsive UI, accessibility, performance, consistent design systems, and thoughtful interaction design.",
   category: "Web Design",

@@ -13,7 +13,7 @@ export const blogPostAiAgentAttackSurface2026: BlogPost = {
   title: "Your AI Agent Is Now Part of Your Attack Surface: A 2026 Security Checklist",
   seoTitle: "AI Agent Security: The 2026 Attack Surface Checklist",
   metaDescription:
-    "AI agents can access APIs, tools, files and cloud systems. Learn the 2026 security checklist for agent identity, permissions, prompt injection, data protection, logging and agentic AI risk.",
+    "Discover the 2026 AI agent security checklist covering identity, prompt injection, least-privilege permissions, and enterprise risk controls.",
   excerpt:
     "AI is moving from generating information to taking actions. Once an AI system can access APIs, databases, files, cloud services, or business tools, it becomes part of the application's attack surface. This practical 2026 checklist explains what businesses must review before connecting an AI agent to real systems and enterprise data.",
   category: "Cybersecurity",
