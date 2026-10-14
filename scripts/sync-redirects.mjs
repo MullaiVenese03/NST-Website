@@ -105,10 +105,12 @@ export async function syncVercelRedirects() {
 
   const allRedirects = [...migrationRedirects, ...blogRedirects, ...baseRedirects];
 
-  // Rewrites: catch unknown blog slugs and route to genuine 404 handler
+  // Rewrites: catch unknown blog and service slugs and route to genuine 404 handler
   const rewrites = [
     { source: "/cgi-bin(.*)", destination: "/api/not-found" },
     { source: "/blog/(.*)", destination: "/api/not-found" },
+    { source: "/blogs/:slug+", destination: "/api/not-found" },
+    { source: "/services/:slug+", destination: "/api/not-found" },
     { source: "/(.*)", destination: "/index.html" },
   ];
 

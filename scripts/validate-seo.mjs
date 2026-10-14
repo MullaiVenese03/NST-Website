@@ -536,6 +536,12 @@ async function runValidation() {
       if (rule.source === "/blog/(.*)" && reqPath.startsWith("/blog/")) {
         return { type: "rewrite", status: 404, destination: rule.destination };
       }
+      if (rule.source === "/blogs/:slug+" && reqPath.startsWith("/blogs/")) {
+        return { type: "rewrite", status: 404, destination: rule.destination };
+      }
+      if (rule.source === "/services/:slug+" && reqPath.startsWith("/services/")) {
+        return { type: "rewrite", status: 404, destination: rule.destination };
+      }
       if (rule.source === "/(.*)") {
         return { type: "rewrite", status: 200, destination: rule.destination, spa: true };
       }
@@ -606,7 +612,24 @@ async function runValidation() {
       expectedDest: "/api/not-found",
     },
     {
+      path: "/services/non-existent-service",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 404,
+      expectedDest: "/api/not-found",
+    },
+    {
+      path: "/blogs/non-existent-blog",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 404,
+      expectedDest: "/api/not-found",
+    },
+    {
       path: "/testimonials",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 200,
+    },
+    {
+      path: "/services/cybersecurity",
       host: "www.nebulasafetech.com",
       expectedStatus: 200,
     },

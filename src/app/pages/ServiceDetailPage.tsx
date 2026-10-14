@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 import TopNav from "../components/TopNav";
 import FooterSection from "../components/FooterSection";
 import ScrollToTop from "../components/ScrollToTop";
+import NotFoundPage from "./NotFoundPage";
 import { SeoHead } from "../../seo/SeoHead";
 import { getServiceDetailSeo, serviceFaqForSlug, type PageSeo, type ServiceSlug } from "../../seo/pageMeta";
 import { SITE_ORIGIN, ORG_NAME } from "../../seo/seoConfig";
@@ -40,28 +41,7 @@ export default function ServiceDetailPage() {
   }, [slug]);
 
   if (!ok || !meta || !content) {
-    const notFoundMeta: PageSeo = {
-      title: `Service not found | ${ORG_NAME}`,
-      description: "This service URL is not valid. Explore NebulaSafeTech cybersecurity, web, UI/UX, and EdTech service pages from the main services index.",
-      keywords: ["NebulaSafeTech", "services"],
-      canonicalPath: "/services",
-    };
-    return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <SeoHead meta={notFoundMeta} noindex />
-        <TopNav />
-        <main className="flex-1 pt-32 px-6 text-center">
-          <h1 className="text-2xl font-bold text-slate-900">Service not found</h1>
-          <p className="text-slate-600 mt-2">
-            <Link to="/services" className="text-[#015AAA] font-semibold">
-              View all services
-            </Link>
-          </p>
-        </main>
-        <FooterSection />
-        <ScrollToTop />
-      </div>
-    );
+    return <NotFoundPage />;
   }
 
   const faqItems = [...serviceFaqForSlug(slug)];

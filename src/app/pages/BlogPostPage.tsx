@@ -19,6 +19,7 @@ import { faqPageSchema, breadcrumbListSchema } from "../../seo/schemas/faqSchema
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
 import { getBlogPostBySlug, getRelatedBlogPosts, getPostToc } from "../data/blogsData";
 import type { PageSeo } from "../../seo/pageMeta";
+import NotFoundPage from "./NotFoundPage";
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -33,38 +34,7 @@ export default function BlogPostPage() {
   }, [slug]);
 
   if (!post) {
-    const notFoundMeta: PageSeo = {
-      title: `Article Not Found | ${ORG_NAME}`,
-      description:
-        "The requested blog article could not be found. Explore our latest technology and cybersecurity guides.",
-      keywords: ["cybersecurity blog", "NebulaSafeTech"],
-      canonicalPath: "/blogs",
-    };
-
-    return (
-      <div className="min-h-screen bg-white flex flex-col">
-        <SeoHead meta={notFoundMeta} noindex />
-        <TopNav />
-        <main className="flex-1 pt-32 pb-20 px-6 text-center max-w-2xl mx-auto flex flex-col items-center justify-center">
-          <div className="w-14 h-14 rounded-full bg-[#015AAA]/10 text-[#015AAA] flex items-center justify-center mb-3">
-            <BookOpen size={28} />
-          </div>
-          <h1 className="nst-h3 text-slate-900 mb-2">Article Not Found</h1>
-          <p className="nst-body text-slate-600 mb-6 text-sm">
-            The article you are looking for does not exist or has been moved.
-          </p>
-          <Link
-            to="/blogs"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#015AAA] text-white font-semibold text-xs sm:text-sm no-underline hover:bg-[#013566] transition-colors"
-          >
-            <ArrowLeft size={15} />
-            Back to all blogs
-          </Link>
-        </main>
-        <FooterSection />
-        <ScrollToTop />
-      </div>
-    );
+    return <NotFoundPage />;
   }
 
   const articleCanonicalPath = `/blogs/${post.slug}`;

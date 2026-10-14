@@ -198,6 +198,14 @@
       "destination": "/api/not-found"
     },
     {
+      "source": "/blogs/:slug+",
+      "destination": "/api/not-found"
+    },
+    {
+      "source": "/services/:slug+",
+      "destination": "/api/not-found"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

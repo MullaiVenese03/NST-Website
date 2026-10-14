@@ -25,39 +25,15 @@ export default function HeroBackground() {
   const [videoReady, setVideoReady] = useState(false);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
 
-  // Defer loading video source until after initial paint & idle to prioritize critical LCP & fonts
+  // Initialize video loading on mount (respecting reduced motion & save data)
   useEffect(() => {
     if (reducedMotion) return;
 
-    // Check for Save-Data header or small mobile viewport
+    // Check for Save-Data header
     const nav = navigator as unknown as { connection?: { saveData?: boolean } };
     if (nav.connection?.saveData) return;
 
-    // Only load full video on desktop / tablet where it adds visual value without killing mobile data
-    if (typeof window !== "undefined" && window.innerWidth < 768) return;
-
-    let timer: ReturnType<typeof setTimeout> | undefined;
-
-    const loadVideo = () => {
-      setVideoSrc(HERO_VIDEO_URL);
-      cleanup();
-    };
-
-    const cleanup = () => {
-      if (timer) clearTimeout(timer);
-      window.removeEventListener("scroll", loadVideo);
-      window.removeEventListener("mousemove", loadVideo);
-      window.removeEventListener("touchstart", loadVideo);
-    };
-
-    window.addEventListener("scroll", loadVideo, { once: true, passive: true });
-    window.addEventListener("mousemove", loadVideo, { once: true, passive: true });
-    window.addEventListener("touchstart", loadVideo, { once: true, passive: true });
-
-    // Fallback: load if user is idle on desktop for 5s
-    timer = setTimeout(loadVideo, 5000);
-
-    return cleanup;
+    setVideoSrc(HERO_VIDEO_URL);
   }, [reducedMotion]);
 
   useEffect(() => {
@@ -66,13 +42,24 @@ export default function HeroBackground() {
     const video = videoRef.current;
     if (!video) return;
 
+    // Mobile WebKit (iOS Safari) requires explicit DOM properties for inline autoplay
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("playsinline", "");
+    video.setAttribute("webkit-playsinline", "");
+
     const onReady = () => setVideoReady(true);
     const play = () => {
-      video.play().catch(() => {});
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.then(onReady).catch(() => {
+          // Autoplay policy prevented playback. Clean white background remains.
+        });
+      }
     };
 
-    video.addEventListener("canplay", onReady, { once: true });
-    video.addEventListener("loadeddata", play, { once: true });
+    video.addEventListener("playing", onReady, { once: true });
+    video.addEventListener("canplay", play, { once: true });
 
     if (video.readyState >= 3) {
       onReady();
@@ -80,14 +67,14 @@ export default function HeroBackground() {
     }
 
     return () => {
-      video.removeEventListener("canplay", onReady);
-      video.removeEventListener("loadeddata", play);
+      video.removeEventListener("playing", onReady);
+      video.removeEventListener("canplay", play);
     };
   }, [videoSrc]);
 
   return (
     <div className="absolute inset-0 z-0 m-0 p-0 overflow-hidden bg-white" aria-hidden>
-      <div className={`${mediaFrameClass} overflow-hidden`}>
+      <div className={`${mediaFrameClass} overflow-hidden bg-white`}>
         {!reducedMotion && videoSrc && (
           <video
             ref={videoRef}

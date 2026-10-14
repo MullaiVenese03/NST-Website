@@ -35,6 +35,14 @@ export const HOME_SEO: PageSeo = {
   canonicalPath: "/",
 };
 
+export const NOT_FOUND_SEO = {
+  title: `404 - Page Not Found | ${ORG_NAME}`,
+  description:
+    "The requested page could not be found or may have moved. Return to the NebulaSafeTech homepage or explore our cybersecurity, web development, and educational technology services.",
+  keywords: [...baseKeywords, "404", "page not found"],
+  canonicalPath: "",
+} as const;
+
 export const ABOUT_SEO: PageSeo = {
   title: `About ${ORG_NAME} | Cybersecurity & Digital Engineering Experts`,
   description: `${BUSINESS_IDENTITY} Learn how our defenders-first engineering team delivers enterprise-grade security, transparency, and product innovation.`,
