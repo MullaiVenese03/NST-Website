@@ -17,9 +17,16 @@ import {
   TERMS_SEO,
   CONTACT_SEO,
   getServiceDetailSeo,
+  getCyberServiceSeo,
   SERVICES_FAQ_ITEMS,
   serviceFaqForSlug,
+  WEB_SECURITY_FAQ,
+  CLOUD_SECURITY_FAQ,
+  APPLICATION_SECURITY_FAQ,
+  NETWORK_SECURITY_FAQ,
+  EDTECH_TRAINING_FAQ,
   type ServiceSlug,
+  type CyberServiceSlug,
 } from "./pageMeta";
 import { PAGE_BREADCRUMBS } from "../app/utils/pageBreadcrumbs";
 import { SITE_ORIGIN, ORG_NAME, defaultOgImageUrl } from "./seoConfig";
@@ -65,10 +72,13 @@ export function getPageSchemaJson(routePath: string, post?: BlogPost): string {
       "@type": "ItemList",
       name: "NebulaSafeTech service areas",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "Cybersecurity", item: `${SITE_ORIGIN}/services/cybersecurity` },
-        { "@type": "ListItem", position: 2, name: "Web development", item: `${SITE_ORIGIN}/services/web-development` },
-        { "@type": "ListItem", position: 3, name: "UI/UX design", item: `${SITE_ORIGIN}/services/ui-ux-design` },
-        { "@type": "ListItem", position: 4, name: "EdTech & training", item: `${SITE_ORIGIN}/services/edtech-training` },
+        { "@type": "ListItem", position: 1, name: "Web Security", item: `${SITE_ORIGIN}/services/web-security` },
+        { "@type": "ListItem", position: 2, name: "Cloud Security", item: `${SITE_ORIGIN}/services/cloud-security` },
+        { "@type": "ListItem", position: 3, name: "Application Security", item: `${SITE_ORIGIN}/services/application-security` },
+        { "@type": "ListItem", position: 4, name: "Network Security", item: `${SITE_ORIGIN}/services/network-security` },
+        { "@type": "ListItem", position: 5, name: "Full-Stack Web Development", item: `${SITE_ORIGIN}/services/web-development` },
+        { "@type": "ListItem", position: 6, name: "UI/UX Design", item: `${SITE_ORIGIN}/services/ui-ux-design` },
+        { "@type": "ListItem", position: 7, name: "EdTech & Cybersecurity Training", item: `${SITE_ORIGIN}/edtech` },
       ],
     };
     const breadcrumb = breadcrumbListSchema([...PAGE_BREADCRUMBS.services], SITE_ORIGIN);
@@ -76,15 +86,51 @@ export function getPageSchemaJson(routePath: string, post?: BlogPost): string {
   }
 
   if (routePath.startsWith("/services/")) {
-    const slug = routePath.replace(/^\/services\//, "").replace(/\/$/, "") as ServiceSlug;
-    const meta = getServiceDetailSeo(slug);
+    const slug = routePath.replace(/^\/services\//, "").replace(/\/$/, "");
+    const cyberFaqMap: Record<string, typeof WEB_SECURITY_FAQ> = {
+      "web-security": WEB_SECURITY_FAQ,
+      "cloud-security": CLOUD_SECURITY_FAQ,
+      "application-security": APPLICATION_SECURITY_FAQ,
+      "network-security": NETWORK_SECURITY_FAQ,
+    };
+
+    if (slug in cyberFaqMap) {
+      const cyberSlug = slug as CyberServiceSlug;
+      const meta = getCyberServiceSeo(cyberSlug);
+      if (!meta) return "";
+      const pageSchema = webPageSchema({
+        url: `${SITE_ORIGIN}${meta.canonicalPath}`,
+        name: meta.title,
+        description: meta.description,
+      });
+      const faqItems = [...cyberFaqMap[cyberSlug]];
+      const sSchema = serviceSchema({
+        serviceType: meta.serviceType,
+        name: meta.title.split("|")[0]?.trim() ?? meta.serviceType,
+        description: meta.description,
+        url: `${SITE_ORIGIN}${meta.canonicalPath}`,
+      });
+      const faq = faqPageSchema(faqItems);
+      const breadcrumb = breadcrumbListSchema(
+        [
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Cybersecurity", path: "/services/cybersecurity" },
+          { name: meta.serviceType, path: meta.canonicalPath },
+        ],
+        SITE_ORIGIN
+      );
+      return toJsonLdScript([pageSchema, sSchema, faq, breadcrumb]);
+    }
+
+    const meta = getServiceDetailSeo(slug as ServiceSlug);
     if (!meta) return "";
     const pageSchema = webPageSchema({
       url: `${SITE_ORIGIN}${meta.canonicalPath}`,
       name: meta.title,
       description: meta.description,
     });
-    const faqItems = [...serviceFaqForSlug(slug)];
+    const faqItems = [...serviceFaqForSlug(slug as ServiceSlug)];
     const sSchema = serviceSchema({
       serviceType: meta.serviceType,
       name: meta.title.split("|")[0]?.trim() ?? meta.serviceType,
@@ -119,8 +165,9 @@ export function getPageSchemaJson(routePath: string, post?: BlogPost): string {
       name: EDTECH_SEO.title,
       description: EDTECH_SEO.description,
     });
+    const faqJson = faqPageSchema([...EDTECH_TRAINING_FAQ]);
     const breadcrumb = breadcrumbListSchema([...PAGE_BREADCRUMBS.edtech], SITE_ORIGIN);
-    return toJsonLdScript([pageSchema, breadcrumb]);
+    return toJsonLdScript([pageSchema, faqJson, breadcrumb]);
   }
 
   if (routePath === "/blogs" || routePath === "/blog") {

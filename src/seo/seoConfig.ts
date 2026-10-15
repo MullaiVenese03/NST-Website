@@ -30,13 +30,15 @@ export const SOCIAL_PROFILES = [
   "https://www.youtube.com/@NebulaSafeTech",
 ] as const;
 
-/** Geographic location coordinates for Hosur, Tamil Nadu, India */
+export const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/ecz8hswVVvLB7rm1A";
+
+/** Geographic location coordinates for Hosur, Tamil Nadu, India (verified via Google Maps) */
 export const GEO_LOCATION = {
   region: "IN-TN",
   placename: "Hosur, Tamil Nadu, India",
-  position: "12.7409;77.8253",
-  latitude: 12.7409,
-  longitude: 77.8253,
+  position: "12.713705;77.8324673",
+  latitude: 12.713705,
+  longitude: 77.8324673,
 } as const;
 
 export const COMPANY_KNOWS_ABOUT = [
@@ -62,8 +64,9 @@ export const BUSINESS_NAP = {
   addressRegion: "Tamil Nadu",
   postalCode: "",
   addressCountry: "IN",
-  formattedAddress: "Hosur, Tamil Nadu, India.",
-  mapsQuery: "Hosur,Tamil+Nadu,India",
+  formattedAddress: "Hosur, Tamil Nadu, India",
+  googleMapsUrl: GOOGLE_MAPS_URL,
+  mapsQuery: "NebulaSafeTech,Hosur,Tamil+Nadu,India",
 } as const;
 
 export function napPostalAddress() {

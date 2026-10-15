@@ -54,6 +54,56 @@ export async function syncVercelRedirects() {
       destination: "https://www.nebulasafetech.com/blogs",
       permanent: true,
     },
+    {
+      source: "/services/encryption-data-protection",
+      destination: "https://www.nebulasafetech.com/services/cybersecurity",
+      permanent: true,
+    },
+    {
+      source: "/services/encryption-data-protection/",
+      destination: "https://www.nebulasafetech.com/services/cybersecurity",
+      permanent: true,
+    },
+    {
+      source: "/services/encryption",
+      destination: "https://www.nebulasafetech.com/services/cybersecurity",
+      permanent: true,
+    },
+    {
+      source: "/services/encryption/",
+      destination: "https://www.nebulasafetech.com/services/cybersecurity",
+      permanent: true,
+    },
+    {
+      source: "/services/data-protection",
+      destination: "https://www.nebulasafetech.com/services/cybersecurity",
+      permanent: true,
+    },
+    {
+      source: "/services/data-protection/",
+      destination: "https://www.nebulasafetech.com/services/cybersecurity",
+      permanent: true,
+    },
+    {
+      source: "/services/edtech-training",
+      destination: "https://www.nebulasafetech.com/edtech",
+      permanent: true,
+    },
+    {
+      source: "/services/edtech-training/",
+      destination: "https://www.nebulasafetech.com/edtech",
+      permanent: true,
+    },
+    {
+      source: "/services/academic-training",
+      destination: "https://www.nebulasafetech.com/edtech",
+      permanent: true,
+    },
+    {
+      source: "/services/academic-training/",
+      destination: "https://www.nebulasafetech.com/edtech",
+      permanent: true,
+    },
   ];
 
   // Phase 3: Known blog slug redirects
@@ -108,6 +158,13 @@ export async function syncVercelRedirects() {
     { source: "/cgi-bin(.*)", destination: "/api/not-found" },
     { source: "/blog/(.*)", destination: "/api/not-found" },
     { source: "/blogs/:slug+", destination: "/api/not-found" },
+    { source: "/services/cybersecurity", destination: "/index.html" },
+    { source: "/services/web-security", destination: "/index.html" },
+    { source: "/services/cloud-security", destination: "/index.html" },
+    { source: "/services/application-security", destination: "/index.html" },
+    { source: "/services/network-security", destination: "/index.html" },
+    { source: "/services/web-development", destination: "/index.html" },
+    { source: "/services/ui-ux-design", destination: "/index.html" },
     { source: "/services/:slug+", destination: "/api/not-found" },
     { source: "/careers", destination: "/api/not-found" },
     { source: "/(.*)", destination: "/index.html" },

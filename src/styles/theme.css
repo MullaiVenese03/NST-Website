@@ -341,8 +341,9 @@
 }
 
 @layer base {
-  section[id] {
-    scroll-margin-top: 100px;
+  :target,
+  [id] {
+    scroll-margin-top: 6rem;
   }
   * {
     @apply border-border outline-ring/50;
@@ -381,7 +382,12 @@
 
   @media (prefers-reduced-motion: reduce) {
     html {
-      scroll-behavior: auto;
+      scroll-behavior: auto !important;
+    }
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
     }
   }
 

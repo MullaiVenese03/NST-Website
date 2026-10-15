@@ -1,13 +1,14 @@
 import { motion, Variants } from "motion/react";
 import { ResponsivePicture } from "./ResponsivePicture";
 import { UNIFIED_PARTNER_LOGOS } from "../data/clientsData";
+import { MOTION_EASE_OUT, VIEWPORT_ONCE } from "../utils/motionPresets";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.08, ease: "easeOut" },
+    transition: { duration: 0.52, delay: i * 0.08, ease: MOTION_EASE_OUT },
   }),
 };
 
@@ -19,7 +20,7 @@ export default function PartnersSection() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           className="mb-10 text-left max-w-2xl"
         >
           <p className="nst-eyebrow text-[#015AAA] text-left mb-3">

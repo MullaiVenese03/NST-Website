@@ -76,8 +76,8 @@ function injectMetadata(templateHtml, meta, routePath, post, prerenderSchemas) {
   <!-- Geo Location Tags -->
   <meta data-rh="true" name="geo.region" content="IN-TN" />
   <meta data-rh="true" name="geo.placename" content="Hosur, Tamil Nadu, India" />
-  <meta data-rh="true" name="geo.position" content="12.7409;77.8253" />
-  <meta data-rh="true" name="ICBM" content="12.7409;77.8253" />
+  <meta data-rh="true" name="geo.position" content="12.713705;77.8324673" />
+  <meta data-rh="true" name="ICBM" content="12.713705;77.8324673" />
 
   <!-- Open Graph Metadata (Authoritative) -->
   <meta data-rh="true" property="og:locale" content="en_IN" />
@@ -326,6 +326,70 @@ async function run() {
       },
     },
     {
+      dir: path.join(dist, "services", "web-security"),
+      routePath: "/services/web-security",
+      meta: {
+        title: `Web Security Services & VAPT | ${ORG_NAME}`,
+        description:
+          "Identify and fix vulnerabilities in websites, web APIs, and authentication flows with OWASP-aligned VAPT assessments and actionable remediation from NST.",
+        canonicalUrl: `${SITE_ORIGIN}/services/web-security`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `Web Security Services & VAPT | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
+      dir: path.join(dist, "services", "cloud-security"),
+      routePath: "/services/cloud-security",
+      meta: {
+        title: `Cloud Security Assessment & Hardening | ${ORG_NAME}`,
+        description:
+          "Audit cloud configurations, IAM posture, and DevSecOps pipelines to eliminate misconfigurations and exposure across AWS, Azure, and GCP.",
+        canonicalUrl: `${SITE_ORIGIN}/services/cloud-security`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `Cloud Security Assessment & Hardening | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
+      dir: path.join(dist, "services", "application-security"),
+      routePath: "/services/application-security",
+      meta: {
+        title: `Application Security Testing & Secure SDLC | ${ORG_NAME}`,
+        description:
+          "Secure software from within with source code reviews, API security testing, threat modelling, and actionable developer remediation guidance.",
+        canonicalUrl: `${SITE_ORIGIN}/services/application-security`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `Application Security Testing & Secure SDLC | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
+      dir: path.join(dist, "services", "network-security"),
+      routePath: "/services/network-security",
+      meta: {
+        title: `Network Security Assessment & Hardening | ${ORG_NAME}`,
+        description:
+          "Audit network perimeters, firewall rules, segmentation controls, and access paths to eliminate unnecessary exposure and reduce lateral movement risk.",
+        canonicalUrl: `${SITE_ORIGIN}/services/network-security`,
+        imageUrl: DEFAULT_OG_IMAGE,
+        imageType: "image/jpeg",
+        imageWidth: 1200,
+        imageHeight: 630,
+        imageAlt: `Network Security Assessment & Hardening | ${ORG_NAME}`,
+        ogType: "website",
+      },
+    },
+    {
       dir: path.join(dist, "services", "web-development"),
       routePath: "/services/web-development",
       meta: {
@@ -354,22 +418,6 @@ async function run() {
         imageWidth: 1200,
         imageHeight: 630,
         imageAlt: `UI/UX Design & Product Experience | ${ORG_NAME}`,
-        ogType: "website",
-      },
-    },
-    {
-      dir: path.join(dist, "services", "edtech-training"),
-      routePath: "/services/edtech-training",
-      meta: {
-        title: `EdTech & Cybersecurity Training | ${ORG_NAME}`,
-        description:
-          "Advance technical capabilities through hands-on cybersecurity labs, industry certifications, and institutional learning programs from NST.",
-        canonicalUrl: `${SITE_ORIGIN}/services/edtech-training`,
-        imageUrl: DEFAULT_OG_IMAGE,
-        imageType: "image/jpeg",
-        imageWidth: 1200,
-        imageHeight: 630,
-        imageAlt: `EdTech & Cybersecurity Training | ${ORG_NAME}`,
         ogType: "website",
       },
     },

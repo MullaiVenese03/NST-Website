@@ -1,63 +1,8 @@
 import { motion } from "motion/react";
-import svgPaths from "../../imports/AboutSection/svg-s1i9qf01my";
 import { ResponsivePicture } from "./ResponsivePicture";
 import { fadeHorizontalVariants, fadeUpVariants, VIEWPORT_ONCE } from "../utils/motionPresets";
 import { useLightExperience } from "../utils/performance";
-
-function UsersIcon() {
-  return (
-    <svg className="w-8 h-8 sm:w-9 sm:h-9" viewBox="0 0 57 48" fill="none" aria-hidden>
-      <path
-        d={svgPaths.p91c0280}
-        stroke="#015AAA"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="3"
-      />
-    </svg>
-  );
-}
-
-function ShieldCheckIcon() {
-  return (
-    <svg className="w-8 h-8 sm:w-9 sm:h-9" viewBox="0 0 51 56.5404" fill="none" aria-hidden>
-      <path
-        d={svgPaths.p35f7eb80}
-        stroke="#015AAA"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="3"
-      />
-    </svg>
-  );
-}
-
-function Hours24Icon() {
-  return (
-    <svg className="w-8 h-8 sm:w-9 sm:h-9" viewBox="0 0 48.6877 48.6473" fill="none" aria-hidden>
-      <path
-        d={svgPaths.pe5e6700}
-        stroke="#015AAA"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="3"
-      />
-      <path
-        d={svgPaths.p1ba05580}
-        stroke="#015AAA"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="3"
-      />
-    </svg>
-  );
-}
-
-const features = [
-  { icon: <UsersIcon />, label1: "Expert-Led", label2: "Security" },
-  { icon: <ShieldCheckIcon />, label1: "Proactive", label2: "Protection" },
-  { icon: <Hours24Icon />, label1: "24/7 Threat", label2: "Monitoring" },
-];
+import { SecurityFeaturesStrip } from "./SecurityFeaturesStrip";
 
 export default function AboutSection() {
   const light = useLightExperience();
@@ -127,25 +72,9 @@ export default function AboutSection() {
             initial="hidden"
             whileInView="visible"
             viewport={VIEWPORT_ONCE}
-            className="grid grid-cols-1 sm:grid-cols-3 items-stretch gap-3 sm:gap-2 border border-slate-100 rounded-2xl p-4 sm:p-6 bg-slate-50/30 shadow-sm mb-8 sm:mb-10 w-full max-w-lg sm:max-w-xl"
+            className="mb-8 sm:mb-10 w-full max-w-lg sm:max-w-xl"
           >
-            {features.map((f, i) => (
-              <div
-                key={i}
-                className="flex flex-1 flex-col items-center justify-center gap-2 sm:gap-3 text-center min-h-[90px] sm:min-h-[100px] px-2 py-3 sm:py-0"
-              >
-                <div className="h-9 sm:h-10 flex items-center justify-center shrink-0" aria-hidden>
-                  {f.icon}
-                </div>
-                <p
-                  className="nst-small font-bold text-slate-900 leading-snug m-0"
-                >
-                  {f.label1}
-                  <br />
-                  {f.label2}
-                </p>
-              </div>
-            ))}
+            <SecurityFeaturesStrip />
           </motion.div>
 
           <motion.a

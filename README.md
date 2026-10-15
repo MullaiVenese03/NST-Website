@@ -85,9 +85,9 @@ All active routes are code-split using React `lazy` and `Suspense`:
 | `/services/cybersecurity` | `ServiceDetailPage.tsx` | Cybersecurity assessment & VAPT detail page |
 | `/services/web-development` | `ServiceDetailPage.tsx` | Full-stack web engineering detail page |
 | `/services/ui-ux-design` | `ServiceDetailPage.tsx` | Product design & UI/UX detail page |
-| `/services/edtech-training` | `ServiceDetailPage.tsx` | Institutional cybersecurity training detail page |
+| `/services/edtech-training` | Permanent 308 redirect | Redirects to canonical `/edtech` |
 | `/testimonials` | `ClientsPage.tsx` | Partner institutions, client testimonials grid, and impact statistics |
-| `/edtech` | `EdTechPage.tsx` | Academic collaborations, workshops, and student learning paths |
+| `/edtech` | `EdTechPage.tsx` | Unified EdTech & Cybersecurity Training ecosystem, labs & courses |
 | `/blogs` | `BlogsPage.tsx` | Technology, cybersecurity, and engineering insights blog |
 | `/blogs/:slug` | `BlogPostPage.tsx` | Individual technical articles and research guides |
 | `/privacy-policy` | `PrivacyPolicyPage.tsx` | Official privacy policy document |

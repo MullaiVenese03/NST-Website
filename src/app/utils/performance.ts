@@ -18,6 +18,24 @@ function prefersLightExperience(): boolean {
 }
 
 
+export function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+export function usePrefersReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(prefersReducedMotion);
+
+  useEffect(() => {
+    const update = () => setReduced(prefersReducedMotion());
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return reduced;
+}
+
 export function useLightExperience(): boolean {
   const [light, setLight] = useState(prefersLightExperience);
 
@@ -27,7 +45,9 @@ export function useLightExperience(): boolean {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     mq.addEventListener("change", update);
     motion.addEventListener("change", update);
-    const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection;
+    const connection = (navigator as Navigator & { connection?: NetworkInformation }).connection as
+      | (EventTarget & NetworkInformation)
+      | undefined;
     connection?.addEventListener?.("change", update);
     return () => {
       mq.removeEventListener("change", update);
@@ -43,3 +63,4 @@ export function useLightExperience(): boolean {
 export function useMotionEnabled(): boolean {
   return !useLightExperience();
 }
+

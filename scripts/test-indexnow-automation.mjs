@@ -165,13 +165,12 @@ async function runAllTests() {
     assert.deepStrictEqual(urls, [`${CANONICAL_ORIGIN}/testimonials`]);
   });
 
-  test("Maps serviceDetailContent.ts to 4 canonical service endpoints", () => {
+  test("Maps serviceDetailContent.ts to 3 canonical service endpoints", () => {
     const urls = mapFileToCanonicalUrls("src/app/data/serviceDetailContent.ts", "M", root);
-    assert.strictEqual(urls.length, 4);
+    assert.strictEqual(urls.length, 3);
     assert(urls.includes(`${CANONICAL_ORIGIN}/services/web-development`));
     assert(urls.includes(`${CANONICAL_ORIGIN}/services/cybersecurity`));
     assert(urls.includes(`${CANONICAL_ORIGIN}/services/ui-ux-design`));
-    assert(urls.includes(`${CANONICAL_ORIGIN}/services/edtech-training`));
   });
 
   // -------------------------------------------------------------------------

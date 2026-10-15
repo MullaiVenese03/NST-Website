@@ -25,7 +25,7 @@ export default function HeroBackground() {
   const [videoReady, setVideoReady] = useState(false);
   const [videoSrc, setVideoSrc] = useState<string | null>(null);
 
-  // Initialize video loading on mount (respecting reduced motion & save data)
+  // Defer video stream initialization so it does not contend with critical path CSS, fonts, and LCP
   useEffect(() => {
     if (reducedMotion) return;
 
@@ -33,7 +33,27 @@ export default function HeroBackground() {
     const nav = navigator as unknown as { connection?: { saveData?: boolean } };
     if (nav.connection?.saveData) return;
 
-    setVideoSrc(HERO_VIDEO_URL);
+    const startVideo = () => {
+      setVideoSrc(HERO_VIDEO_URL);
+    };
+
+    if ("requestIdleCallback" in window) {
+      const handle = (
+        window as Window & {
+          requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => number;
+        }
+      ).requestIdleCallback(startVideo, { timeout: 2000 });
+      return () => {
+        if ("cancelIdleCallback" in window) {
+          (
+            window as Window & { cancelIdleCallback: (id: number) => void }
+          ).cancelIdleCallback(handle);
+        }
+      };
+    } else {
+      const timer = setTimeout(startVideo, 350);
+      return () => clearTimeout(timer);
+    }
   }, [reducedMotion]);
 
   useEffect(() => {
@@ -53,7 +73,7 @@ export default function HeroBackground() {
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.then(onReady).catch(() => {
-          // Autoplay policy prevented playback. Clean white background remains.
+          // Autoplay policy prevented playback. Lightweight poster remains visible.
         });
       }
     };
@@ -75,6 +95,25 @@ export default function HeroBackground() {
   return (
     <div className="absolute inset-0 z-0 m-0 p-0 overflow-hidden bg-white" aria-hidden>
       <div className={`${mediaFrameClass} overflow-hidden bg-white`}>
+        {/* Lightweight, responsive poster image appears immediately without blocking */}
+        <picture
+          className={`${mediaClass} transition-opacity duration-700 ease-out ${
+            videoReady ? "opacity-0 pointer-events-none" : "opacity-100"
+          }`}
+        >
+          <source
+            media="(max-width: 640px)"
+            srcSet="/media/hero-poster/hero-poster-640.webp"
+            type="image/webp"
+          />
+          <img
+            src="/media/hero-poster/hero-poster-1280.webp"
+            alt=""
+            className="h-full w-full object-cover object-center"
+            decoding="async"
+          />
+        </picture>
+
         {!reducedMotion && videoSrc && (
           <video
             ref={videoRef}
@@ -84,7 +123,8 @@ export default function HeroBackground() {
             playsInline
             preload="metadata"
             src={videoSrc}
-            className={`${mediaClass} transition-opacity duration-500 ease-out ${
+            poster="/media/hero-poster/hero-poster-1280.webp"
+            className={`${mediaClass} transition-opacity duration-700 ease-out ${
               videoReady ? "opacity-100" : "opacity-0"
             }`}
           />

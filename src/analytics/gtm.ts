@@ -16,13 +16,13 @@ export function trackPageView(pagePath: string, pageTitle?: string): void {
 }
 
 /** Fires exactly once when Formspree confirms a successful submission.
- *  No PII is included — event name only. */
+ *  No PII is included - event name only. */
 export function trackContactFormSuccess(): void {
   pushDataLayer({ event: "contact_form_success" });
 }
 
 /** Fires when a user clicks the WhatsApp contact link.
- *  No PII is included — click source only. */
+ *  No PII is included - click source only. */
 export function trackWhatsAppClick(source: string = "website"): void {
   pushDataLayer({
     event: "whatsapp_click",

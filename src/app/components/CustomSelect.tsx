@@ -20,7 +20,7 @@ export function CustomSelect({
   placeholder = "Select an option",
   defaultValue = "",
   disabled = false,
-  accentColor = "#015AAA",
+  accentColor: _accentColor = "#015AAA",
   className = "",
   onChange,
 }: CustomSelectProps) {

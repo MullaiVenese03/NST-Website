@@ -62,7 +62,7 @@ export const ServiceCard = memo(function ServiceCard({
         </div>
 
         <div
-          className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#015AAA] to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 ease-out origin-left pointer-events-none"
+          className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#0056A7] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 ease-out origin-left pointer-events-none"
           aria-hidden
         />
       </Link>

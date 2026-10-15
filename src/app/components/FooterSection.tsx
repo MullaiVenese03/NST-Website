@@ -3,13 +3,14 @@ import { motion } from "motion/react";
 import { Phone, Mail, MapPin, MessageCircle, Linkedin, Instagram, Twitter, Youtube, type LucideIcon } from "lucide-react";
 import { BUSINESS_IDENTITY, BUSINESS_NAP } from "../../seo/seoConfig";
 import { trackWhatsAppClick } from "../../analytics/gtm";
+import { scrollToSection } from "../utils/scroll";
 
 const FOOTER_SERVICES = [
   { label: "All Services", path: "/services" },
   { label: "Cybersecurity Services", path: "/services/cybersecurity" },
   { label: "Full-Stack Web Development", path: "/services/web-development" },
   { label: "UI/UX Design Services", path: "/services/ui-ux-design" },
-  { label: "EdTech & Cybersecurity Training", path: "/services/edtech-training" },
+  { label: "EdTech & Cybersecurity Training", path: "/edtech" },
 ] as const;
 
 const FOOTER_RESOURCES = [
@@ -23,12 +24,7 @@ function FooterNavLink({ to, children }: { to: string; children: React.ReactNode
     if (!to.startsWith("#")) return;
     e.preventDefault();
     const id = to.slice(1);
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      window.location.href = `/${to}`;
-    }
+    scrollToSection(id);
   };
 
   const className =
@@ -157,7 +153,7 @@ export default function FooterSection({ anchorId = "contact" }: FooterSectionPro
                 icon={MapPin}
                 label="Address"
                 value={BUSINESS_NAP.formattedAddress}
-                href={`https://maps.google.com/?q=${BUSINESS_NAP.mapsQuery}`}
+                href={BUSINESS_NAP.googleMapsUrl}
               />
             </motion.div>
           </motion.div>

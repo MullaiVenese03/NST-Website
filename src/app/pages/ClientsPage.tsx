@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-import { motion, AnimatePresence, Variants } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import svgPaths from "../../imports/NstWebsiteV2Clients/svg-k9jt45kpig";
 import FooterSection from "../components/FooterSection";
 import AnimatedNumber from "../components/AnimatedNumber";
@@ -14,30 +14,25 @@ import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../
 import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
 
 import { ResponsivePicture } from "../components/ResponsivePicture";
-import type { MediaSlug } from "../utils/media";
 import PartnersSection from "../components/PartnersSection";
 import {
   CLIENT_IMPACT_STATS,
   CLIENT_PROGRAMS,
   type ClientCategory,
 } from "../data/clientsData";
+import { fadeUpVariants, VIEWPORT_ONCE } from "../utils/motionPresets";
+import { useLightExperience } from "../utils/performance";
 
 type Category = ClientCategory;
 
 const allClients = CLIENT_PROGRAMS;
 
-const fadeUp: Variants = {
-  hidden:  { opacity: 0, y: 28 },
-  visible: (i: number = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.52, delay: i * 0.1, ease: "easeOut" },
-  }),
-};
-
 function ClientsHero({ activeFilter, setActiveFilter }: {
   activeFilter: Category;
   setActiveFilter: (f: Category) => void;
 }) {
+  const light = useLightExperience();
+  const fadeUp = fadeUpVariants(light, 0.08);
   const filters: Category[] = ["All Clients", "Academic", "Enterprises"];
 
   return (
@@ -121,6 +116,8 @@ function UsersGroupIcon() {
 }
 
 function ClientCard({ client, index }: { client: typeof allClients[0]; index: number }) {
+  const light = useLightExperience();
+  const fadeUp = fadeUpVariants(light, 0.07);
   const cardRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -130,7 +127,7 @@ function ClientCard({ client, index }: { client: typeof allClients[0]; index: nu
       variants={fadeUp}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={VIEWPORT_ONCE}
       custom={index % 3}
       className="relative bg-white rounded-[16px] flex flex-col overflow-hidden group border border-slate-100 shadow-sm"
       whileHover={{ y: -4, scale: 1.02, boxShadow: "0 6px 18px rgba(1,90,170,0.1)" }}

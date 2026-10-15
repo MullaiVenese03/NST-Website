@@ -2,10 +2,10 @@ import { useRef, useEffect } from "react";
 import { motion, Variants } from "motion/react";
 import {
   Shield, Award, Code2, ShoppingBag, Users, TrendingUp,
-  BookOpen, Wrench, Rocket, CheckCircle, Laptop, DollarSign,
-  UserCheck, ArrowRight, ExternalLink, Star,
-  Globe, ChevronRight, Play, Zap, GraduationCap, FlaskConical,
-  Lightbulb, Target, Building2, BarChart3
+  BookOpen, Rocket, Laptop,
+  ArrowRight, ExternalLink, Star,
+  ChevronRight, Play, Zap, GraduationCap, FlaskConical,
+  Lightbulb, Building2
 } from "lucide-react";
 import { ImageWithFallback } from "../components/ImageWithFallback";
 import { ResponsivePicture } from "../components/ResponsivePicture";
@@ -18,10 +18,12 @@ import ScrollToTop from "../components/ScrollToTop";
 import { Breadcrumbs } from "../components/Breadcrumbs";
 import { SeoHead } from "../../seo/SeoHead";
 import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
-import { EDTECH_SEO } from "../../seo/pageMeta";
-import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
+import { EDTECH_SEO, EDTECH_TRAINING_FAQ } from "../../seo/pageMeta";
+import { faqPageSchema } from "../../seo/schemas/faqSchema";
+import { ServicesFaqSection } from "../components/ServicesFaqSection";
+import { enableSmoothScroll, resetScrollBehavior, scrollToSection, scrollToTopInstant } from "../utils/scroll";
 import { brandMarkUrl } from "../../brandMark";
-import { useParallaxY } from "../utils/motionPresets";
+import { useParallaxY, VIEWPORT_ONCE, MOTION_EASE_OUT } from "../utils/motionPresets";
 import { useLightExperience } from "../utils/performance";
 import {
   CLIENT_PROGRAMS,
@@ -47,14 +49,13 @@ const C = {
 };
 
 const fadeUp: Variants = {
-  hidden:  { opacity: 0, y: 28 },
+  hidden:  { opacity: 0, y: 20 },
   visible: (i: number = 0) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.52, delay: i * 0.08, ease: MOTION_EASE_OUT },
   }),
 };
-const fadeLeft: Variants  = { hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
-const fadeRight: Variants = { hidden: { opacity: 0, x:  40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: [0.22,1,0.36,1] } } };
+const fadeRight: Variants = { hidden: { opacity: 0, x:  20 }, visible: { opacity: 1, x: 0, transition: { duration: 0.55, ease: MOTION_EASE_OUT } } };
 
 export function NSTLogo() {
   return (
@@ -77,7 +78,7 @@ export function NSTLogo() {
 function EdTechHero() {
   const imgRef = useRef<HTMLDivElement>(null);
   const light = useLightExperience();
-  const y = useParallaxY(imgRef, 35);
+  const y = useParallaxY(imgRef, light ? 0 : 35);
 
   const floatingStats = EDTECH_IMPACT_STATS.map((s) => ({
     val: s.val,
@@ -205,7 +206,7 @@ function EdTechServicesSection() {
     <section id="programs" className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#FFFFFF" }}>
       <div className="max-w-[1320px] mx-auto">
 
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           className="flex flex-col items-center text-center gap-4 mb-14">
           <div className="inline-flex items-center gap-2 rounded-full px-4 py-2"
             style={{ background: C.accentMid, border: `1px solid ${C.border}` }}>
@@ -226,7 +227,7 @@ function EdTechServicesSection() {
           {edtechServices.map((svc, i) => {
             const Icon = svc.icon;
             return (
-              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i % 3}
+              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE} custom={i % 3}
                 className="group rounded-[16px] p-6 flex flex-col gap-4 cursor-pointer transition-all duration-300"
                 style={{ background: C.card, border: `1px solid ${C.border}` }}
                 whileHover={{ y: -4, boxShadow: `0 6px 16px rgba(10,102,194,0.06)`, borderColor: C.primary }}>
@@ -299,7 +300,7 @@ export function ProjectCard({ project, index }: { project: typeof featuredProjec
   const diff = difficultyColor[project.difficulty];
   return (
     <motion.div
-      variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={index % 4}
+      variants={fadeUp} initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE} custom={index % 4}
       className="group rounded-[16px] bg-white overflow-hidden flex flex-col cursor-pointer"
       style={{ border: project.highlight ? `2px solid ${C.primary}` : `1px solid ${C.border}` }}
       whileHover={{ y: -4, boxShadow: "0 6px 16px rgba(10,102,194,0.06)" }}
@@ -371,7 +372,7 @@ export function FeaturedProjectsSection() {
     <section id="projects" className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: C.bg }}>
       <div className="max-w-[1320px] mx-auto">
 
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 mb-12">
           <div className="flex flex-col gap-3">
             <div className="inline-flex items-center gap-2 rounded-full px-4 py-2 w-fit"
@@ -399,124 +400,6 @@ export function FeaturedProjectsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredProjects.map((p, i) => <ProjectCard key={i} project={p} index={i} />)}
         </div>
-      </div>
-    </section>
-  );
-}
-
-function ECommerceShoutout() {
-  const imgRef = useRef<HTMLDivElement>(null);
-  const light = useLightExperience();
-  const y = useParallaxY(imgRef, 30);
-
-  return (
-    <section id="ecommerce" className="relative w-full py-4 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-[1320px] mx-auto">
-        <motion.div
-          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-          className="relative rounded-[24px] overflow-hidden flex flex-col lg:flex-row items-stretch"
-          style={{ background: `linear-gradient(135deg, ${C.secondary} 0%, ${C.primary} 60%, #1D78D0 100%)`, minHeight: "480px" }}
-        >
-
-          <div className="absolute top-[-60px] right-[-60px] w-[300px] h-[300px] rounded-full opacity-10"
-            style={{ background: "radial-gradient(circle, white 0%, transparent 70%)" }} />
-          <div className="absolute bottom-[-40px] left-[30%] w-[200px] h-[200px] rounded-full opacity-5"
-            style={{ background: "radial-gradient(circle, white 0%, transparent 70%)" }} />
-
-          <div className="flex-1 flex flex-col justify-center px-10 py-14 lg:px-14 relative z-10">
-
-            <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6 w-fit"
-              style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(10px)", border: "1px solid rgba(255,255,255,0.25)" }}>
-              <ShoppingBag size={14} color="white" />
-              <span className="nst-eyebrow text-white/90">
-                Flagship Project
-              </span>
-            </motion.div>
-
-            <motion.h2 variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="nst-h2 text-white"
-              style={{ marginBottom: "20px", margin: "0 0 20px 0" }}>
-              Build a Real<br />E-Commerce Platform
-            </motion.h2>
-
-            <motion.p variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="nst-body text-white/80"
-              style={{ maxWidth: "420px", marginBottom: "32px", margin: "0 0 32px 0" }}>
-              Dive into a production-grade e-commerce build - from user auth and product catalogs to Stripe payments and an admin panel. This is what real-world development looks like.
-            </motion.p>
-
-            <motion.div variants={fadeLeft} initial="hidden" whileInView="visible" viewport={{ once: true }}
-              className="flex flex-col gap-3 mb-8">
-              {[
-                "Full-stack React + Node.js architecture",
-                "Stripe payment gateway integration",
-                "Admin dashboard & inventory management",
-                "Deployed to live production environment",
-              ].map((point, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="rounded-full p-1 flex-shrink-0" style={{ background: "rgba(255,255,255,0.2)" }}>
-                    <CheckCircle size={13} color="white" />
-                  </div>
-                  <span style={{ fontWeight: 500, fontSize: "14px", color: "rgba(255,255,255,0.85)" }}>
-                    {point}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
-
-            <motion.a
-              href="https://ecommerce.nebulasafetech.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 no-underline w-fit rounded-[14px] py-4 px-8"
-              style={{ background: "#FFFFFF", boxShadow: "0 4px 12px rgba(0,0,0,0.06)", border: `1px solid ${C.border}` }}
-              whileHover={{ scale: 1.03, boxShadow: "0 6px 16px rgba(0,0,0,0.08)" }}
-              whileTap={{ scale: 0.96 }}>
-              <span style={{ fontWeight: 800, fontSize: "16px", color: C.primary }}>
-                Open Project Website
-              </span>
-              <ExternalLink size={16} color={C.primary} />
-            </motion.a>
-
-            <p className="mt-4" style={{ fontWeight: 400, fontSize: "12px", color: "rgba(255,255,255,0.5)" }}>
-              Opens in a new tab → Hosted on NST EdTech platform
-            </p>
-          </div>
-
-          <div ref={imgRef} className="flex-1 relative flex items-center justify-end p-6 lg:p-10">
-            <motion.div style={{ y }} className="relative w-full max-w-[500px]">
-              <div className="rounded-[16px] overflow-hidden relative"
-                style={{ boxShadow: "0 6px 20px rgba(0,0,0,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                <ImageWithFallback
-                  src="https://images.unsplash.com/photo-1763718528755-4bca23f82ac3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBkYXNoYm9hcmQlMjBtb2Rlcm4lMjB3ZWIlMjBhcHBsaWNhdGlvbiUyMFVJfGVufDF8fHx8MTc3Nzc0MjIwOXww&ixlib=rb-4.1.0&q=80&w=1080"
-                  alt="E-Commerce Platform Dashboard"
-                  className="w-full h-auto object-cover"
-                  style={{ maxHeight: "340px" }}
-                />
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-                className="absolute -bottom-4 -left-4 rounded-[12px] p-3 flex items-center gap-3"
-                style={{ background: "#fff", border: `1px solid ${C.border}`, boxShadow: "0 4px 12px rgba(0,0,0,0.06)", minWidth: "160px" }}>
-                <div className="rounded-[8px] p-2" style={{ background: "#ECFDF5" }}>
-                  <TrendingUp size={18} color="#059669" />
-                </div>
-                <div>
-                  <AnimatedNumber
-                    value="+124%"
-                    style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: "16px", color: "#059669", margin: 0 }}
-                  />
-                  <p style={{ fontWeight: 500, fontSize: "13px", color: C.muted, margin: 0 }}>Placement Rate</p>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
@@ -557,7 +440,7 @@ function LearningPathSection() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2 text-center"
         >
           Learning Methodology
@@ -566,7 +449,7 @@ function LearningPathSection() {
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           custom={1}
           className="nst-h2 text-slate-900 m-0 mb-12 text-center"
         >
@@ -582,7 +465,7 @@ function LearningPathSection() {
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
+                viewport={VIEWPORT_ONCE}
                 custom={i}
                 className="flex flex-col items-center text-center p-8 rounded-[24px] border border-slate-100 bg-slate-50 hover:border-slate-200 transition-all"
               >
@@ -613,7 +496,7 @@ function PlatformFeaturesSection() {
   return (
     <section className="w-full py-16 md:py-20 px-8 md:px-14 lg:px-20 border-t border-slate-100" style={{ background: "#F8FAFE" }}>
       <div className="max-w-[1440px] mx-auto">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           className="flex flex-col items-center text-center gap-4 mb-14">
           <p className="nst-eyebrow font-bold text-[#015AAA] m-0">
             Platform Advantages
@@ -630,7 +513,7 @@ function PlatformFeaturesSection() {
           {platformFeatures.map((feat, i) => {
             const Icon = feat.icon;
             return (
-              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} custom={i % 4}
+              <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE} custom={i % 4}
                 className="group rounded-[14px] p-5 flex flex-col gap-4 transition-all duration-300"
                 style={{ background: C.card, border: `1px solid ${C.border}` }}
                 whileHover={{ y: -4, borderColor: C.primary, boxShadow: "0 6px 16px rgba(10,102,194,0.06)" }}>
@@ -664,13 +547,13 @@ function StatsStrip() {
     <motion.section
       className="w-full py-12 px-4 sm:px-6 lg:px-8"
       style={{ background: "#FFFFFF", borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}
-      initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+      initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={VIEWPORT_ONCE} transition={{ duration: 0.6 }}>
       <div className="max-w-[1320px] mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
         {stats.map((s, i) => {
           const Icon = s.icon;
           return (
             <motion.div key={i} className="flex flex-col items-center gap-2"
-              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={VIEWPORT_ONCE}
               transition={{ duration: 0.5, delay: i * 0.1 }}>
               <div className="rounded-[10px] p-2.5" style={{ background: C.accentMid }}>
                 <Icon size={18} color={C.primary} />
@@ -695,7 +578,7 @@ function CTASection() {
     <section className="w-full py-20 px-4 sm:px-6 lg:px-8" style={{ background: C.bg }}>
       <div className="max-w-[1320px] mx-auto">
         <motion.div
-          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
+          variants={fadeUp} initial="hidden" whileInView="visible" viewport={VIEWPORT_ONCE}
           className="relative rounded-[24px] overflow-hidden flex flex-col items-center text-center px-5 sm:px-10 py-12 sm:py-16 gap-8"
           style={{ background: `linear-gradient(135deg, ${C.bg} 0%, ${C.accentMid} 100%)`, border: `2px solid ${C.border}` }}>
 
@@ -727,7 +610,7 @@ function CTASection() {
               whileHover={{ scale: 1.05, background: C.secondary }} whileTap={{ scale: 0.96 }}
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth", block: "start" });
+                scrollToSection("contact-form");
               }}>
               Contact Form <ArrowRight size={16} />
             </motion.a>
@@ -762,7 +645,13 @@ export default function EdTechPage() {
 
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden" style={{ background: C.bg }}>
-      <SeoHead meta={EDTECH_SEO} structuredData={pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.edtech)} />
+      <SeoHead
+        meta={EDTECH_SEO}
+        structuredData={[
+          faqPageSchema([...EDTECH_TRAINING_FAQ]),
+          pageBreadcrumbJsonLd(PAGE_BREADCRUMBS.edtech),
+        ]}
+      />
       <TopNav />
 
       <main id="main-content">
@@ -777,6 +666,12 @@ export default function EdTechPage() {
 
         <LearningPathSection />
         <PlatformFeaturesSection />
+
+        <ServicesFaqSection
+          title="EdTech & Training Programs - FAQ"
+          subtitle="Answers to common questions about institutional partnerships, learning tracks, and student certifications."
+          items={[...EDTECH_TRAINING_FAQ]}
+        />
 
         <CTASection />
         <section className="w-full py-16 md:py-20 px-4 sm:px-6 lg:px-8" style={{ background: "#FFFFFF" }}>

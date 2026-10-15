@@ -1,18 +1,17 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
+import { isReducedMotion } from "../utils/scroll";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 300);
     };
 
+    toggleVisibility();
     window.addEventListener("scroll", toggleVisibility, { passive: true });
     return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
@@ -20,7 +19,7 @@ export default function ScrollToTop() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: isReducedMotion() ? "auto" : "smooth",
     });
   };
 
@@ -29,37 +28,31 @@ export default function ScrollToTop() {
       {isVisible && (
         <motion.button
           type="button"
-          initial={{ opacity: 0, scale: 0.5, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, y: 20 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
+          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.85, y: 12 }}
+          animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, scale: 1, y: 0 }}
+          exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.85, y: 12 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
+          whileHover={shouldReduceMotion ? undefined : { scale: 1.08 }}
+          whileTap={shouldReduceMotion ? undefined : { scale: 0.94 }}
           onClick={scrollToTop}
-          className="fixed bottom-28 max-[1023px]:bottom-32 right-4 sm:right-8 z-[110] w-12 h-12 min-w-[48px] min-h-[48px] rounded-full bg-[#015AAA] text-white shadow-sm flex items-center justify-center cursor-pointer border-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]"
-          aria-label="Scroll to top"
+          className="fixed bottom-28 max-[1023px]:bottom-32 right-4 sm:right-8 z-[110] w-12 h-12 min-w-[48px] min-h-[48px] rounded-full bg-[#015AAA] hover:bg-[#014c8f] text-white shadow-md flex items-center justify-center cursor-pointer border-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA] transition-colors"
+          aria-label="Back to top"
+          title="Back to top"
         >
-          <motion.div
-            animate={{ y: [0, -4, 0] }}
-            transition={{ 
-              duration: 1.5, 
-              repeat: Infinity, 
-              ease: "easeInOut" 
-            }}
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+            className="block shrink-0 pointer-events-none"
           >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M18 15l-6-6-6 6" />
-            </svg>
-          </motion.div>
+            <path d="M18 15l-6-6-6 6" />
+          </svg>
         </motion.button>
       )}
     </AnimatePresence>

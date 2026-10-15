@@ -4,7 +4,6 @@ import {
   BUSINESS_NAP,
   COMPANY_KNOWS_ABOUT,
   GEO_LOCATION,
-  ORG_NAME,
   SITE_ORIGIN,
   SOCIAL_PROFILES,
   napPostalAddress,
@@ -23,6 +22,7 @@ export function localBusinessSchema() {
     telephone: BUSINESS_NAP.telephone,
     email: BUSINESS_NAP.email,
     address: napPostalAddress(),
+    hasMap: BUSINESS_NAP.googleMapsUrl,
     geo: {
       "@type": "GeoCoordinates",
       latitude: GEO_LOCATION.latitude,

@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router";
 import { brandMarkUrl } from "../../brandMark";
-import { scrollToTopInstant } from "../utils/scroll";
+import { isReducedMotion, scrollToTopInstant } from "../utils/scroll";
 
 function NstLogo() {
   return (
@@ -11,7 +11,7 @@ function NstLogo() {
         width={36}
         height={36}
         decoding="async"
-        fetchPriority="high"
+        {...{ fetchpriority: "high" }}
         className="w-full h-full object-contain block"
       />
     </div>
@@ -24,7 +24,7 @@ export default function TopNav() {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === "/") {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: isReducedMotion() ? "auto" : "smooth" });
     } else {
       scrollToTopInstant();
     }

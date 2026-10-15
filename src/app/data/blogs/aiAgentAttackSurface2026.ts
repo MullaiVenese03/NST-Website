@@ -1191,11 +1191,10 @@ export const blogPostAiAgentAttackSurface2026: BlogPost = {
           type: "list",
           style: "unordered",
           items: [
-            "**Application Security** - securing AI-connected applications, APIs, authentication, authorization, and business logic",
             "**Web Security** - protecting public-facing interfaces and AI-enabled web applications",
             "**Cloud Security** - controlling AI agent access to cloud infrastructure and services",
+            "**Application Security** - securing AI-connected applications, APIs, authentication, authorization, and business logic",
             "**Network Security** - limiting unnecessary communication paths and exposure",
-            "**Encryption & Data Protection** - protecting sensitive information accessed or processed by AI systems",
             "**Full-Stack Web Development** - implementing secure application and API architectures",
             "**Web Design & UI/UX Design** - designing safe human-approval and high-risk interaction flows",
             "**Academic Training** - practical learning around AI security and secure application development",

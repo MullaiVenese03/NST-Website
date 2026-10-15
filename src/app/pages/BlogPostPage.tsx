@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router";
-import { Calendar, Clock, ArrowLeft, BookOpen, ExternalLink } from "lucide-react";
+import { Calendar, Clock, ExternalLink } from "lucide-react";
+import { Reveal } from "../components/Reveal";
 import TopNav from "../components/TopNav";
 import FooterSection from "../components/FooterSection";
 import ScrollToTop from "../components/ScrollToTop";
@@ -279,63 +280,65 @@ export default function BlogPostPage() {
               )}
 
               {/* 2. Compact Author Profile Card */}
-              <section
-                aria-label="About the author"
-                className="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/70 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 shadow-xs w-full"
-              >
-                <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shrink-0 border border-slate-200 bg-[#015AAA] text-white flex items-center justify-center font-bold text-lg">
-                  {post.author.avatar ? (
-                    <img
-                      src={post.author.avatar}
-                      alt={post.author.name}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <span>
-                      {post.author.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </span>
-                  )}
-                </div>
-
-                <div className="space-y-1.5 flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="font-heading text-slate-900 m-0 text-base sm:text-lg font-bold">
-                      Written by {post.author.name}
-                    </h2>
-                    <span className="text-[11px] text-[#015AAA] font-semibold bg-[#015AAA]/10 px-2.5 py-0.5 rounded-full border border-[#015AAA]/20">
-                      {post.author.role}
-                    </span>
+              <Reveal variant="fadeUp">
+                <section
+                  aria-label="About the author"
+                  className="p-5 sm:p-6 rounded-2xl bg-slate-50/90 border border-slate-200/70 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-5 shadow-xs w-full"
+                >
+                  <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden shrink-0 border border-slate-200 bg-[#015AAA] text-white flex items-center justify-center font-bold text-lg">
+                    {post.author.avatar ? (
+                      <img
+                        src={post.author.avatar}
+                        alt={post.author.name}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <span>
+                        {post.author.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </span>
+                    )}
                   </div>
 
-                  <p className="text-xs text-slate-500 font-medium m-0">
-                    NebulaSafeTech Defender &amp; Cybersecurity Author
-                  </p>
-
-                  {post.author.bio && (
-                    <p className="text-xs sm:text-sm text-slate-600 font-body leading-relaxed m-0">
-                      {post.author.bio}
-                    </p>
-                  )}
-
-                  {post.author.profileUrl && (
-                    <div className="pt-1">
-                      <a
-                        href={post.author.profileUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-[#015AAA] hover:underline"
-                      >
-                        <span>Connect with {post.author.name} on LinkedIn</span>
-                        <ExternalLink size={12} />
-                      </a>
+                  <div className="space-y-1.5 flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h2 className="font-heading text-slate-900 m-0 text-base sm:text-lg font-bold">
+                        Written by {post.author.name}
+                      </h2>
+                      <span className="text-[11px] text-[#015AAA] font-semibold bg-[#015AAA]/10 px-2.5 py-0.5 rounded-full border border-[#015AAA]/20">
+                        {post.author.role}
+                      </span>
                     </div>
-                  )}
-                </div>
-              </section>
+
+                    <p className="text-xs text-slate-500 font-medium m-0">
+                      NebulaSafeTech Defender &amp; Cybersecurity Author
+                    </p>
+
+                    {post.author.bio && (
+                      <p className="text-xs sm:text-sm text-slate-600 font-body leading-relaxed m-0">
+                        {post.author.bio}
+                      </p>
+                    )}
+
+                    {post.author.profileUrl && (
+                      <div className="pt-1">
+                        <a
+                          href={post.author.profileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-[#015AAA] hover:underline"
+                        >
+                          <span>Connect with {post.author.name} on LinkedIn</span>
+                          <ExternalLink size={12} />
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              </Reveal>
             </div>
           </div>
         </section>
@@ -346,7 +349,7 @@ export default function BlogPostPage() {
         {relatedPosts.length > 0 && (
           <section className="w-full bg-[#F8FAFE] py-12 sm:py-14 px-4 sm:px-8 md:px-14 lg:px-20 border-t border-slate-100">
             <div className="max-w-6xl mx-auto">
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
+              <Reveal variant="fadeUp" className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8">
                 <div>
                   <span className="inline-block text-[11px] font-bold uppercase tracking-wider text-[#015AAA] mb-1">
                     Explore Further
@@ -362,7 +365,7 @@ export default function BlogPostPage() {
                   <span>View all blogs</span>
                   <span aria-hidden="true">&rarr;</span>
                 </Link>
-              </div>
+              </Reveal>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
                 {relatedPosts.map((rPost, idx) => (

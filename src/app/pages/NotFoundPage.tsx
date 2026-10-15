@@ -15,13 +15,14 @@ import TopNav from "../components/TopNav";
 import FooterSection from "../components/FooterSection";
 import { useMotionEnabled } from "../utils/performance";
 import { scrollToTopInstant } from "../utils/scroll";
+import { MOTION_EASE_OUT } from "../utils/motionPresets";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, delay: i * 0.08, ease: "easeOut" },
+    transition: { duration: 0.48, delay: i * 0.08, ease: MOTION_EASE_OUT },
   }),
 };
 

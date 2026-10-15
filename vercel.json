@@ -21,6 +21,56 @@
       "permanent": true
     },
     {
+      "source": "/services/encryption-data-protection",
+      "destination": "https://www.nebulasafetech.com/services/cybersecurity",
+      "permanent": true
+    },
+    {
+      "source": "/services/encryption-data-protection/",
+      "destination": "https://www.nebulasafetech.com/services/cybersecurity",
+      "permanent": true
+    },
+    {
+      "source": "/services/encryption",
+      "destination": "https://www.nebulasafetech.com/services/cybersecurity",
+      "permanent": true
+    },
+    {
+      "source": "/services/encryption/",
+      "destination": "https://www.nebulasafetech.com/services/cybersecurity",
+      "permanent": true
+    },
+    {
+      "source": "/services/data-protection",
+      "destination": "https://www.nebulasafetech.com/services/cybersecurity",
+      "permanent": true
+    },
+    {
+      "source": "/services/data-protection/",
+      "destination": "https://www.nebulasafetech.com/services/cybersecurity",
+      "permanent": true
+    },
+    {
+      "source": "/services/edtech-training",
+      "destination": "https://www.nebulasafetech.com/edtech",
+      "permanent": true
+    },
+    {
+      "source": "/services/edtech-training/",
+      "destination": "https://www.nebulasafetech.com/edtech",
+      "permanent": true
+    },
+    {
+      "source": "/services/academic-training",
+      "destination": "https://www.nebulasafetech.com/edtech",
+      "permanent": true
+    },
+    {
+      "source": "/services/academic-training/",
+      "destination": "https://www.nebulasafetech.com/edtech",
+      "permanent": true
+    },
+    {
       "source": "/blog/ai-agent-attack-surface-security-checklist-2026",
       "destination": "https://www.nebulasafetech.com/blogs/ai-agent-attack-surface-security-checklist-2026",
       "permanent": true
@@ -190,6 +240,34 @@
     {
       "source": "/blogs/:slug+",
       "destination": "/api/not-found"
+    },
+    {
+      "source": "/services/cybersecurity",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/services/web-security",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/services/cloud-security",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/services/application-security",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/services/network-security",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/services/web-development",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/services/ui-ux-design",
+      "destination": "/index.html"
     },
     {
       "source": "/services/:slug+",

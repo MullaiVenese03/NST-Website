@@ -1,4 +1,10 @@
+export function isReducedMotion(): boolean {
+  if (typeof window === "undefined" || !window.matchMedia) return false;
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function enableSmoothScroll() {
+  if (isReducedMotion()) return;
   document.documentElement.style.scrollBehavior = "smooth";
 }
 
@@ -14,7 +20,7 @@ export function scrollToTopInstant() {
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
 
   requestAnimationFrame(() => {
-    root.style.scrollBehavior = previousBehavior || "smooth";
+    root.style.scrollBehavior = previousBehavior;
   });
 }
 
@@ -23,7 +29,7 @@ export function scrollToSection(
   id: string,
   options?: { behavior?: ScrollBehavior; block?: ScrollLogicalPosition; maxAttempts?: number },
 ) {
-  const behavior = options?.behavior ?? "smooth";
+  const behavior = options?.behavior ?? (isReducedMotion() ? "auto" : "smooth");
   const block = options?.block ?? "start";
   const maxAttempts = options?.maxAttempts ?? 48;
 

@@ -1135,10 +1135,9 @@ export const blogPostVapt2026Checklist: BlogPost = {
           style: "unordered",
           items: [
             "Web Security",
-            "Application Security",
             "Cloud Security",
+            "Application Security",
             "Network Security",
-            "Encryption & Data Protection",
             "Full-Stack Web Development",
             "Web Design & UI/UX Design",
             "Academic Training",

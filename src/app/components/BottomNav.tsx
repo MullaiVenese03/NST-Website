@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router";
 import { useEffect, useState } from "react";
-import { scrollToTopInstant } from "../utils/scroll";
+import { isReducedMotion, scrollToTopInstant } from "../utils/scroll";
 import {
   Home,
   Info,
@@ -86,7 +86,7 @@ export default function BottomNav() {
   const handleLinkClick = (item: (typeof navItems)[0], e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === item.path) {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: isReducedMotion() ? "auto" : "smooth" });
       return;
     }
 
@@ -121,11 +121,10 @@ export default function BottomNav() {
               onClick={(e) => handleLinkClick(item, e)}
               aria-label={item.name}
               aria-current={isActive ? "page" : undefined}
-              className={`relative rounded-full border-none font-bold whitespace-nowrap flex items-center justify-center flex-1 no-underline transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015aaa]/60 ${
-                isActive
+              className={`relative rounded-full border-none font-bold whitespace-nowrap flex items-center justify-center flex-1 no-underline transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015aaa]/60 ${isActive
                   ? "bg-[#015aaa] text-white shadow-sm"
                   : "bg-transparent text-gray-800 hover:bg-slate-100/70 hover:text-[#015aaa]"
-              }`}
+                }`}
               style={{
                 fontSize: "clamp(11px, 2vw, 13px)",
                 paddingLeft: "clamp(6px, 2.5vw, 20px)",
@@ -135,9 +134,9 @@ export default function BottomNav() {
                 minHeight: "clamp(32px, 5vw, 44px)",
               }}
             >
-              {/* Mobile (below sm): icon only — text is visually hidden but aria-label covers a11y */}
+              {/* Mobile (below sm): icon only - text is visually hidden but aria-label covers a11y */}
               <NavIcon name={item.name} className="sm:hidden" />
-              {/* Tablet / Desktop (sm and above): existing text label — completely unchanged */}
+              {/* Tablet / Desktop (sm and above): existing text label - completely unchanged */}
               <span className="hidden sm:inline">{item.name}</span>
             </Link>
           );

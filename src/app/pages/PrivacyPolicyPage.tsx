@@ -2,6 +2,7 @@ import LegalDocLayout from "../components/LegalDocLayout";
 import { SeoHead } from "../../seo/SeoHead";
 import { PRIVACY_SEO } from "../../seo/pageMeta";
 import { PAGE_BREADCRUMBS, pageBreadcrumbJsonLd } from "../utils/pageBreadcrumbs";
+import { BUSINESS_NAP } from "../../seo/seoConfig";
 
 export default function PrivacyPolicyPage() {
   return (
@@ -207,7 +208,15 @@ export default function PrivacyPolicyPage() {
           <a href="mailto:info@nebulasafetech.com">info@nebulasafetech.com</a>
         </p>
         <p>
-          <strong>Address:</strong> Hosur, Tamil Nadu, India
+          <strong>Address:</strong>{" "}
+          <a
+            href={BUSINESS_NAP.googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#015AAA] hover:underline"
+          >
+            {BUSINESS_NAP.formattedAddress}
+          </a>
         </p>
       </address>
       <p>We will make our best effort to respond to and resolve any inquiries or complaints in a timely manner in accordance with applicable law.</p>

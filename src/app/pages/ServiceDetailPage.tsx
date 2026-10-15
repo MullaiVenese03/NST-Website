@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import TopNav from "../components/TopNav";
 import FooterSection from "../components/FooterSection";
 import ScrollToTop from "../components/ScrollToTop";
 import NotFoundPage from "./NotFoundPage";
 import { SeoHead } from "../../seo/SeoHead";
-import { getServiceDetailSeo, serviceFaqForSlug, type PageSeo, type ServiceSlug } from "../../seo/pageMeta";
-import { SITE_ORIGIN, ORG_NAME } from "../../seo/seoConfig";
+import { getServiceDetailSeo, serviceFaqForSlug, type ServiceSlug } from "../../seo/pageMeta";
+import { SITE_ORIGIN } from "../../seo/seoConfig";
 import { serviceSchema } from "../../seo/schemas/serviceSchema";
 import { faqPageSchema, breadcrumbListSchema } from "../../seo/schemas/faqSchema";
 import { enableSmoothScroll, resetScrollBehavior, scrollToTopInstant } from "../utils/scroll";
@@ -20,9 +20,10 @@ import {
   ServiceProcessSection,
   ServiceCtaSection,
   ServiceContactFormSection,
+  ProblemAndAudienceSection,
 } from "../components/ServiceDetailSections";
 
-const VALID: ServiceSlug[] = ["web-development", "cybersecurity", "ui-ux-design", "edtech-training"];
+const VALID: ServiceSlug[] = ["web-development", "cybersecurity", "ui-ux-design"];
 
 function isServiceSlug(s: string | undefined): s is ServiceSlug {
   return !!s && (VALID as string[]).includes(s);
@@ -69,6 +70,12 @@ export default function ServiceDetailPage() {
       <TopNav />
       <main id="main-content">
         <ServiceDetailHero meta={meta} content={content} />
+        {content.problemStatement && content.audiences && (
+          <ProblemAndAudienceSection
+            problemStatement={content.problemStatement}
+            audiences={content.audiences}
+          />
+        )}
         <ServiceOfferingsSection content={content} />
         <ServiceCapabilitiesSection content={content} />
         <ServiceBenefitsSection content={content} />
@@ -77,11 +84,11 @@ export default function ServiceDetailPage() {
         <ServiceContactFormSection key={slug} serviceName={meta.serviceType} />
         <ServicesFaqSection
           title={`${meta.serviceType} - FAQ`}
-          subtitle="Common questions about this service area and how we work with clients."
+          subtitle="Straight answers about our process, capabilities, deliverables, and engagement model."
           items={faqItems}
         />
-        <FooterSection />
       </main>
+      <FooterSection />
       <ScrollToTop />
     </div>
   );

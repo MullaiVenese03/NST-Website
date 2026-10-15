@@ -55,6 +55,30 @@ async function run() {
       image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "Cybersecurity & VAPT Services" },
     },
     {
+      path: "/services/web-security",
+      changefreq: "monthly",
+      priority: "0.85",
+      image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "Web Security Services & VAPT" },
+    },
+    {
+      path: "/services/cloud-security",
+      changefreq: "monthly",
+      priority: "0.85",
+      image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "Cloud Security Assessment & Hardening" },
+    },
+    {
+      path: "/services/application-security",
+      changefreq: "monthly",
+      priority: "0.85",
+      image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "Application Security Testing & Secure SDLC" },
+    },
+    {
+      path: "/services/network-security",
+      changefreq: "monthly",
+      priority: "0.85",
+      image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "Network Security Assessment & Hardening" },
+    },
+    {
       path: "/services/web-development",
       changefreq: "monthly",
       priority: "0.85",
@@ -65,12 +89,6 @@ async function run() {
       changefreq: "monthly",
       priority: "0.85",
       image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "UI/UX Product Design Services" },
-    },
-    {
-      path: "/services/edtech-training",
-      changefreq: "monthly",
-      priority: "0.85",
-      image: { loc: `${SITE_ORIGIN}/og-image.webp`, title: "EdTech & Institutional Cybersecurity Training" },
     },
     {
       path: "/testimonials",

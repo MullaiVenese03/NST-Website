@@ -607,7 +607,7 @@ export const blogPostUiUxDesignProcess2026: BlogPost = {
             },
             {
                 "type": "diagram",
-                "content": "Home\n├── About\n├── Services\n│   ├── Web Security\n│   ├── Cloud Security\n│   ├── Application Security\n│   ├── Network Security\n│   ├── Encryption & Data Protection\n│   ├── Full-Stack Web Development\n│   ├── Web Design & UI/UX\n│   └── Academic Training\n├── Projects\n├── Blog\n├── Product\n└── Contact"
+                "content": "Home\n├── About\n├── Services\n│   ├── Web Security\n│   ├── Cloud Security\n│   ├── Application Security\n│   ├── Network Security\n│   ├── Full-Stack Web Development\n│   ├── Web Design & UI/UX\n│   └── Academic Training\n├── Projects\n├── Blog\n├── Product\n└── Contact"
             },
             {
                 "type": "p",

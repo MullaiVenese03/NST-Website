@@ -111,7 +111,6 @@ export function mapFileToCanonicalUrls(filePath, status = "M", rootDir = root) {
       `${CANONICAL_ORIGIN}/services/web-development`,
       `${CANONICAL_ORIGIN}/services/cybersecurity`,
       `${CANONICAL_ORIGIN}/services/ui-ux-design`,
-      `${CANONICAL_ORIGIN}/services/edtech-training`,
     ];
   }
 

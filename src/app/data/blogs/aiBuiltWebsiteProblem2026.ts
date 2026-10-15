@@ -1252,12 +1252,11 @@ export const blogPostAiBuiltWebsiteProblem2026: BlogPost = {
           items: [
             "[Full-Stack Web Development](/services/web-development) - maintainable frontend, backend, API, database, and deployment systems",
             "[Web Design & UI/UX Design](/services/ui-ux-design) - interfaces based on real users rather than generic generated patterns",
-            "[Web Security](/services/cybersecurity) - protection of public-facing websites",
-            "[Application Security](/services/cybersecurity) - authentication, authorization, input handling, APIs, and application logic",
-            "[Cloud Security](/services/cybersecurity) - protection of deployed applications and cloud infrastructure",
-            "[Network Security](/services/cybersecurity) - security of surrounding systems and networks",
-            "[Encryption & Data Protection](/services/cybersecurity) - protection of sensitive information and data flows",
-            "[Academic Training](/services/edtech-training) - practical learning around development, security, and responsible AI-assisted engineering",
+            "[Web Security](/services/web-security) - protection of public-facing websites and APIs",
+            "[Application Security](/services/application-security) - authentication, authorization, input handling, APIs, and application logic",
+            "[Cloud Security](/services/cloud-security) - protection of deployed applications and cloud infrastructure",
+            "[Network Security](/services/network-security) - security of surrounding systems and networks",
+            "[EdTech & Cybersecurity Training](/edtech) - practical learning around development, security, and responsible AI-assisted engineering",
           ],
         },
         {

@@ -1805,7 +1805,7 @@ Production`,
       blocks: [
         {
           type: "p",
-          text: "NebulaSafeTech provides **[Full-Stack Web Development](/services/web-development)** alongside **[Web Design & UI/UX Design](/services/ui-ux-design)**, **[Application Security](/services/cybersecurity)**, **Cloud Security**, **Network Security**, **Web Security**, **Encryption & Data Protection**, and **[Academic Training](/services/edtech-training)**.",
+          text: "NebulaSafeTech provides **[Full-Stack Web Development](/services/web-development)** alongside **[Web Design & UI/UX Design](/services/ui-ux-design)**, **[Web Security](/services/web-security)**, **[Cloud Security](/services/cloud-security)**, **[Application Security](/services/application-security)**, **[Network Security](/services/network-security)**, and **[EdTech & Cybersecurity Training](/edtech)**.",
         },
         {
           type: "p",

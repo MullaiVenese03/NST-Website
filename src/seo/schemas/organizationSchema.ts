@@ -36,6 +36,7 @@ export function organizationSchema() {
       name: "Mullai",
     },
     address: napPostalAddress(),
+    hasMap: BUSINESS_NAP.googleMapsUrl,
   };
 }
 

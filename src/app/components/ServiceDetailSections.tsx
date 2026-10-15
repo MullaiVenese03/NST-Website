@@ -1,8 +1,9 @@
 import { useRef } from "react";
 import { Link } from "react-router";
 import { motion, type Variants } from "motion/react";
-import { useParallaxY } from "../utils/motionPresets";
-import { ArrowRight, CheckCircle2, Mail } from "lucide-react";
+import { useParallaxY, VIEWPORT_ONCE, MOTION_EASE_OUT, fadeUpVariants } from "../utils/motionPresets";
+import { useLightExperience } from "../utils/performance";
+import { ArrowRight, CheckCircle2, Mail, Users } from "lucide-react";
 import { Breadcrumbs } from "./Breadcrumbs";
 import type { ServiceDetailContent } from "../data/serviceDetailContent";
 import { ResponsivePicture } from "./ResponsivePicture";
@@ -11,39 +12,35 @@ import type { PageSeo } from "../../seo/pageMeta";
 import AnimatedNumber from "./AnimatedNumber";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: i * 0.08, ease: "easeOut" },
+    transition: { duration: 0.52, delay: i * 0.08, ease: MOTION_EASE_OUT },
   }),
 };
 
 const fadeRight: Variants = {
-  hidden: { opacity: 0, x: 40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  hidden: { opacity: 0, x: 20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.55, ease: MOTION_EASE_OUT } },
 };
 
 type ServiceHeroProps = {
   meta: PageSeo & { serviceType: string; summary: string };
   content: ServiceDetailContent;
+  breadcrumbItems?: { name: string; path: string }[];
 };
 
-export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
+export function ServiceDetailHero({ meta, content, breadcrumbItems }: ServiceHeroProps) {
   const imgRef = useRef<HTMLDivElement>(null);
   const y = useParallaxY(imgRef, 35);
 
   return (
     <section className="relative w-full bg-white overflow-hidden pt-28 pb-16 md:pb-20 px-8 md:px-14 lg:px-20">
-      <motion.div
-        className="absolute top-20 right-0 w-[min(55vw,520px)] h-[min(55vw,520px)] rounded-full opacity-[0.07] pointer-events-none"
-        style={{ background: "radial-gradient(circle, #015AAA 0%, transparent 70%)" }}
-        aria-hidden
-      />
       <div className="max-w-[1440px] mx-auto">
         <Breadcrumbs
           className="mb-8"
-          items={[
+          items={breadcrumbItems || [
             { name: "Home", path: "/" },
             { name: "Services", path: "/services" },
             { name: meta.serviceType, path: meta.canonicalPath },
@@ -134,32 +131,127 @@ export function ServiceDetailHero({ meta, content }: ServiceHeroProps) {
 
           <motion.div
             ref={imgRef}
-            className="flex-1 min-w-0 w-full lg:max-w-[520px] relative flex items-center justify-center"
+            className="flex-1 min-w-0 w-full lg:max-w-[500px] flex items-center justify-center"
             variants={fadeRight}
             initial="hidden"
             animate="visible"
           >
             <motion.div
-              className="relative w-full rounded-3xl border border-slate-100 bg-gradient-to-br from-slate-50 to-white p-6 sm:p-8 md:p-10 shadow-sm shadow-slate-100 overflow-hidden"
+              className="w-full rounded-2xl border border-slate-200/80 bg-slate-50/50 p-6 sm:p-8 md:p-10 flex items-center justify-center shadow-xs"
               style={{ y }}
             >
-              <motion.div
-                className="absolute inset-0 rounded-3xl opacity-30 pointer-events-none"
-                style={{ background: "radial-gradient(circle at 30% 20%, #015AAA 0%, transparent 55%)" }}
-                aria-hidden
-              />
-              <div className="relative z-10 flex items-center justify-center min-h-[220px] sm:min-h-[280px] max-h-[360px] w-full overflow-hidden">
+              <div className="flex items-center justify-center min-h-[220px] sm:min-h-[260px] max-h-[340px] w-full">
                 <ResponsivePicture
                   slug={content.heroMedia}
                   alt={content.heroImageAlt}
-                  className="w-full h-auto max-w-full max-h-[280px] sm:max-h-[320px] object-contain object-center mx-auto"
+                  className="w-full h-auto max-w-full max-h-[280px] sm:max-h-[320px] object-contain object-center mx-auto select-none"
                   sizes="(max-width: 1024px) 90vw, 480px"
                   profile="icon"
+                  priority
                 />
               </div>
             </motion.div>
           </motion.div>
         </motion.div>
+      </div>
+    </section>
+  );
+}
+
+export function ProblemAndAudienceSection({
+  problemStatement,
+  audiences,
+  problemEyebrow = "Why This Matters",
+  problemTitle = "The core challenge",
+  audienceEyebrow = "Who This Is For",
+  audienceTitle = "Typical clients & partners",
+}: {
+  problemStatement: string;
+  audiences: string[];
+  problemEyebrow?: string;
+  problemTitle?: string;
+  audienceEyebrow?: string;
+  audienceTitle?: string;
+}) {
+  const light = useLightExperience();
+  const fadeUp = fadeUpVariants(light, 0.08);
+
+  return (
+    <section className="w-full bg-white border-y border-slate-100 py-14 md:py-18 px-8 md:px-14 lg:px-20">
+      <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row gap-12 lg:gap-20">
+        <div className="flex-1 min-w-0">
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
+            className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2"
+          >
+            {problemEyebrow}
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
+            custom={1}
+            className="nst-h2 text-slate-900 m-0 mb-4"
+          >
+            {problemTitle}
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
+            custom={2}
+            className="nst-body text-slate-600 m-0 max-w-prose leading-relaxed pl-4 border-l-2 border-[#015AAA]/40"
+          >
+            {problemStatement}
+          </motion.p>
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <motion.p
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
+            className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2"
+          >
+            {audienceEyebrow}
+          </motion.p>
+          <motion.h2
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
+            custom={1}
+            className="nst-h2 text-slate-900 m-0 mb-6"
+          >
+            {audienceTitle}
+          </motion.h2>
+          <motion.ul
+            className="space-y-3 list-none m-0 p-0"
+            variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT_ONCE}
+          >
+            {audiences.map((audience) => (
+              <motion.li
+                key={audience}
+                variants={fadeUp}
+                className="flex items-start gap-3 rounded-xl border border-slate-100 bg-slate-50/60 px-4 py-3.5 nst-small text-slate-800"
+              >
+                <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#015AAA]/10 text-[#015AAA] shrink-0 mt-0.5">
+                  <Users className="w-4 h-4" aria-hidden />
+                </span>
+                {audience}
+              </motion.li>
+            ))}
+          </motion.ul>
+        </div>
       </div>
     </section>
   );
@@ -178,7 +270,7 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2"
         >
           Offerings
@@ -187,7 +279,7 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           custom={1}
           className="nst-h2 text-slate-900 m-0 mb-3"
         >
@@ -197,7 +289,7 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           custom={2}
           className="nst-body text-slate-600 m-0 mb-10 max-w-2xl"
         >
@@ -205,33 +297,64 @@ export function ServiceOfferingsSection({ content }: { content: ServiceDetailCon
         </motion.p>
 
         <div className={`grid grid-cols-1 ${gridCols} gap-6`}>
-          {content.offerings.map((item, i) => (
-            <motion.article
-              key={item.title}
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.15 }}
-              custom={i % 4}
-              className="group relative rounded-2xl bg-white border border-slate-100 hover:border-slate-200/90 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col overflow-hidden h-full"
-            >
-              <div className="p-5 pb-2 flex items-center justify-center h-28 sm:h-32 bg-gradient-to-b from-[#015AAA]/5 to-transparent shrink-0">
-                <ResponsivePicture
-                  slug={item.mediaSlug}
-                  alt=""
-                  className="max-h-16 sm:max-h-20 w-auto object-contain transition-transform duration-200 ease-out group-hover:scale-105"
-                  profile="icon"
-                />
-              </div>
-              <div className="p-5 pt-2 flex flex-col flex-1 min-w-0">
-                <h3 className="nst-h4 text-slate-900 m-0 mb-2 group-hover:text-[#015AAA] transition-colors duration-200">
-                  {item.title}
-                </h3>
-                <p className="nst-small text-slate-500 m-0 flex-1">{item.description}</p>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#015AAA] to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 ease-out origin-left pointer-events-none" aria-hidden />
-            </motion.article>
-          ))}
+          {content.offerings.map((item, i) => {
+            const cardInner = (
+              <>
+                <div className="p-5 pb-2 flex items-center justify-center h-28 sm:h-32 bg-[#F8FAFE] shrink-0">
+                  <ResponsivePicture
+                    slug={item.mediaSlug}
+                    alt=""
+                    className="max-h-16 sm:max-h-20 w-auto object-contain transition-transform duration-200 ease-out group-hover:scale-105"
+                    profile="icon"
+                  />
+                </div>
+                <div className="p-5 pt-2 flex flex-col flex-1 min-w-0">
+                  <h3 className="nst-h4 text-slate-900 m-0 mb-2 group-hover:text-[#015AAA] transition-colors duration-200">
+                    {item.title}
+                  </h3>
+                  <p className="nst-small text-slate-500 m-0 flex-1">{item.description}</p>
+                  {item.link ? (
+                    <span className="nst-small font-semibold text-[#015AAA] inline-flex items-center gap-1.5 mt-4 group-hover:translate-x-1 transition-transform duration-200">
+                      Learn more
+                      <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                    </span>
+                  ) : null}
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-[#0056A7] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 ease-out origin-left pointer-events-none" aria-hidden />
+              </>
+            );
+
+            const cardClasses =
+              "group relative rounded-2xl bg-white border border-slate-100 hover:border-slate-200/90 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex flex-col overflow-hidden h-full no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#015AAA]";
+
+            return item.link ? (
+              <motion.div
+                key={item.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                custom={i % 4}
+                className="h-full flex flex-col"
+              >
+                <Link to={item.link} className={cardClasses}>
+                  {cardInner}
+                </Link>
+              </motion.div>
+            ) : (
+              <motion.article
+                key={item.title}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.15 }}
+                custom={i % 4}
+                className={cardClasses}
+              >
+                {cardInner}
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -247,7 +370,7 @@ export function ServiceCapabilitiesSection({ content }: { content: ServiceDetail
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
         >
           <p className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2">Capabilities</p>
           <h2 className="nst-h2 text-slate-900 m-0 mb-4">
@@ -261,7 +384,7 @@ export function ServiceCapabilitiesSection({ content }: { content: ServiceDetail
           variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
         >
           {content.capabilities.map((cap) => (
             <motion.li
@@ -289,7 +412,7 @@ export function ServiceBenefitsSection({ content }: { content: ServiceDetailCont
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2 text-center"
         >
           Why NebulaSafeTech
@@ -298,7 +421,7 @@ export function ServiceBenefitsSection({ content }: { content: ServiceDetailCont
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           custom={1}
           className="nst-h2 text-slate-900 m-0 mb-10 text-center"
         >
@@ -312,7 +435,7 @@ export function ServiceBenefitsSection({ content }: { content: ServiceDetailCont
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={VIEWPORT_ONCE}
               custom={i}
               className="rounded-2xl border border-slate-100 bg-white p-8 shadow-sm hover:shadow-md hover:border-[#015AAA]/20 transition-all duration-300 group"
             >
@@ -339,7 +462,7 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           className="nst-eyebrow font-bold text-[#015AAA] m-0 mb-2"
         >
           Process
@@ -348,7 +471,7 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           custom={1}
           className="nst-h2 text-slate-900 m-0 mb-3"
         >
@@ -358,7 +481,7 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={VIEWPORT_ONCE}
           custom={2}
           className="nst-body text-slate-600 m-0 mb-12 max-w-2xl"
         >
@@ -372,7 +495,7 @@ export function ServiceProcessSection({ content }: { content: ServiceDetailConte
               variants={fadeUp}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={VIEWPORT_ONCE}
               custom={i}
               className="relative rounded-2xl bg-white border border-slate-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col min-h-[200px]"
             >
@@ -417,10 +540,7 @@ export function ServiceCtaSection({ content }: { content: ServiceDetailContent }
         transition={{ duration: 0.5 }}
       >
         <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(135deg, #014080 0%, #015AAA 50%, #1a7fd4 100%)",
-          }}
+          className="absolute inset-0 bg-[#0056A7]"
           aria-hidden
         />
         <div className="absolute inset-0 opacity-20 pointer-events-none" aria-hidden>

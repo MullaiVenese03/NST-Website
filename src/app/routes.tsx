@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { createBrowserRouter, Navigate, Outlet, useLocation, useParams } from "react-router";
+import { createBrowserRouter, Navigate, Outlet, useLocation } from "react-router";
 import { GlobalStructuredData } from "../seo/GlobalStructuredData";
 import { SkipToContent } from "./components/SkipToContent";
 import { DeferredCompanyFont } from "./components/DeferredCompanyFont";
@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage";
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ServicesPage = lazy(() => import("./pages/ServicesPage"));
 const ServiceDetailPage = lazy(() => import("./pages/ServiceDetailPage"));
+const CyberServicePage = lazy(() => import("./pages/CyberServicePage"));
 const ClientsPage = lazy(() => import("./pages/ClientsPage"));
 const EdTechPage = lazy(() => import("./pages/EdTechPage"));
 const BlogsPage = lazy(() => import("./pages/BlogsPage"));
@@ -68,6 +69,15 @@ export const router = createBrowserRouter([
       { index: true, Component: HomePage },
       { path: "about", Component: AboutPage },
       { path: "services", Component: ServicesPage },
+      { path: "services/web-security", Component: CyberServicePage },
+      { path: "services/cloud-security", Component: CyberServicePage },
+      { path: "services/application-security", Component: CyberServicePage },
+      { path: "services/network-security", Component: CyberServicePage },
+      { path: "services/encryption-data-protection", element: <Navigate to="/services/cybersecurity" replace /> },
+      { path: "services/encryption", element: <Navigate to="/services/cybersecurity" replace /> },
+      { path: "services/data-protection", element: <Navigate to="/services/cybersecurity" replace /> },
+      { path: "services/edtech-training", element: <Navigate to="/edtech" replace /> },
+      { path: "services/academic-training", element: <Navigate to="/edtech" replace /> },
       { path: "services/:slug", Component: ServiceDetailPage },
       { path: "testimonials", Component: ClientsPage },
       { path: "clients", element: <Navigate to="/testimonials" replace /> },

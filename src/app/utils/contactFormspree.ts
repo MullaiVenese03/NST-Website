@@ -24,8 +24,8 @@ export function getFormspreeErrorMessage(errors: SubmissionError | null): string
     return message;
   }
 
-  for (const fieldErrors of errors.getAllFieldErrors()) {
-    if (fieldErrors.length > 0) return fieldErrors[0].message;
+  for (const [, fieldErrors] of errors.getAllFieldErrors()) {
+    if (fieldErrors && fieldErrors.length > 0) return fieldErrors[0].message;
   }
 
   return "Something went wrong sending your message. Please try again or email us at";

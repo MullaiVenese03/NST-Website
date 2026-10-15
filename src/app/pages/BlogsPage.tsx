@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { BookOpen, Sparkles } from "lucide-react";
+import { Reveal } from "../components/Reveal";
 import TopNav from "../components/TopNav";
 import FooterSection from "../components/FooterSection";
 import ScrollToTop from "../components/ScrollToTop";
@@ -53,7 +54,7 @@ export default function BlogsPage() {
             <Breadcrumbs className="mb-4 text-left" items={[...PAGE_BREADCRUMBS.blogs]} />
 
             <div className="w-full max-w-full min-w-0 flex flex-col lg:flex-row lg:items-end justify-between gap-6 pt-2">
-              <div className="w-full max-w-full lg:max-w-2xl min-w-0">
+              <Reveal variant="fadeUp" className="w-full max-w-full lg:max-w-2xl min-w-0">
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#015AAA]/8 border border-[#015AAA]/15 text-[#015AAA] text-xs font-bold tracking-wide uppercase mb-3 shadow-xs">
                   <Sparkles size={12} />
                   <span>NebulaSafeTech Insights</span>
@@ -65,10 +66,12 @@ export default function BlogsPage() {
                 <p className="text-sm sm:text-base text-slate-600 font-body leading-relaxed m-0 break-words">
                   Authoritative security research, autonomous AI agent protection, and resilient engineering blueprints from NebulaSafeTech.
                 </p>
-              </div>
+              </Reveal>
 
               {/* Segmented Filter Navigation with Counts */}
-              <div
+              <Reveal
+                variant="fadeUp"
+                delay={0.08}
                 role="tablist"
                 aria-label="Blog categories"
                 className="w-full max-w-full min-w-0 box-border flex flex-wrap items-center gap-1.5 rounded-2xl p-1.5 bg-slate-100/90 backdrop-blur-md border border-slate-200/80 shadow-xs lg:w-auto lg:max-w-none lg:inline-flex lg:self-auto"
@@ -104,7 +107,7 @@ export default function BlogsPage() {
                     </button>
                   );
                 })}
-              </div>
+              </Reveal>
             </div>
           </div>
         </section>

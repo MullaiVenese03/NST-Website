@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import { ArrowRight } from "lucide-react";
 
 const GPU_LAYER = {
-  willChange: "transform, opacity",
   transform: "translateZ(0)",
 } as const;
 

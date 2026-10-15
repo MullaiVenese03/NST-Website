@@ -99,6 +99,30 @@ async function runValidation() {
       expectedTextSnippet: "VAPT",
     },
     {
+      route: "/services/web-security",
+      file: path.join(distDir, "services", "web-security", "index.html"),
+      expectedCanonical: `${SITE_ORIGIN}/services/web-security`,
+      expectedTextSnippet: "Web Security",
+    },
+    {
+      route: "/services/cloud-security",
+      file: path.join(distDir, "services", "cloud-security", "index.html"),
+      expectedCanonical: `${SITE_ORIGIN}/services/cloud-security`,
+      expectedTextSnippet: "Cloud Security",
+    },
+    {
+      route: "/services/application-security",
+      file: path.join(distDir, "services", "application-security", "index.html"),
+      expectedCanonical: `${SITE_ORIGIN}/services/application-security`,
+      expectedTextSnippet: "Application Security",
+    },
+    {
+      route: "/services/network-security",
+      file: path.join(distDir, "services", "network-security", "index.html"),
+      expectedCanonical: `${SITE_ORIGIN}/services/network-security`,
+      expectedTextSnippet: "Network Security",
+    },
+    {
       route: "/services/web-development",
       file: path.join(distDir, "services", "web-development", "index.html"),
       expectedCanonical: `${SITE_ORIGIN}/services/web-development`,
@@ -109,12 +133,6 @@ async function runValidation() {
       file: path.join(distDir, "services", "ui-ux-design", "index.html"),
       expectedCanonical: `${SITE_ORIGIN}/services/ui-ux-design`,
       expectedTextSnippet: "UI/UX",
-    },
-    {
-      route: "/services/edtech-training",
-      file: path.join(distDir, "services", "edtech-training", "index.html"),
-      expectedCanonical: `${SITE_ORIGIN}/services/edtech-training`,
-      expectedTextSnippet: "EdTech",
     },
     {
       route: "/testimonials",
@@ -521,6 +539,45 @@ async function runValidation() {
     } else {
       pass("Confirmed /contact has no legacy redirects to hash fragments.");
     }
+
+    // 7. Retired service routes: must permanently redirect to /services/cybersecurity (NOT soft-404 to /)
+    const retiredSources = [
+      "/services/encryption-data-protection",
+      "/services/encryption",
+      "/services/data-protection",
+    ];
+    let retiredRedirectFailures = 0;
+    for (const src of retiredSources) {
+      const match = redirects.find(
+        (r) => r.source === src && r.destination === "https://www.nebulasafetech.com/services/cybersecurity" && r.permanent === true
+      );
+      if (!match) {
+        fail(`Missing permanent server redirect for retired service ${src} -> https://www.nebulasafetech.com/services/cybersecurity in vercel.json`);
+        retiredRedirectFailures++;
+      }
+    }
+    if (retiredRedirectFailures === 0) {
+      pass("Confirmed permanent server redirects for retired encryption service routes to /services/cybersecurity in vercel.json.");
+    }
+
+    // 8. Retired edtech service route: must permanently redirect to /edtech
+    const edtechSources = [
+      "/services/edtech-training",
+      "/services/academic-training",
+    ];
+    let edtechRedirectFailures = 0;
+    for (const src of edtechSources) {
+      const match = redirects.find(
+        (r) => r.source === src && r.destination === "https://www.nebulasafetech.com/edtech" && r.permanent === true
+      );
+      if (!match) {
+        fail(`Missing permanent server redirect for retired service ${src} -> https://www.nebulasafetech.com/edtech in vercel.json`);
+        edtechRedirectFailures++;
+      }
+    }
+    if (edtechRedirectFailures === 0) {
+      pass("Confirmed permanent server redirects for retired edtech service routes to /edtech in vercel.json.");
+    }
   }
 
   // =========================================================================
@@ -562,10 +619,24 @@ async function runValidation() {
       fail(`${rel} contains stale internal link to "/blog/${bm[1]}" (should be /blogs/${bm[1]})`);
       staleInternalLinks++;
     }
+
+    // Check for internal navigation to retired encryption services
+    const encMatches = [...content.matchAll(/(?:href|to)=["']\/services\/(?:encryption|data-protection)[^"']*["']/g)];
+    for (const em of encMatches) {
+      fail(`${rel} contains stale internal link to retired service "${em[0]}"`);
+      staleInternalLinks++;
+    }
+
+    // Check for internal navigation to retired edtech service routes
+    const edtechMatches = [...content.matchAll(/(?:href|to)=["']\/services\/(?:edtech-training|academic-training)[^"']*["']/g)];
+    for (const etm of edtechMatches) {
+      fail(`${rel} contains stale internal link to retired service "${etm[0]}" (should be /edtech)`);
+      staleInternalLinks++;
+    }
   }
 
   if (staleInternalLinks === 0) {
-    pass(`Scanned ${srcFilesToScan.length} source files. Zero stale internal links to /clients or /blog/ found.`);
+    pass(`Scanned ${srcFilesToScan.length} source files. Zero stale internal links to /clients, /blog/, or retired encryption/edtech services found.`);
   }
 
   // =========================================================================
@@ -624,6 +695,9 @@ async function runValidation() {
       }
       if (rule.source === "/blogs/:slug+" && reqPath.startsWith("/blogs/")) {
         return { type: "rewrite", status: 404, destination: rule.destination };
+      }
+      if (rule.source === reqPath && rule.destination === "/index.html") {
+        return { type: "rewrite", status: 200, destination: rule.destination, spa: true };
       }
       if (rule.source === "/services/:slug+" && reqPath.startsWith("/services/")) {
         return { type: "rewrite", status: 404, destination: rule.destination };
@@ -718,6 +792,96 @@ async function runValidation() {
       path: "/services/cybersecurity",
       host: "www.nebulasafetech.com",
       expectedStatus: 200,
+    },
+    {
+      path: "/services/web-security",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 200,
+    },
+    {
+      path: "/services/cloud-security",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 200,
+    },
+    {
+      path: "/services/application-security",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 200,
+    },
+    {
+      path: "/services/network-security",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 200,
+    },
+    {
+      path: "/services/web-development",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 200,
+    },
+    {
+      path: "/services/ui-ux-design",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 200,
+    },
+    {
+      path: "/services/edtech-training",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/edtech",
+    },
+    {
+      path: "/services/edtech-training/",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/edtech",
+    },
+    {
+      path: "/services/academic-training",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/edtech",
+    },
+    {
+      path: "/services/academic-training/",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/edtech",
+    },
+    {
+      path: "/services/encryption-data-protection",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/services/cybersecurity",
+    },
+    {
+      path: "/services/encryption-data-protection/",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/services/cybersecurity",
+    },
+    {
+      path: "/services/encryption",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/services/cybersecurity",
+    },
+    {
+      path: "/services/encryption/",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/services/cybersecurity",
+    },
+    {
+      path: "/services/data-protection",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/services/cybersecurity",
+    },
+    {
+      path: "/services/data-protection/",
+      host: "www.nebulasafetech.com",
+      expectedStatus: 308,
+      expectedDest: "https://www.nebulasafetech.com/services/cybersecurity",
     },
     {
       path: "/blogs/ai-agents-enterprise-data-security",
