@@ -3,10 +3,8 @@ import type { BlogPost } from "../blogsData";
 export const blogPostDataSovereigntyAI: BlogPost = {
   id: "6",
   slug: "data-sovereignty-ai-sensitive-enterprise-files",
-  title:
-    "Data Sovereignty in the Age of AI: Why Sensitive Enterprise Files Need More Than Cloud Storage",
-  seoTitle:
-    "Data Sovereignty in the Age of AI: Protecting Sensitive Enterprise Files",
+  title: "Data Sovereignty in the AI Era: Protecting Enterprise Files",
+  seoTitle: "Data Sovereignty in the AI Era: Protecting Enterprise Files",
   metaDescription:
     "Learn how enterprise data sovereignty, access controls, cryptographic protection, and device binding safeguard sensitive corporate files.",
   excerpt:

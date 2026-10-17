@@ -10,8 +10,7 @@ import type { BlogPost } from "../blogsData";
 export const blogPostWebDesign2026: BlogPost = {
   id: "8",
   slug: "web-design-2026-ui-ux-user-experience",
-  title:
-    "Web Design in 2026: How Better UI/UX Creates Faster, More Accessible Websites",
+  title: "Web Design in 2026: UI/UX, Accessibility & Performance",
   seoTitle: "Web Design in 2026: UI/UX, Accessibility & Performance",
   metaDescription:
     "Explore how 2026 web design balances UI/UX aesthetics, responsive layouts, WCAG accessibility, and high performance for modern websites.",

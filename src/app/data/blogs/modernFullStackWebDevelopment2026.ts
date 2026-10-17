@@ -10,9 +10,8 @@ import type { BlogPost } from "../blogsData";
 export const blogPostModernFullStackWebDevelopment2026: BlogPost = {
   id: "10",
   slug: "modern-full-stack-web-development-2026",
-  title:
-    "Modern Full-Stack Web Development in 2026: Building Fast, Scalable and Secure Web Applications",
-  seoTitle: "Modern Full-Stack Web Development in 2026",
+  title: "Modern Full-Stack Web Development in 2026: Complete Guide",
+  seoTitle: "Modern Full-Stack Web Development in 2026: Complete Guide",
   metaDescription:
     "A practical 2026 guide to full-stack web development covering React architecture, API design, security practices, and cloud deployment.",
   excerpt:

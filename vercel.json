@@ -71,6 +71,16 @@
       "permanent": true
     },
     {
+      "source": "/blog/modern-css-techniques-2026",
+      "destination": "https://www.nebulasafetech.com/blogs/modern-css-techniques-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/modern-css-techniques-2026/",
+      "destination": "https://www.nebulasafetech.com/blogs/modern-css-techniques-2026",
+      "permanent": true
+    },
+    {
       "source": "/blog/ai-agent-attack-surface-security-checklist-2026",
       "destination": "https://www.nebulasafetech.com/blogs/ai-agent-attack-surface-security-checklist-2026",
       "permanent": true

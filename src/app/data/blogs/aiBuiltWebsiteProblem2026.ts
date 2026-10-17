@@ -10,8 +10,8 @@ import type { BlogPost } from "../blogsData";
 export const blogPostAiBuiltWebsiteProblem2026: BlogPost = {
   id: "11",
   slug: "ai-built-website-problem-2026",
-  title: "The AI-Built Website Problem in 2026: Fast to Launch, Hard to Trust",
-  seoTitle: "The AI-Built Website Problem in 2026: Fast to Launch, Hard to Trust",
+  title: "The AI-Built Website Problem in 2026: Speed vs Trust",
+  seoTitle: "The AI-Built Website Problem in 2026: Speed vs Trust",
   metaDescription:
     "Explore why AI-generated websites often introduce security flaws, accessibility issues, and technical debt, and learn how to build safely.",
   excerpt:

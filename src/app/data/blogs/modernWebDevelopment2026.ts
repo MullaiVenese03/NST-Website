@@ -10,8 +10,7 @@ import type { BlogPost } from "../blogsData";
 export const blogPostModernWebDevelopment2026: BlogPost = {
   id: "7",
   slug: "modern-web-development-2026-ai-performance-ux",
-  title:
-    "The Modern Web in 2026: How AI, Performance, and UX Are Changing Full-Stack Development",
+  title: "Modern Web Development in 2026: AI, Performance & UX",
   seoTitle: "Modern Web Development in 2026: AI, Performance & UX",
   metaDescription:
     "Understand how server-first patterns, performance optimization, and AI tooling are reshaping modern web application architecture in 2026.",

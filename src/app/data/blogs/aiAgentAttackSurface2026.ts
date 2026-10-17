@@ -10,7 +10,7 @@ import type { BlogPost } from "../blogsData";
 export const blogPostAiAgentAttackSurface2026: BlogPost = {
   id: "13",
   slug: "ai-agent-attack-surface-security-checklist-2026",
-  title: "Your AI Agent Is Now Part of Your Attack Surface: A 2026 Security Checklist",
+  title: "AI Agent Security: The 2026 Attack Surface Checklist",
   seoTitle: "AI Agent Security: The 2026 Attack Surface Checklist",
   metaDescription:
     "Discover the 2026 AI agent security checklist covering identity, prompt injection, least-privilege permissions, and enterprise risk controls.",

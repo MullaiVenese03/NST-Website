@@ -13,8 +13,7 @@ const IMG_BASE = `/media/blogs/${SLUG}`;
 export const blogPostRansomwareDataProtection: BlogPost = {
   id: "3",
   slug: SLUG,
-  title:
-    "Ransomware Is No Longer Just About Encryption. Your Data Is the Real Target.",
+  title: "Ransomware Data Theft: How to Protect Your Business in 2026",
   seoTitle: "Ransomware Data Theft: How to Protect Your Business in 2026",
   metaDescription:
     "Ransomware now emphasizes data extortion over encryption. Learn how multi-layered backups and data access controls protect your organization.",

@@ -10,8 +10,7 @@ import type { BlogPost } from "../blogsData";
 export const blogPostUiUxDesignProcess2026: BlogPost = {
   id: "9",
   slug: "ui-ux-design-process-modern-websites-2026",
-  title:
-    "From Idea to Interface: The Complete UI/UX Design Process for Modern Websites in 2026",
+  title: "UI/UX Design Process for Modern Websites in 2026",
   seoTitle: "UI/UX Design Process for Modern Websites in 2026",
   metaDescription:
     "Master the modern UI/UX design process: user research, wireframes, prototypes, design systems, accessibility, and clean developer handoff.",

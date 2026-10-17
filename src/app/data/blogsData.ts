@@ -13,6 +13,7 @@ import { blogPostModernFullStackWebDevelopment2026 } from "./blogs/modernFullSta
 import { blogPostAiBuiltWebsiteProblem2026 } from "./blogs/aiBuiltWebsiteProblem2026";
 import { blogPostVapt2026Checklist } from "./blogs/vapt2026Checklist";
 import { blogPostAiAgentAttackSurface2026 } from "./blogs/aiAgentAttackSurface2026";
+import { blogPostModernCssTechniques2026 } from "./blogs/modernCssTechniques2026";
 
 export type BlogCategory =
   | "All"
@@ -136,6 +137,7 @@ export interface BlogPost {
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  blogPostModernCssTechniques2026,
   blogPostAiAgentAttackSurface2026,
   blogPostVapt2026Checklist,
   blogPostAiBuiltWebsiteProblem2026,

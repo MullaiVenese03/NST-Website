@@ -1,3 +1,4 @@
+
 /**
  * optimize-blog-images.mjs
  * Unified Blog Image Optimization & Asset Pipeline for NebulaSafeTech
@@ -192,6 +193,17 @@ export const BLOG_IMAGE_REGISTRY = [
     thumbnail: {
       srcFile: "AI_Agent_Attack_Surface_2026_Thumbnail.png",
       outputBaseName: "ai-agent-attack-surface-security-checklist-2026",
+      generatePng: false,
+    },
+    images: [],
+  },
+  {
+    blogNumber: 14,
+    folderName: "#14",
+    slug: "modern-css-techniques-2026",
+    thumbnail: {
+      srcFile: "Modern_CSS_Techniques_2026_Thumbnail.png",
+      outputBaseName: "modern-css-techniques-2026",
       generatePng: false,
     },
     images: [],

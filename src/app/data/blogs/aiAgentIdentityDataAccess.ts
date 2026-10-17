@@ -3,8 +3,7 @@ import type { BlogPost } from "../blogsData";
 export const blogPostAiAgentIdentity: BlogPost = {
   id: "5",
   slug: "ai-agent-security-identity-access-enterprise-data",
-  title:
-    "AI Agents Need More Than Identity: How to Control Their Access to Enterprise Data",
+  title: "AI Agent Security: Identity, Access & Data Protection",
   seoTitle: "AI Agent Security: Identity, Access & Data Protection",
   metaDescription:
     "Learn how to secure AI agents with identity, least privilege, authorization, monitoring, and controlled enterprise data access.",

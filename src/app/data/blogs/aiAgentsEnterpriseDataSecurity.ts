@@ -3,7 +3,7 @@ import type { BlogPost } from "../blogsData";
 export const blogPostAiAgentsSecurity: BlogPost = {
   id: "2",
   slug: "ai-agents-enterprise-data-security",
-  title: "AI Agents Are Accessing Enterprise Data. Is Your Security Ready?",
+  title: "AI Agents & Enterprise Data Security: Risks & Controls",
   seoTitle: "AI Agents & Enterprise Data Security: Risks & Controls",
   metaDescription:
     "AI agents can access enterprise files, apps, and data. Learn the risks, recent Rovo findings, and practical controls for safer AI adoption.",

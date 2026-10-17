@@ -3,7 +3,7 @@ import type { BlogPost } from "../blogsData";
 export const blogPostShadowAiAgents: BlogPost = {
   id: "4",
   slug: "shadow-ai-agents-enterprise-security-risk",
-  title: "Shadow AI Agents: The Enterprise Security Risk You Can't See",
+  title: "Shadow AI Agents: Enterprise Security Risks in 2026",
   seoTitle: "Shadow AI Agents: Enterprise Security Risks in 2026",
   metaDescription:
     "Unsanctioned AI agents create blind spots across APIs and data stores. Learn practical governance steps to detect and secure shadow agents.",

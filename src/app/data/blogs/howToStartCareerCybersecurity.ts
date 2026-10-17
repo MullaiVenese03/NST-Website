@@ -10,7 +10,7 @@ import type { BlogPost } from "../blogsData";
 export const blogPostOne: BlogPost = {
   id: "1",
   slug: "how-to-start-career-cybersecurity",
-  title: "How to Start a Career in Cybersecurity in 2026: A Practical Beginner's Guide",
+  title: "How to Start a Career in Cybersecurity in 2026",
   seoTitle: "How to Start a Career in Cybersecurity in 2026",
   metaDescription:
     "Start your cybersecurity career with a practical 2026 roadmap covering networking fundamentals, Linux, security labs, and certifications.",
